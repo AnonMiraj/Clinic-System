@@ -6,9 +6,10 @@
 #include <ctime>
 #include <iostream>
 #include <iomanip>
-#include "Doctor.h"
-#include "Patient.h"
-#include "Prescription.h"
+#include "person.h"
+#include "doctor.h"
+#include "patient.h"
+#include "prescription.h"
 using namespace std;
 
 class Appointment 

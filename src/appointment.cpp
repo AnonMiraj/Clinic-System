@@ -1,4 +1,4 @@
-#include "Appointment.h"
+#include "appointment.h"
 
 Appointment::Appointment(int i)
 {
