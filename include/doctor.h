@@ -46,6 +46,11 @@ public:
     void setAvailableHours();
     void setDateJoined(const string& dateJoined);
     void setAppointmentFee(double appointmentFee);
+  
+    
+    virtual void readInfo();
+    virtual void printInfo() const;
+
 };
 
 

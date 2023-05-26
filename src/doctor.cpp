@@ -79,3 +79,37 @@ void Doctor::setAppointmentFee(double appointmentFee) {
     this->appointmentFee = appointmentFee;
 }
 
+void Doctor::readInfo() {
+    Person::readInfo();  // Call the base class readInfo() function
+
+    cout << "Enter doctor's salary: ";
+    cin >> salary;
+    cin.ignore();  // Clear the input buffer
+
+    cout << "Enter doctor's profession: ";
+    getline(cin, profession);
+
+    cout << "Enter doctor's experience: ";
+    cin >> experience;
+
+    cin.ignore();  // Clear the input buffer
+
+    cout << "Enter doctor's date joined(YYYY-MM-DD): ";
+    getline(cin, dateJoined);
+
+    cout << "Enter doctor's appointment fee: ";
+    cin >> appointmentFee;
+    cin.ignore();  // Clear the input buffer
+}
+
+void Doctor::printInfo() const {
+    Person::printInfo();  // Call the base class printInfo() function
+
+    cout << "Salary: " << salary << endl;
+    cout << "Profession: " << profession << endl;
+    cout << "Experience: " << experience << " years" << endl;
+    cout << "Rating: " << ratingSum/appointmentCount << "/5" << endl;
+   //to do days worked and hour worked 
+    cout << "Date Joined: " << dateJoined << endl;
+    cout << "Appointment Fee: " << appointmentFee << endl;
+}

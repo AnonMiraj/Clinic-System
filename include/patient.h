@@ -10,7 +10,7 @@ class Patient : public Person {
 private:
     string notes;
     string password;
-    string insurance;
+    // string insurance;
     string emergencyContact;
 
 public:
@@ -31,6 +31,10 @@ public:
     void setPassword(const string& password);
     void setInsurance(const string& insurance);
     void setEmergencyContact(const string& emergencyContact);
+
+
+    virtual void readInfo();
+    virtual void printInfo() const;
 };
 
 

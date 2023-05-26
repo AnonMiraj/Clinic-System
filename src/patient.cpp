@@ -47,3 +47,25 @@ void Patient::setEmergencyContact(const string& emergencyContact) {
     this->emergencyContact = emergencyContact;
 }
 
+void Patient::readInfo() {
+    Person::readInfo();  // Call the base class readInfo() function
+
+    cout << "Enter patient's password: ";
+    getline(cin, password);
+
+    cout << "Enter patient's insurance: ";
+// to do
+    cout << "Enter patient's emergency contact: ";
+    getline(cin, emergencyContact);
+}
+
+void Patient::printInfo() const {
+    Person::printInfo();  // Call the base class printInfo() function
+
+    if (notes!="")
+      cout << "Notes: " << notes << endl;
+
+    // TODO cout << "Insurance: " << insurance << endl;
+
+    cout << "Emergency Contact: " << emergencyContact << endl;
+}

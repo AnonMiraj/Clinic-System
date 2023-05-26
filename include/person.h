@@ -2,7 +2,7 @@
 #define PERSON_H
 
 #include <string>
-
+#include <iostream>
 using namespace std ;
 
 class Person {
@@ -38,6 +38,11 @@ public:
     void setBloodType(const string& bloodType);
     void setPhoneNumber(const string& phoneNumber);
     void setAddress(const string& address);
+
+
+
+    virtual void readInfo()=0;
+    virtual void printInfo() const;
 };
 
 

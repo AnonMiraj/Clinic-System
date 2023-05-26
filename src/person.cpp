@@ -68,4 +68,37 @@ void Person::setPhoneNumber(const string& phoneNumber) {
 void Person::setAddress(const string& address) {
     this->address = address;
 }
+void Person::readInfo() {
+    cout << "Enter person's ID: ";
+    cin >> id;
+    cin.ignore();  // Clear the input buffer
 
+    cout << "Enter person's name: ";
+    getline(cin, name);
+
+    cout << "Enter person's age: ";
+    cin >> age;
+    cin.ignore();  // Clear the input buffer
+
+    cout << "Enter person's gender: ";
+    getline(cin, gender);
+
+    cout << "Enter person's blood type: ";
+    getline(cin, bloodType);
+
+    cout << "Enter person's phone number: ";
+    getline(cin, phoneNumber);
+
+    cout << "Enter person's address: ";
+    getline(cin, address);
+}
+
+void Person::printInfo() const {
+    cout << "ID: " << id << endl;
+    cout << "Name: " << name << endl;
+    cout << "Age: " << age << endl;
+    cout << "Gender: " << gender << endl;
+    cout << "Blood Type: " << bloodType << endl;
+    cout << "Phone Number: " << phoneNumber << endl;
+    cout << "Address: " << address << endl;
+}
