@@ -49,6 +49,7 @@ public:
   
     
     virtual void readInfo();
+    virtual void editInfo();
     virtual void printInfo() const;
 
 };

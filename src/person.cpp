@@ -92,6 +92,40 @@ void Person::readInfo() {
     cout << "Enter person's address: ";
     getline(cin, address);
 }
+void Person::editInfo(){
+  
+
+
+    cout << "ID: " << id << endl;
+    cout << "Enter new ID (Press Enter to skip): ";
+    string newId;
+    getline(cin, newId);
+    if (!newId.empty()) {
+        id = stoi(newId);
+    }
+
+    cout << "Name: " << name << endl;
+    getline(cin, name);
+
+    cout << "Age: " << age << endl;
+    string newAge;
+    getline(cin, newAge);
+    if (!newAge.empty()) {
+        age = stoi(newAge);
+    }
+
+    cout << "Gender: " << gender << endl;
+    getline(cin, gender);
+
+    cout << "Blood Type: " << bloodType << endl;
+    getline(cin, bloodType);
+
+    cout << "Phone Number: " << phoneNumber << endl;
+    getline(cin, phoneNumber);
+
+    cout << "Address: " << address << endl;
+    getline(cin, address);
+}
 
 void Person::printInfo() const {
     cout << "ID: " << id << endl;

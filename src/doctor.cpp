@@ -102,6 +102,44 @@ void Doctor::readInfo() {
     cin.ignore();  // Clear the input buffer
 }
 
+void Doctor::editInfo() {
+
+    cout << "Editing doctor's information:" << endl;
+    Person::editInfo();  // Call the base class editInfo() function
+
+    cout << "Salary: " << salary << endl;
+    cout << "Enter new salary (Press Enter to skip): ";
+    string newSalary;
+    getline(cin, newSalary);
+    if (!newSalary.empty()) {
+        salary = stod(newSalary);
+    }
+
+    cout << "Profession: " << profession << endl;
+    cout << "Enter new profession (Press Enter to skip): ";
+    getline(cin, profession);
+
+    cout << "Experience: " << experience << " years" << endl;
+    cout << "Enter new experience (Press Enter to skip): ";
+    string newExperience;
+    getline(cin, newExperience);
+    if (!newExperience.empty()) {
+        experience = stoi(newExperience);
+    }
+
+
+    cout << "Date Joined: " << dateJoined << endl;
+    cout << "Enter new date joined (Press Enter to skip): ";
+    getline(cin, dateJoined);
+
+    cout << "Appointment Fee: " << appointmentFee << endl;
+    cout << "Enter new appointment fee (Press Enter to skip): ";
+    string newAppointmentFee;
+    getline(cin, newAppointmentFee);
+    if (!newAppointmentFee.empty()) {
+        appointmentFee = stod(newAppointmentFee);
+    }
+}
 void Doctor::printInfo() const {
     Person::printInfo();  // Call the base class printInfo() function
 
