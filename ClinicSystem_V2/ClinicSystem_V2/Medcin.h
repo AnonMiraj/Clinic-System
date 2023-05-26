@@ -8,25 +8,26 @@ private:
     int id;
     string name;
     string brand;
-    string availability;
-    string warnings;
+    int price;
 
 public:
     Medcin();
 
     // Getters
+    int getPrice()const;
     int getId() const;
     string getName() const;
     string getBrand() const;
-    string getAvailability() const;
-    string getWarnings() const;
 
     // Setters
+    void setPrice(const int& price);
     void setId(int id);
     void setName(const string& name);
     void setBrand(const string& brand);
-    void setAvailability(const string& availability);
-    void setWarnings(const string& warnings);
+    friend ostream& operator<<(ostream&, Medcin& m);
+    friend istream& operator>>(istream&, Medcin& m);
+    // Another Functions
+    void Edit();
 };
 
 #endif  // MEDCIN_H
