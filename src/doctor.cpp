@@ -108,7 +108,6 @@ void Doctor::editInfo() {
     Person::editInfo();  // Call the base class editInfo() function
 
     cout << "Salary: " << salary << endl;
-    cout << "Enter new salary (Press Enter to skip): ";
     string newSalary;
     getline(cin, newSalary);
     if (!newSalary.empty()) {
@@ -116,11 +115,9 @@ void Doctor::editInfo() {
     }
 
     cout << "Profession: " << profession << endl;
-    cout << "Enter new profession (Press Enter to skip): ";
     getline(cin, profession);
 
     cout << "Experience: " << experience << " years" << endl;
-    cout << "Enter new experience (Press Enter to skip): ";
     string newExperience;
     getline(cin, newExperience);
     if (!newExperience.empty()) {
@@ -129,11 +126,9 @@ void Doctor::editInfo() {
 
 
     cout << "Date Joined: " << dateJoined << endl;
-    cout << "Enter new date joined (Press Enter to skip): ";
     getline(cin, dateJoined);
 
     cout << "Appointment Fee: " << appointmentFee << endl;
-    cout << "Enter new appointment fee (Press Enter to skip): ";
     string newAppointmentFee;
     getline(cin, newAppointmentFee);
     if (!newAppointmentFee.empty()) {
