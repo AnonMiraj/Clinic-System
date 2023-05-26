@@ -8,6 +8,7 @@
 #include <iomanip>
 #include "Doctor.h"
 #include "Patient.h"
+#include "Prescription.h"
 using namespace std;
 
 class Appointment 
