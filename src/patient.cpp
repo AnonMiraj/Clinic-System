@@ -2,6 +2,11 @@
 
 
 // Constructor
+Patient::Patient()
+  : Person(),
+      password(""), insurance(""), emergencyContact("") {}
+
+
 Patient::Patient(int id, const string& name, int age, const string& gender, const string& bloodType,
     const string& phoneNumber, const string& address, const string& password,
     const string& insurance, const string& emergencyContact)

@@ -5,28 +5,34 @@
 #include "person.h"
 #include <string>
 
-namespace std {
 
 class Doctor : public Person {
 private:
     double salary;
     string profession;
     int experience;
-    double rating;
+    int ratingSum;
+    int appointmentCount;
+    bool availableDays[8];
+    bool availableHours[49];
     string dateJoined;
     double appointmentFee;
 
 public:
     // Constructor
+    Doctor();
     Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
         const string& phoneNumber, const string& address, double salary, const string& profession,
-        int experience, double rating, const string& dateJoined, double appointmentFee);
+        int experience, int ratingSum,int appointmentCount, const string& dateJoined, double appointmentFee);
 
     // Getters
     double getSalary() const;
     string getProfession() const;
     int getExperience() const;
-    double getRating() const;
+    int getRatingSum() const;
+    int getAppointmentCount() const;
+    const bool * getAvailableDays() const;
+    const bool * getAvailableHours() const;
     string getDateJoined() const;
     double getAppointmentFee() const;
 
@@ -34,12 +40,14 @@ public:
     void setSalary(double salary);
     void setProfession(const string& profession);
     void setExperience(int experience);
-    void setRating(double rating);
+    void setRatingSum(int rating);
+    void setAppointmentCount(int appointmentCount);
+    void setAvailableDays();
+    void setAvailableHours();
     void setDateJoined(const string& dateJoined);
     void setAppointmentFee(double appointmentFee);
 };
 
-}  // namespace std
 
 #endif  // DOCTOR_H
 

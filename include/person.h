@@ -17,6 +17,7 @@ private:
 
 public:
     // Constructor
+    Person();
     Person(int id, const string& name, int age, const string& gender, const string& bloodType,
         const string& phoneNumber, const string& address);
 

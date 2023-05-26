@@ -2,6 +2,10 @@
 
 
 // Constructor
+Person::Person()
+: id(0), name(""), age(0), gender(""), bloodType(""),
+      phoneNumber(""), address("") {}
+
 Person::Person(int id, const string& name, int age, const string& gender, const string& bloodType,
     const string& phoneNumber, const string& address)
     : id(id), name(name), age(age), gender(gender), bloodType(bloodType),
