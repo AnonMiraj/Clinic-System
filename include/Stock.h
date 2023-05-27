@@ -1,4 +1,5 @@
 #pragma once
+#include "other.h"
 #include "Medcin.h"
 #include<fstream>
 class Stock
