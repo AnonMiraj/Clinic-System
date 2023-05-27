@@ -121,7 +121,7 @@ void Doctor::readDays(){
     cout << "Enter the working days (\"1 2 3\", \"1-3\", \"1-2 5 6\" ): "<<endl;
     setIndexesToTrue(availableDays, 8);
 }
-void Doctor::printDayNames(bool arr[], int size)const {
+void Doctor::printDayNames(const bool arr[], int size)const {
     const string daysOfWeek[] = {
          "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
     };
@@ -138,6 +138,59 @@ void Doctor::readPeroids(){
     cout << "The day consist of 48 peroids ( 30 min ) the first one starts with 1 and equal 00:00 the next is 00:30 ,etc\n";
     cout << "Enter the working Peroids (\"1 2 3\", \"1-3\", \"1-2 5 6\" ): "<<endl;
     setIndexesToTrue(availablePeroids, 49);
+}
+void Doctor::printPeriodTimes( const bool arr[], int size)const {
+ 
+    const int minutesPerPeriod = 30;
+
+    cout << "Periods: ";
+    int startPeriod = -1;
+    bool isInPeriod = false;
+    for (int i = 0; i < size; ++i) {
+        if (arr[i]) {
+            if (!isInPeriod) {
+                startPeriod = i;
+                isInPeriod = true;
+            }
+        } else {
+            if (isInPeriod) {
+                int endPeriod = i - 1;
+                int startMinutes = ((startPeriod - 1) * minutesPerPeriod) % 60;
+                int endMinutes = (endPeriod * minutesPerPeriod) % 60;
+
+                int startHour = ((startPeriod - 1) * minutesPerPeriod) / 60;
+                int endHour = (endPeriod * minutesPerPeriod) / 60;
+                if (endHour ==24)
+                  endHour=0;
+
+                cout << setfill('0') << setw(2) << startHour << ":"
+                          << setw(2) << startMinutes << " - "
+                          << setw(2) << endHour << ":"
+                          << setw(2) << endMinutes << " ";
+
+                isInPeriod = false;
+            }
+        }
+    }
+
+    if (isInPeriod) {
+        int endPeriod = size - 1;
+        int startMinutes = ((startPeriod - 1) * minutesPerPeriod) % 60;
+        int endMinutes = (endPeriod * minutesPerPeriod) % 60;
+
+        int startHour = ((startPeriod - 1) * minutesPerPeriod) / 60;
+        int endHour = (endPeriod * minutesPerPeriod) / 60;
+        if (endHour ==24)
+          endHour=0;
+
+        cout << setfill('0') << setw(2) << startHour << ":"
+                  << setw(2) << startMinutes << " - "
+                  << setw(2) << endHour << ":"
+                  << setw(2) << endMinutes << " ";
+    }
+
+    cout << endl;
+
 }
 void Doctor::readInfo() {
     Person::readInfo();  // Call the base class readInfo() function
@@ -202,9 +255,10 @@ void Doctor::printInfo() const  {
     cout << "Profession: " << profession << endl;
     cout << "Experience: " << experience << " years" << endl;
     cout << "Rating: " << ratingSum/appointmentCount << "/5" << endl;
-    cout << "AvailableDays:";
-    printDayNames(const availableDays, 8);
-   //to do days worked and hour worked 
+    cout << "Available Days:";
+    printDayNames(availableDays, 8);
+    cout << "Available Hours: ";
+    printPeriodTimes(availablePeroids,49);
     cout << "Date Joined: " << dateJoined << endl;
     cout << "Appointment Fee: " << appointmentFee << endl;
 }

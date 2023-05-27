@@ -5,6 +5,7 @@
 #include "person.h"
 #include <sstream>
 #include <string>
+#include <iomanip>
 
 
 class Doctor : public Person {
@@ -53,6 +54,7 @@ public:
     void readDays();
     void printDayNames(const bool arr[], int size)const;
     void readPeroids();
+    void printPeriodTimes( const bool arr[], int size)const;
     virtual void readInfo();
     virtual void editInfo();
     virtual void printInfo() const;
