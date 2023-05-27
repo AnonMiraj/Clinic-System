@@ -33,13 +33,8 @@ void Appointment::setDate()
     cin >> t->tm_year >> ch >> t->tm_mon >> ch >> t->tm_mday;
     string period=getPeriod();
 
-        t->tm_hour = stoi(period.substr(0,1));
-        t->tm_min = stoi(period.substr(3,1));
-
-
-    //t->tm_hour = (getPeriod()[1] != ':') ? stoi(getPeriod()[0] + getPeriod()[1]) : stoi(getPeriod()[0]);
-    //t->tm_min = (getPeriod()[1] != ':') ? stoi(getPeriod()[2] + getPeriod()[3]) : stoi(getPeriod()[3] + getPeriod()[4]);
-    //t->tm_sec = 0;
+    t->tm_hour = stoi(period.substr(0,1));
+    t->tm_min = stoi(period.substr(3,1));
 
     date = mktime(t);
 }
