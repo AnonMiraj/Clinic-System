@@ -18,31 +18,24 @@ void Appointment::setPeriod(const int& p)
 string Appointment::getPeriod() const
 {
     if (period % 2 == 1)
-        return to_string(period / 2) + ":00 - " + to_string(period/2) + ":30";
+        return (period/2<10 ? "0" :"" )+  to_string(period / 2) + ":00 - " + to_string(period/2) + ":30";
 
-    return to_string(period / 2 - 1) + ":30 - " + (period == 48 ? "0" : to_string(period / 2)) + ":00";
+    return (period/2<10 ? "0" :"" )+ to_string(period / 2 - 1) + ":30 - " + (period == 48 ? "0" : to_string(period / 2)) + ":00";
 
 }
-
 
 void Appointment::setDate() 
 {
     tm* t = localtime(&date);  
     char ch;
 
-    cout << "Enter the date (dd/ mm/ yyyy) : "; cin >> t->tm_year >> ch >> t->tm_mon >> ch >> t->tm_mday;
+    cout << "Enter the date (dd/ mm/ yyyy) : ";
+    cin >> t->tm_year >> ch >> t->tm_mon >> ch >> t->tm_mday;
+    string period=getPeriod();
 
-    if (getPeriod()[1] != ':')
-    {
-        t->tm_hour = stoi(getPeriod()[0] + getPeriod()[1]);
-        t->tm_min = stoi(getPeriod()[2] + getPeriod()[3]);
-    }
+        t->tm_hour = stoi(period.substr(0,1));
+        t->tm_min = stoi(period.substr(3,1));
 
-    else
-    {
-        t->tm_hour = stoi(getPeriod()[0]);
-        t->tm_min = stoi(getPeriod()[3] + getPeriod()[4]);
-    }
 
     //t->tm_hour = (getPeriod()[1] != ':') ? stoi(getPeriod()[0] + getPeriod()[1]) : stoi(getPeriod()[0]);
     //t->tm_min = (getPeriod()[1] != ':') ? stoi(getPeriod()[2] + getPeriod()[3]) : stoi(getPeriod()[3] + getPeriod()[4]);
@@ -97,7 +90,8 @@ istream& operator>> (istream& in, Appointment& a) // for files
 
 ostream& operator<< (ostream& out, const Appointment& a)
 {
-    out << setw(20) << a.patient->getName() << setw(20) << a.doctor->getName() <<setw(15) <<a.getDate() <<endl <<a.getPrescription()->getinfo();
+    out << setw(20) << a.patient->getName() << setw(20) << a.doctor->getName() <<setw(15) <<a.getDate() <<endl ;
+  a.getPrescription()->printInfo();
     return out;
 }
 

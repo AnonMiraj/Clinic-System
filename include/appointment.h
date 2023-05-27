@@ -1,14 +1,14 @@
 #ifndef APPOINTMENT_H
 #define APPOINTMENT_H
 
-#include <string>
+#include <cstring>
 #include <ctime>
 #include <iostream>
 #include <iomanip>
 #include "person.h"
 #include "doctor.h"
 #include "patient.h"
-// #include "prescription.h"
+#include "prescription.h"
 using namespace std;
 
 class Appointment
@@ -19,7 +19,7 @@ private:
     time_t date;
     Doctor *doctor;
     Patient *patient;
-    // Prescription* prescription;
+    Prescription* prescription;
 
 public:
     Appointment(int i);
@@ -39,8 +39,8 @@ public:
     void setPatient(const Patient &p);
     Patient* getPatient() const;
 
-    // void setPrescription(const Prescription& p);
-    // Prescription* getPrescription() const;
+    void setPrescription(const Prescription& p);
+    Prescription* getPrescription() const;
 
     // opertaor overloading
     friend istream &operator>>(istream &in, Appointment &a);
