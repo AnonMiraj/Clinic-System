@@ -1,5 +1,4 @@
 #include "Stock.h"
-
 using namespace std;
 
 Stock::Stock(): c_MedcinList(0) 
@@ -26,8 +25,10 @@ void Stock::addMedcinInStock()
     cout << "Enter the details of the medicine to add to stock:" << endl;
 
     int medcinid;
-
-    cin >> medcinid;
+    do
+    {
+        cin >> medcinid;
+    } while (IsValid(medcinid));
     cin.ignore();
 
     // Check if the medicine already exists in stock
@@ -42,8 +43,11 @@ void Stock::addMedcinInStock()
             if (ch == 'y' || ch == 'Y')
             {
                 int quantity;
-                cout << "Enter the additional quantity: ";
-                cin >> quantity;
+                do
+                {
+                    cout << "Enter the additional quantity: ";
+                    cin >> quantity;
+                } while (IsValid(quantity));
                 cin.ignore();
 
                 MedcinList[i].setQuntitiy(/*MedcinList[i].getQuntitiy()*/ quantity);
@@ -112,8 +116,12 @@ void Stock::editMedcin()
 void Stock::deleteMecinFromStock()
 {
     int id;
-    cout << "Enter id of the medicine to delete:" << endl;
-    cin >> id;
+    do
+    {
+        cout << "Enter id of the medicine to delete:" << endl;
+        cin >> id;
+    } while (IsValid(id));
+
     int index = SearchId(id);
     if (index != -1)
     {
@@ -146,7 +154,7 @@ int Stock::getQuntitiy(int id)
     cout << "This Quntitiy isn't Exist" << endl;
 
     return -1;
- 
+
 }
 
 int Stock::SearchId(int id)
@@ -160,7 +168,7 @@ int Stock::SearchId(int id)
     }
     return -1;
 }
-  
+
 ostream& operator<<(ostream& out, const Stock& stock)
 {
     // TODO: insert return statement here
