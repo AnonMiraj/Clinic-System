@@ -1,6 +1,18 @@
+#ifndef OTHER_H
+#define OTHER_H
+
 #include <iostream>
 #include <string>
-using namespace std;
+#include <iomanip>
 
-bool IsValid(string);
-bool IsValid(int);
+
+using namespace std;
+inline int isValid(int n); 
+inline string IsValid(string msg);
+
+
+
+inline void setIndexesToTrue(bool *arr, int size);
+inline void printDayNames(const bool *arr, int size, ostream& os);
+inline void printPeriodTimes( const bool *arr, int size, ostream& os);
+#endif // !OTHER_H
