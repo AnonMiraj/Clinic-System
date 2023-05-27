@@ -94,6 +94,8 @@ void Person::editInfo(){
     getline(cin, address);
 }
 istream& operator>>(istream& is, Person& person) {
+   
+    is.ignore();
     cout << "Enter person's name: ";
     getline(is, person.name);
 
