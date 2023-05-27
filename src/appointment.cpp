@@ -29,7 +29,13 @@ void Appointment::setDate()
     tm* t = localtime(&date);  
     char ch;
 
-    cout << "Enter the date (dd/ mm/ yyyy) : ";
+    string y,m,d;
+    do
+    {
+        bool IsNotValid; 
+        cout << "Enter the date (dd/ mm/ yyyy) : ";
+        cin >> y >>ch >>m >>ch >>d;
+    } while (IsValid(y) && IsValid(m) && IsValid(d));
     cin >> t->tm_year >> ch >> t->tm_mon >> ch >> t->tm_mday;
     string period=getPeriod();
 
