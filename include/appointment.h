@@ -17,8 +17,8 @@ private:
     int id;
     int period;
     time_t date;
-    Doctor *doctor;
-    Patient *patient;
+    Doctor* doctor;
+    Patient* patient;
     Prescription* prescription;
 
 public:

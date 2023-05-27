@@ -1,6 +1,7 @@
 #ifndef PERSON_H
 #define PERSON_H
 
+#include "other.cpp"
 #include <string>
 #include <iostream>
 using namespace std ;

@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-bool IsValid(string msg)
+string IsValid(string msg)
 {
   bool IsNotValid = false;
   string num;
@@ -25,19 +25,44 @@ bool IsValid(string msg)
       if (IsNotValid)
         throw "Error";
 
-      return true;
+      return num;
     }
 
     catch (const char *str)
     {
-      cerr << "Please, don't write letter. type only from these choices :)\n";
+      cerr << "Please, don't write letter. type only numbers :)\n";
     }
   } while (IsNotValid);
 
-  return true;
+  return num;
 }
 
+int IsValid(int n)
+{
+  bool IsNotValid = false;
+  string num;
 
+  IsNotValid = false;
 
+  try
+  {
+    num = to_string(n);
 
+    for (int i = 0; i < num.size(); i++)
+      if (!isdigit(num[i]))
+      {
+        IsNotValid = true;
+        break;
+      }
 
+    if (IsNotValid)
+      throw "Error";
+
+    return n;
+  }
+
+  catch (const char *str)
+  {
+    cerr << "Please, don't write letter. type only numbers :)\n";
+  }
+}

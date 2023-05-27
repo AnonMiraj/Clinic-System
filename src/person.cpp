@@ -70,6 +70,18 @@ void Person::setAddress(const string& address) {
 }
 
 void Person::editInfo(){
+<<<<<<< HEAD
+=======
+  
+
+    cout << "ID: " << id << endl;
+    string newId;
+    getline(cin, newId);
+    if (!newId.empty()) {
+        id = stoi(newId);
+    }
+
+>>>>>>> refs/remotes/origin/main
     cout << "Name: " << name << endl;
     cout << "Enter new Name (You Can Press Enter to skip): ";
     getline(cin, name);
