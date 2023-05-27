@@ -50,11 +50,9 @@ public:
     void setAppointmentFee(double appointmentFee);
   
     
-    void setIndexesToTrue(bool *arr, int size);
+
     void readDays();
-    void printDayNames(const bool *arr, int size, ostream& os)const;
     void readPeroids();
-    void printPeriodTimes( const bool *arr, int size, ostream& os)const;
     virtual void editInfo();
 
     friend istream& operator>>(istream& is, Doctor& doctor);
