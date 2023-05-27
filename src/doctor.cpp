@@ -1,4 +1,5 @@
 #include "doctor.h"
+#include <string>
 
 
 // Constructor
@@ -236,7 +237,19 @@ void Doctor::editInfo() {
     if (!newExperience.empty()) {
         experience = stoi(newExperience);
     }
-
+    string yes; 
+    cout << "Available Days:";
+    printDayNames(availableDays, 8);
+    cout << "input y to edit otherwise press enter to skip" << endl;
+    getline(cin,yes);
+    if (yes == "y"||yes == "Y")
+        readDays();  
+    cout << "Available Hours: ";
+    printPeriodTimes(availablePeroids,49);
+    cout << "input y to edit otherwise press enter to skip" << endl;
+    getline(cin,yes);
+    if (yes == "y"||yes == "Y")
+        readPeroids();
 
     cout << "Date Joined: " << dateJoined << endl;
     getline(cin, dateJoined);
