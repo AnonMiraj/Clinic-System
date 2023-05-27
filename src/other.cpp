@@ -22,6 +22,7 @@ bool IsValid(string num)
   catch (const char *str)
   {
     cerr << "Please, don't write letter. type only numbers :)\n";
+    return false;
   }
 }
 

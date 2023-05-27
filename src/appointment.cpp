@@ -32,11 +32,32 @@ void Appointment::setDate()
     string y,m,d;
     do
     {
-        bool IsNotValid; 
-        cout << "Enter the date (dd/ mm/ yyyy) : ";
-        cin >> y >>ch >>m >>ch >>d;
-    } while (IsValid(y) && IsValid(m) && IsValid(d));
-    cin >> t->tm_year >> ch >> t->tm_mon >> ch >> t->tm_mday;
+        bool IsNotValid = false;
+        try 
+        {
+            cout << "Enter the date (dd/ mm/ yyyy) : ";
+            cin >> y >>ch >>m >>ch >>d;
+
+            if ( (y.size()>4) && (m.size() > 2) && (d.size() > 2) )
+                throw ("This date is Invalid. :(\n");
+
+            if (!IsValid(y) || !IsValid(m) || !IsValid(d))
+                throw string(" ");
+            
+            t->tm_year = stoi(y) - 1900;
+            t->tm_mon = stoi(m);
+            t->tm_mday = stoi(d);
+            break;
+        }
+        catch (const char *str)
+        {
+            IsNotValid = true;
+            cout<<str;
+        }
+        
+        catch (int num)
+    } while (IsNotValid);
+
     string period=getPeriod();
 
     t->tm_hour = stoi(period.substr(0,1));
