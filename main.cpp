@@ -2,6 +2,7 @@
 #include <cstring>       // string, to_string
 #include <iostream>      // cin, cout
 #include <string>
+#include "admin.h"
 using namespace std;
 void _pause() {
   cin.ignore();
