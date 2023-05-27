@@ -1,34 +1,36 @@
+
 #ifndef ADMIN_H
 #define ADMIN_H
-
 #include "person.h"
-#include "doctor.h"
 #include "patient.h"
-#include "Stock.h"
-#include "appointment.h"
-#include <iostream>
-#include <string>
-#include <fstream>
+#include "doctor.h"
+
 using namespace std;
 
-class Admin
-{
-  public:
-  int doctorCounter;
-  int MaxDoctor;
-  int patientCounter;
-  int MaxPatient;
-  int appointmentCounter;
-  int MaxAppointment;
-  Admin();
-  ~Admin();
+class Admin {
+private:
+    Patient* patients;
+    Doctor* doctors; 
+    Doctor* archivedDoctors;
+    int patientCount;
+    int doctorCount;
+    int archiveCount;   
+    int maxPatients;
+    int maxDoctors;
+    int maxArchive;
+public:
+    Admin();
+    ~Admin();
 
-  protected:
+    // Other member functions for managing patients and doctors
+    void addPatient();
+    void addDoctor();
 
-  private:
-  Doctor* DoctorList;
-  Patient* PatientList;
-  Appointment* AppointmentList;
-}; 
+    void editPatient();
+    void editDoctor();
+    friend ostream& operator<<(ostream& os, const Admin& admin);
+};
 
-#endif //ADMIN_H
+
+#endif  // ADMIN_H
+
