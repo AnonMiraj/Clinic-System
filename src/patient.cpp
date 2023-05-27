@@ -1,6 +1,5 @@
 #include "patient.h"
 
-
 // Constructor
 Patient::Patient()
   : Person(),
@@ -59,8 +58,11 @@ void Patient::editInfo() {
     cout << "Password: " << password << endl;
     getline(cin, password);
 
-    cout << "Insurance: " << insurance << endl;
-    getline(cin, insurance);
+    do
+    {
+        cout << "Insurance: " << insurance << endl;
+        getline(cin, insurance);
+    } while (IsValid(insurance));
 
     cout << "Emergency Contact: " << emergencyContact << endl;
     getline(cin, emergencyContact);
