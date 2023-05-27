@@ -72,9 +72,7 @@ void Person::setAddress(const string& address) {
 void Person::editInfo(){
   
 
-
     cout << "ID: " << id << endl;
-    cout << "Enter new ID (Press Enter to skip): ";
     string newId;
     getline(cin, newId);
     if (!newId.empty()) {
