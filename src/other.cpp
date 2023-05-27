@@ -1,6 +1,4 @@
-#include <iostream>
-#include <string>
-using namespace std;
+#include "other.h"
 
 string IsValid(string msg)
 {
