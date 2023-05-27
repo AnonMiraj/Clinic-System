@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iomanip>
 #include "person.h"
+#include "other.h"
 #include "doctor.h"
 #include "patient.h"
 #include "prescription.h"
