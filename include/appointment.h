@@ -32,7 +32,7 @@ public:
     void setPeriod(const int& p);
     string getPeriod() const;
 
-    void setDate(const time_t& d);
+    void setDate();
     time_t getDate() const;
 
     void setDoctor(const Doctor& doctor);

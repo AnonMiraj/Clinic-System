@@ -25,13 +25,28 @@ string Appointment::getPeriod() const
 }
 
 
-void Appointment::setDate(const time_t& d) 
+void Appointment::setDate() 
 {
-    tm* t = localtime(&d);  
+    tm* t = localtime(&date);  
+    char ch;
 
-    t->tm_hour = (getPeriod()[1] != ':') ? stoi(getPeriod()[0] + getPeriod()[1]) : stoi(getPeriod()[0]);
-    t->tm_min = (getPeriod()[1] != ':') ? stoi(getPeriod()[2] + getPeriod()[3]) : stoi(getPeriod()[3] + getPeriod()[4]);
-    t->tm_sec = 0;
+    cout << "Enter the date (dd/ mm/ yyyy) : "; cin >> t->tm_year >> ch >> t->tm_mon >> ch >> t->tm_mday;
+
+    if (getPeriod()[1] != ':')
+    {
+        t->tm_hour = stoi(getPeriod()[0] + getPeriod()[1]);
+        t->tm_min = stoi(getPeriod()[2] + getPeriod()[3]);
+    }
+
+    else
+    {
+        t->tm_hour = stoi(getPeriod()[0]);
+        t->tm_min = stoi(getPeriod()[3] + getPeriod()[4]);
+    }
+
+    //t->tm_hour = (getPeriod()[1] != ':') ? stoi(getPeriod()[0] + getPeriod()[1]) : stoi(getPeriod()[0]);
+    //t->tm_min = (getPeriod()[1] != ':') ? stoi(getPeriod()[2] + getPeriod()[3]) : stoi(getPeriod()[3] + getPeriod()[4]);
+    //t->tm_sec = 0;
 
     date = mktime(t);
 }
