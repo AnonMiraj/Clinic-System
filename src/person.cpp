@@ -1,6 +1,5 @@
 #include "person.h"
 
-
 // Constructor
 Person::Person()
 : id(0), name(""), age(0), gender(""), bloodType(""),
@@ -69,17 +68,35 @@ void Person::setAddress(const string& address) {
     this->address = address;
 }
 
-void Person::editInfo(){
+void Person::editInfo()
+{
+
+    cout << "ID: " << id << endl;
+    string newId;
+    do
+    {
+        cout << "Enter new ID (Press Enter to skip): ";
+        getline(cin, newId);
+
+        if (!newId.empty())
+            id = stoi(newId);
+
+    } while (IsValid(newId));
+
     cout << "Name: " << name << endl;
-    cout << "Enter new Name (You Can Press Enter to skip): ";
     getline(cin, name);
 
     cout << "Age: " << age << endl;
     string newAge;
-    getline(cin, newAge);
-    if (!newAge.empty()) {
-        age = stoi(newAge);
-    }
+    do
+    {
+        cout << "Age: " << age << endl;
+        getline(cin, newAge);
+
+        if (!newAge.empty())
+            age = stoi(newAge);
+
+    } while (IsValid(newAge));
 
     cout << "Gender: " << gender << endl;
     getline(cin, gender);
@@ -87,13 +104,21 @@ void Person::editInfo(){
     cout << "Blood Type: " << bloodType << endl;
     getline(cin, bloodType);
 
-    cout << "Phone Number: " << phoneNumber << endl;
-    getline(cin, phoneNumber);
+    do
+    {
+        cout << "Phone Number: " << phoneNumber << endl;
+        getline(cin, phoneNumber);
+    } while (IsValid(phoneNumber));
 
     cout << "Address: " << address << endl;
     getline(cin, address);
 }
-istream& operator>>(istream& is, Person& person) {
+istream& operator>>(istream& is, Person& person) 
+{
+    cout << "Enter person's ID: ";
+    is >> person.id;
+    is.ignore();  // Clear the input buffer
+
     cout << "Enter person's name: ";
     getline(is, person.name);
 
