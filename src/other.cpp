@@ -1,6 +1,10 @@
 #include "other.h"
 
-bool other::IsValid(string msg)
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool IsValid(string msg)
 {
   bool IsNotValid = false;
   string num;
@@ -34,3 +38,8 @@ bool other::IsValid(string msg)
 
   return true;
 }
+
+
+
+
+
