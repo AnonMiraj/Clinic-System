@@ -36,7 +36,7 @@ void Appointment::setDate(const time_t& d)
     date = mktime(t);
 }
 
-string Appointment::getDate() const 
+time_t Appointment::getDate() const 
 {
     //return date;
 }
