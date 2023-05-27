@@ -1,5 +1,6 @@
 #include "doctor.h"
 #include <string>
+#include "other.cpp"
 
 
 // Constructor

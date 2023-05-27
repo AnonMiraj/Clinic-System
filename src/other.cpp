@@ -1,46 +1,34 @@
 #include "other.h"
 
-string IsValid(string msg)
+bool IsValid(string num)
 {
   bool IsNotValid = false;
-  string num;
-  do
+
+  try
   {
-    IsNotValid = false;
+    for (int i = 0; i < num.size(); i++)
+      if (!isdigit(num[i]))
+      {
+        IsNotValid = true;
+        break;
+      }
 
-    try
-    {
-      cout << msg;
-      cin >> num;
+    if (IsNotValid)
+      throw "Error";
 
-      for (int i = 0; i < num.size(); i++)
-        if (!isdigit(num[i]))
-        {
-          IsNotValid = true;
-          break;
-        }
+    return true;
+  }
 
-      if (IsNotValid)
-        throw "Error";
-
-      return num;
-    }
-
-    catch (const char *str)
-    {
-      cerr << "Please, don't write letter. type only numbers :)\n";
-    }
-  } while (IsNotValid);
-
-  return num;
+  catch (const char *str)
+  {
+    cerr << "Please, don't write letter. type only numbers :)\n";
+  }
 }
 
-int IsValid(int n)
+bool IsValid(int n)
 {
   bool IsNotValid = false;
   string num;
-
-  IsNotValid = false;
 
   try
   {
@@ -56,7 +44,7 @@ int IsValid(int n)
     if (IsNotValid)
       throw "Error";
 
-    return n;
+    return true;
   }
 
   catch (const char *str)
@@ -64,6 +52,8 @@ int IsValid(int n)
     cerr << "Please, don't write letter. type only numbers :)\n";
   }
 }
+
+
 void setIndexesToTrue(bool arr[], int size) {
     string input;
     getline(cin, input);
