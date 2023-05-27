@@ -9,17 +9,19 @@ private:
     string name;
     string brand;
     int price;
-
+    int Quntitiy;
 public:
     Medcin();
 
     // Getters
+    int getQuntitiy()const;
     int getPrice()const;
     int getId() const;
     string getName() const;
     string getBrand() const;
 
     // Setters
+    void setQuntitiy(const int& q);
     void setPrice(const int& price);
     void setId(int id);
     void setName(const string& name);
@@ -28,6 +30,8 @@ public:
     friend istream& operator>>(istream&, Medcin& m);
     // Another Functions
     void Edit();
+    void editQuntitiy();
+
 };
 
 #endif  // MEDCIN_H

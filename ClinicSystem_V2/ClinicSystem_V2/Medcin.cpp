@@ -9,6 +9,11 @@ Medcin::Medcin():id(0),price(0),name("Unkown"),brand("Unkown")
 // Parameterized constructor
 //Medcin::Medcin();
 
+int Medcin::getQuntitiy() const
+{
+    return Quntitiy;
+}
+
 int Medcin::getPrice() const
 {
     return price;
@@ -24,6 +29,11 @@ std::string Medcin::getName() const {
 
 std::string Medcin::getBrand() const {
     return brand;
+}
+
+void Medcin::setQuntitiy(const int& q) 
+{
+    this->Quntitiy = q;
 }
 
 void Medcin::setPrice(const int& price)
@@ -51,7 +61,8 @@ void Medcin::Edit()
     cout << "2. Brand" << endl;
     cout << "3. id" << endl;
     cout << "4. price" << endl;
-    cout << "Enter your choice (1-4): ";
+    cout << "5. Quntitiy" << endl;
+    cout << "Enter your choice (1-5): ";
 
     int choice;
     cin >> choice;
@@ -74,19 +85,25 @@ void Medcin::Edit()
         break;
     case 3:
         int i;
+        cout << "Enter Id:";
         cin >> i;
         setId(i);
         break;
     case 4:
         int p;
+        cout << "Enter Price: ";
         cin >> p;
         setPrice(p);
+        break;
+    case 5:
+        int q;
+        cin >> q;
+        setQuntitiy(q);
         break;
     default:
         cout << "Invalid choice. No changes made." << endl;
         return;
     }
-
     cout << "Medcin updated successfully." << endl;
 }
 
@@ -100,8 +117,8 @@ ostream& operator<<(ostream& os, Medcin& m) {
 
 // Overloaded extraction operator (>>) to input values into Medcin object
 istream& operator>>(istream& is, Medcin& m) {
-    cout << "Enter ID: ";
-    is >> m.id;
+ //   cout << "Enter ID: ";
+//    is >> m.id;
     cout << "Enter Name: ";
     is >> m.name;
     cout << "Enter Brand: ";
