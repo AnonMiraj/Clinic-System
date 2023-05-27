@@ -53,38 +53,38 @@ void Appointment::setDate()
 
 time_t Appointment::getDate() const 
 {
-    //return date;
+    return date;
 }
 
-void Appointment::setDoctor(const Doctor& doctor)
+void Appointment::setDoctor(const Doctor& d)
 {
-    this->doctor = doctor;
+    *doctor = d;
 }
 
-Doctor Appointment::getDoctor() const
+Doctor* Appointment::getDoctor() const
 {
     return doctor;
 }
 
-void Appointment::setPatient(const Patient& patient)
+void Appointment::setPatient(const Patient& p)
 {
-    this->patient = patient;
+    *patient = p;
 }
 
-Patient Appointment::getPatient() const
+Patient* Appointment::getPatient() const
 {
     return patient;
 }
 
-void Appointment::setPrescription(const Prescription& prescription)
+/*void Appointment::setPrescription(const Prescription& p)
 {
-    this->prescription = prescription;
+    *prescription = prescription;
 }
 
-Prescription Appointment::getPrescription() const
+Prescription* Appointment::getPrescription() const
 {
     return prescription;
-}
+}*/
 
 
 
