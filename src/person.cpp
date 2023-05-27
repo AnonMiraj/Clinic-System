@@ -68,30 +68,7 @@ void Person::setPhoneNumber(const string& phoneNumber) {
 void Person::setAddress(const string& address) {
     this->address = address;
 }
-void Person::readInfo() {
-    cout << "Enter person's ID: ";
-    cin >> id;
-    cin.ignore();  // Clear the input buffer
 
-    cout << "Enter person's name: ";
-    getline(cin, name);
-
-    cout << "Enter person's age: ";
-    cin >> age;
-    cin.ignore();  // Clear the input buffer
-
-    cout << "Enter person's gender: ";
-    getline(cin, gender);
-
-    cout << "Enter person's blood type: ";
-    getline(cin, bloodType);
-
-    cout << "Enter person's phone number: ";
-    getline(cin, phoneNumber);
-
-    cout << "Enter person's address: ";
-    getline(cin, address);
-}
 void Person::editInfo(){
   
 
@@ -126,13 +103,41 @@ void Person::editInfo(){
     cout << "Address: " << address << endl;
     getline(cin, address);
 }
+istream& operator>>(istream& is, Person& person) {
+    cout << "Enter person's ID: ";
+    is >> person.id;
+    is.ignore();  // Clear the input buffer
 
-void Person::printInfo() const {
-    cout << "ID: " << id << endl;
-    cout << "Name: " << name << endl;
-    cout << "Age: " << age << endl;
-    cout << "Gender: " << gender << endl;
-    cout << "Blood Type: " << bloodType << endl;
-    cout << "Phone Number: " << phoneNumber << endl;
-    cout << "Address: " << address << endl;
+    cout << "Enter person's name: ";
+    getline(is, person.name);
+
+    cout << "Enter person's age: ";
+    is >> person.age;
+    is.ignore();  // Clear the input buffer
+
+    cout << "Enter person's gender: ";
+    getline(is, person.gender);
+
+    cout << "Enter person's blood type: ";
+    getline(is, person.bloodType);
+
+    cout << "Enter person's phone number: ";
+    getline(is, person.phoneNumber);
+
+    cout << "Enter person's address: ";
+    getline(is, person.address);
+
+    return is;
+}
+
+ostream& operator<<(ostream& os, const Person& person) {
+    os << "ID: " << person.id << endl;
+    os << "Name: " << person.name << endl;
+    os << "Age: " << person.age << endl;
+    os << "Gender: " << person.gender << endl;
+    os << "Blood Type: " << person.bloodType << endl;
+    os << "Phone Number: " << person.phoneNumber << endl;
+    os << "Address: " << person.address << endl;
+
+    return os;
 }

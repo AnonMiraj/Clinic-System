@@ -91,7 +91,7 @@ istream& operator>> (istream& in, Appointment& a) // for files
 ostream& operator<< (ostream& out, const Appointment& a)
 {
     out << setw(20) << a.patient->getName() << setw(20) << a.doctor->getName() <<setw(15) <<a.getDate() <<endl ;
-  a.getPrescription()->printInfo();
+out<<  a.getPrescription();
     return out;
 }
 

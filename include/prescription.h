@@ -25,8 +25,9 @@ public:
     void setQuantity(int quantity);
 
     // Read and print functions
-    void readInfo();
-    void printInfo() const;
+    friend istream& operator>>(istream& is, Prescription& prescription);
+    friend ostream& operator<<(ostream& os, const Prescription& prescription);
+
 };
 
 

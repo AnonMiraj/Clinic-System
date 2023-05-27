@@ -52,13 +52,13 @@ public:
     
     void setIndexesToTrue(bool arr[], int size);
     void readDays();
-    void printDayNames(const bool arr[], int size)const;
+    void printDayNames(const bool arr[], int size, ostream& os)const;
     void readPeroids();
-    void printPeriodTimes( const bool arr[], int size)const;
-    virtual void readInfo();
+    void printPeriodTimes( const bool arr[], int size, ostream& os)const;
     virtual void editInfo();
-    virtual void printInfo() const;
 
+    friend istream& operator>>(istream& is, Doctor& doctor);
+    friend ostream& operator<<(ostream& os, const Doctor& doctor);
 };
 
 

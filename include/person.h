@@ -45,6 +45,8 @@ public:
     virtual void editInfo()=0;
     virtual void printInfo() const;
   
+    friend istream& operator>>(istream& is, Person& person);
+    friend ostream& operator<<(ostream& os, const Person& person);
 };
 
 

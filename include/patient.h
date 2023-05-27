@@ -33,9 +33,9 @@ public:
     void setEmergencyContact(const string& emergencyContact);
 
 
-    virtual void readInfo();
     virtual void editInfo();
-    virtual void printInfo() const;
+    friend istream& operator>>(istream& is, Patient& patient);
+    friend ostream& operator<<(ostream& os, const Patient& patient);
 };
 
 

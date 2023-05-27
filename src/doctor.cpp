@@ -122,7 +122,7 @@ void Doctor::readDays(){
     cout << "Enter the working days (\"1 2 3\", \"1-3\", \"1-2 5 6\" ): "<<endl;
     setIndexesToTrue(availableDays, 8);
 }
-void Doctor::printDayNames(const bool arr[], int size)const {
+void Doctor::printDayNames(const bool arr[], int size, ostream& os )const {
     const string daysOfWeek[] = {
          "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
     };
@@ -132,7 +132,7 @@ void Doctor::printDayNames(const bool arr[], int size)const {
             cout << daysOfWeek[i-1] << " ";
         }
     }
-    cout << endl;
+    os << endl;
 }
 void Doctor::readPeroids(){
 
@@ -140,7 +140,7 @@ void Doctor::readPeroids(){
     cout << "Enter the working Peroids (\"1 2 3\", \"1-3\", \"1-2 5 6\" ): "<<endl;
     setIndexesToTrue(availablePeroids, 49);
 }
-void Doctor::printPeriodTimes( const bool arr[], int size)const {
+void Doctor::printPeriodTimes( const bool arr[], int size, ostream& os)const {
  
     const int minutesPerPeriod = 30;
 
@@ -164,7 +164,7 @@ void Doctor::printPeriodTimes( const bool arr[], int size)const {
                 if (endHour ==24)
                   endHour=0;
 
-                cout << setfill('0') << setw(2) << startHour << ":"
+                os << setfill('0') << setw(2) << startHour << ":"
                           << setw(2) << startMinutes << " - "
                           << setw(2) << endHour << ":"
                           << setw(2) << endMinutes << " ";
@@ -184,38 +184,15 @@ void Doctor::printPeriodTimes( const bool arr[], int size)const {
         if (endHour ==24)
           endHour=0;
 
-        cout << setfill('0') << setw(2) << startHour << ":"
+        os << setfill('0') << setw(2) << startHour << ":"
                   << setw(2) << startMinutes << " - "
                   << setw(2) << endHour << ":"
                   << setw(2) << endMinutes << " ";
     }
 
-    cout << endl;
+    os << endl;
 
 }
-void Doctor::readInfo() {
-    Person::readInfo();  // Call the base class readInfo() function
-
-    cout << "Enter doctor's salary: ";
-    cin >> salary;
-    cin.ignore();  // Clear the input buffer
-
-    cout << "Enter doctor's profession: ";
-    getline(cin, profession);
-
-    cout << "Enter doctor's experience: ";
-    cin >> experience;
-
-    cin.ignore();  // Clear the input buffer
-
-    cout << "Enter doctor's date joined(YYYY-MM-DD): ";
-    getline(cin, dateJoined);
-
-    cout << "Enter doctor's appointment fee: ";
-    cin >> appointmentFee;
-    cin.ignore();  // Clear the input buffer
-}
-
 void Doctor::editInfo() {
 
     cout << "Editing doctor's information:" << endl;
@@ -239,13 +216,13 @@ void Doctor::editInfo() {
     }
     string yes; 
     cout << "Available Days:";
-    printDayNames(availableDays, 8);
+    printDayNames(availableDays, 8,cout);
     cout << "input y to edit otherwise press enter to skip" << endl;
     getline(cin,yes);
     if (yes == "y"||yes == "Y")
         readDays();  
     cout << "Available Hours: ";
-    printPeriodTimes(availablePeroids,49);
+    printPeriodTimes(availablePeroids,49,cout);
     cout << "input y to edit otherwise press enter to skip" << endl;
     getline(cin,yes);
     if (yes == "y"||yes == "Y")
@@ -261,17 +238,44 @@ void Doctor::editInfo() {
         appointmentFee = stod(newAppointmentFee);
     }
 }
-void Doctor::printInfo() const  {
-    Person::printInfo();  // Call the base class printInfo() function
 
-    cout << "Salary: " << salary << endl;
-    cout << "Profession: " << profession << endl;
-    cout << "Experience: " << experience << " years" << endl;
-    cout << "Rating: " << ratingSum/appointmentCount << "/5" << endl;
-    cout << "Available Days:";
-    printDayNames(availableDays, 8);
-    cout << "Available Hours: ";
-    printPeriodTimes(availablePeroids,49);
-    cout << "Date Joined: " << dateJoined << endl;
-    cout << "Appointment Fee: " << appointmentFee << endl;
+istream& operator>>(istream& is, Doctor& doctor) {
+    is >> static_cast<Person&>(doctor);  // Call the base class operator>>
+
+    cout << "Enter doctor's salary: ";
+    is >> doctor.salary;
+    is.ignore();  // Clear the input buffer
+
+    cout << "Enter doctor's profession: ";
+    getline(is, doctor.profession);
+
+    cout << "Enter doctor's experience: ";
+    is >> doctor.experience;
+    is.ignore();  // Clear the input buffer
+
+    cout << "Enter doctor's date joined (YYYY-MM-DD): ";
+    getline(is, doctor.dateJoined);
+
+    cout << "Enter doctor's appointment fee: ";
+    is >> doctor.appointmentFee;
+    is.ignore();  // Clear the input buffer
+
+    return is;
+}
+
+ostream& operator<<(ostream& os, const Doctor& doctor) {
+    os << static_cast<const Person&>(doctor);  // Call the base class operator<<
+
+    os << "Salary: " << doctor.salary << endl;
+    os << "Profession: " << doctor.profession << endl;
+    os << "Experience: " << doctor.experience << " years" << endl;
+    os << "Rating: " << doctor.ratingSum / doctor.appointmentCount << "/5" << endl;
+    os << "Available Days: ";
+    doctor.printDayNames(doctor.availableDays, 8, os);
+    os << "Available Hours: ";
+    doctor.printPeriodTimes(doctor.availablePeroids , 49, os);
+    os << "Date Joined: " << doctor.dateJoined << endl;
+    os << "Appointment Fee: " << doctor.appointmentFee << endl;
+
+    return os;
 }

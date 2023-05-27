@@ -33,22 +33,26 @@ void Prescription::setQuantity(int quantity) {
     this->quantity = quantity;
 }
 
-// Read and print functions
-void Prescription::readInfo() {
+
+istream& operator>>(istream& is, Prescription& prescription) {
     cout << "Enter medication: ";
-    getline(cin, medication);
+    getline(is, prescription.medication);
 
     cout << "Enter dosage: ";
-    getline(cin, dosage);
+    getline(is, prescription.dosage);
 
     cout << "Enter quantity: ";
-    cin >> quantity;
-    cin.ignore();  // Ignore the newline character in the input buffer
+    is >> prescription.quantity;
+    is.ignore();  // Ignore the newline character in the input buffer
+
+    return is;
 }
 
-void Prescription::printInfo() const {
-    cout << "Medication: " << medication << endl;
-    cout << "Dosage: " << dosage << endl;
-    cout << "Quantity: " << quantity << endl;
+ostream& operator<<(ostream& os, const Prescription& prescription) {
+    os << "Medication: " << prescription.medication << endl;
+    os << "Dosage: " << prescription.dosage << endl;
+    os << "Quantity: " << prescription.quantity << endl;
+
+    return os;
 }
 

@@ -47,17 +47,6 @@ void Patient::setEmergencyContact(const string& emergencyContact) {
     this->emergencyContact = emergencyContact;
 }
 
-void Patient::readInfo() {
-    Person::readInfo();  // Call the base class readInfo() function
-
-    cout << "Enter patient's password: ";
-    getline(cin, password);
-
-    cout << "Enter patient's insurance: ";
-// to do
-    cout << "Enter patient's emergency contact: ";
-    getline(cin, emergencyContact);
-}
 
 void Patient::editInfo() {
 
@@ -78,13 +67,30 @@ void Patient::editInfo() {
 }
 
 
-void Patient::printInfo() const {
-    Person::printInfo();  // Call the base class printInfo() function
+istream& operator>>(istream& is, Patient& patient) {
+    is >> static_cast<Person&>(patient);  // Call the base class operator>>
 
-    if (notes!="")
-      cout << "Notes: " << notes << endl;
+    cout << "Enter patient's password: ";
+    getline(is, patient.password);
 
-    // TODO cout << "Insurance: " << insurance << endl;
+    cout << "Enter patient's emergency contact: ";
+    getline(is, patient.emergencyContact);
 
-    cout << "Emergency Contact: " << emergencyContact << endl;
+    return is;
 }
+
+ostream& operator<<(ostream& os, const Patient& patient) {
+    os << static_cast<const Person&>(patient);  // Call the base class operator<<
+
+    if (!patient.notes.empty()) {
+        os << "Notes: " << patient.notes << endl;
+    }
+
+    // TODO: Print insurance information
+    // os << "Insurance: " << patient.insurance << endl;
+
+    os << "Emergency Contact: " << patient.emergencyContact << endl;
+
+    return os;
+}
+
