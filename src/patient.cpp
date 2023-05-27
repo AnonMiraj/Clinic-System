@@ -59,6 +59,25 @@ void Patient::readInfo() {
     getline(cin, emergencyContact);
 }
 
+void Patient::editInfo() {
+
+    cout << "Editing Patient's information:" << endl;
+    Person::editInfo();  // Call the base class editInfo() function
+
+    cout << "Notes: " << notes << endl;
+    getline(cin, notes);
+
+    cout << "Password: " << password << endl;
+    getline(cin, password);
+
+    cout << "Insurance: " << insurance << endl;
+    getline(cin, insurance);
+
+    cout << "Emergency Contact: " << emergencyContact << endl;
+    getline(cin, emergencyContact);
+}
+
+
 void Patient::printInfo() const {
     Person::printInfo();  // Call the base class printInfo() function
 

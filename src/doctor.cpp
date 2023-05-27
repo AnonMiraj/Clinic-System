@@ -1,11 +1,15 @@
 #include "doctor.h"
+#include <string>
 
 
 // Constructor
 Doctor::Doctor()
  : Person(),
       salary(0), profession(""), experience(0),
-      ratingSum(0),appointmentCount(0), dateJoined(""), appointmentFee(0) {}
+      ratingSum(0),appointmentCount(0), dateJoined(""), appointmentFee(0) {
+  bool availableDays[8]={false};
+  bool setAvailablePeroids[49]={false};
+}
 
 
 Doctor::Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
@@ -14,7 +18,11 @@ Doctor::Doctor(int id, const string& name, int age, const string& gender, const 
     : Person(id, name, age, gender, bloodType, phoneNumber, address),
       salary(salary), profession(profession), experience(experience),
       ratingSum(ratingSum),appointmentCount(appointmentCount)
-      ,dateJoined(dateJoined), appointmentFee(appointmentFee) {}
+      ,dateJoined(dateJoined), appointmentFee(appointmentFee) {
+  bool availableDays[8]={false};
+  bool setAvailablePeroids[49]={false};
+
+}
 
 // Getters
 double Doctor::getSalary() const {
@@ -68,7 +76,7 @@ void Doctor::setAppointmentCount(int appointmentCount){
 void Doctor::setAvailableDays(){
 
 }
-void Doctor::setAvailableHours(){
+void Doctor::setAvailablePeroids(){
 
 }
 void Doctor::setDateJoined(const string& dateJoined) {
@@ -78,7 +86,113 @@ void Doctor::setDateJoined(const string& dateJoined) {
 void Doctor::setAppointmentFee(double appointmentFee) {
     this->appointmentFee = appointmentFee;
 }
+void setIndexesToTrue(bool arr[], int size) {
+    string input;
+    getline(cin, input);
 
+    istringstream iss(input);
+    string token;
+    while (iss >> token) {
+        if (token.find('-') != string::npos) {
+            // Range input detected, e.g., "1-3"
+            istringstream rangeIss(token);
+            string start, end;
+            getline(rangeIss, start, '-');
+            getline(rangeIss, end, '-');
+
+            int startIndex = stoi(start);
+            int endIndex = stoi(end);
+
+            for (int i = startIndex; i <= endIndex; ++i) {
+                if (i >= 0 && i < size) {
+                    arr[i] = true;
+                }
+            }
+        } else {
+            // Single index input detected, e.g., "1"
+            int index = stoi(token);
+            if (index >= 0 && index < size) {
+                arr[index] = true;
+            }
+        }
+    }
+}
+void Doctor::readDays(){
+    cout << "The weak here start with Saturday so 1 means Saturday\n";
+    cout << "Enter the working days (\"1 2 3\", \"1-3\", \"1-2 5 6\" ): "<<endl;
+    setIndexesToTrue(availableDays, 8);
+}
+void Doctor::printDayNames(const bool arr[], int size)const {
+    const string daysOfWeek[] = {
+         "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+    };
+
+    for (int i = 1; i < size; ++i) {
+        if (arr[i]) {
+            cout << daysOfWeek[i-1] << " ";
+        }
+    }
+    cout << endl;
+}
+void Doctor::readPeroids(){
+
+    cout << "The day consist of 48 peroids ( 30 min ) the first one starts with 1 and equal 00:00 the next is 00:30 ,etc\n";
+    cout << "Enter the working Peroids (\"1 2 3\", \"1-3\", \"1-2 5 6\" ): "<<endl;
+    setIndexesToTrue(availablePeroids, 49);
+}
+void Doctor::printPeriodTimes( const bool arr[], int size)const {
+ 
+    const int minutesPerPeriod = 30;
+
+    cout << "Periods: ";
+    int startPeriod = -1;
+    bool isInPeriod = false;
+    for (int i = 0; i < size; ++i) {
+        if (arr[i]) {
+            if (!isInPeriod) {
+                startPeriod = i;
+                isInPeriod = true;
+            }
+        } else {
+            if (isInPeriod) {
+                int endPeriod = i - 1;
+                int startMinutes = ((startPeriod - 1) * minutesPerPeriod) % 60;
+                int endMinutes = (endPeriod * minutesPerPeriod) % 60;
+
+                int startHour = ((startPeriod - 1) * minutesPerPeriod) / 60;
+                int endHour = (endPeriod * minutesPerPeriod) / 60;
+                if (endHour ==24)
+                  endHour=0;
+
+                cout << setfill('0') << setw(2) << startHour << ":"
+                          << setw(2) << startMinutes << " - "
+                          << setw(2) << endHour << ":"
+                          << setw(2) << endMinutes << " ";
+
+                isInPeriod = false;
+            }
+        }
+    }
+
+    if (isInPeriod) {
+        int endPeriod = size - 1;
+        int startMinutes = ((startPeriod - 1) * minutesPerPeriod) % 60;
+        int endMinutes = (endPeriod * minutesPerPeriod) % 60;
+
+        int startHour = ((startPeriod - 1) * minutesPerPeriod) / 60;
+        int endHour = (endPeriod * minutesPerPeriod) / 60;
+        if (endHour ==24)
+          endHour=0;
+
+        cout << setfill('0') << setw(2) << startHour << ":"
+                  << setw(2) << startMinutes << " - "
+                  << setw(2) << endHour << ":"
+                  << setw(2) << endMinutes << " ";
+    }
+
+    cout << endl;
+
+}
 void Doctor::readInfo() {
     Person::readInfo();  // Call the base class readInfo() function
 
@@ -102,14 +216,62 @@ void Doctor::readInfo() {
     cin.ignore();  // Clear the input buffer
 }
 
-void Doctor::printInfo() const {
+void Doctor::editInfo() {
+
+    cout << "Editing doctor's information:" << endl;
+    Person::editInfo();  // Call the base class editInfo() function
+
+    cout << "Salary: " << salary << endl;
+    string newSalary;
+    getline(cin, newSalary);
+    if (!newSalary.empty()) {
+        salary = stod(newSalary);
+    }
+
+    cout << "Profession: " << profession << endl;
+    getline(cin, profession);
+
+    cout << "Experience: " << experience << " years" << endl;
+    string newExperience;
+    getline(cin, newExperience);
+    if (!newExperience.empty()) {
+        experience = stoi(newExperience);
+    }
+    string yes; 
+    cout << "Available Days:";
+    printDayNames(availableDays, 8);
+    cout << "input y to edit otherwise press enter to skip" << endl;
+    getline(cin,yes);
+    if (yes == "y"||yes == "Y")
+        readDays();  
+    cout << "Available Hours: ";
+    printPeriodTimes(availablePeroids,49);
+    cout << "input y to edit otherwise press enter to skip" << endl;
+    getline(cin,yes);
+    if (yes == "y"||yes == "Y")
+        readPeroids();
+
+    cout << "Date Joined: " << dateJoined << endl;
+    getline(cin, dateJoined);
+
+    cout << "Appointment Fee: " << appointmentFee << endl;
+    string newAppointmentFee;
+    getline(cin, newAppointmentFee);
+    if (!newAppointmentFee.empty()) {
+        appointmentFee = stod(newAppointmentFee);
+    }
+}
+void Doctor::printInfo() const  {
     Person::printInfo();  // Call the base class printInfo() function
 
     cout << "Salary: " << salary << endl;
     cout << "Profession: " << profession << endl;
     cout << "Experience: " << experience << " years" << endl;
     cout << "Rating: " << ratingSum/appointmentCount << "/5" << endl;
-   //to do days worked and hour worked 
+    cout << "Available Days:";
+    printDayNames(availableDays, 8);
+    cout << "Available Hours: ";
+    printPeriodTimes(availablePeroids,49);
     cout << "Date Joined: " << dateJoined << endl;
     cout << "Appointment Fee: " << appointmentFee << endl;
 }

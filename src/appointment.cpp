@@ -1,4 +1,4 @@
-#include "Appointment.h"
+#include "appointment.h"
 
 Appointment::Appointment(int i)
 {
@@ -18,58 +18,66 @@ void Appointment::setPeriod(const int& p)
 string Appointment::getPeriod() const
 {
     if (period % 2 == 1)
-        return to_string(period / 2) + ":00 - " + to_string(period/2) + ":30";
+        return (period/2<10 ? "0" :"" )+  to_string(period / 2) + ":00 - " + to_string(period/2) + ":30";
 
-    return to_string(period / 2 - 1) + ":30 - " + (period == 48 ? "0" : to_string(period / 2)) + ":00";
+    return (period/2<10 ? "0" :"" )+ to_string(period / 2 - 1) + ":30 - " + (period == 48 ? "0" : to_string(period / 2)) + ":00";
 
 }
 
-
-void Appointment::setDate(const time_t& d) 
+void Appointment::setDate() 
 {
-    tm* t = localtime(&d);  
+    tm* t = localtime(&date);  
+    char ch;
 
-    t->tm_hour = (getPeriod()[1] != ':') ? stoi(getPeriod()[0] + getPeriod()[1]) : stoi(getPeriod()[0]);
-    t->tm_min = (getPeriod()[1] != ':') ? stoi(getPeriod()[2] + getPeriod()[3]) : stoi(getPeriod()[3] + getPeriod()[4]);
-    t->tm_sec = 0;
+    cout << "Enter the date (dd/ mm/ yyyy) : ";
+    cin >> t->tm_year >> ch >> t->tm_mon >> ch >> t->tm_mday;
+    string period=getPeriod();
+
+        t->tm_hour = stoi(period.substr(0,1));
+        t->tm_min = stoi(period.substr(3,1));
+
+
+    //t->tm_hour = (getPeriod()[1] != ':') ? stoi(getPeriod()[0] + getPeriod()[1]) : stoi(getPeriod()[0]);
+    //t->tm_min = (getPeriod()[1] != ':') ? stoi(getPeriod()[2] + getPeriod()[3]) : stoi(getPeriod()[3] + getPeriod()[4]);
+    //t->tm_sec = 0;
 
     date = mktime(t);
 }
 
-string Appointment::getDate() const 
+time_t Appointment::getDate() const 
 {
-    //return date;
+    return date;
 }
 
-void Appointment::setDoctor(const Doctor& doctor)
+void Appointment::setDoctor(const Doctor& d)
 {
-    this->doctor = doctor;
+    *doctor = d;
 }
 
-Doctor Appointment::getDoctor() const
+Doctor* Appointment::getDoctor() const
 {
     return doctor;
 }
 
-void Appointment::setPatient(const Patient& patient)
+void Appointment::setPatient(const Patient& p)
 {
-    this->patient = patient;
+    *patient = p;
 }
 
-Patient Appointment::getPatient() const
+Patient* Appointment::getPatient() const
 {
     return patient;
 }
 
-void Appointment::setPrescription(const Prescription& prescription)
+/*void Appointment::setPrescription(const Prescription& p)
 {
-    this->prescription = prescription;
+    *prescription = prescription;
 }
 
-Prescription Appointment::getPrescription() const
+Prescription* Appointment::getPrescription() const
 {
     return prescription;
-}
+}*/
 
 
 
@@ -82,7 +90,8 @@ istream& operator>> (istream& in, Appointment& a) // for files
 
 ostream& operator<< (ostream& out, const Appointment& a)
 {
-    out << setw(20) << a.patient->getName() << setw(20) << a.doctor->getName() <<setw(15) <<a.getDate() <<endl <<a.getPrescription()->getinfo();
+    out << setw(20) << a.patient->getName() << setw(20) << a.doctor->getName() <<setw(15) <<a.getDate() <<endl ;
+  a.getPrescription()->printInfo();
     return out;
 }
 
