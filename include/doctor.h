@@ -2,6 +2,7 @@
 #ifndef DOCTOR_H
 #define DOCTOR_H
 
+#include "other.h"
 #include "person.h"
 #include <sstream>
 #include <string>
