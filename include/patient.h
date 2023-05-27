@@ -1,6 +1,7 @@
 #ifndef PATIENT_H
 #define PATIENT_H
 
+#include "other.h"
 #include "person.h"
 #include <string>
 
