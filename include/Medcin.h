@@ -9,10 +9,10 @@ private:
     string name;
     string brand;
     int price;
-    int Quntitiy;
+    int quntitiy;
 public:
     Medcin();
-
+    Medcin(int id, string name, string brand, int q, int price);
     // Getters
     int getQuntitiy()const;
     int getPrice()const;
@@ -30,7 +30,7 @@ public:
     friend istream& operator>>(istream&, Medcin& m);
     // Another Functions
     void Edit();
-    void editQuntitiy();
+    //void editQuntitiy();
 
 };
 

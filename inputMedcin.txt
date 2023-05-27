@@ -1,0 +1,50 @@
+1
+Product A
+Brand X
+10
+50
+2
+Product B
+Brand Y
+20
+30
+3
+Product C
+Brand Z
+15
+40
+4
+Product D
+Brand X
+12
+20
+5
+Product E
+Brand Y
+18
+25
+6
+Product F
+Brand Z
+22
+35
+7
+Product G
+Brand X
+14
+28
+8
+Product H
+Brand Y
+16
+22
+9
+Product I
+Brand Z
+24
+38
+10
+Product J
+Brand X
+30
+15
