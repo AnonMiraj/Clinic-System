@@ -24,5 +24,6 @@ public:
     friend ostream& operator<<(ostream& out, const Medical_Specialization& specialization) ;
     friend istream& operator>>(istream& in, Medical_Specialization& specialization);
     bool operator==(const Medical_Specialization& other) ;
+    void editInfo();
 };
 #endif // MEDICAL_SPECIALIZATION_H

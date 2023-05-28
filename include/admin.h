@@ -7,6 +7,8 @@
 #include "Medical_Insurance.h"
 #include "Medical_Specialization.h"
 #include <fstream>
+#include <conio.h>
+
 using namespace std;
 
 class Admin {
@@ -18,14 +20,14 @@ private:
     Medical_Insurance insurances;
 
     int patientCount;
-    int specializationCount;
     int doctorCount;
     int archiveCount;
+    int specializationCount;
 
-    int maxSpecialization;
     int maxPatients;
     int maxDoctors;
     int maxArchive;
+    int maxSpecialization;
 public:
     Admin();
     ~Admin();
@@ -33,9 +35,14 @@ public:
     // Other member functions for managing patients and doctors
     void addPatient();
     void addDoctor();
+    void addSpecialization();
 
     void editPatient();
     void editDoctor();
+    void editSpecialization();
+
+    void addDoctorToSpec();
+    void DetDoctorFromSpec();
 
     void archiveDoctor();
     void unarchiveDoctor();

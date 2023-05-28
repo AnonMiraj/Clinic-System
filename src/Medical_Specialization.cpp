@@ -24,6 +24,12 @@
         name = _name;
     }
 
+    void Medical_Specialization::editInfo() {
+
+    cout << "Current Name: " << name << endl;
+    cout << "Editing Medical Specialization's Name (You Can Press Enter to skip):" << endl;
+    getline(cin, name);
+}
     // Overloading << operator
     ostream& operator<<(ostream& out, const Medical_Specialization& specialization) {
         out << "ID: " << specialization.id << ", Name: " << specialization.name;

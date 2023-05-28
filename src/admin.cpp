@@ -9,15 +9,21 @@
 
 Admin::Admin()
 {
-    patients = new Patient[10];  // Initial capacity for 10 patients
-    doctors = new Doctor[10];  // Initial capacity for 10 doctors
-    archivedDoctors = new Doctor[10]; // Initial capacity for 10 doctors
     patientCount = 0;
     doctorCount = 0;
     archiveCount = 0;
+    specializationCount=0;
+
     maxPatients = 10;
     maxDoctors = 10;
     maxArchive = 10;
+    maxSpecialization=10;
+
+    patients = new Patient[maxPatients];  // Initial capacity for 10 patients
+    doctors = new Doctor[maxDoctors];  // Initial capacity for 10 doctors
+    archivedDoctors = new Doctor[maxArchive]; // Initial capacity for 10 doctors
+    specializations = new Medical_Specialization[maxSpecialization];  // Initial capacity for 10 doctors
+
 }
 
 Admin::~Admin()
@@ -25,6 +31,7 @@ Admin::~Admin()
     delete[] patients;
     delete[] doctors;
     delete[] archivedDoctors;
+    delete[] specializations;
 }
 
 void Admin::addPatient()
@@ -48,12 +55,84 @@ void Admin::addPatient()
     patientCount++;
 }
 
+void Admin::addSpecialization()
+{
+    if (specializationCount == maxSpecialization)
+    {
+        // Resize the array if it's full
+        Medical_Specialization* newSpecializations = new Medical_Specialization[maxSpecialization * 2];
+        for (int i = 0; i < specializationCount; i++)
+        {
+            newSpecializations[i] = specializations[i];
+        }
+        delete[] specializations;
+        specializations = newSpecializations;
+        maxSpecialization *= 2;
+    }
+
+    specializations[specializationCount] =  Medical_Specialization();
+    cin>>specializations[specializationCount];
+    specializations[specializationCount].setId(specializationCount+1);
+    specializationCount++;
+}
+
+
 void Admin::editPatient()
 {
     int id;
     cout<<"Enter patient Id: ";
     cin>>id;
     patients[id-1].editInfo();
+}
+
+void Admin::editSpecialization()
+{
+    int id;
+    cout<<"Enter patient Id: ";
+    cin>>id;
+    specializations[id-1].editInfo();
+}
+
+void Admin::addDoctorToSpec(){
+    int Spec_Indx=-1;
+    cout<<"Enter Specialization Id (Enter 0 to exit Add To Spec Menu ): ";
+    cin>>Spec_Indx;
+    Spec_Indx--;
+
+    int doc_Indx=-1;
+    cout<<"Enter Doctor Id (Enter 0 to exit Add To Spec Menu ): ";
+    cin>>doc_Indx;
+    doc_Indx--;
+
+    if(Spec_Indx == -1 || doc_Indx==-1 )
+    {
+        cout << "Exiting the Add To Specialization Menu " << endl;
+        _getch();
+        return;
+    }
+    system("cls");
+
+    doctors[doc_Indx].setSpecialization(specializations[Spec_Indx]);
+
+    cout << "Doctor Added successfully." ;
+}
+void Admin::DetDoctorFromSpec(){
+    int doc_Indx=-1;
+    cout<<"Enter Doctor Id (Enter 0 to exit Add To Spec Menu ): ";
+    cin>>doc_Indx;
+    doc_Indx--;
+
+    if(doc_Indx == -1)
+    {
+        cout << "Exiting the Remove From Specialization Menu " << endl;
+        return;
+    }
+    system("cls");
+    Medical_Specialization newSpec;
+    doctors[doc_Indx].setSpecialization(newSpec);
+
+    cout << "Doctor Removed successfully." ;
+    _getch();
 }
 
 void Admin::addDoctor()
