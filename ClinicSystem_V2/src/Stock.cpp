@@ -4,19 +4,28 @@ using namespace std;
 
 Stock::Stock(): c_MedcinList(0) 
 {
+    MedcinList = new Medcin[100];
     input.open("inputMedcin.txt");
     if (!input)
     {
         cout << "File Can Not Be Open ):" << endl;
         system("pause");
     }
-    MedcinList = new Medcin[100];
+    //output.open("outputMedcin.txt");
+    Quntitiy = new int[100];
+
 }
 
 Stock::~Stock()
 {
     delete[] MedcinList;
     input.close();
+}
+
+
+void Stock::setQuantity(int Q,int index)
+{
+    Quntitiy[index] = Q;
 }
 
 // Function to add a medicine to stock
@@ -41,12 +50,8 @@ void Stock::addMedcinInStock()
             cin >> ch;
             if (ch == 'y' || ch == 'Y')
             {
-                int quantity;
                 cout << "Enter the additional quantity: ";
-                cin >> quantity;
-                cin.ignore();
-
-                MedcinList[i].setQuntitiy(/*MedcinList[i].getQuntitiy()*/ quantity);
+                cin>>Quntitiy[c_MedcinList];
             } 
 
             return;
@@ -60,17 +65,13 @@ void Stock::addMedcinInStock()
 
     // add and increase counter
 
-    cout << "Medicine added to stock." << endl;
+    cout << "^_^ Medicine Successfully Added To Stock. ^_^" << endl;
 }
 
 void Stock::addMedcinInStockByFiles()
 {
-    if (!input)
-    {
-        cout << "Failed to open the input file.";
-        return;
-    }
-    int id, q,price;
+
+    int id, price;
     string name, brand;
 
     while (c_MedcinList <100 && input >> id)
@@ -79,9 +80,9 @@ void Stock::addMedcinInStockByFiles()
         input.ignore();
         getline(input, name);
         getline(input, brand);
-        input >> q;
         input >> price;
-        MedcinList[c_MedcinList] = Medcin(id, name, brand, q, price);
+        input >> Quntitiy[c_MedcinList];
+        MedcinList[c_MedcinList] = Medcin(id, name, brand, price);
 
         c_MedcinList++;
     }
@@ -90,8 +91,7 @@ void Stock::addMedcinInStockByFiles()
 // Function to edit a medicine in stock
 void Stock::editMedcin()
 {
-    cout << "Enter  ID of the medicine to edit:" << endl;
-
+    cout << "Enter  ID of the medicine You Want To Edit:" << endl;
     int medcinid;
     cin >> medcinid;
 
@@ -141,7 +141,7 @@ int Stock::getQuntitiy(int id)
     index=SearchId(id);
     if (index != -1)
     {
-        return MedcinList[index].getQuntitiy();
+        return Quntitiy[index];
     }
     cout << "This Quntitiy isn't Exist" << endl;
 
@@ -166,9 +166,10 @@ ostream& operator<<(ostream& out, const Stock& stock)
     // TODO: insert return statement here
     for (int i = 0; i < stock.c_MedcinList; i++)
     {
-        out << "+--------------------------------+"<<endl;
+        out << "+------------------------------------+"<<endl;
         out << stock.MedcinList[i];
-        out << "+--------------------------------+" << endl;
+        out << "| Quntitiy: " << setw(24) << setfill(' ') << stock.Quntitiy[i] << " |" << endl;
+        out << "+------------------------------------+" << endl;
 
     }
     return out;
