@@ -18,7 +18,12 @@ orderItem::orderItem(Stock& stock) : stk(&stock), idOrderItem(0), sale_price(0.0
 //}
 
 
-void orderItem::setOrderItem(int id,Stock&s)
+void orderItem::setTotalPrice(double t)
+{
+    totalPriceOrderItem = t;
+}
+
+bool orderItem::setOrderItem(int id,Stock&s)
 {
     stk = &s;
     int index= stk->SearchId(id);
@@ -37,7 +42,7 @@ void orderItem::setOrderItem(int id,Stock&s)
             cout << "This Item Added Successfully \n";
             stk->setQuantity((stk->getQuntitiy(id) - q), index); //10-->4//6
             this->qunatityOrderItem = q;
-            return;
+            return true;
         }
         else if (q > stk->getQuntitiy(id))
         {
@@ -51,14 +56,20 @@ void orderItem::setOrderItem(int id,Stock&s)
                 setOrderItem(id, s);
             }
             
-            return;
+            return false;
         }
     }
     else
     {
         cout << "This Id Doesn't Exist ): \n";
-        return;
+        return false;
     }
+}
+
+double orderItem::calcTotalPrice()
+{
+    totalPriceOrderItem = sale_price * qunatityOrderItem;
+    return totalPriceOrderItem;
 }
 
 void orderItem::UpdateQuantity(int newQuantity)
@@ -87,6 +98,11 @@ void orderItem::UpdateQuantity(int newQuantity)
             UpdateQuantity(q);
         }
     }
+}
+
+double orderItem::getTotalPrice()
+{
+    return totalPriceOrderItem;
 }
 
 int orderItem::getIdOrderItem()

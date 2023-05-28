@@ -5,6 +5,7 @@ class orderItem
 {
 private:
 	double sale_price;
+	double totalPriceOrderItem;
 	int qunatityOrderItem;
 	Stock* stk;
 	int idOrderItem;
@@ -13,14 +14,24 @@ public:
 	orderItem();
 	orderItem(Stock&);
 
-	void setOrderItem(int id, Stock& s);
-	void UpdateQuantity(int newQuantity);
-	int getIdOrderItem();
+	// Setter
+	void setTotalPrice(double total);
+	bool setOrderItem(int id, Stock& s);
 	void setSalePrice(double);
-	double getSalePrice();
 	void setQuantityOfOrderItem(int);
+
+	// Getter
+	double getTotalPrice();
+	int getIdOrderItem();
+	double getSalePrice();
 	double getQuantityOfOrderItem();
+
+	// Another
+	double calcTotalPrice();
+	void UpdateQuantity(int newQuantity);
 	void EditOrderItem();
+
+	// Overloding Operators
 	orderItem operator++();
 	orderItem operator--();
 	orderItem operator+=(int quantity);
