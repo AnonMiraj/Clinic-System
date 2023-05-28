@@ -12,6 +12,7 @@ private:
     int quantity;
 
 public:
+    Prescription();
     Prescription(const string& medication, const string& dosage, int quantity);
 
     // Getter methods

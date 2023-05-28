@@ -2,6 +2,8 @@
 #include "prescription.h"
 #include <iostream>
 
+Prescription::Prescription() : medication("") , dosage("") , quantity(0)
+{ }
 
 Prescription::Prescription(const string& medication, const string& dosage, int quantity)
     : medication(medication), dosage(dosage), quantity(quantity) {

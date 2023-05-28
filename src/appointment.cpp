@@ -3,7 +3,10 @@
 Appointment::Appointment(int i)
 {
     id = i;
+    doctor = new Doctor();  // Allocate memory for the Doctor object
+    patient = new Patient();  // Allocate memory for the Patient object
 }
+
 
 int Appointment::getID() const
 {
@@ -87,6 +90,7 @@ void Appointment::setPatient(const Patient& p)
     *patient = p;
 }
 
+
 Patient* Appointment::getPatient() const
 {
     return patient;
@@ -94,7 +98,7 @@ Patient* Appointment::getPatient() const
 
 void Appointment::setPrescription(const Prescription& p)
 {
-    *prescription = prescription;
+    *prescription = p;
 }
 
 Prescription* Appointment::getPrescription() const
@@ -114,7 +118,7 @@ istream& operator>> (istream& in, Appointment& a) // for files
 ostream& operator<< (ostream& out, const Appointment& a)
 {
     out << setw(20) << a.patient->getName() << setw(20) << a.doctor->getName() <<setw(15) <<a.getDate() <<endl ;
-out<<  a.getPrescription();
+    out <<  a.getPrescription();
     return out;
 }
 
