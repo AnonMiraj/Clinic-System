@@ -92,7 +92,7 @@ Patient* Appointment::getPatient() const
     return patient;
 }
 
-/*void Appointment::setPrescription(const Prescription& p)
+void Appointment::setPrescription(const Prescription& p)
 {
     *prescription = prescription;
 }
@@ -100,7 +100,7 @@ Patient* Appointment::getPatient() const
 Prescription* Appointment::getPrescription() const
 {
     return prescription;
-}*/
+}
 
 
 
