@@ -2,17 +2,18 @@
 #ifndef DOCTOR_H
 #define DOCTOR_H
 
-#include "person.h"
 #include <sstream>
 #include <string>
 #include <iomanip>
 #include <fstream>
+#include "person.h"
+#include "Medical_Specialization.h"
 
 
 class Doctor : public Person {
 private:
+    Medical_Specialization specialization;
     int salary;
-    string profession;
     int experience;
     int ratingSum;
     int appointmentCount;
@@ -25,12 +26,12 @@ public:
     // Constructor
     Doctor();
     Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
-        const string& phoneNumber, const string& address, int salary, const string& profession,
+        const string& phoneNumber, const string& address, int salary, const Medical_Specialization& specialization,
         int experience, int ratingSum,int appointmentCount, const string& dateJoined, int appointmentFee);
 
     // Getters
     int getSalary() const;
-    string getProfession() const;
+    Medical_Specialization getSpecialization() const;
     int getExperience() const;
     int getRatingSum() const;
     int getAppointmentCount() const;
@@ -41,7 +42,7 @@ public:
 
     // Setters
     void setSalary(int salary);
-    void setProfession(const string& profession);
+    void setSpecialization(const Medical_Specialization& specialization);
     void setExperience(int experience);
     void setRatingSum(int rating);
     void setAppointmentCount(int appointmentCount);
@@ -49,8 +50,7 @@ public:
     void setAvailablePeroids();
     void setDateJoined(const string& dateJoined);
     void setAppointmentFee(int appointmentFee);
-  
-    
+
 
     void readDays();
     void readPeroids();

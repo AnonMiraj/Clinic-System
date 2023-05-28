@@ -4,25 +4,21 @@
 // Constructor
 Patient::Patient()
   : Person(),
-      password(""), insurance(""), emergencyContact("") {}
+      password(""), insurance(0), emergencyContact("") {}
 
 
 Patient::Patient(int id, const string& name, int age, const string& gender, const string& bloodType,
-    const string& phoneNumber, const string& address,const string& notes, const string& password,
-    const string& insurance, const string& emergencyContact)
-    : Person(id, name, age, gender, bloodType, phoneNumber, address),notes(notes),
+    const string& phoneNumber, const string& address, const string& password,
+    const int& insurance, const string& emergencyContact)
+    : Person(id, name, age, gender, bloodType, phoneNumber, address),
       password(password), insurance(insurance), emergencyContact(emergencyContact) {}
 
 // Getters
-string Patient::getNotes() const {
-    return notes;
-}
-
 string Patient::getPassword() const {
     return password;
 }
 
-string Patient::getInsurance() const {
+int Patient::getInsurance() const {
     return insurance;
 }
 
@@ -31,15 +27,12 @@ string Patient::getEmergencyContact() const {
 }
 
 // Setters
-void Patient::setNotes(const string& notes) {
-    this->notes = notes;
-}
 
 void Patient::setPassword(const string& password) {
     this->password = password;
 }
 
-void Patient::setInsurance(const string& insurance) {
+void Patient::setInsurance(const int& insurance) {
     this->insurance = insurance;
 }
 
@@ -50,16 +43,31 @@ void Patient::saveInfo(){
   ofstream  oupt;
   oupt.open("inputPatient.txt",ios::app);
   if (oupt.is_open()) {
-    oupt<<this->getId()<<endl;  
-    oupt<<this->getName()<<endl;
-    oupt<<this->getAge()<<endl;
-    oupt<<this->getGender()<<endl;
-    oupt<<this->getBloodType()<<endl;
-    oupt<<this->getPhoneNumber()<<endl;
-    oupt<<this->getAddress()<<endl;
-    oupt<<this->getNotes()<<endl;
-    oupt<<this->getEmergencyContact()<<endl;
-
+    oupt<<"====================================="<<endl;
+    oupt<<"ID: "<<this->getId()<<endl;
+    oupt<<"Name: "<<this->getName()<<endl;
+    oupt<<"Age: "<<this->getAge()<<endl;
+    oupt<<"Gender: "<<this->getGender()<<endl;
+    oupt<<"Blood Type: "<<this->getBloodType()<<endl;
+    oupt<<"Phone Number: "<<this->getPhoneNumber()<<endl;
+    oupt<<"Address: "<<this->getAddress()<<endl;
+    oupt<<"Emergency Contact: "<<this->getEmergencyContact()<<endl;
+    oupt << "Insurance: ";
+        switch (this->getInsurance()) {
+        case 0:
+            oupt << "No Medical Insurance" << endl;
+            break;
+        case 1:
+            oupt << "Basic" << endl;
+            break;
+        case 2:
+            oupt << "Premium" << endl;
+            break;
+        case 3:
+            oupt << "Standard" << endl;
+            break;
+    }
+    oupt<<"====================================="<<endl;
   }
   oupt.close();
 }
@@ -70,15 +78,16 @@ void Patient::editInfo() {
     cout << "Editing Patient's information:" << endl;
     Person::editInfo();  // Call the base class editInfo() function
 
-    cout << "Notes: " << notes << endl;
-    getline(cin, notes);
-
-
-    // cout << "Insurance: " << insurance << endl;
-    // getline(cin, insurance);
-
     cout << "Emergency Contact: " << emergencyContact << endl;
     getline(cin, emergencyContact);
+    cout << "Editing Medical Insurance information:\n";
+    cout << "1. No Medical Insurance \n";
+    cout << "2. Basic \n";
+    cout << "3. Premium \n";
+    cout << "4. Standard \n";
+    cout << "Enter your choice (1-4): ";
+    cin>>insurance;
+    insurance--;
 }
 
 
@@ -91,19 +100,36 @@ istream& operator>>(istream& is, Patient& patient) {
     cout << "Enter patient's emergency contact: ";
     getline(is, patient.emergencyContact);
 
+        // Display options
+    cout << "Medical Insurance Options:\n";
+    cout << "1. No Medical Insurance \n";
+    cout << "2. Basic \n";
+    cout << "3. Premium \n";
+    cout << "4. Standard \n";
+    cout << "Enter your choice (1-4): ";
+    is>>patient.insurance;
+    patient.insurance--;
     return is;
 }
 
 ostream& operator<<(ostream& os, const Patient& patient) {
     os << static_cast<const Person&>(patient);  // Call the base class operator<<
 
-    if (!patient.notes.empty()) {
-        os << "Notes: " << patient.notes << endl;
+    os << "Insurance: ";
+        switch (patient.insurance) {
+        case 0:
+            os << "No Medical Insurance" << endl;
+            break;
+        case 1:
+            os << "Basic" << endl;
+            break;
+        case 2:
+            os << "Premium" << endl;
+            break;
+        case 3:
+            os << "Standard" << endl;
+            break;
     }
-
-    // TODO: Print insurance information
-    // os << "Insurance: " << patient.insurance << endl;
-
     os << "Emergency Contact: " << patient.emergencyContact << endl;
 
     return os;

@@ -78,6 +78,7 @@ void Person::editInfo(){
     getline(cin, name);
 
     cout << "Age: " << age << endl;
+    cout << "Enter new Age (You Can Press Enter to skip): ";
     string newAge;
     getline(cin, newAge);
     if (!newAge.empty()) {
@@ -85,19 +86,23 @@ void Person::editInfo(){
     }
 
     cout << "Gender: " << gender << endl;
+    cout << "Enter new Gender (You Can Press Enter to skip): ";
     getline(cin, gender);
 
     cout << "Blood Type: " << bloodType << endl;
+    cout << "Enter new Blood Type (You Can Press Enter to skip): ";
     getline(cin, bloodType);
 
     cout << "Phone Number: " << phoneNumber << endl;
+    cout << "Enter new Phone Number (You Can Press Enter to skip): ";
     getline(cin, phoneNumber);
 
     cout << "Address: " << address << endl;
+    cout << "Enter new Address (You Can Press Enter to skip): ";
     getline(cin, address);
 }
 istream& operator>>(istream& is, Person& person) {
-   
+
     is.ignore();
     cout << "Enter person's name: ";
     getline(is, person.name);

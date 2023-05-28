@@ -5,7 +5,7 @@
 // Constructor
 Doctor::Doctor()
  : Person(),
-      salary(0), profession(""), experience(0),
+      salary(0), specialization(), experience(0),
       ratingSum(0),appointmentCount(0), dateJoined(""), appointmentFee(0) {
   bool availableDays[8]={false};
   bool setAvailablePeroids[49]={false};
@@ -13,10 +13,10 @@ Doctor::Doctor()
 
 
 Doctor::Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
-    const string& phoneNumber, const string& address, int salary, const string& profession,
+    const string& phoneNumber, const string& address, int salary, const Medical_Specialization& specialization,
     int experience, int ratingSum,int appointmentCount, const string& dateJoined, int appointmentFee)
     : Person(id, name, age, gender, bloodType, phoneNumber, address),
-      salary(salary), profession(profession), experience(experience),
+      salary(salary), specialization(specialization), experience(experience),
       ratingSum(ratingSum),appointmentCount(appointmentCount)
       ,dateJoined(dateJoined), appointmentFee(appointmentFee) {
   bool availableDays[8]={false};
@@ -29,8 +29,8 @@ int Doctor::getSalary() const {
     return salary;
 }
 
-string Doctor::getProfession() const {
-    return profession;
+Medical_Specialization Doctor::getSpecialization() const {
+    return specialization;
 }
 
 int Doctor::getExperience() const {
@@ -63,8 +63,8 @@ void Doctor::setSalary(int salary) {
     this->salary = salary;
 }
 
-void Doctor::setProfession(const string& profession) {
-    this->profession = profession;
+void Doctor::setSpecialization(const Medical_Specialization& specialization) {
+    this->specialization = specialization;
 }
 
 void Doctor::setExperience(int experience) {
@@ -106,15 +106,19 @@ void Doctor::saveInfo(){
   ofstream  oupt;
   oupt.open("inputDoctors.txt",ios::app);
   if (oupt.is_open()) {
-    oupt<<this->getId()<<endl;  
-    oupt<<this->getName()<<endl;
-    oupt<<this->getAge()<<endl;
-    oupt<<this->getGender()<<endl;
-    oupt<<this->getBloodType()<<endl;
-    oupt<<this->getPhoneNumber()<<endl;
-    oupt<<this->getAddress()<<endl;
-    oupt<<this->getSalary()<<endl;
-    oupt<<this->getProfession()<<endl;
+    oupt<<"====================================="<<endl;
+    oupt<<"ID: "<<this->getId()<<endl;
+    oupt<<"Name: "<<this->getName()<<endl;
+    oupt<<"Age: "<<this->getAge()<<endl;
+    oupt<<"Gender: "<<this->getGender()<<endl;
+    oupt<<"Blood Type: "<<this->getBloodType()<<endl;
+    oupt<<"Phone Number: "<<this->getPhoneNumber()<<endl;
+    oupt<<"Address: "<<this->getAddress()<<endl;
+    oupt<<"Salary: "<<this->getSalary()<<endl;
+    if(specialization.getName()=="")
+    oupt<<"Not Added to Any Specialization Yet"<<endl;
+    else
+    oupt<<"Specialization: "<<this->getSpecialization()<<endl;
     for (int i = 1; i<8;i++)
     {
       if(availableDays[i])
@@ -127,8 +131,9 @@ void Doctor::saveInfo(){
         oupt<<i<<" ";
     }
     oupt<<endl;
-    oupt<<this->getDateJoined()<<endl;
-    oupt<<this->getAppointmentFee()<<endl;
+    oupt<<"Date Joined: "<<this->getDateJoined()<<endl;
+    oupt<<"Appointment Fee: "<<this->getAppointmentFee()<<endl;
+    oupt<<"====================================="<<endl;
 
   }
   oupt.close();
@@ -147,22 +152,19 @@ void Doctor::editInfo() {
         salary = stod(newSalary);
     }
 
-    cout << "Profession: " << profession << endl;
-    getline(cin, profession);
-
     cout << "Experience: " << experience << " years" << endl;
     string newExperience;
     getline(cin, newExperience);
     if (!newExperience.empty()) {
         experience = stoi(newExperience);
     }
-    string yes; 
+    string yes;
     cout << "Available Days:";
     printDayNames(availableDays, 8,cout);
     cout << "input y to edit otherwise press enter to skip" << endl;
     getline(cin,yes);
     if (yes == "y"||yes == "Y")
-        readDays();  
+        readDays();
     cout << "Available Hours: ";
     printPeriodTimes(availablePeroids,49,cout);
     cout << "input y to edit otherwise press enter to skip" << endl;
@@ -188,9 +190,6 @@ istream& operator>>(istream& is, Doctor& doctor) {
     is >> doctor.salary;
     is.ignore();  // Clear the input buffer
 
-    cout << "Enter doctor's profession: ";
-    getline(is, doctor.profession);
-
     cout << "Enter doctor's experience: ";
     is >> doctor.experience;
     is.ignore();  // Clear the input buffer
@@ -211,8 +210,10 @@ ostream& operator<<(ostream& os, const Doctor& doctor) {
     os << static_cast<const Person&>(doctor);  // Call the base class operator<<
 
     os << "Salary: " << doctor.salary << endl;
-    os << "Profession: " << doctor.profession << endl;
-    os << "Experience: " << doctor.experience << " years" << endl;
+    if(doctor.getSpecialization().getName() =="")
+    os<<"Not Added to Any Specialization Yet"<<endl;
+    else
+    os<<"Specialization: "<<doctor.getSpecialization()<<endl;    os << "Experience: " << doctor.experience << " years" << endl;
     // os << "Rating: " << doctor.ratingSum / doctor.appointmentCount << "/5" << endl;
     os << "Available Days: ";
     printDayNames(doctor.availableDays, 8, os);
