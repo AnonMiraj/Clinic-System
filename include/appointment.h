@@ -23,6 +23,7 @@ private:
 
 public:
     Appointment(int i);
+    Appointment();
 
     // setter and getter for each variable
     int getID() const;
