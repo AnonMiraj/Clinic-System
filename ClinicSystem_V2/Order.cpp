@@ -284,4 +284,3 @@ ostream& operator<<(ostream& out, Order& r) {
 
     return out;
 }
-
