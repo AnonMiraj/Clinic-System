@@ -2,6 +2,8 @@
 #include <cstring>       // string, to_string
 #include <iostream>      // cin, cout
 #include <string>
+#include <unistd.h>
+#include "admin.h"
 using namespace std;
 void _pause() {
   cin.ignore();
@@ -42,6 +44,10 @@ int get_menu_choise(string menu, int level = 0) {
   cin >> c;
   return c;
 }
+/// Admin inilization 
+
+Admin Hospital;
+
 
 /** ADMIN MANAGEMENT AND SUB MENU **/
 
@@ -50,12 +56,14 @@ void sub_menu_1_admin_management() {
   while (c != 0) {
     wait_or_clear(0, 1);
     printline("\n\nMAIN MENU -> patient_management ....");
-    c = get_menu_choise("ADD DOCTOR,ARCHIVE DOCTOR,HISTORY PATIENT,HISTORY DOCTOR,DOCTOR EDIT REQUEST,PATIENT EDIT REQUEST,APPOINTMENT EDIT REQUEST,APPOINTMENT CANCEL REQUEST", 1);
+    c = get_menu_choise("ADD DOCTOR,EDIT DOCTOR,ARCHIVE DOCTOR,HISTORY PATIENT,HISTORY DOCTOR,DOCTOR EDIT REQUEST,PATIENT EDIT REQUEST,APPOINTMENT EDIT REQUEST,APPOINTMENT CANCEL REQUEST", 1);
     switch (c) {
     case 1:
+      Hospital.addDoctor();      
       _pause();
       break;
     case 2:
+      Hospital.editDoctor();
       _pause();
       break;
     case 3:
@@ -77,6 +85,9 @@ void sub_menu_1_admin_management() {
       _pause();
       break;
     case 9:
+      _pause();
+      break;
+    case 10:
       _pause();
       break;
     case 0:
@@ -117,7 +128,7 @@ void sub_sub_menu_3_patient_management() {
   while (c != 0) {
     wait_or_clear(0, 1);
     printline("\n\nMAIN MENU -> PATIENT MANAGEMENT -> APPOINTMENT, ....");
-    c = get_menu_choise("ADD,EDIT,DELELE,BENEFIT MANAGEMENT", 2);
+    c = get_menu_choise("", 2);
     switch (c) {
     case 1:
       _pause();
@@ -143,12 +154,14 @@ void sub_menu_3_patient_management() {
   while (c != 0) {
     wait_or_clear(0, 1);
     printline("\n\nMAIN MENU -> PATIENT MANAGEMENT ....");
-    c = get_menu_choise("CREATE ACCOUNT ,BUY A PRESCRIPTION,EDIT ACCOUNT INFORMATION ,APPOINTMENT,VIEW AVAILABLE DOCTORS", 1);
+    c = get_menu_choise("CREATE ACCOUNT ,EDIT ACCOUNT INFORMATION ,BUY A PRESCRIPTION,APPOINTMENT,VIEW AVAILABLE DOCTORS", 1);
     switch (c) {
     case 1:
+      Hospital.addPatient();
       _pause();
       break;
     case 2:
+      Hospital.editPatient();
       _pause();
       break;
     case 3:
@@ -180,7 +193,7 @@ int main() {
   while (c != 0) {
     wait_or_clear(0, 1);
     printline("\n\nMAIN MENU ....", 1);
-    c = get_menu_choise("ADMIN MANAGEMENT,DOCTOR MANAGEMENT,PATIENT MANAGEMENT",
+    c = get_menu_choise("ADMIN MANAGEMENT,DOCTOR MANAGEMENT,PATIENT MANAGEMENT,debug",
                         0);
 
     switch (c) {
@@ -193,6 +206,10 @@ int main() {
     case 3:
       sub_menu_3_patient_management();
       break;
+    case 4:
+      cout<<Hospital;
+      _pause();
+      break;
     case 0:
       printline("\n\n\a\t\t\tGoodbye :)......\n\n\n\n\n\n", 1);
       break;
@@ -203,4 +220,3 @@ int main() {
   }
   return 0;
 }
-

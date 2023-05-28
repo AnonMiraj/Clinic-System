@@ -11,7 +11,6 @@ Stock::Stock(): c_MedcinList(0)
         system("pause");
     }
     MedcinList = new Medcin[100];
-
 }
 
 Stock::~Stock()

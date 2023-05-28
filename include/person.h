@@ -1,6 +1,7 @@
 #ifndef PERSON_H
 #define PERSON_H
 
+#include "other.h"
 #include <string>
 #include <iostream>
 using namespace std ;
@@ -41,9 +42,7 @@ public:
 
 
 
-    virtual void readInfo()=0;
     virtual void editInfo()=0;
-    virtual void printInfo() const;
   
     friend istream& operator>>(istream& is, Person& person);
     friend ostream& operator<<(ostream& os, const Person& person);

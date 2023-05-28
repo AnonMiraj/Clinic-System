@@ -70,18 +70,8 @@ void Person::setAddress(const string& address) {
 }
 
 void Person::editInfo(){
-  
-
-
-    cout << "ID: " << id << endl;
-    cout << "Enter new ID (Press Enter to skip): ";
-    string newId;
-    getline(cin, newId);
-    if (!newId.empty()) {
-        id = stoi(newId);
-    }
-
     cout << "Name: " << name << endl;
+    cout << "Enter new Name (You Can Press Enter to skip): ";
     getline(cin, name);
 
     cout << "Age: " << age << endl;
@@ -104,10 +94,8 @@ void Person::editInfo(){
     getline(cin, address);
 }
 istream& operator>>(istream& is, Person& person) {
-    cout << "Enter person's ID: ";
-    is >> person.id;
-    is.ignore();  // Clear the input buffer
-
+   
+    is.ignore();
     cout << "Enter person's name: ";
     getline(is, person.name);
 
