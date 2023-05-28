@@ -2,15 +2,10 @@
 #include <cstring>       // string, to_string
 #include <iostream>      // cin, cout
 #include <string>
-#include <unistd.h>
 #include "admin.h"
+#include "other.h"
 using namespace std;
-void _pause() {
-  cin.ignore();
-  do {
-    cout << '\n' << "Press the Enter key to continue.";
-  } while (cin.get() != '\n');
-}
+
 /** ASSISTANT INLINE FUNCTIONS **/
 inline void wait_or_clear(unsigned int sec, bool clear_screen = false) {
   sleep(sec);

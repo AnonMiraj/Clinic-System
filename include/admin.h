@@ -7,7 +7,6 @@
 #include "Medical_Insurance.h"
 #include "Medical_Specialization.h"
 #include <fstream>
-#include <conio.h>
 
 using namespace std;
 

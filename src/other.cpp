@@ -216,4 +216,9 @@ void printPeriodTimes( const bool arr[], int size, ostream& os) {
     os << endl;
 
 }
-
+void _pause() {
+  cin.ignore();
+  do {
+    cout << '\n' << "Press the Enter key to continue.";
+  } while (cin.get() != '\n');
+}

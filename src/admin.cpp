@@ -107,7 +107,6 @@ void Admin::addDoctorToSpec(){
     if(Spec_Indx == -1 || doc_Indx==-1 )
     {
         cout << "Exiting the Add To Specialization Menu " << endl;
-        _getch();
         return;
     }
     system("cls");
@@ -132,7 +131,7 @@ void Admin::DetDoctorFromSpec(){
     doctors[doc_Indx].setSpecialization(newSpec);
 
     cout << "Doctor Removed successfully." ;
-    _getch();
+    
 }
 
 void Admin::addDoctor()

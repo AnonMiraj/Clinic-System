@@ -16,4 +16,5 @@ void setIndexesToTrue(bool *arr, int size);
 void setIndexesToTrue(bool *arr, int size, string);
 void printDayNames(const bool *arr, int size, ostream& os);
 void printPeriodTimes( const bool *arr, int size, ostream& os);
+void _pause();
 #endif // !OTHER_H
