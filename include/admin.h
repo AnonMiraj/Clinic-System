@@ -1,9 +1,10 @@
-
 #ifndef ADMIN_H
 #define ADMIN_H
 #include "person.h"
 #include "patient.h"
 #include "doctor.h"
+#include "other.h"
+#include <fstream>
 
 using namespace std;
 
@@ -28,6 +29,11 @@ public:
 
     void editPatient();
     void editDoctor();
+    
+    void loadDoctor();
+    void loadPatient();
+    void load();
+    void save();
     friend ostream& operator<<(ostream& os, const Admin& admin);
 };
 

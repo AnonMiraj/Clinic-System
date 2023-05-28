@@ -1,4 +1,5 @@
 #include "person.h"
+#include <fstream>
 
 
 // Constructor
@@ -72,6 +73,8 @@ void Person::setAddress(const string& address) {
 void Person::editInfo(){
     cout << "Name: " << name << endl;
     cout << "Enter new Name (You Can Press Enter to skip): ";
+    cin.ignore();
+
     getline(cin, name);
 
     cout << "Age: " << age << endl;

@@ -55,7 +55,7 @@ void sub_menu_1_admin_management() {
   int c = -1;
   while (c != 0) {
     wait_or_clear(0, 1);
-    printline("\n\nMAIN MENU -> patient_management ....");
+    printline("\n\nMAIN MENU -> ADMIN MANAGEMENT ....");
     c = get_menu_choise("ADD DOCTOR,EDIT DOCTOR,ARCHIVE DOCTOR,HISTORY PATIENT,HISTORY DOCTOR,DOCTOR EDIT REQUEST,PATIENT EDIT REQUEST,APPOINTMENT EDIT REQUEST,APPOINTMENT CANCEL REQUEST", 1);
     switch (c) {
     case 1:
@@ -187,6 +187,7 @@ void sub_menu_3_patient_management() {
 
 /** MAIN FUNCTION **/
 int main() {
+  Hospital.load();
   printline("START APPLICATION ....", 1);
   wait_or_clear(1, 1);
   int c = -1;
@@ -218,5 +219,6 @@ int main() {
       wait_or_clear(3, true);
     }
   }
-  return 0;
+  Hospital.save();
+ return 0;
 }

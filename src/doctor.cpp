@@ -13,8 +13,8 @@ Doctor::Doctor()
 
 
 Doctor::Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
-    const string& phoneNumber, const string& address, double salary, const string& profession,
-    int experience, int ratingSum,int appointmentCount, const string& dateJoined, double appointmentFee)
+    const string& phoneNumber, const string& address, int salary, const string& profession,
+    int experience, int ratingSum,int appointmentCount, const string& dateJoined, int appointmentFee)
     : Person(id, name, age, gender, bloodType, phoneNumber, address),
       salary(salary), profession(profession), experience(experience),
       ratingSum(ratingSum),appointmentCount(appointmentCount)
@@ -25,7 +25,7 @@ Doctor::Doctor(int id, const string& name, int age, const string& gender, const 
 }
 
 // Getters
-double Doctor::getSalary() const {
+int Doctor::getSalary() const {
     return salary;
 }
 
@@ -43,19 +43,23 @@ int Doctor::getRatingSum() const {
 int Doctor::getAppointmentCount()const{
   return appointmentCount;
 }
-const bool* Doctor::getAvailableDays()const{
+bool* Doctor::getAvailableDays(){
   return  availableDays;
 }
+bool* Doctor::getAvailablePeroids(){
+  return availablePeroids;
+}
+
 string Doctor::getDateJoined() const {
     return dateJoined;
 }
 
-double Doctor::getAppointmentFee() const {
+int Doctor::getAppointmentFee() const {
     return appointmentFee;
 }
 
 // Setters
-void Doctor::setSalary(double salary) {
+void Doctor::setSalary(int salary) {
     this->salary = salary;
 }
 
@@ -83,7 +87,7 @@ void Doctor::setDateJoined(const string& dateJoined) {
     this->dateJoined = dateJoined;
 }
 
-void Doctor::setAppointmentFee(double appointmentFee) {
+void Doctor::setAppointmentFee(int appointmentFee) {
     this->appointmentFee = appointmentFee;
 }
 
@@ -98,6 +102,39 @@ void Doctor::readPeroids(){
     cout << "Enter the working Peroids (\"1 2 3\", \"1-3\", \"1-2 5 6\" ): "<<endl;
     setIndexesToTrue(availablePeroids, 49);
 }
+void Doctor::saveInfo(){
+  ofstream  oupt;
+  oupt.open("inputDoctors.txt",ios::app);
+  if (oupt.is_open()) {
+    oupt<<this->getId()<<endl;  
+    oupt<<this->getName()<<endl;
+    oupt<<this->getAge()<<endl;
+    oupt<<this->getGender()<<endl;
+    oupt<<this->getBloodType()<<endl;
+    oupt<<this->getPhoneNumber()<<endl;
+    oupt<<this->getAddress()<<endl;
+    oupt<<this->getSalary()<<endl;
+    oupt<<this->getProfession()<<endl;
+    for (int i = 1; i<8;i++)
+    {
+      if(availableDays[i])
+        oupt<<i<<" ";
+    }
+    oupt<<endl;
+    for (int i = 1; i<49;i++)
+    {
+      if(availablePeroids[i])
+        oupt<<i<<" ";
+    }
+    oupt<<endl;
+    oupt<<this->getDateJoined()<<endl;
+    oupt<<this->getAppointmentFee()<<endl;
+
+  }
+  oupt.close();
+}
+
+
 void Doctor::editInfo() {
 
     cout << "Editing doctor's information:" << endl;
@@ -157,6 +194,8 @@ istream& operator>>(istream& is, Doctor& doctor) {
     cout << "Enter doctor's experience: ";
     is >> doctor.experience;
     is.ignore();  // Clear the input buffer
+    doctor.readDays();
+    doctor.readPeroids();
 
     cout << "Enter doctor's date joined (YYYY-MM-DD): ";
     getline(is, doctor.dateJoined);
@@ -174,7 +213,7 @@ ostream& operator<<(ostream& os, const Doctor& doctor) {
     os << "Salary: " << doctor.salary << endl;
     os << "Profession: " << doctor.profession << endl;
     os << "Experience: " << doctor.experience << " years" << endl;
-    os << "Rating: " << doctor.ratingSum / doctor.appointmentCount << "/5" << endl;
+    // os << "Rating: " << doctor.ratingSum / doctor.appointmentCount << "/5" << endl;
     os << "Available Days: ";
     printDayNames(doctor.availableDays, 8, os);
     os << "Available Hours: ";

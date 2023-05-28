@@ -6,11 +6,12 @@
 #include <sstream>
 #include <string>
 #include <iomanip>
+#include <fstream>
 
 
 class Doctor : public Person {
 private:
-    double salary;
+    int salary;
     string profession;
     int experience;
     int ratingSum;
@@ -18,28 +19,28 @@ private:
     bool availableDays[8];
     bool availablePeroids[49];
     string dateJoined;
-    double appointmentFee;
+    int appointmentFee;
 
 public:
     // Constructor
     Doctor();
     Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
-        const string& phoneNumber, const string& address, double salary, const string& profession,
-        int experience, int ratingSum,int appointmentCount, const string& dateJoined, double appointmentFee);
+        const string& phoneNumber, const string& address, int salary, const string& profession,
+        int experience, int ratingSum,int appointmentCount, const string& dateJoined, int appointmentFee);
 
     // Getters
-    double getSalary() const;
+    int getSalary() const;
     string getProfession() const;
     int getExperience() const;
     int getRatingSum() const;
     int getAppointmentCount() const;
-    const bool * getAvailableDays() const;
-    const bool * getAvailablePeroids() const;
+    bool * getAvailableDays() ;
+    bool * getAvailablePeroids();
     string getDateJoined() const;
-    double getAppointmentFee() const;
+    int getAppointmentFee() const;
 
     // Setters
-    void setSalary(double salary);
+    void setSalary(int salary);
     void setProfession(const string& profession);
     void setExperience(int experience);
     void setRatingSum(int rating);
@@ -47,12 +48,13 @@ public:
     void setAvailableDays();
     void setAvailablePeroids();
     void setDateJoined(const string& dateJoined);
-    void setAppointmentFee(double appointmentFee);
+    void setAppointmentFee(int appointmentFee);
   
     
 
     void readDays();
     void readPeroids();
+    void saveInfo();
     virtual void editInfo();
 
     friend istream& operator>>(istream& is, Doctor& doctor);
