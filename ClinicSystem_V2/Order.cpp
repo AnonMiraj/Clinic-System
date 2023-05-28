@@ -5,22 +5,21 @@ Order::Order() {
     number = 0;
     status = "PENDING";
     totalPrice = 0;
-    NameOfCustomer = "Unkwon";
+    NameOfPatient = "Unkwon";
     items = new orderItem*[100];
     c_orderItem = 0;
-    CustomerID = 0;
+    PatientID = 0;
 }
 
-Order::Order(int orderId, int num, string orderStatus, int total, string customerName, Stock& stock) {
+Order::Order(int orderId, int num, string orderStatus, int total, string customerName) {
     OrderID = orderId;
     number = num;
     status = orderStatus;
     totalPrice = total;
-    NameOfCustomer = customerName;
-    stk = &stock;
+    NameOfPatient = customerName;
     items = nullptr;
     c_orderItem = 0;
-    CustomerID = 0;
+    PatientID = 0;
 }
 
 Order::~Order() {
@@ -55,14 +54,14 @@ int Order::getTotalPrice() const {
 }
 
 string Order::getNameOfCustomer() const {
-    return NameOfCustomer;
+    return NameOfPatient;
 }
 
 void Order::setDate()
 {
     time_t rawtime;
     time(&rawtime);
-    //date = ctime(&rawtime);
+    //date = ctime(&rawtime);                   //Error Here --> ):
 }
 
 void Order::setOrderId(int id) {
@@ -97,15 +96,37 @@ void Order::setTotalPrice(int total) {
     totalPrice = total;
 }
 
-void Order::setNameOfCustomer(string customerName) {//-->>
-    NameOfCustomer = customerName;
+void Order::setNameOfPatient(string customerName) {       //-->> prepate to add patient
+    NameOfPatient = customerName;
+}
+/*
+int Order::calcTotalPiceOfOrder()
+{
+    totalPrice = 0;
+    for (int i = 0; i < c_orderItem; i++)
+    {
+        totalPrice += items[i]->getTotalPrice();
+    }
+    return totalPrice;
+}
+*/
+int Order::searchIdItems(int id)
+{
+    for (int i = 0; i < c_orderItem; i++)
+    {
+        if (items[i]->getIdOrderItem() == id)
+        {
+            return i;
+        }
+    }
+    return -1;
 }
 
 void Order::CreateOrder(Stock& s) {
     
     stk = &s;
     char ch;
-    cout << "Enter Id Of Custmer You Want To Add Oreder To Him: ";
+    cout << "Enter Id Of Patent You Want To Add Oreder To Him: ";
     int cusid;
     cin >> cusid;
     //int indexofcustmer = l.SearchCustmerByID(cusid);
@@ -115,9 +136,7 @@ void Order::CreateOrder(Stock& s) {
        // setCoustmerId(cusid);
         int id;
         cout << "Enter Id OF Order: ";
-        cin >> OrderID;
-
-        //setOrderId(OrderId);
+        cin >> id;
 
         do {
             cout << "Enter item Id: ";
@@ -126,10 +145,17 @@ void Order::CreateOrder(Stock& s) {
             if (items[c_orderItem]->setOrderItem(id, s))
             {
                 c_orderItem++;
+                totalPrice += items[c_orderItem]->calcTotalPrice();
+
             }
-            cout << "Do You Want To Add Another Item [y/n] ";
+            cout << "Do You Want To Add Another Medcine [y/n] ";
             ch = _getch();
         } while (ch == 'y' || ch == 'Y');
+
+        if (c_orderItem > 0)
+        {
+            setOrderId(id);
+        }
    // }
    // else
       //  cout << "This Custmer Id Does't Exist):" << endl;
@@ -139,36 +165,38 @@ void Order::CreateOrder(Stock& s) {
 void Order::AddOrderItem(orderItem* item) {
     // Add the given order item to the order
     // and update the total price
-    if (items == nullptr) {
-        // Create a new array to store order items
-        items = new orderItem * [1];
-        items[0] = item;
-        c_orderItem = 1;
-    }
-    else {
-        // Create a new array with increased size
-        orderItem** newItems = new orderItem * [c_orderItem + 1];
+    char ch;
+    
+        if (items == nullptr) {
+            // Create a new array to store order items
+            items = new orderItem * [1];
+            items[0] = item;
+            c_orderItem = 1;
+        }
+        else {
+            // Create a new array with increased size
+            orderItem** newItems = new orderItem * [c_orderItem + 1];
 
-        // Copy existing items to the new array
-        for (int i = 0; i < c_orderItem; i++) {
-            newItems[i] = items[i];
+            // Copy existing items to the new array
+            for (int i = 0; i < c_orderItem; i++) {
+                newItems[i] = items[i];
+            }
+
+            // Add the new item to the end of the new array
+            newItems[c_orderItem] = item;
+
+            // Delete the old array
+            delete[] items;
+
+            // Update the items pointer to point to the new array
+            items = newItems;
+            totalPrice += items[c_orderItem]->calcTotalPrice();
+            // Increment the count of order items
+            c_orderItem++;
+
         }
 
-        // Add the new item to the end of the new array
-        newItems[c_orderItem] = item;
-
-        // Delete the old array
-        delete[] items;
-
-        // Update the items pointer to point to the new array
-        items = newItems;
-
-        // Increment the count of order items
-        c_orderItem++;
-    }
-
     // Update the total price
-    totalPrice += item[c_orderItem].calcTotalPrice();
 }
 
 void Order::UpdateOrderStatus(ORDERSTATUS orderStatus) {
@@ -188,11 +216,13 @@ void Order::UpdateOrderStatus(ORDERSTATUS orderStatus) {
     }
 }
 
-void Order::EditOrder(int itemId) {
+void Order::EditOrder(int id) {
     // Find the order item with the given item ID
-    int index = stk->SearchId(itemId);
+    int index = stk->SearchId(id);
     if (index != -1)
     {
+
+
         // Prompt the user to edit the order item details
         cout << "Enter new quantity: ";
         int newQuantity;
@@ -205,7 +235,9 @@ void Order::EditOrder(int itemId) {
         items[index]->UpdateQuantity(newQuantity);
 
         // Calculate the new total price 
-        totalPrice += items[index]->getTotalPrice();
+        totalPrice+= items[index]->calcTotalPrice();
+
+        //totalPrice += items[index]->getTotalPrice();
 
         cout << "Order item updated successfully." << endl;
         return;
@@ -217,6 +249,7 @@ void Order::EditOrder(int itemId) {
 
 void Order::RemoveOrderItem(int itemId) {
     // Find the order item with the given item ID
+
     for (int i = 0; i < c_orderItem; i++) {
         if (items[i]->getIdOrderItem() == itemId) {
             // Calculate the total price before removing the item
@@ -226,10 +259,10 @@ void Order::RemoveOrderItem(int itemId) {
             delete items[i];
 
             // Shift the remaining items to fill the gap
-            for (int j = i; j < c_orderItem - 1; j++) {
-                items[j] = items[j + 1];
-            }
-
+            //for (int j = i; j < c_orderItem - 1; j++) {
+            //    items[j] = items[j + 1];
+            //}
+            swap(items[i], items[c_orderItem-1]);
             // Decrement the count of order items
             c_orderItem--;
 
@@ -269,18 +302,22 @@ istream& operator>>(istream& in, Order& r) {
 
 ostream& operator<<(ostream& out, Order& r) {
 
+    
     out << "Order ID: " << r.OrderID << endl;
-    out << "Number: " << r.number << endl;
     out << "Date: " << r.date << endl;
     out << "Status: " << r.status << endl;
     out << "Total Price: " << r.totalPrice << endl;
     //out << "Name of Customer: " << r.NameOfCustomer << endl;
-
-    out << "Order Items:" << endl;
-    for (int i = 0; i < r.c_orderItem; i++) {
-        out << "Order Item " << i + 1 << ":" << endl;
-        out << r.items[i] << endl;
+    cout << "Do You Need To Display Items? [Y/N]";
+    char ch;
+    ch = _getch();
+    if(ch=='Y'||ch=='y')
+    {
+        out << "Order Items:" << endl;
+        for (int i = 0; i < r.c_orderItem; i++) {
+            out << "Order Item " << i + 1 << ":" << endl;
+            out << r.items[i] << endl;
+        }
     }
-
     return out;
 }

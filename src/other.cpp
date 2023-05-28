@@ -35,6 +35,32 @@ string IsValid(string msg)
   return num;
 }
 
+bool IsValid(string num, char n)
+{
+  bool IsNotValid = false;
+    IsNotValid = false;
+    try
+    {
+      for (int i = 0; i < num.size(); i++)
+        if (!isdigit(num[i]))
+        {
+          IsNotValid = true;
+          break;
+        }
+
+      if (IsNotValid)
+        throw "Error";
+    }
+
+    catch (const char *str)
+    {
+      cerr << "Please, don't write letter. type only numbers :)\n";
+      return false;
+    }
+
+  return true;
+}
+
 int IsValid(int n)
 {
   bool IsNotValid = false;

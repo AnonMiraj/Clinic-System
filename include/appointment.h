@@ -45,8 +45,8 @@ public:
     // opertaor overloading
     friend istream &operator>>(istream &in, Appointment &a);
     friend ostream &operator<<(ostream &out, const Appointment &a);
-    bool operator==(Appointment &a);
-    bool operator>(Appointment &a);
+    bool operator==(const Appointment &a);
+    bool operator>(const Appointment &a);
 };
 
 #endif

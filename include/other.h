@@ -10,8 +10,7 @@
 using namespace std;
 int isValid(int n); 
 string IsValid(string msg);
-
-
+bool IsValid(string num, char n);
 
 void setIndexesToTrue(bool *arr, int size);
 void setIndexesToTrue(bool *arr, int size, string);

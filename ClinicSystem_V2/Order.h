@@ -19,16 +19,16 @@ private:
     int number;
     string status;
     int totalPrice;
-    string NameOfCustomer;
     Stock *stk;
     orderItem** items;
     int c_orderItem;
-    int CustomerID;
-
+    string NameOfPatient;
+    int PatientID;
+    string NameOfdoctor;
 public:
 
     Order();
-    Order(int orderId, int num, string orderStatus, int total, string customerName, Stock& stock);
+    Order(int orderId, int num, string orderStatus, int total, string PatientName);
     ~Order();
     // Getter
     string getDate()const;
@@ -43,8 +43,11 @@ public:
     void setNumber(int num);
     void setStatus(ORDERSTATUS orderStatus);
     void setTotalPrice(int total);
-    void setNameOfCustomer(string customerName);
+    void setNameOfPatient(string customerName);
     // Another 
+    
+    //int calcTotalPiceOfOrder();
+    int searchIdItems(int id);
     void CreateOrder(Stock& stock);
     void AddOrderItem(orderItem* item);
     void UpdateOrderStatus(ORDERSTATUS status);
