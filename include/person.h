@@ -4,6 +4,7 @@
 #include "other.h"
 #include <string>
 #include <iostream>
+#include <fstream>
 using namespace std ;
 
 class Person {
@@ -43,11 +44,9 @@ public:
 
 
     virtual void editInfo()=0;
-  
     friend istream& operator>>(istream& is, Person& person);
     friend ostream& operator<<(ostream& os, const Person& person);
 };
 
 
 #endif  // PERSON_H
-

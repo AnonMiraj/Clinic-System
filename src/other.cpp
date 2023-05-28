@@ -86,6 +86,67 @@ void setIndexesToTrue(bool arr[], int size) {
         }
     }
 }
+void setIndexesToTrue(bool arr[], int size) {
+    string input;
+    getline(cin, input);
+
+    istringstream iss(input);
+    string token;
+    while (iss >> token) {
+        if (token.find('-') != string::npos) {
+            // Range input detected, e.g., "1-3"
+            istringstream rangeIss(token);
+            string start, end;
+            getline(rangeIss, start, '-');
+            getline(rangeIss, end, '-');
+
+            int startIndex = stoi(start);
+            int endIndex = stoi(end);
+
+            for (int i = startIndex; i <= endIndex; ++i) {
+                if (i >= 0 && i < size) {
+                    arr[i] = true;
+                }
+            }
+        } else {
+            // Single index input detected, e.g., "1"
+            int index = stoi(token);
+            if (index >= 0 && index < size) {
+                arr[index] = true;
+            }
+        }
+    }
+}
+void setIndexesToTrue(bool arr[], int size,string input) {
+
+    istringstream iss(input);
+    string token;
+    while (iss >> token) {
+        if (token.find('-') != string::npos) {
+            // Range input detected, e.g., "1-3"
+            istringstream rangeIss(token);
+            string start, end;
+            getline(rangeIss, start, '-');
+            getline(rangeIss, end, '-');
+
+            int startIndex = stoi(start);
+            int endIndex = stoi(end);
+
+            for (int i = startIndex; i <= endIndex; ++i) {
+                if (i >= 0 && i < size) {
+                    arr[i] = true;
+                }
+            }
+        } else {
+            // Single index input detected, e.g., "1"
+            int index = stoi(token);
+            if (index >= 0 && index < size) {
+                arr[index] = true;
+            }
+        }
+    }
+}
+
 void printDayNames(const bool arr[], int size, ostream& os ) {
     const string daysOfWeek[] = {
          "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
@@ -151,4 +212,3 @@ void printPeriodTimes( const bool arr[], int size, ostream& os) {
     os << endl;
 
 }
-

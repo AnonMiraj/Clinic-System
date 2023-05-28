@@ -1,9 +1,9 @@
 #ifndef PATIENT_H
 #define PATIENT_H
 
-#include "other.h"
 #include "person.h"
 #include <string>
+#include <fstream>
 
 using namespace std; 
 
@@ -18,7 +18,7 @@ public:
     // Constructor
     Patient();
     Patient(int id, const string& name, int age, const string& gender, const string& bloodType,
-        const string& phoneNumber, const string& address, const string& password,
+        const string& phoneNumber, const string& address,const string& notes, const string& password,
         const string& insurance, const string& emergencyContact);
 
     // Getters
@@ -33,7 +33,7 @@ public:
     void setInsurance(const string& insurance);
     void setEmergencyContact(const string& emergencyContact);
 
-
+    void saveInfo();
     virtual void editInfo();
     friend istream& operator>>(istream& is, Patient& patient);
     friend ostream& operator<<(ostream& os, const Patient& patient);

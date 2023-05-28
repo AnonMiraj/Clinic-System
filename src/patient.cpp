@@ -1,5 +1,6 @@
 #include "patient.h"
 
+
 // Constructor
 Patient::Patient()
   : Person(),
@@ -7,9 +8,9 @@ Patient::Patient()
 
 
 Patient::Patient(int id, const string& name, int age, const string& gender, const string& bloodType,
-    const string& phoneNumber, const string& address, const string& password,
+    const string& phoneNumber, const string& address,const string& notes, const string& password,
     const string& insurance, const string& emergencyContact)
-    : Person(id, name, age, gender, bloodType, phoneNumber, address),
+    : Person(id, name, age, gender, bloodType, phoneNumber, address),notes(notes),
       password(password), insurance(insurance), emergencyContact(emergencyContact) {}
 
 // Getters
@@ -45,6 +46,23 @@ void Patient::setInsurance(const string& insurance) {
 void Patient::setEmergencyContact(const string& emergencyContact) {
     this->emergencyContact = emergencyContact;
 }
+void Patient::saveInfo(){
+  ofstream  oupt;
+  oupt.open("inputPatient.txt",ios::app);
+  if (oupt.is_open()) {
+    oupt<<this->getId()<<endl;  
+    oupt<<this->getName()<<endl;
+    oupt<<this->getAge()<<endl;
+    oupt<<this->getGender()<<endl;
+    oupt<<this->getBloodType()<<endl;
+    oupt<<this->getPhoneNumber()<<endl;
+    oupt<<this->getAddress()<<endl;
+    oupt<<this->getNotes()<<endl;
+    oupt<<this->getEmergencyContact()<<endl;
+
+  }
+  oupt.close();
+}
 
 
 void Patient::editInfo() {
@@ -55,14 +73,9 @@ void Patient::editInfo() {
     cout << "Notes: " << notes << endl;
     getline(cin, notes);
 
-    cout << "Password: " << password << endl;
-    getline(cin, password);
 
-    do
-    {
-        cout << "Insurance: " << insurance << endl;
-        getline(cin, insurance);
-    } while (IsValid(insurance));
+    // cout << "Insurance: " << insurance << endl;
+    // getline(cin, insurance);
 
     cout << "Emergency Contact: " << emergencyContact << endl;
     getline(cin, emergencyContact);
@@ -95,4 +108,3 @@ ostream& operator<<(ostream& os, const Patient& patient) {
 
     return os;
 }
-
