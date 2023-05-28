@@ -44,14 +44,14 @@ int get_menu_choise(string menu, int level = 0) {
 Admin Hospital;
 
 
-/** ADMIN MANAGEMENT AND SUB MENU **/
+/** ADMIN HUB AND SUB MENU **/
 
-void sub_menu_1_admin_management() {
+void sub_sub_menu_1_doctor_management() {
   int c = -1;
   while (c != 0) {
     wait_or_clear(0, 1);
-    printline("\n\nMAIN MENU -> ADMIN MANAGEMENT ....");
-    c = get_menu_choise("ADD DOCTOR,EDIT DOCTOR,ARCHIVE DOCTOR,UNARCHIVE DOCTOR,HISTORY PATIENT,HISTORY DOCTOR,DOCTOR EDIT REQUEST,PATIENT EDIT REQUEST,APPOINTMENT EDIT REQUEST,APPOINTMENT CANCEL REQUEST", 1);
+    printline("\n\nMAIN MENU -> ADMIN HUB -> DOCTOR MANAGEMENT ....");
+    c = get_menu_choise("ADD DOCTOR,EDIT DOCTOR,ARCHIVE DOCTOR,UNARCHIVE DOCTOR", 2);
     switch (c) {
     case 1:
       Hospital.addDoctor();      
@@ -69,6 +69,63 @@ void sub_menu_1_admin_management() {
       Hospital.archiveDoctor();
       _pause();
       break;
+   case 0:
+      return;
+    default:
+      print_try_again();
+    }
+  }
+}
+void sub_sub_menu_2_spec_management() {
+  int c = -1;
+  while (c != 0) {
+    wait_or_clear(0, 1);
+    printline("\n\nMAIN MENU -> ADMIN HUB -> SPECIALTIES MANAGEMENT ....");
+    c = get_menu_choise("ADD SPECIALTY,EDIT SPECIALTY,ASSIGN DOCTOR,UNASSIGN DOCTOR", 2);
+    switch (c) {
+    case 1:
+      Hospital.addSpecialization();      
+      break;
+    case 2:
+      Hospital.editSpecialization();
+      _pause();
+      break;
+    case 3:
+      Hospital.addDoctorToSpec();
+      _pause();
+      break;
+    case 4:
+      Hospital.archiveDoctor();
+      _pause();
+      break;
+   case 0:
+      return;
+    default:
+      print_try_again();
+    }
+  }
+}
+
+
+void sub_menu_1_admin_hub() {
+  int c = -1;
+  while (c != 0) {
+    wait_or_clear(0, 1);
+    printline("\n\nMAIN MENU -> ADMIN hub ....");
+    c = get_menu_choise("DOCTOR MANAGEMENT,SPECIALTY MANAGEMENT,HISTORY PATIENT,HISTORY DOCTOR,DOCTOR EDIT REQUEST,PATIENT EDIT REQUEST,APPOINTMENT EDIT REQUEST,APPOINTMENT CANCEL REQUEST", 1);
+    switch (c) {
+    case 1:
+      sub_sub_menu_1_doctor_management();
+      break;
+    case 2:
+      sub_sub_menu_2_spec_management();
+      break;
+    case 3:
+      _pause();
+      break;
+    case 4:
+      _pause();
+      break;
     case 5:
       _pause();
       break;
@@ -81,15 +138,6 @@ void sub_menu_1_admin_management() {
     case 8:
       _pause();
       break;
-    case 9:
-      _pause();
-      break;
-    case 10:
-      _pause();
-      break;
-    case 11:
-      _pause();
-      break;
     case 0:
       return;
     default:
@@ -100,11 +148,11 @@ void sub_menu_1_admin_management() {
 
 
 /** DATA ENTRY AND SUB MENU **/
-void sub_menu_2_doctor_management() {
+void sub_menu_2_doctor_hub() {
   int c = -1;
   while (c != 0) {
     wait_or_clear(0, 1);
-    printline("\n\nMAIN MENU -> DOCTOR MANAGEMENT ....");
+    printline("\n\nMAIN MENU -> DOCTOR HUB ....");
     c = get_menu_choise("ATTEND,EDIT", 1);
     switch (c) {
     case 1:
@@ -121,13 +169,13 @@ void sub_menu_2_doctor_management() {
   }
 }
 
-/** patient management AND SUB MENU **/
+/** patient hub AND SUB MENU **/
 
-void sub_sub_menu_3_patient_management() {
+void sub_sub_menu_3_patient_hub() {
   int c = -1;
   while (c != 0) {
     wait_or_clear(0, 1);
-    printline("\n\nMAIN MENU -> PATIENT MANAGEMENT -> APPOINTMENT, ....");
+    printline("\n\nMAIN MENU -> PATIENT HUB -> APPOINTMENT, ....");
     c = get_menu_choise("", 2);
     switch (c) {
     case 1:
@@ -149,11 +197,11 @@ void sub_sub_menu_3_patient_management() {
     }
   }
 }
-void sub_menu_3_patient_management() {
+void sub_menu_3_patient_hub() {
   int c = -1;
   while (c != 0) {
     wait_or_clear(0, 1);
-    printline("\n\nMAIN MENU -> PATIENT MANAGEMENT ....");
+    printline("\n\nMAIN MENU -> PATIENT HUB ....");
     c = get_menu_choise("CREATE ACCOUNT ,EDIT ACCOUNT INFORMATION ,BUY A PRESCRIPTION,APPOINTMENT,VIEW AVAILABLE DOCTORS", 1);
     switch (c) {
     case 1:
@@ -168,7 +216,7 @@ void sub_menu_3_patient_management() {
       _pause();
       break;
     case 4:
-      sub_sub_menu_3_patient_management();
+      sub_sub_menu_3_patient_hub();
       _pause();
       break;
     case 5:
@@ -194,18 +242,18 @@ int main() {
   while (c != 0) {
     wait_or_clear(0, 1);
     printline("\n\nMAIN MENU ....", 1);
-    c = get_menu_choise("ADMIN MANAGEMENT,DOCTOR MANAGEMENT,PATIENT MANAGEMENT,debug",
+    c = get_menu_choise("ADMIN HUB,DOCTOR MANAGEMENT,PATIENT MANAGEMENT",
                         0);
 
     switch (c) {
     case 1:
-      sub_menu_1_admin_management();
+      sub_menu_1_admin_hub();
       break;
     case 2:
-      sub_menu_2_doctor_management();
+      sub_menu_2_doctor_hub();
       break;
     case 3:
-      sub_menu_3_patient_management();
+      sub_menu_3_patient_hub();
       break;
     case 4:
       cout<<Hospital;

@@ -1,17 +1,19 @@
 #include "Medical_Specialization.h"
 
     // Default constructor
-    Medical_Specialization::Medical_Specialization() {
-        id = 0;
-        name = "";
+    Medical_Specialization::Medical_Specialization()
+    : id(-1),name(""){
+    }
+    Medical_Specialization::Medical_Specialization(int _id,string _name)
+    : id(_id),name(_name){
     }
 
     // Getters
-    int Medical_Specialization::getId() {
+    int Medical_Specialization::getId() const{
         return id;
     }
 
-    string Medical_Specialization::getName() {
+    string Medical_Specialization::getName() const {
         return name;
     }
 
@@ -28,6 +30,7 @@
 
     cout << "Current Name: " << name << endl;
     cout << "Editing Medical Specialization's Name (You Can Press Enter to skip):" << endl;
+    cin.ignore();
     getline(cin, name);
 }
     // Overloading << operator
@@ -38,7 +41,6 @@
 
     // Overloading >> operator
     istream& operator>>(istream& in, Medical_Specialization& specialization) {
-        cout << "Enter Name: ";
         getline(in, specialization.name);
         return in;
     }

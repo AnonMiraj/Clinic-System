@@ -12,7 +12,7 @@
 
 class Doctor : public Person {
 private:
-    Medical_Specialization specialization;
+    Medical_Specialization * specialization;
     int salary;
     int experience;
     int ratingSum;
@@ -26,12 +26,12 @@ public:
     // Constructor
     Doctor();
     Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
-        const string& phoneNumber, const string& address, int salary, const Medical_Specialization& specialization,
+        const string& phoneNumber, const string& address, int salary,
         int experience, int ratingSum,int appointmentCount, const string& dateJoined, int appointmentFee);
 
     // Getters
     int getSalary() const;
-    Medical_Specialization getSpecialization() const;
+    int getSpecializationId() const;
     int getExperience() const;
     int getRatingSum() const;
     int getAppointmentCount() const;
@@ -42,7 +42,7 @@ public:
 
     // Setters
     void setSalary(int salary);
-    void setSpecialization(const Medical_Specialization& specialization);
+    void setSpecialization( Medical_Specialization* specialization);
     void setExperience(int experience);
     void setRatingSum(int rating);
     void setAppointmentCount(int appointmentCount);

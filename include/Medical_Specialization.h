@@ -13,10 +13,11 @@ private:
 public:
     // Default constructor
     Medical_Specialization() ;
+    Medical_Specialization(int _id,string _name);
 
     // Getters
-    int getId() ;
-    string getName() ;
+    int getId() const;
+    string getName()const ;
     // Setter
     void setId(int _id) ;
     void setName(string _name) ;
