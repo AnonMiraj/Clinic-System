@@ -7,6 +7,10 @@ Appointment::Appointment(int i)
     patient = new Patient();  // Allocate memory for the Patient object
 }
 
+Appointment::Appointment()
+{
+    id = 0;
+}
 
 int Appointment::getID() const
 {
