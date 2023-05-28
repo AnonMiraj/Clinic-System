@@ -7,7 +7,6 @@
 #include "Medical_Insurance.h"
 #include "Medical_Specialization.h"
 #include <fstream>
-#include <conio.h>
 
 using namespace std;
 
@@ -15,18 +14,15 @@ class Admin {
 private:
     Patient* patients;
     Doctor* doctors;
-    Doctor* archivedDoctors;
     Medical_Specialization* specializations;
     Medical_Insurance insurances;
 
     int patientCount;
     int doctorCount;
-    int archiveCount;
     int specializationCount;
 
     int maxPatients;
     int maxDoctors;
-    int maxArchive;
     int maxSpecialization;
 public:
     Admin();
@@ -49,6 +45,8 @@ public:
 
     void loadDoctor();
     void loadPatient();
+    void loadSpecial();
+
     void load();
     void save();
     friend ostream& operator<<(ostream& os, const Admin& admin);

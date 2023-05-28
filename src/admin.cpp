@@ -1,27 +1,26 @@
 #include "admin.h"
+#include "Medical_Specialization.h"
 #include "doctor.h"
 #include "other.h"
 #include "patient.h"
 #include "person.h"
 #include <fstream>
 #include <string>
+#include <unistd.h>
 
 
 Admin::Admin()
 {
     patientCount = 0;
     doctorCount = 0;
-    archiveCount = 0;
     specializationCount=0;
 
     maxPatients = 10;
     maxDoctors = 10;
-    maxArchive = 10;
-    maxSpecialization=10;
+    maxSpecialization=50;
 
     patients = new Patient[maxPatients];  // Initial capacity for 10 patients
     doctors = new Doctor[maxDoctors];  // Initial capacity for 10 doctors
-    archivedDoctors = new Doctor[maxArchive]; // Initial capacity for 10 doctors
     specializations = new Medical_Specialization[maxSpecialization];  // Initial capacity for 10 doctors
 
 }
@@ -30,7 +29,6 @@ Admin::~Admin()
 {
     delete[] patients;
     delete[] doctors;
-    delete[] archivedDoctors;
     delete[] specializations;
 }
 
@@ -69,10 +67,11 @@ void Admin::addSpecialization()
         specializations = newSpecializations;
         maxSpecialization *= 2;
     }
-
-    specializations[specializationCount] =  Medical_Specialization();
-    cin>>specializations[specializationCount];
-    specializations[specializationCount].setId(specializationCount+1);
+    string name;
+    cin.ignore();
+    cout << "Enter Name: ";
+    getline(cin,name);
+    specializations[specializationCount] =  Medical_Specialization(specializationCount+1,name);
     specializationCount++;
 }
 
@@ -107,12 +106,11 @@ void Admin::addDoctorToSpec(){
     if(Spec_Indx == -1 || doc_Indx==-1 )
     {
         cout << "Exiting the Add To Specialization Menu " << endl;
-        _getch();
         return;
     }
     system("cls");
 
-    doctors[doc_Indx].setSpecialization(specializations[Spec_Indx]);
+    doctors[doc_Indx].setSpecialization(&specializations[Spec_Indx]);
 
     cout << "Doctor Added successfully." ;
 }
@@ -128,11 +126,11 @@ void Admin::DetDoctorFromSpec(){
         return;
     }
     system("cls");
-    Medical_Specialization newSpec;
+    Medical_Specialization *newSpec;
     doctors[doc_Indx].setSpecialization(newSpec);
 
     cout << "Doctor Removed successfully." ;
-    _getch();
+    
 }
 
 void Admin::addDoctor()
@@ -164,65 +162,23 @@ void Admin::editDoctor()
 }
 void Admin::archiveDoctor()
 {
-    if (archiveCount == maxArchive)
-    {
-        // Resize the array if it's full
-        Doctor* newArchive = new Doctor[maxArchive * 2];
-        for (int i = 0; i < archiveCount; i++)
-        {
-            newArchive[i] = archivedDoctors[i];
-        }
-        delete[] archivedDoctors;
-        archivedDoctors = newArchive;
-        maxArchive *= 2;
-    }
     int doctorIndex;
     cout<<"Enter the doctor id: ";
     cin>>doctorIndex;
-    archivedDoctors[archiveCount] = doctors[doctorIndex];
-    archiveCount++;
 
-    // Remove the retired doctor from the doctors array
-    for (int i = doctorIndex; i < doctorCount - 1; i++)
-    {
-        doctors[i] = doctors[i + 1];
-    }
-    doctorCount--;
 }
 void Admin::unarchiveDoctor()
 {
-    if (doctorCount == maxDoctors)
-    {
-        // Resize the array if it's full
-        Doctor* newDoctors = new Doctor[maxDoctors * 2];
-        for (int i = 0; i < doctorCount; i++)
-        {
-            newDoctors[i] = doctors[i];
-        }
-        delete[] doctors;
-        doctors = newDoctors;
-        maxDoctors *= 2;
-    }
-
     int archiveIndex;
     cout<<"Enter the archived Doctor id: ";
     cin>>archiveIndex;
-    doctors[doctorCount] = archivedDoctors[archiveIndex];
-    doctorCount++;
 
-    // Remove the doctor from the doctorArchive array
-    for (int i = archiveIndex; i < archiveCount - 1; i++)
-    {
-        archivedDoctors[i] = archivedDoctors[i + 1];
-    }
-    archiveCount--;
 }
 
 void Admin::loadDoctor()
 {
-    int id,age,expYears,salary,fee;
+    int id,age,expYears,specializationID,salary,fee;
     string name,gender,blood,phone,address,avalDay,avalHour,date;
-    Medical_Specialization specialization;
     ifstream inp;
     inp.open("inputDoctors.txt");
     if(inp.is_open())
@@ -237,16 +193,18 @@ void Admin::loadDoctor()
             getline(inp,phone);
             getline(inp,address);
             inp>>salary;
-            inp>>specialization;
+            inp>>specializationID;
             inp>>expYears;
             inp.ignore();
             getline(inp,avalDay);
             getline(inp,avalHour);
             getline(inp,date);
             inp>>fee;
-            doctors[doctorCount]=Doctor(id,name,age,gender,blood,phone,address,salary,specialization,expYears,0,0,date,fee);
+            doctors[doctorCount]=Doctor(id,name,age,gender,blood,phone,address,salary,expYears,0,0,date,fee);
             setIndexesToTrue(doctors[doctorCount].getAvailableDays(),8,avalDay);
             setIndexesToTrue(doctors[doctorCount].getAvailablePeroids(),49,avalHour);
+            if(specializationID!=-1)
+              doctors[doctorCount].setSpecialization(&specializations[specializationID-1]);
             doctorCount++;
         }
     else
@@ -279,11 +237,30 @@ void Admin::loadPatient()
         cout<<"FUCK";
     inp.close();
 }
+void Admin::loadSpecial(){
+  string name;
+  ifstream inp("inputSpec.txt");
+
+    if(inp.is_open())
+        while (getline(inp,name))
+        {
+            specializations[specializationCount]=Medical_Specialization(specializationCount+1,name);
+
+        cout<<"FUCK";
+        cout<<"FUCK";
+        specializationCount++;
+        }   
+    else
+        cout<<"FUCK";
+    inp.close();
+
+}
 
 void Admin::load()
 {
     this->loadDoctor();
     this->loadPatient();
+    this->loadSpecial();
 }
 void Admin::save()
 {
@@ -324,11 +301,13 @@ ostream& operator<<(ostream& os, const Admin& admin)
     {
         os << admin.doctors[i] << endl;
     }
-    os << "Archived Doctors:" << endl;
-    for (int i = 0; i < admin.archiveCount; i++)
+    os << "Specials :" << endl;
+    for (int i = 0; i < admin.specializationCount; i++)
     {
-        os << admin.archivedDoctors[i] << endl;
+        os << admin.specializations[i] << endl;
     }
+
+
     return os;
 }
 

@@ -9,18 +9,20 @@ Doctor::Doctor()
       ratingSum(0),appointmentCount(0), dateJoined(""), appointmentFee(0) {
   bool availableDays[8]={false};
   bool setAvailablePeroids[49]={false};
+  specialization=nullptr;
 }
 
 
 Doctor::Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
-    const string& phoneNumber, const string& address, int salary, const Medical_Specialization& specialization,
+    const string& phoneNumber, const string& address, int salary,
     int experience, int ratingSum,int appointmentCount, const string& dateJoined, int appointmentFee)
     : Person(id, name, age, gender, bloodType, phoneNumber, address),
-      salary(salary), specialization(specialization), experience(experience),
+      salary(salary), experience(experience),
       ratingSum(ratingSum),appointmentCount(appointmentCount)
       ,dateJoined(dateJoined), appointmentFee(appointmentFee) {
   bool availableDays[8]={false};
   bool setAvailablePeroids[49]={false};
+  specialization=nullptr;
 
 }
 
@@ -29,8 +31,10 @@ int Doctor::getSalary() const {
     return salary;
 }
 
-Medical_Specialization Doctor::getSpecialization() const {
-    return specialization;
+int Doctor::getSpecializationId() const {
+    if (specialization!=nullptr)
+       return specialization->getId();
+    return -1;
 }
 
 int Doctor::getExperience() const {
@@ -63,7 +67,7 @@ void Doctor::setSalary(int salary) {
     this->salary = salary;
 }
 
-void Doctor::setSpecialization(const Medical_Specialization& specialization) {
+void Doctor::setSpecialization(Medical_Specialization* specialization) {
     this->specialization = specialization;
 }
 
@@ -106,19 +110,15 @@ void Doctor::saveInfo(){
   ofstream  oupt;
   oupt.open("inputDoctors.txt",ios::app);
   if (oupt.is_open()) {
-    oupt<<"====================================="<<endl;
-    oupt<<"ID: "<<this->getId()<<endl;
-    oupt<<"Name: "<<this->getName()<<endl;
-    oupt<<"Age: "<<this->getAge()<<endl;
-    oupt<<"Gender: "<<this->getGender()<<endl;
-    oupt<<"Blood Type: "<<this->getBloodType()<<endl;
-    oupt<<"Phone Number: "<<this->getPhoneNumber()<<endl;
-    oupt<<"Address: "<<this->getAddress()<<endl;
-    oupt<<"Salary: "<<this->getSalary()<<endl;
-    if(specialization.getName()=="")
-    oupt<<"Not Added to Any Specialization Yet"<<endl;
-    else
-    oupt<<"Specialization: "<<this->getSpecialization()<<endl;
+    oupt<<this->getId()<<endl;
+    oupt<<this->getName()<<endl;
+    oupt<<this->getAge()<<endl;
+    oupt<<this->getGender()<<endl;
+    oupt<<this->getBloodType()<<endl;
+    oupt<<this->getPhoneNumber()<<endl;
+    oupt<<this->getAddress()<<endl;
+    oupt<<this->getSalary()<<endl;
+    oupt<<this->getSpecializationId()<<endl;
     for (int i = 1; i<8;i++)
     {
       if(availableDays[i])
@@ -131,9 +131,8 @@ void Doctor::saveInfo(){
         oupt<<i<<" ";
     }
     oupt<<endl;
-    oupt<<"Date Joined: "<<this->getDateJoined()<<endl;
-    oupt<<"Appointment Fee: "<<this->getAppointmentFee()<<endl;
-    oupt<<"====================================="<<endl;
+    oupt<<this->getDateJoined()<<endl;
+    oupt<<this->getAppointmentFee()<<endl;
 
   }
   oupt.close();
@@ -210,11 +209,10 @@ ostream& operator<<(ostream& os, const Doctor& doctor) {
     os << static_cast<const Person&>(doctor);  // Call the base class operator<<
 
     os << "Salary: " << doctor.salary << endl;
-    if(doctor.getSpecialization().getName() =="")
-    os<<"Not Added to Any Specialization Yet"<<endl;
-    else
-    os<<"Specialization: "<<doctor.getSpecialization()<<endl;    os << "Experience: " << doctor.experience << " years" << endl;
-    // os << "Rating: " << doctor.ratingSum / doctor.appointmentCount << "/5" << endl;
+    os<<"Specialization: "<<(doctor.specialization!=nullptr ? doctor.specialization->getName():"None")<<endl;
+    os << "Experience: " << doctor.experience << " years" << endl;
+    if (doctor.appointmentCount!=0) 
+      os << "Rating: " << doctor.ratingSum / doctor.appointmentCount << "/5" << endl;
     os << "Available Days: ";
     printDayNames(doctor.availableDays, 8, os);
     os << "Available Hours: ";
