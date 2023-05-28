@@ -6,7 +6,7 @@ Medcin::Medcin():id(0),price(0),name("Unkown"),brand("Unkown")
 
 }
 
-Medcin::Medcin(int i, string n, string b, int q, int p):id(i),name(n),brand(b),quntitiy(q),price(p)
+Medcin::Medcin(int i, string n, string b,int p) :id(i),name(n),brand(b),price(p)
 {
 
 }
@@ -14,10 +14,7 @@ Medcin::Medcin(int i, string n, string b, int q, int p):id(i),name(n),brand(b),q
 // Parameterized constructor
 //Medcin::Medcin();
 
-int Medcin::getQuntitiy() const
-{
-    return quntitiy;
-}
+
 
 int Medcin::getPrice() const
 {
@@ -36,10 +33,7 @@ std::string Medcin::getBrand() const {
     return brand;
 }
 
-void Medcin::setQuntitiy(const int& q) 
-{
-    this->quntitiy = q;
-}
+
 
 void Medcin::setPrice(const int& price)
 {
@@ -66,8 +60,7 @@ void Medcin::Edit()
     cout << "2. Brand" << endl;
     cout << "3. id" << endl;
     cout << "4. price" << endl;
-    cout << "5. Quntitiy" << endl;
-    cout << "Enter your choice (1-5): ";
+    cout << "Enter your choice (1-4): ";
 
     int choice;
     cin >> choice;
@@ -100,11 +93,7 @@ void Medcin::Edit()
         cin >> p;
         setPrice(p);
         break;
-    case 5:
-        int q;
-        cin >> q;
-        setQuntitiy(q);
-        break;
+
     default:
         cout << "Invalid choice. No changes made." << endl;
         return;
@@ -115,11 +104,19 @@ void Medcin::Edit()
 
 
 ostream& operator<<(ostream& os, Medcin& m) {
-    os << "ID: " << m.id << endl;
-    os << "Name: " << m.name << endl;
-    os << "Brand: " << m.brand << endl;
-    os << "Price: " << m.price << endl;
-    os << "Quntitiy: " << m.quntitiy << endl;
+
+    // Print the ID
+    os << "| ID: " << setw(30) << setfill(' ') << m.id << " |" << endl;
+
+    // Print the name
+    os << "| Name: " << setw(28) << setfill(' ') << m.name << " |" << endl;
+
+    // Print the brand
+    os << "| Brand: " << setw(27) << setfill(' ') << m.brand << " |" << endl;
+
+    // Print the price
+    os << "| Price: " << setw(27) << setfill(' ') << m.price << " |" << endl;
+
     return os;
 }
 
@@ -131,8 +128,6 @@ istream& operator>>(istream& is, Medcin& m) {
     getline(is, m.name);
     cout << "Enter Brand: ";
     getline(is, m.brand);
-    cout << "Enter Quntitiy: ";
-    cin >> m.quntitiy;
     cout << "Enter Price: ";
     cin >> m.price;
 
