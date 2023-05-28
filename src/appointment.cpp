@@ -119,12 +119,12 @@ out<<  a.getPrescription();
 }
 
 
-bool Appointment::operator== (Appointment& a)
+bool Appointment::operator== (const Appointment& a)
 {
     return this->id == a.id;
 }
 
-bool Appointment::operator>(Appointment& a)
+bool Appointment::operator>(const Appointment& a)
 {
     return this->date > a.date;
 }
