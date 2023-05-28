@@ -30,6 +30,9 @@ public:
     void editPatient();
     void editDoctor();
     
+    void archiveDoctor();
+    void unarchiveDoctor();
+
     void loadDoctor();
     void loadPatient();
     void load();

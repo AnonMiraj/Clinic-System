@@ -72,6 +72,54 @@ void Admin::editDoctor(){
   cin>>id;
   doctors[id-1].editInfo();
 }
+void Admin::archiveDoctor() {
+    if (archiveCount == maxArchive) {
+        // Resize the array if it's full
+        Doctor* newArchive = new Doctor[maxArchive * 2];
+        for (int i = 0; i < archiveCount; i++) {
+            newArchive[i] = archivedDoctors[i];
+        }
+        delete[] archivedDoctors;
+        archivedDoctors = newArchive;
+        maxArchive *= 2;
+    }
+    int doctorIndex;
+    cout<<"Enter the doctor id: ";
+    cin>>doctorIndex;
+    archivedDoctors[archiveCount] = doctors[doctorIndex];
+    archiveCount++;
+
+    // Remove the retired doctor from the doctors array
+    for (int i = doctorIndex; i < doctorCount - 1; i++) {
+        doctors[i] = doctors[i + 1];
+    }
+    doctorCount--;
+}
+void Admin::unarchiveDoctor() {
+    if (doctorCount == maxDoctors) {
+        // Resize the array if it's full
+        Doctor* newDoctors = new Doctor[maxDoctors * 2];
+        for (int i = 0; i < doctorCount; i++) {
+            newDoctors[i] = doctors[i];
+        }
+        delete[] doctors;
+        doctors = newDoctors;
+        maxDoctors *= 2;
+    }
+
+    int archiveIndex;
+    cout<<"Enter the archived Doctor id: ";
+    cin>>archiveIndex;
+    doctors[doctorCount] = archivedDoctors[archiveIndex];
+    doctorCount++;
+
+    // Remove the doctor from the doctorArchive array
+    for (int i = archiveIndex; i < archiveCount - 1; i++) {
+        archivedDoctors[i] = archivedDoctors[i + 1];
+    }
+    archiveCount--;
+}
+
 void Admin::loadDoctor(){
   int id,age,expYears,salary,fee;
   string name,gender,blood,phone,address,profession,avalDay,avalHour,date;
@@ -161,7 +209,10 @@ ostream& operator<<(ostream& os, const Admin& admin) {
     for (int i = 0; i < admin.doctorCount; i++) {
         os << admin.doctors[i] << endl;
     }
-
+    os << "Archived Doctors:" << endl;
+    for (int i = 0; i < admin.archiveCount; i++) {
+        os << admin.archivedDoctors[i] << endl;
+    }
     return os;
 }
 

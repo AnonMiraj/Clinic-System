@@ -56,7 +56,7 @@ void sub_menu_1_admin_management() {
   while (c != 0) {
     wait_or_clear(0, 1);
     printline("\n\nMAIN MENU -> ADMIN MANAGEMENT ....");
-    c = get_menu_choise("ADD DOCTOR,EDIT DOCTOR,ARCHIVE DOCTOR,HISTORY PATIENT,HISTORY DOCTOR,DOCTOR EDIT REQUEST,PATIENT EDIT REQUEST,APPOINTMENT EDIT REQUEST,APPOINTMENT CANCEL REQUEST", 1);
+    c = get_menu_choise("ADD DOCTOR,EDIT DOCTOR,ARCHIVE DOCTOR,UNARCHIVE DOCTOR,HISTORY PATIENT,HISTORY DOCTOR,DOCTOR EDIT REQUEST,PATIENT EDIT REQUEST,APPOINTMENT EDIT REQUEST,APPOINTMENT CANCEL REQUEST", 1);
     switch (c) {
     case 1:
       Hospital.addDoctor();      
@@ -67,9 +67,11 @@ void sub_menu_1_admin_management() {
       _pause();
       break;
     case 3:
+      Hospital.archiveDoctor();
       _pause();
       break;
     case 4:
+      Hospital.archiveDoctor();
       _pause();
       break;
     case 5:
@@ -88,6 +90,9 @@ void sub_menu_1_admin_management() {
       _pause();
       break;
     case 10:
+      _pause();
+      break;
+    case 11:
       _pause();
       break;
     case 0:
