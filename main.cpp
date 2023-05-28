@@ -95,7 +95,7 @@ void sub_sub_menu_2_spec_management() {
       _pause();
       break;
     case 4:
-      Hospital.archiveDoctor();
+      Hospital.DetDoctorFromSpec();
       _pause();
       break;
    case 0:

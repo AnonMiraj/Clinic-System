@@ -17,6 +17,7 @@ private:
     int experience;
     int ratingSum;
     int appointmentCount;
+    bool archived;
     bool availableDays[8];
     bool availablePeroids[49];
     string dateJoined;
@@ -27,7 +28,7 @@ public:
     Doctor();
     Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
         const string& phoneNumber, const string& address, int salary,
-        int experience, int ratingSum,int appointmentCount, const string& dateJoined, int appointmentFee);
+        int experience, int ratingSum,int appointmentCount,bool archived, const string& dateJoined, int appointmentFee);
 
     // Getters
     int getSalary() const;
@@ -37,6 +38,7 @@ public:
     int getAppointmentCount() const;
     bool * getAvailableDays() ;
     bool * getAvailablePeroids();
+    bool getAracived() const;
     string getDateJoined() const;
     int getAppointmentFee() const;
 
@@ -48,6 +50,7 @@ public:
     void setAppointmentCount(int appointmentCount);
     void setAvailableDays();
     void setAvailablePeroids();
+    void setAracived();
     void setDateJoined(const string& dateJoined);
     void setAppointmentFee(int appointmentFee);
 

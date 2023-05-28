@@ -15,10 +15,10 @@ Doctor::Doctor()
 
 Doctor::Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
     const string& phoneNumber, const string& address, int salary,
-    int experience, int ratingSum,int appointmentCount, const string& dateJoined, int appointmentFee)
+    int experience, int ratingSum,int appointmentCount,bool archived , const string& dateJoined, int appointmentFee)
     : Person(id, name, age, gender, bloodType, phoneNumber, address),
       salary(salary), experience(experience),
-      ratingSum(ratingSum),appointmentCount(appointmentCount)
+      ratingSum(ratingSum),appointmentCount(appointmentCount),archived(archived)
       ,dateJoined(dateJoined), appointmentFee(appointmentFee) {
   bool availableDays[8]={false};
   bool setAvailablePeroids[49]={false};
