@@ -222,3 +222,8 @@ ostream& operator<<(ostream& os, const Doctor& doctor) {
 
     return os;
 }
+
+bool Doctor::operator==(const Doctor &d)
+{
+    return this->getId() == d.getId();
+}

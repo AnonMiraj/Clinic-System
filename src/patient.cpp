@@ -135,3 +135,7 @@ ostream& operator<<(ostream& os, const Patient& patient) {
     return os;
 }
 
+bool Patient::operator==(const Patient &p)
+{
+    return this->getId() == p.getId();
+}

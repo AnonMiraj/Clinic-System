@@ -6,6 +6,7 @@
 #include "other.h"
 #include "Medical_Insurance.h"
 #include "Medical_Specialization.h"
+#include "appointment.h"
 #include <fstream>
 
 using namespace std;
@@ -15,15 +16,18 @@ private:
     Patient* patients;
     Doctor* doctors;
     Medical_Specialization* specializations;
+    Appointment* appointments;
     Medical_Insurance insurances;
 
     int patientCount;
     int doctorCount;
     int specializationCount;
+    int appointmentCount;
 
     int maxPatients;
     int maxDoctors;
     int maxSpecialization;
+    int maxAppointment;
 public:
     Admin();
     ~Admin();
@@ -32,6 +36,7 @@ public:
     void addPatient();
     void addDoctor();
     void addSpecialization();
+    void addAppointment();
 
     void editPatient();
     void editDoctor();
@@ -53,6 +58,9 @@ public:
 
     void setInsurances();
     void getInsurances();
+
+    int searchPatient(int);
+    int searchDoctor(int);
 };
 
 

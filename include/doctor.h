@@ -62,6 +62,8 @@ public:
 
     friend istream& operator>>(istream& is, Doctor& doctor);
     friend ostream& operator<<(ostream& os, const Doctor& doctor);
+    bool operator==(const Doctor &d);
+
 };
 
 

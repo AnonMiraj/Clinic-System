@@ -13,15 +13,18 @@ Admin::Admin()
 {
     patientCount = 0;
     doctorCount = 0;
-    specializationCount=0;
+    specializationCount = 0;
+    appointmentCount = 0;
 
     maxPatients = 10;
     maxDoctors = 10;
     maxSpecialization=50;
+    maxAppointment = 100;
 
     patients = new Patient[maxPatients];  // Initial capacity for 10 patients
     doctors = new Doctor[maxDoctors];  // Initial capacity for 10 doctors
     specializations = new Medical_Specialization[maxSpecialization];  // Initial capacity for 10 doctors
+    appointments = new Appointment[maxAppointment];
 
 }
 
@@ -75,6 +78,46 @@ void Admin::addSpecialization()
     specializationCount++;
 }
 
+void Admin::addAppointment()
+{
+    appointments[appointmentCount] = Appointment(appointmentCount+1);
+
+    //choose doctor
+    int ID, index = -2;
+    do
+    {
+        if (index == -1)
+            cout<<"Please enter a valid doctor id :)\n";
+        cout<<"Enter doctor id : ";
+        cin>>ID;
+        index = searchDoctor(ID);
+    } while ( index == -1);
+
+    appointments[appointmentCount].setDoctor(doctors[ID]);
+
+
+    //choose appointment
+    int per;
+    printDayNames(doctors[ID].getAvailableDays(), 49, cout);
+    printPeriodTimes(doctors[ID].getAvailablePeroids(), 8, cout);
+    cout<<"Enter a number of period : "; cin >> per;
+    appointments[appointmentCount].setPeriod(per);
+    cout<<"Enter a day number : "; cin>>per;
+    appointments[appointmentCount].setDate(per);
+
+    //choose patient
+    do
+    {
+        if (index == -1)
+            cout<<"Please enter a valid patient id :)\n";
+        cout<<"Enter patient id : ";
+        cin>>ID;
+        index = searchPatient(ID);
+    } while (index == -1);
+    
+    //pay to book the appointment
+
+}
 
 void Admin::editPatient()
 {
@@ -114,6 +157,7 @@ void Admin::addDoctorToSpec(){
 
     cout << "Doctor Added successfully." ;
 }
+
 void Admin::DetDoctorFromSpec(){
     int doc_Indx=-1;
     cout<<"Enter Doctor Id (Enter 0 to exit Add To Spec Menu ): ";
@@ -130,7 +174,7 @@ void Admin::DetDoctorFromSpec(){
     doctors[doc_Indx].setSpecialization(newSpec);
 
     cout << "Doctor Removed successfully." ;
-    
+
 }
 
 void Admin::addDoctor()
@@ -153,6 +197,7 @@ void Admin::addDoctor()
     doctors[doctorCount].setId(doctorCount+1);
     doctorCount++;
 }
+
 void Admin::editDoctor()
 {
     int id;
@@ -160,6 +205,7 @@ void Admin::editDoctor()
     cin>>id;
     doctors[id-1].editInfo();
 }
+
 void Admin::archiveDoctor()
 {
     int doctorIndex;
@@ -167,6 +213,7 @@ void Admin::archiveDoctor()
     cin>>doctorIndex;
 
 }
+
 void Admin::unarchiveDoctor()
 {
     int archiveIndex;
@@ -200,7 +247,7 @@ void Admin::loadDoctor()
             getline(inp,avalHour);
             getline(inp,date);
             inp>>fee;
-            doctors[doctorCount]=Doctor(id,name,age,gender,blood,phone,address,salary,expYears,0,0,true,date,fee);
+            doctors[doctorCount]=Doctor(id,name,age,gender,blood,phone,address,salary,expYears,0,0,date,fee);
             setIndexesToTrue(doctors[doctorCount].getAvailableDays(),8,avalDay);
             setIndexesToTrue(doctors[doctorCount].getAvailablePeroids(),49,avalHour);
             if(specializationID!=-1)
@@ -210,6 +257,7 @@ void Admin::loadDoctor()
     else
     inp.close();
 }
+
 void Admin::loadPatient()
 {
     int id,age;
@@ -237,6 +285,7 @@ void Admin::loadPatient()
         cout<<"FUCK";
     inp.close();
 }
+
 void Admin::loadSpecial(){
   string name;
   ifstream inp("inputSpec.txt");
@@ -249,7 +298,7 @@ void Admin::loadSpecial(){
         cout<<"FUCK";
         cout<<"FUCK";
         specializationCount++;
-        }   
+        }
     else
         cout<<"FUCK";
     inp.close();
@@ -262,6 +311,7 @@ void Admin::load()
     this->loadPatient();
     this->loadSpecial();
 }
+
 void Admin::save()
 {
     ofstream ofs ("inputPatient.txt", std::ios::out | std::ios::trunc); // clear contents
@@ -279,13 +329,34 @@ void Admin::save()
     }
 
 }
-    void Admin::setInsurances(){
+
+void Admin::setInsurances(){
     cin>>insurances;
     }
 
-    void Admin::getInsurances(){
+void Admin::getInsurances(){
     cout<<insurances;
     }
+
+
+//seerch
+int Admin::searchPatient(int id)
+{
+    for (int i=0; i<patientCount; i++)
+        if (patients[i] == patients[id])
+            return i;
+
+    return -1;
+}
+
+int Admin::searchDoctor(int id)
+{
+    for (int i=0; i<patientCount; i++)
+        if (doctors[i] == doctors[id])
+            return i;
+
+    return -1;
+}
 
 //temprory
 ostream& operator<<(ostream& os, const Admin& admin)

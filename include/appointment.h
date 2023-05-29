@@ -31,7 +31,7 @@ public:
     void setPeriod(const int &p);
     string getPeriod() const;
 
-    void setDate();
+    void setDate(int);
     time_t getDate() const;
 
     void setDoctor(const Doctor &d);

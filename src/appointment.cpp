@@ -31,18 +31,18 @@ string Appointment::getPeriod() const
 
 }
 
-void Appointment::setDate() 
+void Appointment::setDate(int wday)
 {
-    tm* t = localtime(&date);  
+    tm* t = localtime(&date);
     char ch;
     string y,m,d;
     bool IsNotValid;
     do
     {
         IsNotValid = false;
-        try 
+        try
         {
-            
+
             cout << "Enter the date (dd/ mm/ yyyy) : ";
             cin >> y >>ch >>m >>ch >>d;
 
@@ -53,6 +53,9 @@ void Appointment::setDate()
             if (IsValid(y,'1') || IsValid(m, '2') || IsValid(d,'3'))
                 throw ("\n");
             
+            if (t->tm_wday != wday)
+                throw ("This day is not valid day for the doctor :(\n");
+
             t->tm_year = stoi(y) - 1900;
             t->tm_mon = stoi(m);
             t->tm_mday = stoi(d);
@@ -72,6 +75,7 @@ void Appointment::setDate()
 
     date = mktime(t);
 }
+
 
 
 time_t Appointment::getDate() const
