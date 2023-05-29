@@ -251,6 +251,76 @@ CMakeFiles/main_library.dir/src/prescription.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main_library.dir/src/prescription.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ezz/Clinic-System/src/prescription.cpp -o CMakeFiles/main_library.dir/src/prescription.cpp.s
 
+CMakeFiles/main_library.dir/src/Cash.cpp.o: CMakeFiles/main_library.dir/flags.make
+CMakeFiles/main_library.dir/src/Cash.cpp.o: /home/ezz/Clinic-System/src/Cash.cpp
+CMakeFiles/main_library.dir/src/Cash.cpp.o: CMakeFiles/main_library.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ezz/Clinic-System/.build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/main_library.dir/src/Cash.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_library.dir/src/Cash.cpp.o -MF CMakeFiles/main_library.dir/src/Cash.cpp.o.d -o CMakeFiles/main_library.dir/src/Cash.cpp.o -c /home/ezz/Clinic-System/src/Cash.cpp
+
+CMakeFiles/main_library.dir/src/Cash.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main_library.dir/src/Cash.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ezz/Clinic-System/src/Cash.cpp > CMakeFiles/main_library.dir/src/Cash.cpp.i
+
+CMakeFiles/main_library.dir/src/Cash.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main_library.dir/src/Cash.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ezz/Clinic-System/src/Cash.cpp -o CMakeFiles/main_library.dir/src/Cash.cpp.s
+
+CMakeFiles/main_library.dir/src/Check.cpp.o: CMakeFiles/main_library.dir/flags.make
+CMakeFiles/main_library.dir/src/Check.cpp.o: /home/ezz/Clinic-System/src/Check.cpp
+CMakeFiles/main_library.dir/src/Check.cpp.o: CMakeFiles/main_library.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ezz/Clinic-System/.build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/main_library.dir/src/Check.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_library.dir/src/Check.cpp.o -MF CMakeFiles/main_library.dir/src/Check.cpp.o.d -o CMakeFiles/main_library.dir/src/Check.cpp.o -c /home/ezz/Clinic-System/src/Check.cpp
+
+CMakeFiles/main_library.dir/src/Check.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main_library.dir/src/Check.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ezz/Clinic-System/src/Check.cpp > CMakeFiles/main_library.dir/src/Check.cpp.i
+
+CMakeFiles/main_library.dir/src/Check.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main_library.dir/src/Check.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ezz/Clinic-System/src/Check.cpp -o CMakeFiles/main_library.dir/src/Check.cpp.s
+
+CMakeFiles/main_library.dir/src/Credit.cpp.o: CMakeFiles/main_library.dir/flags.make
+CMakeFiles/main_library.dir/src/Credit.cpp.o: /home/ezz/Clinic-System/src/Credit.cpp
+CMakeFiles/main_library.dir/src/Credit.cpp.o: CMakeFiles/main_library.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ezz/Clinic-System/.build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/main_library.dir/src/Credit.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_library.dir/src/Credit.cpp.o -MF CMakeFiles/main_library.dir/src/Credit.cpp.o.d -o CMakeFiles/main_library.dir/src/Credit.cpp.o -c /home/ezz/Clinic-System/src/Credit.cpp
+
+CMakeFiles/main_library.dir/src/Credit.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main_library.dir/src/Credit.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ezz/Clinic-System/src/Credit.cpp > CMakeFiles/main_library.dir/src/Credit.cpp.i
+
+CMakeFiles/main_library.dir/src/Credit.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main_library.dir/src/Credit.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ezz/Clinic-System/src/Credit.cpp -o CMakeFiles/main_library.dir/src/Credit.cpp.s
+
+CMakeFiles/main_library.dir/src/Payment.cpp.o: CMakeFiles/main_library.dir/flags.make
+CMakeFiles/main_library.dir/src/Payment.cpp.o: /home/ezz/Clinic-System/src/Payment.cpp
+CMakeFiles/main_library.dir/src/Payment.cpp.o: CMakeFiles/main_library.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ezz/Clinic-System/.build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/main_library.dir/src/Payment.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_library.dir/src/Payment.cpp.o -MF CMakeFiles/main_library.dir/src/Payment.cpp.o.d -o CMakeFiles/main_library.dir/src/Payment.cpp.o -c /home/ezz/Clinic-System/src/Payment.cpp
+
+CMakeFiles/main_library.dir/src/Payment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main_library.dir/src/Payment.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ezz/Clinic-System/src/Payment.cpp > CMakeFiles/main_library.dir/src/Payment.cpp.i
+
+CMakeFiles/main_library.dir/src/Payment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main_library.dir/src/Payment.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ezz/Clinic-System/src/Payment.cpp -o CMakeFiles/main_library.dir/src/Payment.cpp.s
+
+CMakeFiles/main_library.dir/src/Transaction.cpp.o: CMakeFiles/main_library.dir/flags.make
+CMakeFiles/main_library.dir/src/Transaction.cpp.o: /home/ezz/Clinic-System/src/Transaction.cpp
+CMakeFiles/main_library.dir/src/Transaction.cpp.o: CMakeFiles/main_library.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ezz/Clinic-System/.build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/main_library.dir/src/Transaction.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_library.dir/src/Transaction.cpp.o -MF CMakeFiles/main_library.dir/src/Transaction.cpp.o.d -o CMakeFiles/main_library.dir/src/Transaction.cpp.o -c /home/ezz/Clinic-System/src/Transaction.cpp
+
+CMakeFiles/main_library.dir/src/Transaction.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main_library.dir/src/Transaction.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ezz/Clinic-System/src/Transaction.cpp > CMakeFiles/main_library.dir/src/Transaction.cpp.i
+
+CMakeFiles/main_library.dir/src/Transaction.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main_library.dir/src/Transaction.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ezz/Clinic-System/src/Transaction.cpp -o CMakeFiles/main_library.dir/src/Transaction.cpp.s
+
 # Object files for target main_library
 main_library_OBJECTS = \
 "CMakeFiles/main_library.dir/src/person.cpp.o" \
@@ -265,7 +335,12 @@ main_library_OBJECTS = \
 "CMakeFiles/main_library.dir/src/Medical_Specialization.cpp.o" \
 "CMakeFiles/main_library.dir/src/appointment.cpp.o" \
 "CMakeFiles/main_library.dir/src/other.cpp.o" \
-"CMakeFiles/main_library.dir/src/prescription.cpp.o"
+"CMakeFiles/main_library.dir/src/prescription.cpp.o" \
+"CMakeFiles/main_library.dir/src/Cash.cpp.o" \
+"CMakeFiles/main_library.dir/src/Check.cpp.o" \
+"CMakeFiles/main_library.dir/src/Credit.cpp.o" \
+"CMakeFiles/main_library.dir/src/Payment.cpp.o" \
+"CMakeFiles/main_library.dir/src/Transaction.cpp.o"
 
 # External object files for target main_library
 main_library_EXTERNAL_OBJECTS =
@@ -283,9 +358,14 @@ libmain_library.a: CMakeFiles/main_library.dir/src/Medical_Specialization.cpp.o
 libmain_library.a: CMakeFiles/main_library.dir/src/appointment.cpp.o
 libmain_library.a: CMakeFiles/main_library.dir/src/other.cpp.o
 libmain_library.a: CMakeFiles/main_library.dir/src/prescription.cpp.o
+libmain_library.a: CMakeFiles/main_library.dir/src/Cash.cpp.o
+libmain_library.a: CMakeFiles/main_library.dir/src/Check.cpp.o
+libmain_library.a: CMakeFiles/main_library.dir/src/Credit.cpp.o
+libmain_library.a: CMakeFiles/main_library.dir/src/Payment.cpp.o
+libmain_library.a: CMakeFiles/main_library.dir/src/Transaction.cpp.o
 libmain_library.a: CMakeFiles/main_library.dir/build.make
 libmain_library.a: CMakeFiles/main_library.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ezz/Clinic-System/.build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX static library libmain_library.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ezz/Clinic-System/.build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX static library libmain_library.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/main_library.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main_library.dir/link.txt --verbose=$(VERBOSE)
 

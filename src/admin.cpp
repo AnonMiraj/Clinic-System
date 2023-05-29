@@ -224,7 +224,7 @@ void Admin::unarchiveDoctor()
 
 void Admin::loadDoctor()
 {
-    int id,age,expYears,specializationID,salary,fee;
+    int id,age,expYears,specializationID,salary,fee,archive;
     string name,gender,blood,phone,address,avalDay,avalHour,date;
     ifstream inp;
     inp.open("inputDoctors.txt");
@@ -242,12 +242,13 @@ void Admin::loadDoctor()
             inp>>salary;
             inp>>specializationID;
             inp>>expYears;
+            inp>>archive;           
             inp.ignore();
             getline(inp,avalDay);
             getline(inp,avalHour);
             getline(inp,date);
             inp>>fee;
-            doctors[doctorCount]=Doctor(id,name,age,gender,blood,phone,address,salary,expYears,0,0,date,fee);
+            doctors[doctorCount]=Doctor(id,name,age,gender,blood,phone,address,salary,expYears,0,0,false,date,fee);
             setIndexesToTrue(doctors[doctorCount].getAvailableDays(),8,avalDay);
             setIndexesToTrue(doctors[doctorCount].getAvailablePeroids(),49,avalHour);
             if(specializationID!=-1)

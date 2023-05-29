@@ -48,9 +48,7 @@ public:
     void setExperience(int experience);
     void setRatingSum(int rating);
     void setAppointmentCount(int appointmentCount);
-    void setAvailableDays();
-    void setAvailablePeroids();
-    void setAracived();
+    void setAracived(bool state);
     void setDateJoined(const string& dateJoined);
     void setAppointmentFee(int appointmentFee);
 

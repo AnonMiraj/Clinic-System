@@ -1,8 +1,8 @@
-CMakeFiles/main_library.dir/src/admin.cpp.o: \
- /home/ezz/Clinic-System/src/admin.cpp /usr/include/stdc-predef.h \
- /home/ezz/Clinic-System/include/admin.h \
- /home/ezz/Clinic-System/include/person.h \
- /home/ezz/Clinic-System/include/other.h /usr/include/c++/13.1.1/iostream \
+CMakeFiles/main_library.dir/src/Credit.cpp.o: \
+ /home/ezz/Clinic-System/src/Credit.cpp /usr/include/stdc-predef.h \
+ /home/ezz/Clinic-System/include/Credit.h \
+ /home/ezz/Clinic-System/include/Payment.h \
+ /usr/include/c++/13.1.1/iostream \
  /usr/include/c++/13.1.1/bits/requires_hosted.h \
  /usr/include/c++/13.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/13.1.1/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -137,34 +137,5 @@ CMakeFiles/main_library.dir/src/admin.cpp.o: \
  /usr/include/c++/13.1.1/bits/locale_facets.tcc \
  /usr/include/c++/13.1.1/bits/basic_ios.tcc \
  /usr/include/c++/13.1.1/bits/ostream.tcc /usr/include/c++/13.1.1/istream \
- /usr/include/c++/13.1.1/bits/istream.tcc /usr/include/c++/13.1.1/sstream \
- /usr/include/c++/13.1.1/bits/sstream.tcc /usr/include/c++/13.1.1/iomanip \
- /usr/include/c++/13.1.1/locale \
- /usr/include/c++/13.1.1/bits/locale_facets_nonio.h \
- /usr/include/c++/13.1.1/ctime \
- /usr/include/c++/13.1.1/x86_64-pc-linux-gnu/bits/time_members.h \
- /usr/include/c++/13.1.1/x86_64-pc-linux-gnu/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/13.1.1/bits/codecvt.h \
- /usr/include/c++/13.1.1/bits/locale_facets_nonio.tcc \
- /usr/include/c++/13.1.1/bits/locale_conv.h \
- /usr/include/c++/13.1.1/bits/quoted_string.h \
- /home/ezz/Clinic-System/include/patient.h \
- /usr/include/c++/13.1.1/fstream \
- /usr/include/c++/13.1.1/x86_64-pc-linux-gnu/bits/basic_file.h \
- /usr/include/c++/13.1.1/x86_64-pc-linux-gnu/bits/c++io.h \
- /usr/include/c++/13.1.1/bits/fstream.tcc \
- /home/ezz/Clinic-System/include/doctor.h \
- /home/ezz/Clinic-System/include/Medical_Specialization.h \
- /home/ezz/Clinic-System/include/Medical_Insurance.h \
- /home/ezz/Clinic-System/include/appointment.h \
- /usr/include/c++/13.1.1/cstring /usr/include/string.h \
- /usr/include/strings.h /home/ezz/Clinic-System/include/prescription.h \
- /home/ezz/Clinic-System/include/Medical_Specialization.h \
- /home/ezz/Clinic-System/include/doctor.h \
- /home/ezz/Clinic-System/include/other.h \
- /home/ezz/Clinic-System/include/patient.h \
- /home/ezz/Clinic-System/include/person.h /usr/include/unistd.h \
- /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
- /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
- /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
- /usr/include/linux/close_range.h
+ /usr/include/c++/13.1.1/bits/istream.tcc /usr/include/string.h \
+ /usr/include/strings.h

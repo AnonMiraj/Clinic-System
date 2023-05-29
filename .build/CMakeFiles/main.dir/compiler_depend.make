@@ -431,8 +431,12 @@ CMakeFiles/main.dir/main.cpp.o: /home/ezz/Clinic-System/main.cpp \
   /home/ezz/Clinic-System/include/doctor.h \
   /home/ezz/Clinic-System/include/Medical_Specialization.h \
   /home/ezz/Clinic-System/include/Medical_Insurance.h \
+  /home/ezz/Clinic-System/include/appointment.h \
+  /home/ezz/Clinic-System/include/prescription.h \
   /home/ezz/Clinic-System/include/other.h
 
+
+/home/ezz/Clinic-System/include/prescription.h:
 
 /home/ezz/Clinic-System/include/Medical_Insurance.h:
 
@@ -863,6 +867,8 @@ CMakeFiles/main.dir/main.cpp.o: /home/ezz/Clinic-System/main.cpp \
 /usr/include/c++/13.1.1/scoped_allocator:
 
 /usr/include/c++/13.1.1/x86_64-pc-linux-gnu/bits/stdc++.h:
+
+/home/ezz/Clinic-System/include/appointment.h:
 
 /usr/include/bits/uintn-identity.h:
 

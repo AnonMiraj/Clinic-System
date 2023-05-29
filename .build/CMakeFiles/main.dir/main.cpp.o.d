@@ -318,4 +318,6 @@ CMakeFiles/main.dir/main.cpp.o: /home/ezz/Clinic-System/main.cpp \
  /home/ezz/Clinic-System/include/doctor.h \
  /home/ezz/Clinic-System/include/Medical_Specialization.h \
  /home/ezz/Clinic-System/include/Medical_Insurance.h \
+ /home/ezz/Clinic-System/include/appointment.h \
+ /home/ezz/Clinic-System/include/prescription.h \
  /home/ezz/Clinic-System/include/other.h

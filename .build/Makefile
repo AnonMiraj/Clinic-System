@@ -166,6 +166,78 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Cash.o: src/Cash.cpp.o
+.PHONY : src/Cash.o
+
+# target to build an object file
+src/Cash.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Cash.cpp.o
+.PHONY : src/Cash.cpp.o
+
+src/Cash.i: src/Cash.cpp.i
+.PHONY : src/Cash.i
+
+# target to preprocess a source file
+src/Cash.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Cash.cpp.i
+.PHONY : src/Cash.cpp.i
+
+src/Cash.s: src/Cash.cpp.s
+.PHONY : src/Cash.s
+
+# target to generate assembly for a file
+src/Cash.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Cash.cpp.s
+.PHONY : src/Cash.cpp.s
+
+src/Check.o: src/Check.cpp.o
+.PHONY : src/Check.o
+
+# target to build an object file
+src/Check.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Check.cpp.o
+.PHONY : src/Check.cpp.o
+
+src/Check.i: src/Check.cpp.i
+.PHONY : src/Check.i
+
+# target to preprocess a source file
+src/Check.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Check.cpp.i
+.PHONY : src/Check.cpp.i
+
+src/Check.s: src/Check.cpp.s
+.PHONY : src/Check.s
+
+# target to generate assembly for a file
+src/Check.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Check.cpp.s
+.PHONY : src/Check.cpp.s
+
+src/Credit.o: src/Credit.cpp.o
+.PHONY : src/Credit.o
+
+# target to build an object file
+src/Credit.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Credit.cpp.o
+.PHONY : src/Credit.cpp.o
+
+src/Credit.i: src/Credit.cpp.i
+.PHONY : src/Credit.i
+
+# target to preprocess a source file
+src/Credit.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Credit.cpp.i
+.PHONY : src/Credit.cpp.i
+
+src/Credit.s: src/Credit.cpp.s
+.PHONY : src/Credit.s
+
+# target to generate assembly for a file
+src/Credit.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Credit.cpp.s
+.PHONY : src/Credit.cpp.s
+
 src/Medcin.o: src/Medcin.cpp.o
 .PHONY : src/Medcin.o
 
@@ -286,6 +358,30 @@ src/OrderItem.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/OrderItem.cpp.s
 .PHONY : src/OrderItem.cpp.s
 
+src/Payment.o: src/Payment.cpp.o
+.PHONY : src/Payment.o
+
+# target to build an object file
+src/Payment.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Payment.cpp.o
+.PHONY : src/Payment.cpp.o
+
+src/Payment.i: src/Payment.cpp.i
+.PHONY : src/Payment.i
+
+# target to preprocess a source file
+src/Payment.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Payment.cpp.i
+.PHONY : src/Payment.cpp.i
+
+src/Payment.s: src/Payment.cpp.s
+.PHONY : src/Payment.s
+
+# target to generate assembly for a file
+src/Payment.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Payment.cpp.s
+.PHONY : src/Payment.cpp.s
+
 src/Stock.o: src/Stock.cpp.o
 .PHONY : src/Stock.o
 
@@ -309,6 +405,30 @@ src/Stock.s: src/Stock.cpp.s
 src/Stock.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Stock.cpp.s
 .PHONY : src/Stock.cpp.s
+
+src/Transaction.o: src/Transaction.cpp.o
+.PHONY : src/Transaction.o
+
+# target to build an object file
+src/Transaction.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Transaction.cpp.o
+.PHONY : src/Transaction.cpp.o
+
+src/Transaction.i: src/Transaction.cpp.i
+.PHONY : src/Transaction.i
+
+# target to preprocess a source file
+src/Transaction.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Transaction.cpp.i
+.PHONY : src/Transaction.cpp.i
+
+src/Transaction.s: src/Transaction.cpp.s
+.PHONY : src/Transaction.s
+
+# target to generate assembly for a file
+src/Transaction.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_library.dir/build.make CMakeFiles/main_library.dir/src/Transaction.cpp.s
+.PHONY : src/Transaction.cpp.s
 
 src/admin.o: src/admin.cpp.o
 .PHONY : src/admin.o
@@ -491,6 +611,15 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/Cash.o"
+	@echo "... src/Cash.i"
+	@echo "... src/Cash.s"
+	@echo "... src/Check.o"
+	@echo "... src/Check.i"
+	@echo "... src/Check.s"
+	@echo "... src/Credit.o"
+	@echo "... src/Credit.i"
+	@echo "... src/Credit.s"
 	@echo "... src/Medcin.o"
 	@echo "... src/Medcin.i"
 	@echo "... src/Medcin.s"
@@ -506,9 +635,15 @@ help:
 	@echo "... src/OrderItem.o"
 	@echo "... src/OrderItem.i"
 	@echo "... src/OrderItem.s"
+	@echo "... src/Payment.o"
+	@echo "... src/Payment.i"
+	@echo "... src/Payment.s"
 	@echo "... src/Stock.o"
 	@echo "... src/Stock.i"
 	@echo "... src/Stock.s"
+	@echo "... src/Transaction.o"
+	@echo "... src/Transaction.i"
+	@echo "... src/Transaction.s"
 	@echo "... src/admin.o"
 	@echo "... src/admin.i"
 	@echo "... src/admin.s"

@@ -53,6 +53,9 @@ bool* Doctor::getAvailableDays(){
 bool* Doctor::getAvailablePeroids(){
   return availablePeroids;
 }
+bool Doctor::getAracived()const{
+  return archived;
+}
 
 string Doctor::getDateJoined() const {
     return dateJoined;
@@ -81,11 +84,8 @@ void Doctor::setRatingSum(int ratingSum) {
 void Doctor::setAppointmentCount(int appointmentCount){
     this->appointmentCount=appointmentCount;
 }
-void Doctor::setAvailableDays(){
-
-}
-void Doctor::setAvailablePeroids(){
-
+void Doctor::setAracived(bool state){
+  archived=state;
 }
 void Doctor::setDateJoined(const string& dateJoined) {
     this->dateJoined = dateJoined;
@@ -119,6 +119,8 @@ void Doctor::saveInfo(){
     oupt<<this->getAddress()<<endl;
     oupt<<this->getSalary()<<endl;
     oupt<<this->getSpecializationId()<<endl;
+    oupt<<this->getExperience()<<endl;
+    oupt<<this->getAracived()<<endl;
     for (int i = 1; i<8;i++)
     {
       if(availableDays[i])
