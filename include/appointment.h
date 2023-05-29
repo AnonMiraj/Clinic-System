@@ -3,6 +3,7 @@
 
 #include <cstring>
 #include <ctime>
+#include <chrono>
 #include <iostream>
 #include <iomanip>
 #include "person.h"
@@ -34,10 +35,10 @@ public:
     void setDate(int);
     time_t getDate() const;
 
-    void setDoctor(const Doctor &d);
+    void setDoctor(Doctor &d);
     Doctor* getDoctor() const;
 
-    void setPatient(const Patient &p);
+    void setPatient(Patient &p);
     Patient* getPatient() const;
 
     void setPrescription(const Prescription& p);
