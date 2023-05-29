@@ -8,8 +8,7 @@
 		<Option virtualFolders="CMake Files/" />
 		<Build>
 			<Target title="all">
-				<Option output="main" prefix_auto="0" extension_auto="0" />
-				<Option working_dir="" />
+				<Option output="main.exe" prefix_auto="0" extension_auto="0" />
 				<Option object_output="/home/ezz/Clinic-System/.build/.objs" />
 				<Option type="1" />
 				<Option compiler="gcc" />
