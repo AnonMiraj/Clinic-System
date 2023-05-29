@@ -83,38 +83,26 @@ void Admin::addAppointment()
     appointments[appointmentCount] = Appointment(appointmentCount+1);
 
     //choose doctor
-    int ID, index = -2;
-    do
-    {
-        if (index == -1)
-            cout<<"Please enter a valid doctor id :)\n";
-        cout<<"Enter doctor id : ";
-        cin>>ID;
-        index = searchDoctor(ID);
-    } while ( index == -1);
-
-    appointments[appointmentCount].setDoctor(doctors[ID]);
+    int ID;
+    cout<<"Enter doctor id : ";
+    cin>>ID;
+    appointments[appointmentCount].setDoctor(doctors[ID-1]);
 
 
     //choose appointment
     int per;
-    printDayNames(doctors[ID].getAvailableDays(), 49, cout);
-    printPeriodTimes(doctors[ID].getAvailablePeroids(), 8, cout);
+    printDayNames(doctors[ID-1].getAvailableDays(), 49, cout);
+    printPeriodTimes(doctors[ID-1].getAvailablePeroids(), 8, cout);
     cout<<"Enter a number of period : "; cin >> per;
     appointments[appointmentCount].setPeriod(per);
     cout<<"Enter a day number : "; cin>>per;
     appointments[appointmentCount].setDate(per);
 
     //choose patient
-    do
-    {
-        if (index == -1)
-            cout<<"Please enter a valid patient id :)\n";
-        cout<<"Enter patient id : ";
-        cin>>ID;
-        index = searchPatient(ID);
-    } while (index == -1);
-    
+    cout<<"Enter patient id : ";
+    cin>>ID;
+    appointments[appointmentCount].setPatient(patients[ID-1]);
+
     //pay to book the appointment
 
 }
@@ -242,7 +230,7 @@ void Admin::loadDoctor()
             inp>>salary;
             inp>>specializationID;
             inp>>expYears;
-            inp>>archive;           
+            inp>>archive;
             inp.ignore();
             getline(inp,avalDay);
             getline(inp,avalHour);
