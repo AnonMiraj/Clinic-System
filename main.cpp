@@ -94,7 +94,10 @@ void sub_sub_menu_2_spec_management()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> ADMIN HUB -> SPECIALTIES MANAGEMENT ....");
-        c = get_menu_choise("ADD SPECIALTY,EDIT SPECIALTY,ASSIGN DOCTOR,UNASSIGN DOCTOR,Print All Specs", 2);
+        do
+        {
+            c = get_menu_choise("ADD DOCTOR,EDIT DOCTOR,ARCHIVE DOCTOR,UNARCHIVE DOCTOR,print all", 2);
+        } while (IsValid(0,5,to_string(c)) == -1);
         switch (c)
         {
         case 1:

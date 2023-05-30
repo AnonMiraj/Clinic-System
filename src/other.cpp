@@ -124,6 +124,41 @@ char IsValid(string msg, int small, int big)
     return num[0];
 }
 
+int IsValid(int small, int big, string num)
+{
+    bool IsNotValid = false;
+        try
+        {
+
+            for (int i = 0; i < num.size(); i++)
+                if (!isdigit(num[i]))
+                {
+                    IsNotValid = true; break;
+                }
+
+            if (IsNotValid)
+                throw "Error";
+
+            if (stoi(num)  < small || stoi(num) > big)
+                throw (big);
+
+            //return num[0];
+        }
+
+        catch (const char* str)
+        {
+            cerr << "Please, don't write letter. type only from these choices :)\n";
+        }
+
+        catch (int i)
+        {
+            cerr << "please, Enter a number from the list :)\n";
+            IsNotValid = true;
+            return -1;
+        }
+    return stoi(num);
+}
+
 string printDate(time_t timeValue)
 {
     tm* timeInfo = localtime(&timeValue);

@@ -13,7 +13,10 @@ using namespace std;
 int IsValid(int n);
 string IsValid(string word);
 bool IsValid(string num, char n);
+
 char IsValid(string msg, int small, int big);
+int IsValid(int small, int big, string num);
+
 string printDate(time_t);
 string printTime(time_t);
 
