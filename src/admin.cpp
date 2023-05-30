@@ -1,454 +1,306 @@
-#include "admin.h"
-#include "Medical_Specialization.h"
-#include "doctor.h"
-#include "other.h"
-#include "patient.h"
-#include "person.h"
-#include <fstream>
+#include <bits/stdc++.h> // stringstream
+#include <cstring>       // string, to_string
+#include <iostream>      // cin, cout
 #include <string>
-#include <unistd.h>
+#include "admin.h"
+#include "other.h"
+using namespace std;
 
-
-Admin::Admin()
+/** ASSISTANT INLINE FUNCTIONS **/
+inline void wait_or_clear(unsigned int sec, bool clear_screen = false)
 {
-    patientCount = 0;
-    doctorCount = 0;
-    specializationCount = 0;
-    appointmentCount = 0;
-
-    maxPatients = 10;
-    maxDoctors = 10;
-    maxSpecialization=50;
-    maxAppointment = 100;
-
-    patients = new Patient[maxPatients];  // Initial capacity for 10 patients
-    doctors = new Doctor[maxDoctors];  // Initial capacity for 10 doctors
-    specializations = new Medical_Specialization[maxSpecialization];  // Initial capacity for 10 doctors
-    appointments = new Appointment[maxAppointment];
-
+    _sleep(sec);
+    if (clear_screen)
+        system("cls");
 }
 
-Admin::~Admin()
+inline void printline(string msg, bool end_line = true)
 {
-    delete[] patients;
-    delete[] doctors;
-    delete[] specializations;
+    cout << msg << (end_line ? "\n" : "\t");
 }
 
-void Admin::addPatient()
+inline void print_try_again()
 {
-    if (patientCount == maxPatients)
+    printline("\n\n\n\aInvalid Choice Try Again!!!!!!!!", 1);
+    wait_or_clear(3, 1);
+}
+
+/** MAIN PRINT MENU FUNCTION **/
+int get_menu_choise(string menu, int level = 0)
+{
+    stringstream X(menu);
+    string line, padding;
+    int i = 1;
+    for (int p = 0; p < level + 1; ++p)
+        padding += "\t";
+
+    int counter = 0;
+    while (getline(X, line, ','))
     {
-        // Resize the array if it's full
-        Patient* newPatients = new Patient[maxPatients * 2];
-        for (int i = 0; i < patientCount; i++)
+        printline(padding + to_string(i++) + ". " + line, 1);
+        counter++;
+    }
+
+    printline(level ? padding + "0. RETURN BACK" : padding + "0. EXIT APP", 1);
+    string c;
+    do
+    {
+        printline("ENTER YOUR CHOICE :", false);
+        cin >> c;
+    } while (IsValid(0, counter, c) == -1);
+    return stoi(c);
+}
+
+/// Admin inilization
+
+Admin Hospital;
+
+
+/** ADMIN HUB AND SUB MENU **/
+
+void sub_sub_menu_1_doctor_management()
+{
+    int c = -1;
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> ADMIN HUB -> DOCTOR MANAGEMENT ....");
+
+        c = get_menu_choise("ADD DOCTOR,EDIT DOCTOR,ARCHIVE DOCTOR,UNARCHIVE DOCTOR,print all", 2);
+        switch (c)
         {
-            newPatients[i] = patients[i];
+        case 1:
+            Hospital.addDoctor();
+            _pause();
+            break;
+        case 2:
+            Hospital.editDoctor();
+            _pause();
+            break;
+        case 3:
+            Hospital.archiveDoctor();
+            _pause();
+            break;
+        case 4:
+            Hospital.unarchiveDoctor();
+            _pause();
+            break;
+        case 5:
+            Hospital.printAllDoctors();
+            _pause();
+            break;
+        case 0:
+            return;
+        default:
+            print_try_again();
         }
-        delete[] patients;
-        patients = newPatients;
-        maxPatients *= 2;
     }
-
-    patients[patientCount] =  Patient();
-    cin>>patients[patientCount];
-    patients[patientCount].setId(patientCount+1);
-    patientCount++;
 }
-
-void Admin::addSpecialization()
+void sub_sub_menu_2_spec_management()
 {
-    if (specializationCount == maxSpecialization)
+    int c = -1;
+    while (c != 0)
     {
-        // Resize the array if it's full
-        Medical_Specialization* newSpecializations = new Medical_Specialization[maxSpecialization * 2];
-        for (int i = 0; i < specializationCount; i++)
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> ADMIN HUB -> SPECIALTIES MANAGEMENT ....");
+        c = get_menu_choise("ADD SPECIALTY,EDIT SPECIALTY,ASSIGN DOCTOR,UNASSIGN DOCTOR,Print All Specs", 2);
+        switch (c)
         {
-            newSpecializations[i] = specializations[i];
+        case 1:
+            Hospital.addSpecialization();
+            break;
+        case 2:
+            Hospital.editSpecialization();
+            _pause();
+            break;
+        case 3:
+            Hospital.addDoctorToSpec();
+            _pause();
+            break;
+        case 4:
+            Hospital.DetDoctorFromSpec();
+            _pause();
+            break;
+        case 5:
+            Hospital.printAllSpecs();
+            _pause();
+            break;
+        case 0:
+            return;
+        default:
+            print_try_again();
         }
-        delete[] specializations;
-        specializations = newSpecializations;
-        maxSpecialization *= 2;
     }
-    string name;
-    cin.ignore();
-    cout << "Enter Name: ";
-    getline(cin,name);
-    specializations[specializationCount] =  Medical_Specialization(specializationCount+1,name);
-    specializationCount++;
 }
 
-void Admin::addAppointment()
+
+void sub_menu_1_admin_hub()
 {
-    appointments[appointmentCount] = Appointment(appointmentCount+1);
-
-    //choose doctor
-    int ID;
-    cout<<"Enter doctor id : "; cin>>ID;
-    cout<<doctors[ID-1];
-    appointments[appointmentCount].setDoctor(doctors[ID-1]);
-
-
-
-    //choose appointment
-    int per;
-    //printDayNames(doctors[ID-1].getAvailableDays(), 49, cout);
-    //printPeriodTimes(doctors[ID-1].getAvailablePeroids(), 8, cout);
-    cout<<"Enter a number of period : "; cin >> per;
-    appointments[appointmentCount].setPeriod(per);
-    cout<<"Enter a day number : "; cin>>per;
-    appointments[appointmentCount].setDate(per);
-
-    //choose patient
-    cout<<"Enter patient id : ";
-    cin>>ID;
-    appointments[appointmentCount].setPatient(patients[ID-1]);
-
-    //pay to book the appointment
-    
-    appointments[appointmentCount].setStatue(1);
-    appointmentCount++;
-
-}
-
-void Admin::BeAttend()
-{
-    cout <<setw(8) <<"ID" <<setw(10) <<"Date" <<setw(10) <<"Period" /*<< setw(20) <<"Patient"*/ << setw(20) << "Doctor"  <<endl;
-    for (int i = 0; i<appointmentCount; i++)
+    int c = -1;
+    while (c != 0)
     {
-        if (appointments[i].getStatue() == "BOOKED")
-            cout<<appointments[i];
-    }
-
-    int AttendID;
-    cout<<"Enter appointment ID to be attended : "; cin>>AttendID;
-    appointments[AttendID-1].setStatue(2);
-}
-
-
-
-void Admin::editPatient()
-{
-    int id;
-    cout<<"Enter patient Id: ";
-    cin>>id;
-    patients[id-1].editInfo();
-}
-
-void Admin::editSpecialization()
-{
-    int id;
-    cout<<"Enter patient Id: ";
-    cin>>id;
-    specializations[id-1].editInfo();
-}
-
-void Admin::addDoctorToSpec()
-{
-    int Spec_Indx=-1;
-    cout<<"Enter Specialization Id (Enter 0 to exit Add To Spec Menu ): ";
-    cin>>Spec_Indx;
-    Spec_Indx--;
-
-    int doc_Indx=-1;
-    cout<<"Enter Doctor Id (Enter 0 to exit Add To Spec Menu ): ";
-    cin>>doc_Indx;
-    doc_Indx--;
-
-    if(Spec_Indx == -1 || doc_Indx==-1 )
-    {
-        cout << "Exiting the Add To Specialization Menu " << endl;
-        return;
-    }
-    system("cls");
-
-    doctors[doc_Indx].setSpecialization(&specializations[Spec_Indx]);
-
-    cout << "Doctor Added successfully." ;
-}
-
-void Admin::DetDoctorFromSpec()
-{
-    int doc_Indx=-1;
-    cout<<"Enter Doctor Id (Enter 0 to exit Add To Spec Menu ): ";
-    cin>>doc_Indx;
-    doc_Indx--;
-
-    if(doc_Indx == -1)
-    {
-        cout << "Exiting the Remove From Specialization Menu " << endl;
-        return;
-    }
-    system("cls");
-    Medical_Specialization *newSpec;
-    doctors[doc_Indx].setSpecialization(newSpec);
-
-    cout << "Doctor Removed successfully." ;
-
-}
-
-void Admin::addDoctor()
-{
-    if (doctorCount == maxDoctors)
-    {
-        // Resize the array if it's full
-        Doctor* newDoctors = new Doctor[maxDoctors * 2];
-        for (int i = 0; i < doctorCount; i++)
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> ADMIN hub ....");
+        c = get_menu_choise("DOCTOR MANAGEMENT,SPECIALTY MANAGEMENT,HISTORY PATIENT,HISTORY DOCTOR", 1);
+        switch (c)
         {
-            newDoctors[i] = doctors[i];
+        case 1:
+            sub_sub_menu_1_doctor_management();
+            break;
+        case 2:
+            sub_sub_menu_2_spec_management();
+            break;
+        case 3:
+            Hospital.patientHistory();
+            _pause();
+            break;
+        case 4:
+            Hospital.doctorsHistory();
+            _pause();
+            break;
+        case 0:
+            return;
+        default:
+            print_try_again();
         }
-        delete[] doctors;
-        doctors = newDoctors;
-        maxDoctors *= 2;
     }
-
-    doctors[doctorCount] = Doctor();
-    cin>>doctors[doctorCount];
-    doctors[doctorCount].setId(doctorCount+1);
-    doctorCount++;
 }
 
-void Admin::editDoctor()
-{
-    int id;
-    cout<<"Enter doctors Id: ";
-    cin>>id;
-    doctors[id-1].editInfo();
-}
 
-void Admin::archiveDoctor()
+/** DATA ENTRY AND SUB MENU **/
+void sub_menu_2_doctor_hub()
 {
-    int doctorIndex;
-    cout<<"Enter the doctor id: ";
-    cin>>doctorIndex;
-    doctors[doctorIndex-1].setAracived(true);
-
-}
-
-void Admin::unarchiveDoctor()
-{
-    int archiveIndex;
-    cout<<"Enter the archived Doctor id: ";
-    cin>>archiveIndex;
-    doctors[archiveIndex-1].setAracived(false);
-}
-
-void Admin::printAllDoctors()
-{
-    for(int i=0; i<doctorCount; i++)
+    int c = -1;
+    while (c != 0)
     {
-        cout<<"==============================="<<endl;
-        cout<<doctors[i];
-        cout<<"==============================="<<endl;
-
-    }
-
-}
-void Admin::printAllSpecs()
-{
-    for(int i=0; i<specializationCount; i++)
-    {
-        cout<<"==============================="<<endl;
-        cout<<specializations[i];
-        cout<<"==============================="<<endl;
-
-    }
-
-}
-
-void Admin::patientHistory(){
-    int id;
-    cout<<"Enter patient Id: ";
-    cin>>id;
-
-
-        for(int i=0; i<appointmentCount; i++)
-    {
-        if(id-1==Appointment().getPatient()->getId())
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> DOCTOR HUB ....");
+        c = get_menu_choise("ATTEND,EDIT", 1);
+        switch (c)
         {
-
-        cout<<"==============================="<<endl;
-        cout<<appointments[i];
-        cout<<"==============================="<<endl;
+        case 1:
+            Hospital.BeAttend();
+            _pause();
+            break;
+        case 2:
+            _pause();
+            break;
+        case 0:
+            return;
+        default:
+            print_try_again();
         }
-
     }
 }
 
+/** patient hub AND SUB MENU **/
 
-void Admin::doctorsHistory(){}
-
-void Admin::loadDoctor()
+void sub_sub_menu_3_patient_hub()
 {
-    int id,age,expYears,specializationID,salary,fee,archive;
-    string name,gender,blood,phone,address,avalDay,avalHour,date;
-    ifstream inp;
-    inp.open("inputDoctors.txt");
-    if(inp.is_open())
-        while (inp>>id)
+    int c = -1;
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> PATIENT HUB -> APPOINTMENT, ....");
+        c = get_menu_choise("", 2);
+        switch (c)
         {
-            inp.ignore();
-            getline(inp,name);
-            inp>>age;
-            inp.ignore();
-            getline(inp,gender);
-            getline(inp,blood);
-            getline(inp,phone);
-            getline(inp,address);
-            inp>>salary;
-            inp>>specializationID;
-            inp>>expYears;
-            inp>>archive;
-            inp.ignore();
-            getline(inp,avalDay);
-            getline(inp,avalHour);
-            getline(inp,date);
-            inp>>fee;
-            doctors[doctorCount]=Doctor(id,name,age,gender,blood,phone,address,salary,expYears,0,0,false,date,fee);
-            setIndexesToTrue(doctors[doctorCount].getAvailableDays(),8,avalDay);
-            setIndexesToTrue(doctors[doctorCount].getAvailablePeroids(),49,avalHour);
-            if(specializationID!=-1)
-                doctors[doctorCount].setSpecialization(&specializations[specializationID-1]);
-            doctorCount++;
+        case 1:
+            _pause();
+            break;
+        case 2:
+            _pause();
+            break;
+        case 3:
+            _pause();
+            break;
+        case 4:
+            _pause();
+            break;
+        case 0:
+            return;
+        default:
+            print_try_again();
         }
-    else
-        inp.close();
+    }
 }
-
-void Admin::loadPatient()
+void sub_menu_3_patient_hub()
 {
-    int id,age;
-    string name,gender,blood,phone,address,notes,emergency;
-    ifstream inp;
-
-    inp.open("inputPatient.txt");
-    if(inp.is_open())
-        while (inp>>id)
+    int c = -1;
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> PATIENT HUB ....");
+        c = get_menu_choise("CREATE ACCOUNT ,EDIT ACCOUNT INFORMATION ,BUY A PRESCRIPTION,APPOINTMENT,VIEW AVAILABLE DOCTORS", 1);
+        switch (c)
         {
-            inp.ignore();
-            getline(inp,name);
-            inp>>age;
-            inp.ignore();
-            getline(inp,gender);
-            getline(inp,blood);
-            getline(inp,phone);
-            getline(inp,address);
-            getline(inp,notes);
-            getline(inp,emergency);
-
-            patients[patientCount++]=Patient(id,name,age,gender,blood,phone,address,"",0,emergency);
+        case 1:
+            Hospital.addPatient();
+            _pause();
+            break;
+        case 2:
+            Hospital.editPatient();
+            _pause();
+            break;
+        case 3:
+            _pause();
+            break;
+        case 4:
+            Hospital.addAppointment();
+            sub_sub_menu_3_patient_hub();
+            _pause();
+            break;
+        case 5:
+            _pause();
+            break;
+        case 6:
+            _pause();
+            break;
+        case 0:
+            return;
+        default:
+            print_try_again();
         }
-    else
-        cout<<"FUCK";
-    inp.close();
+    }
 }
 
-void Admin::loadSpecial()
+/** MAIN FUNCTION **/
+int main()
 {
-    string name;
-    ifstream inp("inputSpec.txt");
+    Hospital.load();
+    printline("START APPLICATION ....", 1);
+    wait_or_clear(1, 1);
+    int c = -1;
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU ....", 1);
+        c = get_menu_choise("ADMIN HUB,DOCTOR MANAGEMENT,PATIENT MANAGEMENT",
+                            0);
 
-    if(inp.is_open())
-        while (getline(inp,name))
+        switch (c)
         {
-            specializations[specializationCount]=Medical_Specialization(specializationCount+1,name);
-
-            cout<<"FUCK";
-            cout<<"FUCK";
-            specializationCount++;
+        case 1:
+            sub_menu_1_admin_hub();
+            break;
+        case 2:
+            sub_menu_2_doctor_hub();
+            break;
+        case 3:
+            sub_menu_3_patient_hub();
+            break;
+        case 4:
+            cout<<Hospital;
+            _pause();
+            break;
+        case 0:
+            printline("\n\n\a\t\t\tGoodbye :)......\n\n\n\n\n\n", 1);
+            break;
+        default:
+            print_try_again();
+            wait_or_clear(3, true);
         }
-    else
-        cout<<"FUCK";
-    inp.close();
-
-}
-
-void Admin::load()
-{
-    this->loadDoctor();
-    this->loadPatient();
-    this->loadSpecial();
-}
-
-void Admin::save()
-{
-    ofstream ofs ("inputPatient.txt", std::ios::out | std::ios::trunc); // clear contents
-    ofs.close();
-
-    for (int i = 0; i < patientCount; i++)
-    {
-        patients[i].saveInfo();
     }
-    ofs.open("inputDoctors.txt", std::ios::out | std::ios::trunc);
-    ofs.close();
-    for (int i = 0; i < doctorCount; i++)
-    {
-        doctors[i].saveInfo();
-    }
-
+    Hospital.save();
+    return 0;
 }
-
-void Admin::setInsurances()
-{
-    cin>>insurances;
-}
-
-void Admin::getInsurances()
-{
-    cout<<insurances;
-}
-
-
-//seerch
-int Admin::searchPatient(int id)
-{
-    for (int i=0; i<patientCount; i++)
-        if (patients[i] == patients[id])
-            return i;
-
-    return -1;
-}
-
-string Admin::getPatient_name(int in)
-{
-    return patients[in].getName();
-}
-
-string Admin::getDoctor_name(int in)
-{
-    return doctors[in].getName();
-}
-
-int Admin::searchDoctor(int id)
-{
-    for (int i=0; i<patientCount; i++)
-        if (doctors[i] == doctors[id])
-            return i;
-
-    return -1;
-}
-
-//temprory
-ostream& operator<<(ostream& os, const Admin& admin)
-{
-    os << "Patients:" << endl;
-    for (int i = 0; i < admin.patientCount; i++)
-    {
-        os << admin.patients[i] << endl;
-    }
-
-    os << "Doctors:" << endl;
-    for (int i = 0; i < admin.doctorCount; i++)
-    {
-        os << admin.doctors[i] << endl;
-    }
-    os << "Specials :" << endl;
-    for (int i = 0; i < admin.specializationCount; i++)
-    {
-        os << admin.specializations[i] << endl;
-    }
-
-
-    return os;
-}
-
