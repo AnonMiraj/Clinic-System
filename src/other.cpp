@@ -124,6 +124,22 @@ char IsValid(string msg, int small, int big)
     return num[0];
 }
 
+string printDate(time_t timeValue)
+{
+    tm* timeInfo = localtime(&timeValue);
+    char buffer[80];
+    strftime(buffer, sizeof(buffer), "%Y-%m-%d", timeInfo);
+    return buffer;
+}
+
+string printTime(time_t timeValue)
+{
+    tm* timeInfo = localtime(&timeValue);
+    char buffer[80];
+    strftime(buffer, sizeof(buffer), "%H:%M", timeInfo);
+    return buffer;
+}
+
 void setIndexesToTrue(bool arr[], int size) {
     string input;
     getline(cin, input);
@@ -155,6 +171,7 @@ void setIndexesToTrue(bool arr[], int size) {
         }
     }
 }
+
 void setIndexesToTrue(bool arr[], int size,string input) {
 
     istringstream iss(input);
@@ -197,8 +214,9 @@ void printDayNames(const bool arr[], int size, ostream& os ) {
     }
     os << endl;
 }
+
 void printPeriodTimes( const bool arr[], int size, ostream& os) {
- 
+
     const int minutesPerPeriod = 30;
 
     cout << "Periods: ";
@@ -250,6 +268,7 @@ void printPeriodTimes( const bool arr[], int size, ostream& os) {
     os << endl;
 
 }
+
 void _pause() {
   cin.ignore();
   do {

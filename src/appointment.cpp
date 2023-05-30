@@ -142,7 +142,7 @@ istream& operator>> (istream& in, Appointment& a) // for files
 
 ostream& operator<< (ostream& out, const Appointment& a)
 {
-    out <<setw(8) <<a.getID() /*<<setw(15) <<a.getDate()*/ << setw(20) << a.patient->getName() << setw(20) << a.doctor->getName() <<endl ;
+    out <<setw(8) <<a.getID() <<setw(10) <<printDate(a.getDate()) <<setw(10) <<printTime(a.getDate()) /*<< setw(20) << a.patient->getName()*/ << setw(20) << a.doctor->getName() <<endl ;
     //out <<  a.getPrescription();
     return out;
 }

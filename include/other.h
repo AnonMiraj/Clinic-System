@@ -6,13 +6,16 @@
 #include <sstream>
 #include <cctype>
 #include <iomanip>
+#include <ctime>
 
 
 using namespace std;
-int IsValid(int n); 
+int IsValid(int n);
 string IsValid(string word);
 bool IsValid(string num, char n);
 char IsValid(string msg, int small, int big);
+string printDate(time_t);
+string printTime(time_t);
 
 void setIndexesToTrue(bool *arr, int size);
 void setIndexesToTrue(bool *arr, int size, string);

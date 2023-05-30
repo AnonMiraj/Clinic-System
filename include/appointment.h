@@ -10,6 +10,7 @@
 #include "doctor.h"
 #include "patient.h"
 #include "prescription.h"
+#include "other.h"
 using namespace std;
 
 class Appointment
