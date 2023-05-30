@@ -213,7 +213,7 @@ ostream& operator<<(ostream& os, const Doctor& doctor) {
     os << "Salary: " << doctor.salary << endl;
     os<<"Specialization: "<<(doctor.specialization!=nullptr ? doctor.specialization->getName():"None")<<endl;
     os << "Experience: " << doctor.experience << " years" << endl;
-    if (doctor.appointmentCount!=0) 
+    if (doctor.appointmentCount!=0)
       os << "Rating: " << doctor.ratingSum / doctor.appointmentCount << "/5" << endl;
     os << "Available Days: ";
     printDayNames(doctor.availableDays, 8, os);
@@ -225,7 +225,12 @@ ostream& operator<<(ostream& os, const Doctor& doctor) {
     return os;
 }
 
-bool Doctor::operator==(const Doctor &d)
+bool Doctor::operator==(const Doctor& d)
 {
     return this->getId() == d.getId();
+}
+
+bool Doctor::operator==(const int id)
+{
+    return this->getId() == id;
 }

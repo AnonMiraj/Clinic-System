@@ -139,3 +139,7 @@ bool Patient::operator==(const Patient &p)
 {
     return this->getId() == p.getId();
 }
+bool Patient::operator==(const int id)
+{
+    return this->getId() == id;
+}
