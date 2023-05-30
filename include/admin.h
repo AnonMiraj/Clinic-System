@@ -54,6 +54,7 @@ public:
     void addSpecialization();
     void editSpecialization();
     void addAppointment();
+    void BeAttend();
 
     void loadDoctor();
     void loadPatient();
