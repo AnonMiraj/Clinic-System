@@ -86,25 +86,31 @@ void Admin::addAppointment()
     int ID;
     cout<<"Enter doctor id : ";
     cin>>ID;
+    cout<<doctors[ID-1];
     appointments[appointmentCount].setDoctor(doctors[ID-1]);
+
 
 
     //choose appointment
     int per;
-    printDayNames(doctors[ID-1].getAvailableDays(), 49, cout);
-    printPeriodTimes(doctors[ID-1].getAvailablePeroids(), 8, cout);
-    cout<<"Enter a number of period : "; cin >> per;
+    //printDayNames(doctors[ID-1].getAvailableDays(), 49, cout);
+    //printPeriodTimes(doctors[ID-1].getAvailablePeroids(), 8, cout);
+    cout<<"Enter a number of period : ";
+    cin >> per;
     appointments[appointmentCount].setPeriod(per);
-    cout<<"Enter a day number : "; cin>>per;
+    cout<<"Enter a day number : ";
+    cin>>per;
     appointments[appointmentCount].setDate(per);
 
     //choose patient
     cout<<"Enter patient id : ";
     cin>>ID;
     appointments[appointmentCount].setPatient(patients[ID-1]);
-
+    cout<<appointments[appointmentCount]<<endl;
+    _pause();
     //pay to book the appointment
 
+    appointmentCount++;
 }
 
 void Admin::editPatient()
@@ -123,7 +129,8 @@ void Admin::editSpecialization()
     specializations[id-1].editInfo();
 }
 
-void Admin::addDoctorToSpec(){
+void Admin::addDoctorToSpec()
+{
     int Spec_Indx=-1;
     cout<<"Enter Specialization Id (Enter 0 to exit Add To Spec Menu ): ";
     cin>>Spec_Indx;
@@ -146,7 +153,8 @@ void Admin::addDoctorToSpec(){
     cout << "Doctor Added successfully." ;
 }
 
-void Admin::DetDoctorFromSpec(){
+void Admin::DetDoctorFromSpec()
+{
     int doc_Indx=-1;
     cout<<"Enter Doctor Id (Enter 0 to exit Add To Spec Menu ): ";
     cin>>doc_Indx;
@@ -199,6 +207,7 @@ void Admin::archiveDoctor()
     int doctorIndex;
     cout<<"Enter the doctor id: ";
     cin>>doctorIndex;
+    doctors[doctorIndex-1].setAracived(true);
 
 }
 
@@ -207,8 +216,53 @@ void Admin::unarchiveDoctor()
     int archiveIndex;
     cout<<"Enter the archived Doctor id: ";
     cin>>archiveIndex;
+    doctors[archiveIndex-1].setAracived(false);
+}
+
+void Admin::printAllDoctors()
+{
+    for(int i=0; i<doctorCount; i++)
+    {
+        cout<<"==============================="<<endl;
+        cout<<doctors[i];
+        cout<<"==============================="<<endl;
+
+    }
 
 }
+void Admin::printAllSpecs()
+{
+    for(int i=0; i<specializationCount; i++)
+    {
+        cout<<"==============================="<<endl;
+        cout<<specializations[i];
+        cout<<"==============================="<<endl;
+
+    }
+
+}
+
+void Admin::patientHistory(){
+    int id;
+    cout<<"Enter patient Id: ";
+    cin>>id;
+
+
+        for(int i=0; i<appointmentCount; i++)
+    {
+        if(id-1==Appointment().getPatient()->getId())
+        {
+
+        cout<<"==============================="<<endl;
+        cout<<appointments[i];
+        cout<<"==============================="<<endl;
+        }
+
+    }
+}
+
+
+void Admin::doctorsHistory(){}
 
 void Admin::loadDoctor()
 {
@@ -240,11 +294,11 @@ void Admin::loadDoctor()
             setIndexesToTrue(doctors[doctorCount].getAvailableDays(),8,avalDay);
             setIndexesToTrue(doctors[doctorCount].getAvailablePeroids(),49,avalHour);
             if(specializationID!=-1)
-              doctors[doctorCount].setSpecialization(&specializations[specializationID-1]);
+                doctors[doctorCount].setSpecialization(&specializations[specializationID-1]);
             doctorCount++;
         }
     else
-    inp.close();
+        inp.close();
 }
 
 void Admin::loadPatient()
@@ -275,18 +329,19 @@ void Admin::loadPatient()
     inp.close();
 }
 
-void Admin::loadSpecial(){
-  string name;
-  ifstream inp("inputSpec.txt");
+void Admin::loadSpecial()
+{
+    string name;
+    ifstream inp("inputSpec.txt");
 
     if(inp.is_open())
         while (getline(inp,name))
         {
             specializations[specializationCount]=Medical_Specialization(specializationCount+1,name);
 
-        cout<<"FUCK";
-        cout<<"FUCK";
-        specializationCount++;
+            cout<<"FUCK";
+            cout<<"FUCK";
+            specializationCount++;
         }
     else
         cout<<"FUCK";
@@ -319,13 +374,15 @@ void Admin::save()
 
 }
 
-void Admin::setInsurances(){
+void Admin::setInsurances()
+{
     cin>>insurances;
-    }
+}
 
-void Admin::getInsurances(){
+void Admin::getInsurances()
+{
     cout<<insurances;
-    }
+}
 
 
 //seerch
@@ -336,6 +393,16 @@ int Admin::searchPatient(int id)
             return i;
 
     return -1;
+}
+
+string Admin::getPatient_name(int in)
+{
+    return patients[in].getName();
+}
+
+string Admin::getDoctor_name(int in)
+{
+    return doctors[in].getName();
 }
 
 int Admin::searchDoctor(int id)
