@@ -21,7 +21,7 @@ private:
     Doctor* doctor;
     Patient* patient;
     Prescription* prescription;
-    int status;
+    int statue;
 
 public:
     Appointment(int i);
@@ -45,8 +45,8 @@ public:
     void setPrescription(const Prescription& p);
     Prescription* getPrescription() const;
     
-    void setStatus(int s);
-    string getStatus() const;
+    void setStatue(int s);
+    string getStatue() const;
 
     // opertaor overloading
     friend istream &operator>>(istream &in, Appointment &a);

@@ -119,17 +119,17 @@ Prescription* Appointment::getPrescription() const
     return prescription;
 }
 
-void setStatus(int s)
+void  Appointment::setStatue(int s)
 {
-    status = s;
+    statue = s;
 }
 
-string getStatus() const
+string  Appointment::getStatue() const
 {
-    if (status == 1)
+    if (statue == 1)
         return "BOOKED";
         
-    return "ATTEND"
+    return "ATTEND";
 }
 
 

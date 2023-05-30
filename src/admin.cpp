@@ -106,7 +106,7 @@ void Admin::addAppointment()
 
     //pay to book the appointment
     
-    appointments[appointmentCount].setStatus(1);
+    appointments[appointmentCount].setStatue(1);
     appointmentCount++;
 
 }
@@ -116,13 +116,13 @@ void Admin::BeAttend()
     cout <<setw(8) <<"ID" /*<<setw(15) <<"Date"*/ << setw(20) <<"Patient" << setw(20) << "Doctor"  <<endl;
     for (int i = 0; i<appointmentCount; i++)
     {
-        if (appointments[i].getStatus() == "BOOKED")
+        if (appointments[i].getStatue() == "BOOKED")
             cout<<appointments[i];
     }
     
     int AttendID;
     cout<<"Enter appointment ID to be attended : "; cin>>AttendID;
-    appointments[AttendID-1].setStatus(2);
+    appointments[AttendID-1].setStatue(2);
 
 }
 
