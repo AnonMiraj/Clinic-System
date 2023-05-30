@@ -3,8 +3,6 @@
 Appointment::Appointment(int i)
 {
     id = i;
-    doctor = new Doctor();  // Allocate memory for the Doctor object
-    patient = new Patient();  // Allocate memory for the Patient object
 }
 
 Appointment::Appointment()
@@ -84,6 +82,7 @@ void Appointment::setDate(int wday)
 }
 
 
+
 time_t Appointment::getDate() const
 {
     return date;
@@ -120,6 +119,18 @@ Prescription* Appointment::getPrescription() const
     return prescription;
 }
 
+void setStatus(int s)
+{
+    status = s;
+}
+
+string getStatus() const
+{
+    if (status == 1)
+        return "BOOKED";
+        
+    return "ATTEND"
+}
 
 
 //operator overloading
@@ -131,8 +142,8 @@ istream& operator>> (istream& in, Appointment& a) // for files
 
 ostream& operator<< (ostream& out, const Appointment& a)
 {
-    out << setw(20) << a.patient->getName() << setw(20) << a.doctor->getName() <<setw(15) <<a.getDate() <<endl ;
-    out <<  a.getPrescription();
+    out <<setw(8) <<a.getID() /*<<setw(15) <<a.getDate()*/ << setw(20) << a.patient->getName() << setw(20) << a.doctor->getName() <<endl ;
+    //out <<  a.getPrescription();
     return out;
 }
 
