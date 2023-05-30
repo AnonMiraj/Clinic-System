@@ -4,12 +4,13 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <cctype>
 #include <iomanip>
 
 
 using namespace std;
 int IsValid(int n); 
-string IsValid(string msg);
+string IsValid(string word);
 bool IsValid(string num, char n);
 char IsValid(string msg, int small, int big);
 

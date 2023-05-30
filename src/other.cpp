@@ -1,20 +1,13 @@
 #include "other.h"
 
-string IsValid(string msg)
+string IsValid(string word)
 {
   bool IsNotValid = false;
-  string num;
-  do
-  {
-    IsNotValid = false;
-
     try
     {
-      cout << msg;
-      cin >> num;
 
-      for (int i = 0; i < num.size(); i++)
-        if (!isdigit(num[i]))
+      for (int i = 0; i < word.size(); i++)
+        if (!isalpha(word[i]))
         {
           IsNotValid = true;
           break;
@@ -23,16 +16,15 @@ string IsValid(string msg)
       if (IsNotValid)
         throw "Error";
 
-      return num;
+      return word;
     }
 
     catch (const char *str)
     {
-      cerr << "Please, don't write letter. type only numbers :)\n";
+      cerr << "Please, type only letter :)\n";
     }
-  } while (IsNotValid);
 
-  return num;
+  return word;
 }
 
 bool IsValid(string num, char n)
