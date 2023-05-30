@@ -34,19 +34,26 @@ public:
 
     // Other member functions for managing patients and doctors
     void addPatient();
-    void addDoctor();
-    void addSpecialization();
-    void addAppointment();
-
     void editPatient();
-    void editDoctor();
-    void editSpecialization();
 
+    void addDoctor();
+    void editDoctor();
     void addDoctorToSpec();
     void DetDoctorFromSpec();
+    //new
+    void printAllDoctors();
+    void patientHistory();
+    void doctorsHistory();
+    void printAllSpecs();
+
+
 
     void archiveDoctor();
     void unarchiveDoctor();
+
+    void addSpecialization();
+    void editSpecialization();
+    void addAppointment();
 
     void loadDoctor();
     void loadPatient();
@@ -61,6 +68,8 @@ public:
 
     int searchPatient(int);
     int searchDoctor(int);
+    string getPatient_name(int in);
+    string getDoctor_name(int in);
 };
 
 
