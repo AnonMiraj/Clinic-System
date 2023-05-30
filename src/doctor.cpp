@@ -208,6 +208,9 @@ istream& operator>>(istream& is, Doctor& doctor) {
 }
 
 ostream& operator<<(ostream& os, const Doctor& doctor) {
+    string archiv;
+    (doctor.archived) ? archiv="YES" : archiv="NO";
+    os << "ARCHIVED: " << archiv  << endl;
     os << static_cast<const Person&>(doctor);  // Call the base class operator<<
 
     os << "Salary: " << doctor.salary << endl;
@@ -221,6 +224,7 @@ ostream& operator<<(ostream& os, const Doctor& doctor) {
     printPeriodTimes(doctor.availablePeroids , 49, os);
     os << "Date Joined: " << doctor.dateJoined << endl;
     os << "Appointment Fee: " << doctor.appointmentFee << endl;
+
 
     return os;
 }
