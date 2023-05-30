@@ -84,8 +84,7 @@ void Admin::addAppointment()
 
     //choose doctor
     int ID;
-    cout<<"Enter doctor id : ";
-    cin>>ID;
+    cout<<"Enter doctor id : "; cin>>ID;
     cout<<doctors[ID-1];
     appointments[appointmentCount].setDoctor(doctors[ID-1]);
 
@@ -95,23 +94,38 @@ void Admin::addAppointment()
     int per;
     //printDayNames(doctors[ID-1].getAvailableDays(), 49, cout);
     //printPeriodTimes(doctors[ID-1].getAvailablePeroids(), 8, cout);
-    cout<<"Enter a number of period : ";
-    cin >> per;
+    cout<<"Enter a number of period : "; cin >> per;
     appointments[appointmentCount].setPeriod(per);
-    cout<<"Enter a day number : ";
-    cin>>per;
+    cout<<"Enter a day number : "; cin>>per;
     appointments[appointmentCount].setDate(per);
 
     //choose patient
     cout<<"Enter patient id : ";
     cin>>ID;
     appointments[appointmentCount].setPatient(patients[ID-1]);
-    cout<<appointments[appointmentCount]<<endl;
-    _pause();
-    //pay to book the appointment
 
+    //pay to book the appointment
+    
+    appointments[appointmentCount].setStatus(1);
     appointmentCount++;
+
 }
+
+void Admin::BeAttend()
+{
+    cout <<setw(8) <<"ID" /*<<setw(15) <<"Date"*/ << setw(20) <<"Patient" << setw(20) << "Doctor"  <<endl;
+    for (int i = 0; i<appointmentCount; i++)
+    {
+        if (appointments[i].getStatus() == "BOOKED")
+            cout<<appointments[i];
+    }
+    
+    int AttendID;
+    cout<<"Enter appointment ID to be attended : "; cin>>AttendID;
+    appointments[AttendID-1].setStatus(2);
+
+}
+
 
 void Admin::editPatient()
 {
