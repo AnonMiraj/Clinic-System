@@ -170,6 +170,7 @@ void sub_menu_2_doctor_hub()
         switch (c)
         {
         case 1:
+        Hospital.BeAttend();
             _pause();
             break;
         case 2:
