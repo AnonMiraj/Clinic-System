@@ -77,7 +77,6 @@ void Appointment::setDate(int wday)
             t->tm_mday = stoi(d);
 
             da = system_clock::to_time_t(system_clock::from_time_t(mktime(t)));
-            cout<<endl <<t->tm_wday <<endl;
 
             if (t->tm_wday != wday)
                 throw "This day is not a valid day for the doctor. :(\n";
@@ -104,6 +103,10 @@ void Appointment::setDate(int wday)
     date = y + "/" + m + "/" + d;
 }
 
+void Appointment::setDate(string d)
+{
+    date = d;
+}
 
 
 string Appointment::getDate() const
@@ -251,7 +254,7 @@ ostream& operator<< (ostream& out, const Appointment& a)
 
 bool Appointment::operator== (const Appointment& a)
 {
-    return this->id == a.id;
+    return (date == a.date && period == a.period && doctor == a.doctor);
 }
 
 bool Appointment::operator>(const Appointment& a)

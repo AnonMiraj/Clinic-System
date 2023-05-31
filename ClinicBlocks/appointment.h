@@ -42,6 +42,7 @@ public:
     int getPeriod_int() const;
 
     void setDate(int);
+    void setDate(string);
     string getDate() const;
     int getDate_wday() const;
 

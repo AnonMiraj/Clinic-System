@@ -62,7 +62,7 @@
 
     // Overloading == operator
     bool Medical_Specialization::operator==(const Medical_Specialization& other) {
-        return (id == other.id && name == other.name);
+        return id == other.id;
     }
 
     Medical_Specialization& Medical_Specialization::operator++() {

@@ -18,12 +18,14 @@ private:
     int ratingSum;
     int appointmentCount;
     bool archived;
-    bool availableDays[8];
-    bool availablePeroids[49];
+
+
     string dateJoined;
     int appointmentFee;
 
 public:
+    bool availableDays[8];
+    bool availablePeroids[49];
     // Constructor
     Doctor();
     Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,

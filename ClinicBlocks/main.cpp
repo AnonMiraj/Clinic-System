@@ -209,24 +209,29 @@ void sub_sub_menu_3_Appointement()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> PATIENT HUB -> APPOINTMENT ....");
-        c = get_menu_choise("BOOK,VIEW,EDIT,CANCEL", 2);
+        c = get_menu_choise("BOOK,VIEW,CANCEL", 2);
         switch (c)
         {
         case 1:
             Hospital.addAppointment();
             _pause();
             break;
+
         case 2:
             Hospital.viewAPP();
             _pause();
             break;
+
         case 3:
-            _pause();
-            break;
-        case 4:
             Hospital.cancelAPP();
             _pause();
             break;
+
+        /*case 3:
+            //edit --> doctor id , period , day and date , patient id , prescription values
+            _pause();
+            break;*/
+
         case 0:
             return;
         default:
@@ -242,7 +247,7 @@ void sub_sub_menu_4_View()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> PATIENT HUB -> VIEW ....");
-        c = get_menu_choise("ALL DOCTORS,SPECIFIC SPECIALIZATION,SEARCH BY NAME,SORTED", 2);
+        c = get_menu_choise("ALL DOCTORS,SPECIFIC SPECIALIZATION,SEARCH BY NAME", 2);
         switch (c)
         {
         case 1:
@@ -251,14 +256,13 @@ void sub_sub_menu_4_View()
             break;
 
         case 2:
+            Hospital.printSpecDoctors();
             _pause();
             break;
         case 3:
             _pause();
             break;
-        case 4:
-            _pause();
-            break;
+
         case 0:
             return;
         default:

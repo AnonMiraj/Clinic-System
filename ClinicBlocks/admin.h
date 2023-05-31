@@ -9,7 +9,9 @@
 #include "appointment.h"
 #include "prescription.h"
 #include <fstream>
-
+#include <ctime>
+#include <string>
+#include <chrono>
 using namespace std;
 
 class Admin {
@@ -50,6 +52,7 @@ public:
     void patientHistory();
     void doctorsHistory();
     void printAllSpecs();
+    void printSpecDoctors();
 
 
 
@@ -87,6 +90,9 @@ public:
     int searchDoctor(int);
     string getPatient_name(int in);
     string getDoctor_name(int in);
+
+    //print
+    string printAvailableDay(const Doctor&);
 };
 
 

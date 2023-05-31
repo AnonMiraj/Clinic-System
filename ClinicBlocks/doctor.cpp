@@ -70,9 +70,9 @@ void Doctor::setSalary(int salary) {
     this->salary = salary;
 }
 
-void Doctor::setSpecialization(Medical_Specialization &specialization) {
-    Medical_Specialization *p= &specialization;
-    this->specialization = p;
+void Doctor::setSpecialization(Medical_Specialization &specialization)
+{
+    this->specialization = &specialization;
 }
 
 void Doctor::setExperience(int experience) {

@@ -1,5 +1,14 @@
 #include "other.h"
 
+string getPeriod(int period)
+{
+    if (period % 2 == 1)
+        return (period/2<10 ? "0" :"" )+  to_string(period / 2) + ":00 - " + to_string(period/2) + ":30";
+
+    return (period/2<10 ? "0" :"" )+ to_string(period / 2 - 1) + ":30 - " + (period == 48 ? "0" : to_string(period / 2)) + ":00";
+
+}
+
 string IsValid(string word)
 {
   bool IsNotValid = false;
