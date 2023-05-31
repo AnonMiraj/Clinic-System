@@ -131,7 +131,7 @@ int IsValid(int small, int big, string num)
         {
 
             for (int i = 0; i < num.size(); i++)
-                if (!isdigit(num[i]))
+                if (!isdigit(num[i]) && num[i]!='-')
                 {
                     IsNotValid = true; break;
                 }
@@ -142,12 +142,12 @@ int IsValid(int small, int big, string num)
             if (stoi(num)  < small || stoi(num) > big)
                 throw (big);
 
-            //return num[0];
         }
 
         catch (const char* str)
         {
             cerr << "Please, don't write letter. type only from these choices :)\n";
+            return -1;
         }
 
         catch (int i)

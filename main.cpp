@@ -34,15 +34,23 @@ int get_menu_choise(string menu, int level = 0)
     for (int p = 0; p < level + 1; ++p)
         padding += "\t";
 
+    int counter = 0;
     while (getline(X, line, ','))
+    {
         printline(padding + to_string(i++) + ". " + line, 1);
+        counter++;
+    }
 
     printline(level ? padding + "0. RETURN BACK" : padding + "0. EXIT APP", 1);
-    int c;
-    printline("ENTER YOUR CHOICE :", false);
-    cin >> c;
-    return c;
+    string c;
+    do
+    {
+        printline("ENTER YOUR CHOICE :", false);
+        cin >> c;
+    } while (IsValid(0, counter, c) == -1);
+    return stoi(c);
 }
+
 /// Admin inilization
 
 Admin Hospital;
@@ -57,6 +65,7 @@ void sub_sub_menu_1_doctor_management()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> ADMIN HUB -> DOCTOR MANAGEMENT ....");
+
         c = get_menu_choise("ADD DOCTOR,EDIT DOCTOR,ARCHIVE DOCTOR,UNARCHIVE DOCTOR,print all", 2);
         switch (c)
         {
@@ -94,10 +103,7 @@ void sub_sub_menu_2_spec_management()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> ADMIN HUB -> SPECIALTIES MANAGEMENT ....");
-        do
-        {
-            c = get_menu_choise("ADD DOCTOR,EDIT DOCTOR,ARCHIVE DOCTOR,UNARCHIVE DOCTOR,print all", 2);
-        } while (IsValid(0,5,to_string(c)) == -1);
+        c = get_menu_choise("ADD SPECIALTY,EDIT SPECIALTY,ASSIGN DOCTOR,UNASSIGN DOCTOR,Print All Specs", 2);
         switch (c)
         {
         case 1:
@@ -173,7 +179,7 @@ void sub_menu_2_doctor_hub()
         switch (c)
         {
         case 1:
-        Hospital.BeAttend();
+            Hospital.BeAttend();
             _pause();
             break;
         case 2:
