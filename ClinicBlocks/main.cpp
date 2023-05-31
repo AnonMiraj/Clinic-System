@@ -260,6 +260,7 @@ void sub_sub_menu_4_View()
             _pause();
             break;
         case 3:
+            Hospital.Doctors_SearchByName();
             _pause();
             break;
 
