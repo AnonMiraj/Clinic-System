@@ -1,4 +1,4 @@
-﻿#include "OrderItem.h"
+﻿#include "orderItem.h"
 #include <iostream>
 using namespace std;
 
@@ -75,21 +75,45 @@ double orderItem::calcTotalPrice()
 void orderItem::UpdateQuantity(int newQuantity)
 {
     int index;
-    index=stk->SearchId(idOrderItem);
-    //cout << "The Old Quntitiy Is: " << qunatityOrderItem << endl;
-    if (stk->getQuntitiy(idOrderItem)+this->qunatityOrderItem >= newQuantity) // 10 --> 5 //--> 3 --> 7
+    if (newQuantity != 0)
     {
-        cout << "Has been Added Successfully \n";
-         stk->setQuantity((stk->getQuntitiy(idOrderItem) + this->qunatityOrderItem - newQuantity), index); //--> هجمع القديم ناقص الجديد
-         this->qunatityOrderItem = newQuantity;
+        index = stk->SearchId(idOrderItem);
+        //cout << "The Old Quntitiy Is: " << qunatityOrderItem << endl;
+        if (stk->getQuntitiy(idOrderItem) + this->qunatityOrderItem >= newQuantity) // 10 --> 5 //--> 3 --> 7
+        {
+            cout << "Has been Added Successfully \n";
+            stk->setQuantity((stk->getQuntitiy(idOrderItem) + this->qunatityOrderItem - newQuantity), index); //--> هجمع القديم ناقص الجديد
+            this->qunatityOrderItem = newQuantity;
+            return;
+        }
+        else
+        {
+            cout << "Sorry , This Quntitiy Is Not Valid ):" << endl;
+            cout << "The Valid Quntitiy Is: " << stk->getQuntitiy(idOrderItem) + this->qunatityOrderItem << endl;
+            if ((stk->getQuntitiy(idOrderItem) + this->qunatityOrderItem) != 0)
+            {
+                cout << "Are You Want To Update Again [Y/N]";
+                char ch;
+                ch = _getch();
+                if (ch == 'y' || ch == 'Y')
+                {
+                    cout << "Enter New Quntitiy Again: ";
+                    int q;
+                    cin >> q;
+                    UpdateQuantity(q);
+                }
+            }
+            else
+                return;
+        }
     }
     else
     {
-        cout << "Sorry , This Quntitiy Is Not Valid ):" << endl;
-        cout << "The Valid Quntitiy Is: " << stk->getQuntitiy(idOrderItem)+this->qunatityOrderItem << endl;
-        cout << "Are You Want To Update Again [Y/N]";
+        cout << "You Enter Quntitiy 0 This is Not Valid:  ";
+
+        cout << "Are You Want To Enter Again [Y/N]";
         char ch;
-        cin >> ch;
+        ch = _getch();
         if (ch == 'y' || ch == 'Y')
         {
             cout << "Enter New Quntitiy Again: ";
@@ -201,12 +225,13 @@ void orderItem::EditOrderItem()
     if (option == 1)
     {
         cout << "The Old Sale Price Is " << sale_price << endl;
-        cout << "Enter The New Sale Price: ";
+        cout << "Enter The New Sale Price( Price per One Unit ): ";
         cin >> sale_price;
     }
     else if (option == 2)
     {
         int q;
+        cout << "The Old Quntitiy Is: " << stk->getQuntitiy(idOrderItem) << endl;
         cout << "Enter New Quntitiy: ";
         cin >> q;
         UpdateQuantity(q);
@@ -331,8 +356,9 @@ double orderItem::getQuantitiy()
 
 ostream& operator<<(ostream&out, orderItem&r)
 {
-    out << "Id Of Item Is : " << r.idOrderItem << endl;
-    out << "Sale Price Is: " << r.sale_price << endl;
-    out << "Quntitiy Is: " << r.getQuantityOfOrderItem() << endl;
+    out << "| Id Of Item Is: " << setw(24) << setfill(' ') << r.idOrderItem << " |" << endl;
+    out << "| Sale Price Is: " << setw(24) << setfill(' ') << r.getQuantityOfOrderItem() << " |" << endl;
+    out << "| Quntitiy Is: " << setw(26) << setfill(' ') << r.getQuantityOfOrderItem() << " |" << endl;
+
     return out;
 }

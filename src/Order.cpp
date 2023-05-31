@@ -1,32 +1,38 @@
 #include "Order.h"
+#include "Order.h"
+#include "Order.h"
 
-Order::Order() {
+Order::Order()
+{
     OrderID = 0;
     number = 0;
     status = "PENDING";
     totalPrice = 0;
-    NameOfCustomer = "Unkwon";
+    NameOfPatient = "Unkwon";
     items = new orderItem*[100];
     c_orderItem = 0;
-    CustomerID = 0;
+    PatientID = 0;
 }
 
-Order::Order(int orderId, int num, string orderStatus, int total, string customerName, Stock& stock) {
+Order::Order(int orderId, int num, string orderStatus, int total, string customerName)
+{
     OrderID = orderId;
     number = num;
     status = orderStatus;
     totalPrice = total;
-    NameOfCustomer = customerName;
-    stk = &stock;
+    NameOfPatient = customerName;
     items = nullptr;
     c_orderItem = 0;
-    CustomerID = 0;
+    PatientID = 0;
 }
 
-Order::~Order() {
+Order::~Order()
+{
     // Clean up dynamically allocated memory for order items
-    if (items != nullptr) {
-        for (int i = 0; i < c_orderItem; i++) {
+    if (items != nullptr)
+    {
+        for (int i = 0; i < c_orderItem; i++)
+        {
             delete items[i];
         }
         delete[] items;
@@ -38,42 +44,45 @@ string Order::getDate() const
     return date;
 }
 
-int Order::getOrderId() const {
+int Order::getOrderId() const
+{
     return OrderID;
 }
 
-int Order::getNumber() const {
+int Order::getNumber() const
+{
     return number;
 }
 
-string Order::getStatus() const {
+string Order::getStatus() const
+{
     return status;
 }
 
-int Order::getTotalPrice() const {
+int Order::getTotalPrice() const
+{
     return totalPrice;
-}
-
-string Order::getNameOfCustomer() const {
-    return NameOfCustomer;
 }
 
 void Order::setDate()
 {
     time_t rawtime;
     time(&rawtime);
-    //date = ctime(&rawtime);
+    //date = ctime(&rawtime);                   //Error Here --> ):
 }
 
-void Order::setOrderId(int id) {
+void Order::setOrderId(int id)
+{
     OrderID = id;
 }
 
-void Order::setNumber(int num) {
+void Order::setNumber(int num)
+{
     number = num;
 }
 
-void Order::setStatus(ORDERSTATUS s) {
+void Order::setStatus(ORDERSTATUS s)
+{
 
     if (s== PENDING)
     {
@@ -93,64 +102,197 @@ void Order::setStatus(ORDERSTATUS s) {
     }
 }
 
-void Order::setTotalPrice(int total) {
+void Order::setTotalPrice(int total)
+{
     totalPrice = total;
 }
 
-void Order::setNameOfCustomer(string customerName) {//-->>
-    NameOfCustomer = customerName;
+void Order::setNameOfPatient(string name)         //-->> prepate to add patient
+{
+    NameOfPatient = name;
+}
+/*
+int Order::calcTotalPiceOfOrder()
+{
+    totalPrice = 0;
+    for (int i = 0; i < c_orderItem; i++)
+    {
+        totalPrice += items[i]->getTotalPrice();
+    }
+    return totalPrice;
+}
+*/
+int Order::searchIdItems(int id)
+{
+    for (int i = 0; i < c_orderItem; i++)
+    {
+        if (items[i]->getIdOrderItem() == id)
+        {
+            return i;
+        }
+    }
+    return -1;
 }
 
-void Order::CreateOrder(Stock& s) {
-    
+void Order::CreateOrderOutsideClinic(Stock& s,Admin&a)
+{
+
+p:
+    system("Color 03");
     stk = &s;
+    ptrAdmin=&a;
     char ch;
-    cout << "Enter Id Of Custmer You Want To Add Oreder To Him: ";
-    int cusid;
-    cin >> cusid;
-    //int indexofcustmer = l.SearchCustmerByID(cusid);
+    cout << "Enter Id Of Patent You Want To Add Oreder To Him: ";
+    int p_id;
+    cin >> p_id;
+    int indexofPatient =ptrAdmin->searchPatient(p_id) ;
+    if(indexofPatient=-1)
+    {
+        system("Color 04");
+        cout<<"Srry, This Id Patient Not Exist ):"<<endl;
+        cout<<"Do You Need To try Again? [Y/N]: ";
+        cin>>ch;
+        if(ch=='Y'||ch=='y')
+        {
+            system("cls");
+            goto p;
+        }
+        else
+            return;
+    }
 
-    //if (indexofcustmer != -1)
-   //{
-       // setCoustmerId(cusid);
+    setPatientIdInOrder(p_id);
+    int id;
+    cout << "Enter Id OF Order: ";
+    cin >> id;
+
+    do
+    {
+        cout << "Enter item Id: ";
         int id;
-        cout << "Enter Id OF Order: ";
-        cin >> OrderID;
+        cin >> id;
+        if (items[c_orderItem]->setOrderItem(id, s))
+        {
+            c_orderItem++;
+            totalPrice += items[c_orderItem]->calcTotalPrice();
 
-        //setOrderId(OrderId);
+        }
+        cout << "Do You Want To Add Another Medcine [y/n] ";
+        ch = _getch();
+    }
+    while (ch == 'y' || ch == 'Y');
 
-        do {
-            cout << "Enter item Id: ";
-            int id;
-            cin >> id;
-            if (items[c_orderItem]->setOrderItem(id, s))
-            {
-                c_orderItem++;
-            }
-            cout << "Do You Want To Add Another Item [y/n] ";
-            cin>>ch;
-        } while (ch == 'y' || ch == 'Y');
-   // }
-   // else
-      //  cout << "This Custmer Id Does't Exist):" << endl;
+    if (c_orderItem > 0)
+    {
+        setOrderId(id);
+    }
+    // }
+    // else
+    //  cout << "This Custmer Id Does't Exist):" << endl;
 
 }
 
-void Order::AddOrderItem(orderItem* item) {
+void Order::CreateOrderInsideClinic(Stock&s,Admin&a)
+{
+p:
+    system("Color 03");
+    stk = &s;
+    ptrAdmin=&a;
+    char ch;
+
+         /// To Return Enter The Value (Return Again)
+
+    cout << "Enter Patient Id: ";
+    int p_id;
+    cin >> p_id;
+
+    int indexofPatient =ptrAdmin->searchPatient(p_id);/// To Search In Array Patient And Make Sure Is This Ptient Is Exist
+
+    if(indexofPatient=-1)
+    {
+        system("Color 04");
+        cout<<"Srry, This Id Patient Not Exist ):"<<endl;
+        cout<<"Do You Need To try Again? [Y/N]: ";
+        cin>>ch;
+        if(ch=='Y'||ch=='y')
+        {
+            system("cls");
+            goto p;
+        }
+        else
+            return;
+    }
+v:
+    int d_id;
+    cout << "Enter Id Of Doctor: ";
+    cin>>d_id;
+    int indexofDoctor =ptrAdmin->searchDoctor(d_id) ;
+    if(indexofPatient=-1)
+    {
+        system("Color 04");
+        cout<<"Srry, This Id Doctor Not Exist ):"<<endl;
+        cout<<"Do You Need To try Again? [Y/N]: ";
+        cin>>ch;
+        if(ch=='Y'||ch=='y')
+        {
+            system("cls");
+            goto v;
+        }
+        else
+            return;
+    }
+
+    setPatientIdInOrder(p_id);    /// To Add ID Patient In Order
+    setDoctorIdInOrder(d_id);    /// To Add ID Doctor In Order
+    NameOfPatient=ptrAdmin->getPatient_name(indexofPatient);
+    NameOfdoctor=ptrAdmin->getDoctor_name(indexofDoctor);
+    int id;
+    cout << "Enter Id OF Order: ";
+    cin >> id;
+
+    do
+    {
+        cout << "Enter item Id: ";
+        int id;
+        cin >> id;
+        if (items[c_orderItem]->setOrderItem(id, s))
+        {
+            c_orderItem++;
+            totalPrice += items[c_orderItem]->calcTotalPrice();
+
+        }
+        cout << "Do You Want To Add Another Medcine [y/n] ";
+        ch = _getch();
+    }
+    while (ch == 'y' || ch == 'Y');
+
+    if (c_orderItem > 0)
+    {
+        setOrderId(id);
+    }
+}
+
+void Order::AddOrderItem(orderItem* item)
+{
     // Add the given order item to the order
     // and update the total price
-    if (items == nullptr) {
+    char ch;
+
+    if (items == nullptr)
+    {
         // Create a new array to store order items
         items = new orderItem * [1];
         items[0] = item;
         c_orderItem = 1;
     }
-    else {
+    else
+    {
         // Create a new array with increased size
         orderItem** newItems = new orderItem * [c_orderItem + 1];
 
         // Copy existing items to the new array
-        for (int i = 0; i < c_orderItem; i++) {
+        for (int i = 0; i < c_orderItem; i++)
+        {
             newItems[i] = items[i];
         }
 
@@ -162,18 +304,20 @@ void Order::AddOrderItem(orderItem* item) {
 
         // Update the items pointer to point to the new array
         items = newItems;
-
+        totalPrice += items[c_orderItem]->calcTotalPrice();
         // Increment the count of order items
         c_orderItem++;
+
     }
 
     // Update the total price
-    totalPrice += item[c_orderItem].calcTotalPrice();
 }
 
-void Order::UpdateOrderStatus(ORDERSTATUS orderStatus) {
+void Order::UpdateOrderStatus(ORDERSTATUS orderStatus)
+{
     // Update the order status based on the provided enum value
-    switch (orderStatus) {
+    switch (orderStatus)
+    {
     case PENDING:
         status = "PENDING";
         break;
@@ -188,9 +332,10 @@ void Order::UpdateOrderStatus(ORDERSTATUS orderStatus) {
     }
 }
 
-void Order::EditOrder(int itemId) {
+void Order::EditOrder(int id)
+{
     // Find the order item with the given item ID
-    int index = stk->SearchId(itemId);
+    int index = stk->SearchId(id);
     if (index != -1)
     {
         // Prompt the user to edit the order item details
@@ -198,27 +343,32 @@ void Order::EditOrder(int itemId) {
         int newQuantity;
         cin >> newQuantity;
 
-        // Supstract the old valu 
+        // Supstract the old valu
         totalPrice -= items[index]->calcTotalPrice();
 
         // Update the quantity of the order item
         items[index]->UpdateQuantity(newQuantity);
 
-        // Calculate the new total price 
-        totalPrice += items[index]->getTotalPrice();
+        // Calculate the new total price
+        totalPrice+= items[index]->calcTotalPrice();
+
+        //totalPrice += items[index]->getTotalPrice();
 
         cout << "Order item updated successfully." << endl;
         return;
     }
-    
 
     cout << "Order item not found." << endl;
 }
 
-void Order::RemoveOrderItem(int itemId) {
+void Order::RemoveOrderItem(int itemId)
+{
     // Find the order item with the given item ID
-    for (int i = 0; i < c_orderItem; i++) {
-        if (items[i]->getIdOrderItem() == itemId) {
+
+    for (int i = 0; i < c_orderItem; i++)
+    {
+        if (items[i]->getIdOrderItem() == itemId)
+        {
             // Calculate the total price before removing the item
             int itemTotalPrice = items[i]->getTotalPrice();
 
@@ -226,10 +376,10 @@ void Order::RemoveOrderItem(int itemId) {
             delete items[i];
 
             // Shift the remaining items to fill the gap
-            for (int j = i; j < c_orderItem - 1; j++) {
-                items[j] = items[j + 1];
-            }
-
+            //for (int j = i; j < c_orderItem - 1; j++) {
+            //    items[j] = items[j + 1];
+            //}
+            swap(items[i], items[c_orderItem-1]);
             // Decrement the count of order items
             c_orderItem--;
 
@@ -245,7 +395,8 @@ void Order::RemoveOrderItem(int itemId) {
 }
 
 
-istream& operator>>(istream& in, Order& r) {
+istream& operator>>(istream& in, Order& r)
+{
     // i won't use this overloding i will use function create order
     char ch;
     int id;
@@ -255,32 +406,72 @@ istream& operator>>(istream& in, Order& r) {
     {
         cout << "Enter Item Id: ";
         in >> id;
-         //if (r.items[r.c_orderItem]->setOrderItem(id))
+        //if (r.items[r.c_orderItem]->setOrderItem(id))
         {
             r.c_orderItem++;
         }
 
         cout << "Do You Want To Add Another Item [y/n] ";
-        cin>>ch;
-    } while (ch == 'y' || ch == 'Y');
+        ch = _getch();
+    }
+    while (ch == 'y' || ch == 'Y');
 
     return in;
 }
 
-ostream& operator<<(ostream& out, Order& r) {
+ostream& operator<<(ostream& out, Order& r)
+{
+
 
     out << "Order ID: " << r.OrderID << endl;
-    out << "Number: " << r.number << endl;
     out << "Date: " << r.date << endl;
     out << "Status: " << r.status << endl;
     out << "Total Price: " << r.totalPrice << endl;
     //out << "Name of Customer: " << r.NameOfCustomer << endl;
-
-    out << "Order Items:" << endl;
-    for (int i = 0; i < r.c_orderItem; i++) {
-        out << "Order Item " << i + 1 << ":" << endl;
-        out << r.items[i] << endl;
+    cout << "Do You Need To Display Items? [Y/N]";
+    char ch;
+    ch = _getch();
+    if(ch=='Y'||ch=='y')
+    {
+        out << "Order Items:" << endl;
+        for (int i = 0; i < r.c_orderItem; i++)
+        {
+            out << "Order Item " << i + 1 << ":" << endl;
+            out << r.items[i] << endl;
+        }
     }
-
     return out;
+}
+
+void Order::setPatientIdInOrder(int id)
+{
+    PatientID = id;
+}
+
+void Order::setNameOfDoctor(string name)
+{
+    this->NameOfdoctor = name;
+}
+void Order::setDoctorIdInOrder(int id)
+{
+    this->DoctorId = id;
+}
+string Order::getPatentName() const
+{
+    return NameOfPatient;
+}
+
+string Order::getDoctorName() const
+{
+    return NameOfdoctor;
+}
+
+int Order::getPatientId() const
+{
+    return PatientID;
+}
+
+int Order::getDoctorId() const
+{
+    return DoctorId;
 }
