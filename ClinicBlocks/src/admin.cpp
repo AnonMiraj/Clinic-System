@@ -1,414 +1,107 @@
-#include "admin.h"
-#include "Medical_Specialization.h"
+#ifndef ADMIN_H
+#define ADMIN_H
+#include "person.h"
+#include "patient.h"
 #include "doctor.h"
 #include "other.h"
-#include "patient.h"
-#include "person.h"
+#include "Medical_Insurance.h"
+#include "Medical_Specialization.h"
+#include "appointment.h"
+#include "prescription.h"
+//#include "Order.h"
 #include <fstream>
+#include <ctime>
 #include <string>
-#include <unistd.h>
-
-
-Admin::Admin()
-{
-    patientCount = 0;
-    doctorCount = 0;
-    specializationCount = 0;
-    appointmentCount = 0;
-
-    maxPatients = 10;
-    maxDoctors = 10;
-    maxSpecialization=50;
-    maxAppointment = 100;
-
-    patients = new Patient[maxPatients];  // Initial capacity for 10 patients
-    doctors = new Doctor[maxDoctors];  // Initial capacity for 10 doctors
-    specializations = new Medical_Specialization[maxSpecialization];  // Initial capacity for 10 doctors
-    appointments = new Appointment[maxAppointment];
-
-}
-
-Admin::~Admin()
-{
-    delete[] patients;
-    delete[] doctors;
-    delete[] specializations;
-}
-
-void Admin::addPatient()
-{
-    if (patientCount == maxPatients)
-    {
-        // Resize the array if it's full
-        Patient* newPatients = new Patient[maxPatients * 2];
-        for (int i = 0; i < patientCount; i++)
-        {
-            newPatients[i] = patients[i];
-        }
-        delete[] patients;
-        patients = newPatients;
-        maxPatients *= 2;
-    }
-
-    patients[patientCount] =  Patient();
-    cin>>patients[patientCount];
-    patients[patientCount].setId(patientCount+1);
-    patientCount++;
-}
-
-void Admin::addSpecialization()
-{
-    if (specializationCount == maxSpecialization)
-    {
-        // Resize the array if it's full
-        Medical_Specialization* newSpecializations = new Medical_Specialization[maxSpecialization * 2];
-        for (int i = 0; i < specializationCount; i++)
-        {
-            newSpecializations[i] = specializations[i];
-        }
-        delete[] specializations;
-        specializations = newSpecializations;
-        maxSpecialization *= 2;
-    }
-    string name;
-    cin.ignore();
-    cout << "Enter Name: ";
-    getline(cin,name);
-    specializations[specializationCount] =  Medical_Specialization(specializationCount+1,name);
-    specializationCount++;
-}
-
-void Admin::addAppointment()
-{
-    appointments[appointmentCount] = Appointment(appointmentCount+1);
-
-    //choose doctor
-    int ID;
-    cout<<"Enter doctor id : ";
-    cin>>ID;
-    appointments[appointmentCount].setDoctor(doctors[ID-1]);
-
-
-    //choose appointment
-    int per;
-    printDayNames(doctors[ID-1].getAvailableDays(), 49, cout);
-    printPeriodTimes(doctors[ID-1].getAvailablePeroids(), 8, cout);
-    cout<<"Enter a number of period : "; cin >> per;
-    appointments[appointmentCount].setPeriod(per);
-    cout<<"Enter a day number : "; cin>>per;
-    appointments[appointmentCount].setDate(per);
-
-    //choose patient
-    cout<<"Enter patient id : ";
-    cin>>ID;
-    appointments[appointmentCount].setPatient(patients[ID-1]);
-
-    //pay to book the appointment
-
-}
-
-void Admin::editPatient()
-{
-    int id;
-    cout<<"Enter patient Id: ";
-    cin>>id;
-    patients[id-1].editInfo();
-}
-
-void Admin::editSpecialization()
-{
-    int id;
-    cout<<"Enter patient Id: ";
-    cin>>id;
-    specializations[id-1].editInfo();
-}
-
-void Admin::addDoctorToSpec(){
-    int Spec_Indx=-1;
-    cout<<"Enter Specialization Id (Enter 0 to exit Add To Spec Menu ): ";
-    cin>>Spec_Indx;
-    Spec_Indx--;
-
-    int doc_Indx=-1;
-    cout<<"Enter Doctor Id (Enter 0 to exit Add To Spec Menu ): ";
-    cin>>doc_Indx;
-    doc_Indx--;
-
-    if(Spec_Indx == -1 || doc_Indx==-1 )
-    {
-        cout << "Exiting the Add To Specialization Menu " << endl;
-        return;
-    }
-    system("cls");
-
-    doctors[doc_Indx].setSpecialization(&specializations[Spec_Indx]);
-
-    cout << "Doctor Added successfully." ;
-}
-
-void Admin::DetDoctorFromSpec(){
-    int doc_Indx=-1;
-    cout<<"Enter Doctor Id (Enter 0 to exit Add To Spec Menu ): ";
-    cin>>doc_Indx;
-    doc_Indx--;
-
-    if(doc_Indx == -1)
-    {
-        cout << "Exiting the Remove From Specialization Menu " << endl;
-        return;
-    }
-    system("cls");
-    Medical_Specialization *newSpec;
-    doctors[doc_Indx].setSpecialization(newSpec);
-
-    cout << "Doctor Removed successfully." ;
-
-}
-
-void Admin::addDoctor()
-{
-    if (doctorCount == maxDoctors)
-    {
-        // Resize the array if it's full
-        Doctor* newDoctors = new Doctor[maxDoctors * 2];
-        for (int i = 0; i < doctorCount; i++)
-        {
-            newDoctors[i] = doctors[i];
-        }
-        delete[] doctors;
-        doctors = newDoctors;
-        maxDoctors *= 2;
-    }
-
-    doctors[doctorCount] = Doctor();
-    cin>>doctors[doctorCount];
-    doctors[doctorCount].setId(doctorCount+1);
-    doctorCount++;
-}
-
-void Admin::editDoctor()
-{
-    int id;
-    cout<<"Enter doctors Id: ";
-    cin>>id;
-    doctors[id-1].editInfo();
-}
-
-void Admin::archiveDoctor()
-{
-    int doctorIndex;
-    cout<<"Enter the doctor id: ";
-    cin>>doctorIndex;
-
-}
-
-void Admin::unarchiveDoctor()
-{
-    int archiveIndex;
-    cout<<"Enter the archived Doctor id: ";
-    cin>>archiveIndex;
-
-}
-
-void Admin::loadDoctor()
-{
-    int id,age,expYears,specializationID,salary,fee,archive;
-    string name,gender,blood,phone,address,avalDay,avalHour,date;
-    ifstream inp;
-    inp.open("inputDoctors.txt");
-    if(inp.is_open())
-        while (inp>>id)
-        {
-            inp.ignore();
-            getline(inp,name);
-            inp>>age;
-            inp.ignore();
-            getline(inp,gender);
-            getline(inp,blood);
-            getline(inp,phone);
-            getline(inp,address);
-            inp>>salary;
-            inp>>specializationID;
-            inp>>expYears;
-            inp>>archive;
-            inp.ignore();
-            getline(inp,avalDay);
-            getline(inp,avalHour);
-            getline(inp,date);
-            inp>>fee;
-            doctors[doctorCount]=Doctor(id,name,age,gender,blood,phone,address,salary,expYears,0,0,false,date,fee);
-            setIndexesToTrue(doctors[doctorCount].getAvailableDays(),8,avalDay);
-            setIndexesToTrue(doctors[doctorCount].getAvailablePeroids(),49,avalHour);
-            if(specializationID!=-1)
-              doctors[doctorCount].setSpecialization(&specializations[specializationID-1]);
-            doctorCount++;
-        }
-    else
-    inp.close();
-}
-
-void Admin::loadPatient()
-{
-    int id,age;
-    string name,gender,blood,phone,address,notes,emergency;
-    ifstream inp;
-
-    inp.open("inputPatient.txt");
-    if(inp.is_open())
-        while (inp>>id)
-        {
-            inp.ignore();
-            getline(inp,name);
-            inp>>age;
-            inp.ignore();
-            getline(inp,gender);
-            getline(inp,blood);
-            getline(inp,phone);
-            getline(inp,address);
-            getline(inp,notes);
-            getline(inp,emergency);
-
-            patients[patientCount++]=Patient(id,name,age,gender,blood,phone,address,"",0,emergency);
-        }
-    else
-        cout<<"FUCK";
-    inp.close();
-}
-
-void Admin::loadSpecial(){
-  string name;
-  ifstream inp("inputSpec.txt");
-
-    if(inp.is_open())
-        while (getline(inp,name))
-        {
-            specializations[specializationCount]=Medical_Specialization(specializationCount+1,name);
-
-        cout<<"FUCK";
-        cout<<"FUCK";
-        specializationCount++;
-        }
-    else
-        cout<<"FUCK";
-    inp.close();
-
-}
-
-void Admin::load()
-{
-    this->loadDoctor();
-    this->loadPatient();
-    this->loadSpecial();
-}
-
-void Admin::save()
-{
-    ofstream ofs ("inputPatient.txt", std::ios::out | std::ios::trunc); // clear contents
-    ofs.close();
-
-    for (int i = 0; i < patientCount; i++)
-    {
-        patients[i].saveInfo();
-    }
-    ofs.open("inputDoctors.txt", std::ios::out | std::ios::trunc);
-    ofs.close();
-    for (int i = 0; i < doctorCount; i++)
-    {
-        doctors[i].saveInfo();
-    }
-
-}
-
-void Admin::setInsurances(){
-    cin>>insurances;
-    }
-
-void Admin::getInsurances(){
-    cout<<insurances;
-    }
-
-void Admin::Doctors_SearchByName()
-{
-    int c = 0;
-    string s; cout<<"\nEnter a name or part to search : "; cin>>s;
-
-    int len = s.size();
-
-    for (int i=0; i<doctorCount; i++)
-    {
-        string name = doctors[i].getName();
-
-        for (int j=0; j<=name.size()-len; j++)
-        {
-
-            string sub= name.substr(j,len);
-            /*for (int k=j; k<j+len; k++) //substr
-                sub += name[k];*/
-
-            if (s == sub)
-                {
-                    cout<<"\n##########################\n";
-                    cout<<doctors[i];
-                    cout<<"\n##########################\n";
-                    c++;
-                    break;
-                }
-        }
-    }
-
-    if (c == 0)
-        cout<<"\nThere is no Doctors at this name :(\n";
-}
-
-//seerch
-int Admin::searchAppoint_patient(int id)
-{
-    for (int i=0; i<appointmentCount; i++)
-        if (*appointments[i].getPatient() == patients[i] && appointments[i].getStatue() != "CANCELLED")
-            return i;
-
-    return -1;
-}
-
-int Admin::searchPatient(int id)
-{
-    for (int i=0; i<patientCount; i++)
-        if (patients[i] == patients[id])
-            return i;
-
-    return -1;
-}
-
-int Admin::searchDoctor(int id)
-{
-    for (int i=0; i<patientCount; i++)
-        if (doctors[i] == doctors[id])
-            return i;
-
-    return -1;
-}
-
-//temprory
-ostream& operator<<(ostream& os, const Admin& admin)
-{
-    os << "Patients:" << endl;
-    for (int i = 0; i < admin.patientCount; i++)
-    {
-        os << admin.patients[i] << endl;
-    }
-
-    os << "Doctors:" << endl;
-    for (int i = 0; i < admin.doctorCount; i++)
-    {
-        os << admin.doctors[i] << endl;
-    }
-    os << "Specials :" << endl;
-    for (int i = 0; i < admin.specializationCount; i++)
-    {
-        os << admin.specializations[i] << endl;
-    }
-
-
-    return os;
-}
+#include <chrono>
+
+using namespace std;
+
+class Admin {
+private:
+    //Order*ListOrders;
+    Patient* patients;
+    Doctor* doctors;
+    Medical_Specialization* specializations;
+    Appointment* appointments;
+    Medical_Insurance insurances;
+
+    int c_OrderList;
+    int patientCount;
+    int doctorCount;
+    int specializationCount;
+    int appointmentCount;
+
+    int maxPatients;
+    int maxDoctors;
+    int maxSpecialization;
+    int maxAppointment;
+public:
+    Admin();
+    ~Admin();
+
+    // Other member functions for managing patients and doctors
+    void addPatient();
+    void editPatient();
+
+    void addDoctor();
+    void viewDoctor();
+    void viewAvailableDoctors();
+    void editDoctor();
+
+    void addDoctorToSpec();
+    void DetDoctorFromSpec();
+
+    //new
+    void printAllDoctors();
+    void patientHistory();
+    void doctorsHistory();
+    void printAllSpecs();
+    void printSpecDoctors();
+    void Doctors_SearchByName();
+    /// Orders
+    void addOrders();
+
+    void archiveDoctor();
+    void unarchiveDoctor();
+
+    void addSpecialization();
+    void editSpecialization();
+    void addAppointment();
+    void viewAPP();
+    void BeAttend();
+    void cancelAPP();
+
+  // resize dynamic arrays
+    void resizeDoctor();
+    void resizePatient();
+    void resizespecial();
+    void resizeappoint();
+
+  // files
+    void loadDoctor();
+    void loadPatient();
+    void loadSpecial();
+    void loadAppointment();
+    void loadPrescription();
+
+    void load();
+    void save();
+    friend ostream& operator<<(ostream& os, const Admin& admin);
+
+    void setInsurances();
+    void getInsurances();
+
+    int searchAppointment(int id);
+    int searchPatient(int);
+    int searchDoctor(int);
+    string getPatient_name(int in);
+    string getDoctor_name(int in);
+    int searchAppoint_patient(int);
+
+    //print
+    string printAvailableDay(const Doctor&);
+};
+
+
+#endif  // ADMIN_H
 
