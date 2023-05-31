@@ -18,7 +18,7 @@ class Appointment
 private:
     int id;
     int period;
-    time_t date;
+    string date;
     Doctor* doctor;
     Patient* patient;
     Prescription* prescription;
@@ -39,7 +39,7 @@ public:
     string getPeriod() const;
 
     void setDate(int);
-    time_t getDate() const;
+    string getDate() const;
 
     void setDoctor(Doctor &d);
     Doctor* getDoctor() const;
