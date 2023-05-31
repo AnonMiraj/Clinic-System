@@ -135,7 +135,14 @@ void Admin::cancelAPP()
     cin>>id;
 
     if(appointments[id-1].getStatue() == "BOOKED")
+    {
         appointments[id-1].setStatue(0);
+        appointments[id-1].getDoctor()->setAvailablePeroids(appointments[id-1].getPeriod_int(),true);
+        appointments[id-1].getDoctor()->setAvailablePeroids(appointments[id-1].getDate_wday(),true);
+    }
+
+    else
+        cout<<"You cancel the appointment. it's " <<appointments[id-1].getStatue() <<"\n";
 }
 
 int Admin::searchAppointment(int id)

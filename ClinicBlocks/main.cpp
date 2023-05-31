@@ -224,6 +224,7 @@ void sub_sub_menu_3_Appointement()
             _pause();
             break;
         case 4:
+            Hospital.cancelAPP();
             _pause();
             break;
         case 0:
@@ -241,7 +242,7 @@ void sub_sub_menu_4_View()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> PATIENT HUB -> VIEW ....");
-        c = get_menu_choise("ALL DOTORS,SPECIFIC SPECIALIZATION,SEARCH BY NAME,SORTED", 2);
+        c = get_menu_choise("ALL DOCTORS,SPECIFIC SPECIALIZATION,SEARCH BY NAME,SORTED", 2);
         switch (c)
         {
         case 1:
@@ -372,7 +373,7 @@ int main()
         case 0:
             printline("\n\n\a\t\t\tGoodbye :)......\n\n\n\n\n\n", 1);
             break;
-
+        //
         default:
             print_try_again();
             wait_or_clear(3, true);

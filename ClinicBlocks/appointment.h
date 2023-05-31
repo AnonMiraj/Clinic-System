@@ -39,9 +39,11 @@ public:
 
     void setPeriod(const int &p);
     string getPeriod() const;
+    int getPeriod_int() const;
 
     void setDate(int);
     string getDate() const;
+    int getDate_wday() const;
 
     void setDoctor(Doctor &d);
     Doctor* getDoctor() const;

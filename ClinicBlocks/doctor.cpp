@@ -96,6 +96,16 @@ void Doctor::setAppointmentFee(int appointmentFee) {
     this->appointmentFee = appointmentFee;
 }
 
+void Doctor::setAvailableDays(int index, bool b)
+{
+    availableDays[index] = b;
+}
+
+void Doctor::setAvailablePeroids(int index, bool b)
+{
+    availablePeroids[index] = b;
+}
+
 void Doctor::readDays(){
     cout << "The weak here start with Saturday so 1 means Saturday\n";
     cout << "Enter the working days (\"1 2 3\", \"1-3\", \"1-2 5 6\" ): "<<endl;
@@ -184,6 +194,7 @@ void Doctor::editInfo() {
         appointmentFee = stod(newAppointmentFee);
     }
 }
+
 
 Medical_Specialization* Doctor::getSpecialization()
 {

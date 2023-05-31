@@ -41,6 +41,11 @@ string Appointment::getPeriod() const
 
 }
 
+int Appointment::getPeriod_int() const
+{
+    return period;
+}
+
 void Appointment::setDate(int wday)
 {
     using namespace std;
@@ -92,6 +97,10 @@ void Appointment::setDate(int wday)
 
     da = system_clock::to_time_t(system_clock::from_time_t(mktime(t)));
 
+    // modify date to " 2023/06/04 " form
+    m = (m.size() == 1 ? "0"+m : m);
+    d = (d.size() == 1 ? "0"+d : d);
+
     date = y + "/" + m + "/" + d;
 }
 
@@ -100,6 +109,25 @@ void Appointment::setDate(int wday)
 string Appointment::getDate() const
 {
     return date;
+}
+
+int Appointment::getDate_wday() const
+{
+    using namespace std;
+    using namespace chrono;
+    time_t da = system_clock::to_time_t(system_clock::now());
+    tm* t = localtime(&da);
+
+    string year, month, day; //2023/06/04
+    year = date.substr(0,4);
+    month = date.substr(5,2);
+    day = date.substr(8,2);
+
+    t->tm_year = stoi(year) - 1900;
+    t->tm_mon = stoi(month) - 1;
+    t->tm_mday = stoi(day);
+
+    return (t->tm_wday == 6)? 1 : t->tm_wday+2;
 }
 
 void Appointment::setDoctor(Doctor& d)

@@ -548,18 +548,20 @@
 	<string>
 	<unistd.h>
 
-1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\admin.cpp
+1685543251 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\admin.cpp
 	"admin.h"
 	"Medical_Specialization.h"
+	"appointment.h"
 	"doctor.h"
 	"other.h"
 	"patient.h"
 	"person.h"
+	<cstdio>
 	<fstream>
 	<string>
 	<unistd.h>
 
-1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\admin.h
+1685538509 c:\users\abdo1\documents\github\clinic-system\clinicblocks\admin.h
 	"person.h"
 	"patient.h"
 	"doctor.h"
@@ -567,6 +569,7 @@
 	"Medical_Insurance.h"
 	"Medical_Specialization.h"
 	"appointment.h"
+	"prescription.h"
 	<fstream>
 
 1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\person.h
@@ -574,7 +577,7 @@
 	<string>
 	<iostream>
 
-1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\other.h
+1685528080 c:\users\abdo1\documents\github\clinic-system\clinicblocks\other.h
 	<iostream>
 	<string>
 	<sstream>
@@ -587,7 +590,7 @@
 	<string>
 	<fstream>
 
-1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\doctor.h
+1685541739 c:\users\abdo1\documents\github\clinic-system\clinicblocks\doctor.h
 	<sstream>
 	<string>
 	<iomanip>
@@ -595,16 +598,19 @@
 	"person.h"
 	"Medical_Specialization.h"
 
-1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\medical_specialization.h
+1685528080 c:\users\abdo1\documents\github\clinic-system\clinicblocks\medical_specialization.h
 	<iostream>
 	<string>
+	<fstream>
 
 1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\medical_insurance.h
 	<iostream>
 	<string>
 
-1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\appointment.h
+1685543251 c:\users\abdo1\documents\github\clinic-system\clinicblocks\appointment.h
 	<cstring>
+	<string>
+	<string.h>
 	<ctime>
 	<chrono>
 	<iostream>
@@ -615,11 +621,13 @@
 	"prescription.h"
 	"other.h"
 
-1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\prescription.h
+1685528080 c:\users\abdo1\documents\github\clinic-system\clinicblocks\prescription.h
 	<string>
+	<fstream>
 
-1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\appointment.cpp
+1685538521 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\appointment.cpp
 	"appointment.h"
+	"prescription.h"
 
 1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\cash.cpp
 	"Cash.h"
@@ -645,12 +653,11 @@
 	"Payment.h"
 	<string>
 
-1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\doctor.cpp
+1685541739 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\doctor.cpp
 	"doctor.h"
 	<string>
 
-1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\list_of_orders.cpp
-	"List_Of_Orders.h"
+1685528080 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\list_of_orders.cpp
 	<iostream>
 
 1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\list_of_orders.h
@@ -668,21 +675,21 @@
 	<string>
 	<iomanip>
 
-1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\order.h
+1685528080 c:\users\abdo1\documents\github\clinic-system\clinicblocks\order.h
 	<iostream>
 	"Stock.h"
 	"OrderItem.h"
-	"Admin.h"
+	"admin.h"
 	<string>
 	<conio.h>
 	<ctime>
 
-1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\orderitem.h
+1685528080 c:\users\abdo1\documents\github\clinic-system\clinicblocks\orderitem.h
 	"Medcin.h"
 	"Stock.h"
 	<conio.h>
 
-1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\main.cpp
+1685543251 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\main.cpp
 	<bits/stdc++.h>
 	<cstring>
 	<iostream>
@@ -697,7 +704,7 @@
 1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\medical_insurance.cpp
 	"Medical_Insurance.h"
 
-1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\medical_specialization.cpp
+1685528080 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\medical_specialization.cpp
 	"Medical_Specialization.h"
 
 1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\order.cpp
@@ -706,7 +713,7 @@
 1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\orderitem.cpp
 	<iostream>
 
-1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\other.cpp
+1685536980 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\other.cpp
 	"other.h"
 
 1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\patient.cpp
@@ -719,7 +726,7 @@
 	"person.h"
 	<fstream>
 
-1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\prescription.cpp
+1685528080 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\prescription.cpp
 	"prescription.h"
 	<iostream>
 
