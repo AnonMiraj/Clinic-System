@@ -251,7 +251,7 @@ ostream& operator<< (ostream& out, const Appointment& a)
 
 bool Appointment::operator== (const Appointment& a)
 {
-    return this->id == a.id;
+    return (date == a.date && period == a.period);
 }
 
 bool Appointment::operator>(const Appointment& a)

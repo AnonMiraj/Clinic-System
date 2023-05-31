@@ -78,10 +78,23 @@ void Admin::addAppointment()
     
     // check if at this day , this appointment is exist ? 
     // check for all book appointments
-    cout<<"Enter a number of period : "; cin >> period;
-    appointments[appointmentCount].setPeriod(period);
-    cout<<"Enter a day number : "; cin>>day;
-    appointments[appointmentCount].setDate(day);
+    bool check = false;
+    do
+    {
+        cout<<"Enter a number of period : "; cin >> period;
+        appointments[appointmentCount].setPeriod(period);
+        cout<<"Enter a day number : "; cin>>day;
+        appointments[appointmentCount].setDate(day);
+    
+        for (int i=0; i<appointmentCount-1; i++)
+            if (appointments[i] == appointments[appointmentCount])
+            {
+                check = true;
+                cout<<"\nThis date is already booked :(\nPlease, enter a new date";
+                break;
+            }
+
+        }while (check);
 
     //choose patient
     int pID
@@ -94,7 +107,7 @@ void Admin::addAppointment()
     appointments[appointmentCount].setStatue(1);
     appointmentCount++;
     doctors[dID].setAvailableDays(day,false);
-    doctors[dID].setAvailablePeroids(period,true);
+    doctors[dID].setAvailablePeroids(period,false);
 }
 
 void Admin::viewAPP()
