@@ -327,8 +327,49 @@ void Admin::getInsurances(){
     cout<<insurances;
     }
 
+void Admin::Doctors_SearchByName()
+{
+    int c = 0;
+    string s; cout<<"\nEnter a name or part to search : "; cin>>s;
+
+    int len = s.size();
+
+    for (int i=0; i<doctorCount; i++)
+    {
+        string name = doctors[i].getName();
+
+        for (int j=0; j<=name.size()-len; j++)
+        {
+
+            string sub= name.substr(j,len);
+            /*for (int k=j; k<j+len; k++) //substr
+                sub += name[k];*/
+
+            if (s == sub)
+                {
+                    cout<<"\n##########################\n";
+                    cout<<doctors[i];
+                    cout<<"\n##########################\n";
+                    c++;
+                    break;
+                }
+        }
+    }
+
+    if (c == 0)
+        cout<<"\nThere is no Doctors at this name :(\n";
+}
 
 //seerch
+int Admin::searchAppoint_patient(int id)
+{
+    for (int i=0; i<appointmentCount; i++)
+        if (*appointments[i].getPatient() == patients[i] && appointments[i].getStatue() != "CANCELLED")
+            return i;
+
+    return -1;
+}
+
 int Admin::searchPatient(int id)
 {
     for (int i=0; i<patientCount; i++)
