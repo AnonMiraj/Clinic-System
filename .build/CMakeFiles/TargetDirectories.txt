@@ -1,4 +1,0 @@
-/home/ezz/Clinic-System/.build/CMakeFiles/main_library.dir
-/home/ezz/Clinic-System/.build/CMakeFiles/main.dir
-/home/ezz/Clinic-System/.build/CMakeFiles/edit_cache.dir
-/home/ezz/Clinic-System/.build/CMakeFiles/rebuild_cache.dir

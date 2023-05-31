@@ -43,31 +43,15 @@ void Patient::saveInfo(){
   ofstream  oupt;
   oupt.open("inputPatient.txt",ios::app);
   if (oupt.is_open()) {
-    oupt<<"====================================="<<endl;
-    oupt<<"ID: "<<this->getId()<<endl;
-    oupt<<"Name: "<<this->getName()<<endl;
-    oupt<<"Age: "<<this->getAge()<<endl;
-    oupt<<"Gender: "<<this->getGender()<<endl;
-    oupt<<"Blood Type: "<<this->getBloodType()<<endl;
-    oupt<<"Phone Number: "<<this->getPhoneNumber()<<endl;
-    oupt<<"Address: "<<this->getAddress()<<endl;
-    oupt<<"Emergency Contact: "<<this->getEmergencyContact()<<endl;
-    oupt << "Insurance: ";
-        switch (this->getInsurance()) {
-        case 0:
-            oupt << "No Medical Insurance" << endl;
-            break;
-        case 1:
-            oupt << "Basic" << endl;
-            break;
-        case 2:
-            oupt << "Premium" << endl;
-            break;
-        case 3:
-            oupt << "Standard" << endl;
-            break;
-    }
-    oupt<<"====================================="<<endl;
+    oupt<<this->getId()<<endl;
+    oupt<<this->getName()<<endl;
+    oupt<<this->getAge()<<endl;
+    oupt<<this->getGender()<<endl;
+    oupt<<this->getBloodType()<<endl;
+    oupt<<this->getPhoneNumber()<<endl;
+    oupt<<this->getAddress()<<endl;
+    oupt<<this->getEmergencyContact()<<endl;
+    oupt<<this->getInsurance()<<endl;
   }
   oupt.close();
 }

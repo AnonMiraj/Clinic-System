@@ -317,8 +317,8 @@ void Admin::loadDoctor()
 
 void Admin::loadPatient()
 {
-    int id,age;
-    string name,gender,blood,phone,address,notes,emergency;
+    int id,age,insurance;
+    string name,gender,blood,phone,address,emergency;
     ifstream inp;
 
     inp.open("inputPatient.txt");
@@ -333,10 +333,10 @@ void Admin::loadPatient()
             getline(inp,blood);
             getline(inp,phone);
             getline(inp,address);
-            getline(inp,notes);
             getline(inp,emergency);
+            inp>>insurance;
 
-            patients[patientCount++]=Patient(id,name,age,gender,blood,phone,address,"",0,emergency);
+            patients[patientCount++]=Patient(id,name,age,gender,blood,phone,address,"",insurance,emergency);
         }
     else
         cout<<"FUCK";

@@ -9,7 +9,7 @@ using namespace std;
 /** ASSISTANT INLINE FUNCTIONS **/
 inline void wait_or_clear(unsigned int sec, bool clear_screen = false)
 {
-    _sleep(sec);
+    sleep(sec);
     if (clear_screen)
         system("cls");
 }
