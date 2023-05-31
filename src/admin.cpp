@@ -64,32 +64,37 @@ void Admin::addAppointment()
     appointments[appointmentCount] = Appointment(appointmentCount+1);
 
     //choose doctor
-    int ID;
-    cout<<"Enter doctor id : "; cin>>ID;
-    cout<<doctors[ID-1];
-    appointments[appointmentCount].setDoctor(doctors[ID-1]);
+    int dID;
+    cout<<"Enter doctor id : "; cin>>dID;
+    cout<<doctors[dID-1];
+    appointments[appointmentCount].setDoctor(doctors[dID-1]);
 
 
 
     //choose appointment
-    int per;
-    //printDayNames(doctors[ID-1].getAvailableDays(), 49);
-    //printPeriodTimes(doctors[ID-1].getAvailablePeroids(), 8);
-    cout<<"Enter a number of period : "; cin >> per;
-    appointments[appointmentCount].setPeriod(per);
-    cout<<"Enter a day number : "; cin>>per;
-    appointments[appointmentCount].setDate(per);
+    int day, period;
+    //printDayNames(doctors[dID-1].getAvailableDays(), 49);
+    //printPeriodTimes(doctors[dID-1].getAvailablePeroids(), 8);
+    
+    // check if at this day , this appointment is exist ? 
+    // check for all book appointments
+    cout<<"Enter a number of period : "; cin >> period;
+    appointments[appointmentCount].setPeriod(period);
+    cout<<"Enter a day number : "; cin>>day;
+    appointments[appointmentCount].setDate(day);
 
     //choose patient
+    int pID
     cout<<"Enter patient id : ";
-    cin>>ID;
-    appointments[appointmentCount].setPatient(patients[ID-1]);
+    cin>>pID;
+    appointments[appointmentCount].setPatient(patients[pID-1]);
 
     //pay to book the appointment
 
     appointments[appointmentCount].setStatue(1);
     appointmentCount++;
-
+    doctors[dID].setAvailableDays(day,false);
+    doctors[dID].setAvailablePeroids(period,true);
 }
 
 void Admin::viewAPP()
