@@ -3,7 +3,7 @@
 #include "Admin.h"
 #include "Stock.h"
 #include "Order.h"
-
+#include "appointment.h"
 class List_Of_Orders {
 private:
     Order* orders;
@@ -12,17 +12,17 @@ private:
     int c_orders;
     Admin*ptrAdmin;
     Stock*ptrStock;
-
+    Appointment*ptrAppointment;
 public:
     List_Of_Orders();
-    List_Of_Orders(Admin*ptr);
+    List_Of_Orders(Admin*ptr,Stock&s);
     ~List_Of_Orders();
 
     void addOrder(Stock*s,Admin*ptr);
     void removeOrder(int orderId);
     void printAllOrders();
 
-    // Other functions you may need for manipulating the list of orders
+
 };
 
 #endif

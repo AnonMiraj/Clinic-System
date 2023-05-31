@@ -81,6 +81,7 @@ int IsValid(int n)
   {
     cerr << "Please, don't write letter. type only numbers :)\n";
   }
+  return n;
 }
 
 char IsValid(string msg, int small, int big)
@@ -237,20 +238,20 @@ void setIndexesToTrue(bool arr[], int size,string input) {
     }
 }
 
-void printDayNames(const bool arr[], int size, ostream& os ) {
+void printDayNames(const bool arr[], int size ) {
     const string daysOfWeek[] = {
-         "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+         "","Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
     };
 
     for (int i = 1; i < size; ++i) {
         if (arr[i]) {
-            cout << daysOfWeek[i-1] << " ";
+            cout << daysOfWeek[i] << " ";
         }
     }
-    os << endl;
+    cout << endl;
 }
 
-void printPeriodTimes( const bool arr[], int size, ostream& os) {
+void printPeriodTimes( const bool arr[], int size) {
 
     const int minutesPerPeriod = 30;
 
@@ -263,7 +264,8 @@ void printPeriodTimes( const bool arr[], int size, ostream& os) {
                 startPeriod = i;
                 isInPeriod = true;
             }
-        } else {
+        }
+        else {
             if (isInPeriod) {
                 int endPeriod = i - 1;
                 int startMinutes = ((startPeriod - 1) * minutesPerPeriod) % 60;
@@ -274,7 +276,7 @@ void printPeriodTimes( const bool arr[], int size, ostream& os) {
                 if (endHour ==24)
                   endHour=0;
 
-                os << setfill('0') << setw(2) << startHour << ":"
+                cout << setfill('0') << setw(2) << startHour << ":"
                           << setw(2) << startMinutes << " - "
                           << setw(2) << endHour << ":"
                           << setw(2) << endMinutes << " ";
@@ -294,13 +296,13 @@ void printPeriodTimes( const bool arr[], int size, ostream& os) {
         if (endHour ==24)
           endHour=0;
 
-        os << setfill('0') << setw(2) << startHour << ":"
+        cout << setfill('0') << setw(2) << startHour << ":"
                   << setw(2) << startMinutes << " - "
                   << setw(2) << endHour << ":"
                   << setw(2) << endMinutes << " ";
     }
 
-    os << endl;
+    cout << endl;
 
 }
 

@@ -22,7 +22,7 @@ string printTime(time_t);
 
 void setIndexesToTrue(bool *arr, int size);
 void setIndexesToTrue(bool *arr, int size, string);
-void printDayNames(const bool *arr, int size, ostream& os);
-void printPeriodTimes( const bool *arr, int size, ostream& os);
+void printDayNames(const bool *arr, int size);
+void printPeriodTimes( const bool *arr, int size);
 void _pause();
 #endif // !OTHER_H

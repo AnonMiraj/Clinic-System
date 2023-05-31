@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Stock.h"
 #include "OrderItem.h"
-#include "Admin.h"
+#include "admin.h"
 #include <string>
 #include<conio.h>
 #include <ctime>
@@ -62,17 +62,15 @@ public:
 
     ///int calcTotalPiceOfOrder();
     int searchIdItems(int id);
-    bool CreateOrderInsideClinic(Stock* stock,Admin*a);
-    bool CreateOrderOutsideClinic(Stock* stock,Admin*a);
+    void CreateOrderInsideClinic(Stock& stock,Admin&a);
+    void CreateOrderOutsideClinic(Stock& stock,Admin&a);
     void AddOrderItem(orderItem* item);
     void UpdateOrderStatus(ORDERSTATUS status);
     void EditOrder(int itemId);
     void RemoveOrderItem(int itemId);
 
-    ///Print Funcions
+    ///Print
 
-    void printOrderofPatientInsideClinic(Order&r);/// Take Obeject From Order And Print
-    void printOrderofPatientOutsideClinic(Order&r);
     /// Overloading Opetator for cin and cout ^_^ (:
 
     friend istream& operator>>(istream& in, Order& r);

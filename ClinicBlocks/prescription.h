@@ -2,6 +2,7 @@
 #define PRESCRIPTION_H
 
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -25,6 +26,8 @@ public:
     void setDosage(const string& dosage);
     void setQuantity(int quantity);
 
+    // other
+    void saveInfo();
     // Read and print functions
     friend istream& operator>>(istream& is, Prescription& prescription);
     friend ostream& operator<<(ostream& os, const Prescription& prescription);

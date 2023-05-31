@@ -44,7 +44,7 @@ public:
 
     // Setters
     void setSalary(int salary);
-    void setSpecialization( Medical_Specialization* specialization);
+    void setSpecialization( Medical_Specialization& specialization);
     void setExperience(int experience);
     void setRatingSum(int rating);
     void setAppointmentCount(int appointmentCount);

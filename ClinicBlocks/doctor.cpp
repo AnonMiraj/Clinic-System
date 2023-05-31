@@ -70,8 +70,9 @@ void Doctor::setSalary(int salary) {
     this->salary = salary;
 }
 
-void Doctor::setSpecialization(Medical_Specialization* specialization) {
-    this->specialization = specialization;
+void Doctor::setSpecialization(Medical_Specialization &specialization) {
+    Medical_Specialization *p= &specialization;
+    this->specialization = p;
 }
 
 void Doctor::setExperience(int experience) {
@@ -161,13 +162,13 @@ void Doctor::editInfo() {
     }
     string yes;
     cout << "Available Days:";
-    printDayNames(availableDays, 8,cout);
+    printDayNames(availableDays, 8);
     cout << "input y to edit otherwise press enter to skip" << endl;
     getline(cin,yes);
     if (yes == "y"||yes == "Y")
         readDays();
     cout << "Available Hours: ";
-    printPeriodTimes(availablePeroids,49,cout);
+    printPeriodTimes(availablePeroids,49);
     cout << "input y to edit otherwise press enter to skip" << endl;
     getline(cin,yes);
     if (yes == "y"||yes == "Y")
@@ -219,9 +220,9 @@ ostream& operator<<(ostream& os, const Doctor& doctor) {
     if (doctor.appointmentCount!=0)
       os << "Rating: " << doctor.ratingSum / doctor.appointmentCount << "/5" << endl;
     os << "Available Days: ";
-    printDayNames(doctor.availableDays, 8, os);
+    printDayNames(doctor.availableDays, 8);
     os << "Available Hours: ";
-    printPeriodTimes(doctor.availablePeroids , 49, os);
+    printPeriodTimes(doctor.availablePeroids , 49);
     os << "Date Joined: " << doctor.dateJoined << endl;
     os << "Appointment Fee: " << doctor.appointmentFee << endl;
 

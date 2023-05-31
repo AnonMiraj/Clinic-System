@@ -7,6 +7,7 @@
 #include "Medical_Insurance.h"
 #include "Medical_Specialization.h"
 #include "appointment.h"
+#include "prescription.h"
 #include <fstream>
 
 using namespace std;
@@ -55,10 +56,19 @@ public:
     void editSpecialization();
     void addAppointment();
     void BeAttend();
+    int searchAppointment(int id);
+  // resize dynamic arrays
+    void resizeDoctor();
+    void resizePatient();
+    void resizespecial();
+    void resizeappoint();
 
+  // files
     void loadDoctor();
     void loadPatient();
     void loadSpecial();
+    void loadAppointment();
+    void loadPrescription();
 
     void load();
     void save();

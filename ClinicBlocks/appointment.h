@@ -23,9 +23,13 @@ private:
     Patient* patient;
     Prescription* prescription;
     int statue;
+    int prescriptionCount; 
+    int prescriptionSize; 
+
 
 public:
     Appointment(int i);
+    Appointment(int i,int period,time_t date,int statue);
     Appointment();
 
     // setter and getter for each variable
@@ -49,6 +53,8 @@ public:
     void setStatue(int s);
     string getStatue() const;
 
+    void addPrescription(string medic,string dose,int quantity);
+    void saveInfo();
     // opertaor overloading
     friend istream &operator>>(istream &in, Appointment &a);
     friend ostream &operator<<(ostream &out, const Appointment &a);

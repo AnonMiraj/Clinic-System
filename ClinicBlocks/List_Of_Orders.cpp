@@ -7,21 +7,34 @@ List_Of_Orders::List_Of_Orders() {
     orders = new Order[capacity];
 
 }
-List_Of_Orders::List_Of_Orders(Admin*a) {
+/**
+List_Of_Orders::List_Of_Orders(Admin*a,Stock&s) {
     capacity = 10; // Initial capacity
     size = 0;
     orders = new Order[capacity];
-    ptrAdmin=a;
-}
+
+}**/
 
 List_Of_Orders::~List_Of_Orders() {
     delete[] orders;
 }
 
-void List_Of_Orders::addOrder(Stock*s,Admin*ptr)
+void List_Of_Orders::addOrder(Stock*s,Admin*a)
 {
 
-if(orders[c_orders].CreateOrderInsideClinic(s,ptr));
+ptrAdmin=&a;
+ptrStock=&s;
+
+if(ptrAppointment->!=-1)
+{
+   if(orders[c_orders].CreateOrderInsideClinic(ptrStock,ptrAdmin))
+   {
+       c_orders++;
+
+   }
+}
+else
+
 
 }
 
