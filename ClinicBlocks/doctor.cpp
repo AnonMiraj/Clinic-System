@@ -185,6 +185,11 @@ void Doctor::editInfo() {
     }
 }
 
+Medical_Specialization* Doctor::getSpecialization()
+{
+    return specialization;
+}
+
 istream& operator>>(istream& is, Doctor& doctor) {
     is >> static_cast<Person&>(doctor);  // Call the base class operator>>
 

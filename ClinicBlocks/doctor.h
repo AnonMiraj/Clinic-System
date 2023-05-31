@@ -57,6 +57,7 @@ public:
     void readPeroids();
     void saveInfo();
     virtual void editInfo();
+    Medical_Specialization* getSpecialization();
 
     friend istream& operator>>(istream& is, Doctor& doctor);
     friend ostream& operator<<(ostream& os, const Doctor& doctor);
