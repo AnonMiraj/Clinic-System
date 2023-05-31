@@ -1,4 +1,4 @@
-#include "List_Of_Orders.h"
+/**#include "List_Of_Orders.h"
 #include <iostream>
 using namespace std;
 List_Of_Orders::List_Of_Orders() {
@@ -7,13 +7,6 @@ List_Of_Orders::List_Of_Orders() {
     orders = new Order[capacity];
 
 }
-/**
-List_Of_Orders::List_Of_Orders(Admin*a,Stock&s) {
-    capacity = 10; // Initial capacity
-    size = 0;
-    orders = new Order[capacity];
-
-}**/
 
 List_Of_Orders::~List_Of_Orders() {
     delete[] orders;
@@ -61,3 +54,4 @@ void List_Of_Orders::printAllOrders() {
 }
 
 // Other function implementations you may need for manipulating the list of orders
+**/

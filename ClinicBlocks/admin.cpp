@@ -85,7 +85,7 @@ void Admin::addAppointment()
     appointments[appointmentCount].setPatient(patients[ID-1]);
 
     //pay to book the appointment
-    
+
     appointments[appointmentCount].setStatue(1);
     appointmentCount++;
 
@@ -123,7 +123,7 @@ p:
 int Admin::searchAppointment(int id)
 {
     for (int i=0; i<appointmentCount; i++)
-        if (appointments[i]->getID() == id)
+        if (appointments[i].getID() == id)
             return i;
     return -1;
 }
@@ -309,7 +309,7 @@ void Admin::resizespecial(){
         specializations = newSpecializations;
         maxSpecialization *= 2;
     }
- 
+
 }
 void Admin::resizeappoint(){
       if (appointmentCount == maxAppointment)
@@ -361,7 +361,7 @@ void Admin::loadDoctor()
             {
               doctors[doctorCount].setSpecialization(specializations[specializationID-1]);
               ++specializations[specializationID-1];
-            } 
+            }
             doctorCount++;
         }
     else
@@ -445,13 +445,13 @@ void Admin::loadPrescription(){
     if(inp.is_open())
         while (inp>>appointmentId)
         {
-            inp>>prescCount; 
+            inp>>prescCount;
             while (prescCount--) {
             inp.ignore();
             getline(inp,medic);
             getline(inp,dose);
             inp>>quantity;
-            appointments[appointmentId-1].addPrescription(medic, dose , quantity); 
+            appointments[appointmentId-1].addPrescription(medic, dose , quantity);
             }
 
         }
@@ -467,7 +467,7 @@ void Admin::load()
     this->loadSpecial();
     this->loadDoctor();
     this->loadPatient();
-    this->loadAppointment(); 
+    this->loadAppointment();
     this->loadPrescription();
 }
 
@@ -490,12 +490,12 @@ void Admin::save()
     ofs.close();
     for (int i = 0; i < specializationCount; i++)
     {
-      specializations[i].saveInfo(); 
+      specializations[i].saveInfo();
     }
 
     ofs.open("inputAppoint.txt", std::ios::out | std::ios::trunc);
     ofs.close();
-    
+
     ofs.open("inputPresc.txt", std::ios::out | std::ios::trunc);
     ofs.close();
 
@@ -505,8 +505,8 @@ void Admin::save()
       oupt2.open("inputPresc.txt",ios::app);
       oupt2<<i+1<<endl;
       oupt2.close();
-      appointments[i].saveInfo(); 
-    } 
+      appointments[i].saveInfo();
+    }
 
 }
 

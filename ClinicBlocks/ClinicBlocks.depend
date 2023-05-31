@@ -361,10 +361,11 @@
 	"Stock.h"
 	<conio.h>
 
-1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\appointment.cpp
+1685527046 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\appointment.cpp
 	"appointment.h"
+	"prescription.h"
 
-1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\appointment.h
+1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\appointment.h
 	<cstring>
 	<ctime>
 	<chrono>
@@ -381,7 +382,7 @@
 	<string>
 	<iostream>
 
-1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\other.h
+1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\other.h
 	<iostream>
 	<string>
 	<sstream>
@@ -389,7 +390,7 @@
 	<iomanip>
 	<ctime>
 
-1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\doctor.h
+1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\doctor.h
 	<sstream>
 	<string>
 	<iomanip>
@@ -397,17 +398,19 @@
 	"person.h"
 	"Medical_Specialization.h"
 
-1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_specialization.h
+1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_specialization.h
 	<iostream>
 	<string>
+	<fstream>
 
 1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\patient.h
 	"person.h"
 	<string>
 	<fstream>
 
-1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\prescription.h
+1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\prescription.h
 	<string>
+	<fstream>
 
 1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\cash.cpp
 	"Cash.h"
@@ -433,12 +436,11 @@
 	"Payment.h"
 	<string>
 
-1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\doctor.cpp
+1685527046 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\doctor.cpp
 	"doctor.h"
 	<string>
 
-1685505112 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\list_of_orders.cpp
-	"List_Of_Orders.h"
+1685527577 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\list_of_orders.cpp
 	<iostream>
 
 1685504866 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\list_of_orders.h
@@ -455,7 +457,7 @@
 	"other.h"
 	<windows.h>
 
-1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.h
+1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.h
 	"person.h"
 	"patient.h"
 	"doctor.h"
@@ -463,6 +465,7 @@
 	"Medical_Insurance.h"
 	"Medical_Specialization.h"
 	"appointment.h"
+	"prescription.h"
 	<fstream>
 
 1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_insurance.h
@@ -480,17 +483,17 @@
 1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_insurance.cpp
 	"Medical_Insurance.h"
 
-1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_specialization.cpp
+1685527046 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_specialization.cpp
 	"Medical_Specialization.h"
 
 1685505139 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.cpp
 	"Order.h"
 
-1685505084 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.h
+1685527806 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.h
 	<iostream>
 	"Stock.h"
 	"OrderItem.h"
-	"Admin.h"
+	"admin.h"
 	<string>
 	<conio.h>
 	<ctime>
@@ -508,7 +511,7 @@
 1685505084 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\orderitem.cpp
 	<iostream>
 
-1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\other.cpp
+1685527046 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\other.cpp
 	"other.h"
 
 1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\patient.cpp
@@ -521,7 +524,7 @@
 	"person.h"
 	<fstream>
 
-1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\prescription.cpp
+1685527046 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\prescription.cpp
 	"prescription.h"
 	<iostream>
 
@@ -537,13 +540,15 @@
 	"Check.h"
 	"Payment.h"
 
-1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.cpp
+1685527616 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.cpp
 	"admin.h"
 	"Medical_Specialization.h"
+	"appointment.h"
 	"doctor.h"
 	"other.h"
 	"patient.h"
 	"person.h"
+	<cstdio>
 	<fstream>
 	<string>
 	<unistd.h>

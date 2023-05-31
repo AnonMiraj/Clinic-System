@@ -1,4 +1,4 @@
-#ifndef LIST_OF_ORDERS_H
+/**#ifndef LIST_OF_ORDERS_H
 #define LIST_OF_ORDERS_H
 #include "Admin.h"
 #include "Stock.h"
@@ -26,3 +26,4 @@ public:
 };
 
 #endif
+**/
