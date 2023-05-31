@@ -7,7 +7,7 @@
 #include <string>
 #include<conio.h>
 #include <ctime>
-
+#include "appointment.h"
 using namespace std;
 
 enum ORDERSTATUS { PENDING, PAID, COMPLETED, CANCELED };
@@ -20,6 +20,7 @@ private:
     string NameOfdoctor;
     string date;
 
+    bool inside;
     int OrderID;
     int number;
     int totalPrice;
@@ -62,16 +63,22 @@ public:
 
     ///int calcTotalPiceOfOrder();
     int searchIdItems(int id);
-    bool CreateOrderInsideClinic(Stock* s,Admin*a);
-    bool CreateOrderOutsideClinic(Stock* s,Admin*a);
+    bool CreateOrderInsideClinic(Stock* s,Admin*a,int id,int index);
+    bool CreateOrderOutsideClinic(Stock* s,Admin*a,int id,int index);
+    bool CreateOrder(Stock* s,Admin*a,Appointment*appoint);
+
+
+
     void AddOrderItem(orderItem* item);
     void UpdateOrderStatus(ORDERSTATUS status);
     void EditOrder(int itemId);
     void RemoveOrderItem(int itemId);
 
     ///Print
-    void printOrderofPatientInsideClinic(Order&);
-    void printOrderofPatientOutsideClinic(Order&);
+    void printOrder();
+    void printOrderofPatientInsideClinic();
+    void printOrderofPatientOutsideClinic();
+
     /// Overloading Opetator for cin and cout ^_^ (:
 
     friend istream& operator>>(istream& in, Order& r);

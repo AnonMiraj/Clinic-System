@@ -1,4 +1,4 @@
-/**#ifndef LIST_OF_ORDERS_H
+#ifndef LIST_OF_ORDERS_H
 #define LIST_OF_ORDERS_H
 #include "Admin.h"
 #include "Stock.h"
@@ -18,12 +18,12 @@ public:
     List_Of_Orders(Admin*ptr,Stock&s);
     ~List_Of_Orders();
 
-    void addOrder(Stock*s,Admin*ptr);
+    void addOrder(Admin*ptr,Stock*s,Appointment *p);
     void removeOrder(int orderId);
     void printAllOrders();
-
+    void editOrder();
 
 };
 
 #endif
-**/
+

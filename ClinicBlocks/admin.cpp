@@ -10,9 +10,9 @@
 #include <string>
 #include <unistd.h>
 
-
 Admin::Admin()
 {
+    c_OrderList=0;
     patientCount = 0;
     doctorCount = 0;
     specializationCount = 0;
