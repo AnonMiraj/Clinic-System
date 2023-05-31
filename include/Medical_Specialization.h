@@ -4,11 +4,13 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 class Medical_Specialization {
 private:
     int id;
     string name;
+    int quantity;
 
 public:
     // Default constructor
@@ -18,13 +20,19 @@ public:
     // Getters
     int getId() const;
     string getName()const ;
+    int getQuantity() const;
     // Setter
     void setId(int _id) ;
     void setName(string _name) ;
-    //other
+    void setQuantity(int _quantity) ;
+    // operator overloading
     friend ostream& operator<<(ostream& out, const Medical_Specialization& specialization) ;
     friend istream& operator>>(istream& in, Medical_Specialization& specialization);
+    Medical_Specialization& operator++() ;
     bool operator==(const Medical_Specialization& other) ;
+
+    //other
     void editInfo();
+    void saveInfo();
 };
 #endif // MEDICAL_SPECIALIZATION_H

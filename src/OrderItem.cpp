@@ -1,4 +1,4 @@
-﻿#include "orderItem.h"
+﻿#include "OrderItem.h"
 #include <iostream>
 using namespace std;
 
@@ -94,7 +94,8 @@ void orderItem::UpdateQuantity(int newQuantity)
             {
                 cout << "Are You Want To Update Again [Y/N]";
                 char ch;
-                ch = _getch();
+                // ch = _getch();
+                cin>>ch;
                 if (ch == 'y' || ch == 'Y')
                 {
                     cout << "Enter New Quntitiy Again: ";
@@ -113,7 +114,8 @@ void orderItem::UpdateQuantity(int newQuantity)
 
         cout << "Are You Want To Enter Again [Y/N]";
         char ch;
-        ch = _getch();
+        // ch = _getch();
+        cin>>ch;
         if (ch == 'y' || ch == 'Y')
         {
             cout << "Enter New Quntitiy Again: ";

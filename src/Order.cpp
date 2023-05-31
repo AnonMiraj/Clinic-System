@@ -1,6 +1,4 @@
 #include "Order.h"
-#include "Order.h"
-#include "Order.h"
 
 Order::Order()
 {
@@ -146,7 +144,7 @@ p:
     int p_id;
     cin >> p_id;
     int indexofPatient =ptrAdmin->searchPatient(p_id) ;
-    if(indexofPatient=-1)
+    if(indexofPatient==-1)
     {
         system("Color 04");
         cout<<"Srry, This Id Patient Not Exist ):"<<endl;
@@ -178,7 +176,8 @@ p:
 
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
-        ch = _getch();
+        // ch = _getch();
+        cin>>ch;
     }
     while (ch == 'y' || ch == 'Y');
 
@@ -208,7 +207,7 @@ p:
 
     int indexofPatient =ptrAdmin->searchPatient(p_id);/// To Search In Array Patient And Make Sure Is This Ptient Is Exist
 
-    if(indexofPatient=-1)
+    if(indexofPatient==-1)
     {
         system("Color 04");
         cout<<"Srry, This Id Patient Not Exist ):"<<endl;
@@ -227,7 +226,7 @@ v:
     cout << "Enter Id Of Doctor: ";
     cin>>d_id;
     int indexofDoctor =ptrAdmin->searchDoctor(d_id) ;
-    if(indexofPatient=-1)
+    if(indexofPatient==-1)
     {
         system("Color 04");
         cout<<"Srry, This Id Doctor Not Exist ):"<<endl;
@@ -262,7 +261,8 @@ v:
 
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
-        ch = _getch();
+        // ch = _getch();
+        cin>>ch;
     }
     while (ch == 'y' || ch == 'Y');
 
@@ -412,7 +412,8 @@ istream& operator>>(istream& in, Order& r)
         }
 
         cout << "Do You Want To Add Another Item [y/n] ";
-        ch = _getch();
+        // ch = _getch();
+        cin>>ch;
     }
     while (ch == 'y' || ch == 'Y');
 
@@ -430,7 +431,8 @@ ostream& operator<<(ostream& out, Order& r)
     //out << "Name of Customer: " << r.NameOfCustomer << endl;
     cout << "Do You Need To Display Items? [Y/N]";
     char ch;
-    ch = _getch();
+    // ch = _getch();
+    cin>>ch;
     if(ch=='Y'||ch=='y')
     {
         out << "Order Items:" << endl;

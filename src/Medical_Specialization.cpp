@@ -3,9 +3,11 @@
     // Default constructor
     Medical_Specialization::Medical_Specialization()
     : id(-1),name(""){
+    quantity=0;
     }
     Medical_Specialization::Medical_Specialization(int _id,string _name)
     : id(_id),name(_name){
+    quantity=0;
     }
 
     // Getters
@@ -16,6 +18,10 @@
     string Medical_Specialization::getName() const {
         return name;
     }
+    int Medical_Specialization::getQuantity() const{
+        return quantity;
+    }
+
 
     // Setters
     void Medical_Specialization::setId(int _id) {
@@ -33,9 +39,18 @@
     cin.ignore();
     getline(cin, name);
 }
+    void Medical_Specialization::saveInfo(){
+  ofstream  oupt;
+  oupt.open("inputSpec.txt",ios::app);
+  if (oupt.is_open()) {
+    oupt<<this->getName()<<endl;
+  }
+  oupt.close();
+
+}
     // Overloading << operator
     ostream& operator<<(ostream& out, const Medical_Specialization& specialization) {
-        out << "ID: " << specialization.id << ", Name: " << specialization.name;
+        out << "ID: " << specialization.id << ", Name: " << specialization.name<< ", Quantity: " << specialization.quantity;
         return out;
     }
 
@@ -50,3 +65,7 @@
         return (id == other.id && name == other.name);
     }
 
+    Medical_Specialization& Medical_Specialization::operator++() {
+    quantity++;
+    return *this;
+    }

@@ -34,7 +34,17 @@ void Prescription::setDosage(const string& dosage) {
 void Prescription::setQuantity(int quantity) {
     this->quantity = quantity;
 }
+void Prescription::saveInfo(){
+  ofstream  oupt;
+  oupt.open("inputPresc.txt",ios::app);
+  if (oupt.is_open()) {
+    oupt<<this->getMedication()<<endl;
+    oupt<<this->getDosage()<<endl;
+    oupt<<this->getQuantity()<<endl;
+  }
+  oupt.close();
 
+}
 
 istream& operator>>(istream& is, Prescription& prescription) {
     cout << "Enter medication: ";

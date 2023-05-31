@@ -1,13 +1,25 @@
 #include "appointment.h"
+#include "prescription.h"
 
 Appointment::Appointment(int i)
 {
-    id = i;
+    prescriptionCount=0;
+    prescriptionSize=10;
+    prescription=new Prescription[prescriptionSize]; // Initial capacity for 10 patients
 }
 
 Appointment::Appointment()
 {
+    prescriptionCount=0;
+    prescriptionSize=10;
+    prescription=new Prescription[prescriptionSize]; // Initial capacity for 10 patients
     id = 0;
+}
+Appointment::Appointment(int i,int period,time_t date ,int statue )
+: id(i),period(period),date(date),statue(statue){
+    prescriptionCount=0;
+    prescriptionSize=10;
+    prescription=new Prescription[prescriptionSize]; // Initial capacity for 10 patients
 }
 
 int Appointment::getID() const
@@ -132,6 +144,41 @@ string  Appointment::getStatue() const
     return "ATTEND";
 }
 
+void Appointment::addPrescription(string medic,string dose,int quantity){
+    if (prescriptionCount == prescriptionSize)
+    {
+        // Resize the array if it's full
+        Prescription* newPrescription = new Prescription[prescriptionSize * 2];
+        for (int i = 0; i < prescriptionCount; i++)
+        {
+            newPrescription[i] = prescription[i];
+        }
+        delete[] prescription;
+        prescription = newPrescription;
+        prescriptionSize *= 2;
+    }
+    prescription[prescriptionCount] =  Prescription(medic,dose,quantity);
+    prescriptionCount++;
+}
+void Appointment::saveInfo(){
+  ofstream  oupt;
+  oupt.open("inputAppoint.txt",ios::app);
+  ofstream  oupt2;
+  oupt2.open("inputPresc.txt",ios::app);
+  if (oupt.is_open()) {
+
+    oupt<<this->getDate()<<endl;
+    oupt<<this->period<<endl;
+    oupt<<this->getPatient()->getId()<<endl;
+    oupt<<this->getDoctor()->getId()<<endl;
+    oupt<<this->statue<<endl;
+    oupt2<<this->prescriptionCount<<endl;
+    oupt2.close();
+    for(int i=0;i<prescriptionCount;++i)
+      prescription[i].saveInfo();
+  }
+  oupt.close();
+}
 
 //operator overloading
 
@@ -142,8 +189,10 @@ istream& operator>> (istream& in, Appointment& a) // for files
 
 ostream& operator<< (ostream& out, const Appointment& a)
 {
-    out <<"Appointment ID : " <<a.getID() <<"\nDate : " <<printDate(a.getDate()) <<"\nPeriod : " <<a.getPeriod() <<"\nPatient :" << a.patient->getName() <<"\nDoctor : " << a.doctor->getName();
-    //out <<  a.getPrescription();
+    out <<"Appointment ID : " <<a.getID() <<"\nDate : " <<printDate(a.getDate()) <<"\nPeriod : " <<a.getPeriod() <<"\nPatient :" << a.patient->getName() <<"\nDoctor : " << a.doctor->getName()<<endl;
+  for (int i=0 ; i<a.prescriptionCount; i++) {
+  out << i+1<<"- "<<a.prescription[i]<<endl;
+  }
     return out;
 }
 

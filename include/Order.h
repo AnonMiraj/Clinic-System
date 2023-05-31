@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Stock.h"
 #include "OrderItem.h"
-#include "Admin.h"
+#include "admin.h"
 #include <string>
 #include<conio.h>
 #include <ctime>

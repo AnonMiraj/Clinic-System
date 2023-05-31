@@ -1,9 +1,11 @@
 #include "admin.h"
 #include "Medical_Specialization.h"
+#include "appointment.h"
 #include "doctor.h"
 #include "other.h"
 #include "patient.h"
 #include "person.h"
+#include <cstdio>
 #include <fstream>
 #include <string>
 #include <unistd.h>
@@ -18,8 +20,8 @@ Admin::Admin()
 
     maxPatients = 10;
     maxDoctors = 10;
-    maxSpecialization=50;
-    maxAppointment = 100;
+    maxSpecialization=10;
+    maxAppointment = 10;
 
     patients = new Patient[maxPatients];  // Initial capacity for 10 patients
     doctors = new Doctor[maxDoctors];  // Initial capacity for 10 doctors
@@ -37,19 +39,7 @@ Admin::~Admin()
 
 void Admin::addPatient()
 {
-    if (patientCount == maxPatients)
-    {
-        // Resize the array if it's full
-        Patient* newPatients = new Patient[maxPatients * 2];
-        for (int i = 0; i < patientCount; i++)
-        {
-            newPatients[i] = patients[i];
-        }
-        delete[] patients;
-        patients = newPatients;
-        maxPatients *= 2;
-    }
-
+    resizePatient();
     patients[patientCount] =  Patient();
     cin>>patients[patientCount];
     patients[patientCount].setId(patientCount+1);
@@ -58,18 +48,7 @@ void Admin::addPatient()
 
 void Admin::addSpecialization()
 {
-    if (specializationCount == maxSpecialization)
-    {
-        // Resize the array if it's full
-        Medical_Specialization* newSpecializations = new Medical_Specialization[maxSpecialization * 2];
-        for (int i = 0; i < specializationCount; i++)
-        {
-            newSpecializations[i] = specializations[i];
-        }
-        delete[] specializations;
-        specializations = newSpecializations;
-        maxSpecialization *= 2;
-    }
+    resizespecial();
     string name;
     cin.ignore();
     cout << "Enter Name: ";
@@ -80,6 +59,7 @@ void Admin::addSpecialization()
 
 void Admin::addAppointment()
 {
+    resizeappoint();
     appointments[appointmentCount] = Appointment(appointmentCount+1);
 
     //choose doctor
@@ -92,8 +72,8 @@ void Admin::addAppointment()
 
     //choose appointment
     int per;
-    //printDayNames(doctors[ID-1].getAvailableDays(), 49, cout);
-    //printPeriodTimes(doctors[ID-1].getAvailablePeroids(), 8, cout);
+    printDayNames(doctors[ID-1].getAvailableDays(), 49);
+    printPeriodTimes(doctors[ID-1].getAvailablePeroids(), 8);
     cout<<"Enter a number of period : "; cin >> per;
     appointments[appointmentCount].setPeriod(per);
     cout<<"Enter a day number : "; cin>>per;
@@ -120,13 +100,33 @@ void Admin::BeAttend()
                 <<appointments[i]
                 <<"\n************************\n";
     }
-
+string medic, dose;
+int quantity,yes;
     int AttendID;
     cout<<"Enter appointment ID to be attended : "; cin>>AttendID;
+p:
+    cout<<"Add Prescription: "<<endl;
+    cout<<"medication: ";
+    cin>>medic;
+    cout<<"Dose: ";
+    cin>>dose;
+    cout<<"quantity";
+    cin>>quantity;
+    appointments[AttendID-1].addPrescription(medic,dose,quantity);
+    cout<<"Add more? (y/N)";
+    cin>>yes;
+    if (yes=='y'||yes=='Y')
+      goto p;
     appointments[AttendID-1].setStatue(2);
 }
 
-
+int Admin::searchAppointment(int id)
+{
+    for (int i=0; i<appointmentCount; i++)
+        if (appointments[i]->getID() == id)
+            return i;
+    return -1;
+}
 void Admin::editPatient()
 {
     int id;
@@ -162,8 +162,8 @@ void Admin::addDoctorToSpec()
     }
     system("cls");
 
-    doctors[doc_Indx].setSpecialization(&specializations[Spec_Indx]);
-
+    doctors[doc_Indx].setSpecialization(specializations[Spec_Indx]);
+    ++specializations[Spec_Indx];
     cout << "Doctor Added successfully." ;
 }
 
@@ -180,7 +180,7 @@ void Admin::DetDoctorFromSpec()
         return;
     }
     system("cls");
-    Medical_Specialization *newSpec;
+    Medical_Specialization newSpec;
     doctors[doc_Indx].setSpecialization(newSpec);
 
     cout << "Doctor Removed successfully." ;
@@ -189,19 +189,7 @@ void Admin::DetDoctorFromSpec()
 
 void Admin::addDoctor()
 {
-    if (doctorCount == maxDoctors)
-    {
-        // Resize the array if it's full
-        Doctor* newDoctors = new Doctor[maxDoctors * 2];
-        for (int i = 0; i < doctorCount; i++)
-        {
-            newDoctors[i] = doctors[i];
-        }
-        delete[] doctors;
-        doctors = newDoctors;
-        maxDoctors *= 2;
-    }
-
+    resizeDoctor();
     doctors[doctorCount] = Doctor();
     cin>>doctors[doctorCount];
     doctors[doctorCount].setId(doctorCount+1);
@@ -275,9 +263,69 @@ void Admin::patientHistory(){
     }
 }
 
-
 void Admin::doctorsHistory(){}
+// resizer
+void Admin::resizeDoctor(){
+      if (doctorCount == maxDoctors)
+    {
+        // Resize the array if it's full
+        Doctor* newDoctors = new Doctor[maxDoctors * 2];
+        for (int i = 0; i < doctorCount; i++)
+        {
+            newDoctors[i] = doctors[i];
+        }
+        delete[] doctors;
+        doctors = newDoctors;
+        maxDoctors *= 2;
+    }
+}
 
+void Admin::resizePatient(){
+    if (patientCount == maxPatients)
+    {
+        // Resize the array if it's full
+        Patient* newPatients = new Patient[maxPatients * 2];
+        for (int i = 0; i < patientCount; i++)
+        {
+            newPatients[i] = patients[i];
+        }
+        delete[] patients;
+        patients = newPatients;
+        maxPatients *= 2;
+    }
+
+
+}
+void Admin::resizespecial(){
+    if (specializationCount == maxSpecialization)
+    {
+        // Resize the array if it's full
+        Medical_Specialization* newSpecializations = new Medical_Specialization[maxSpecialization * 2];
+        for (int i = 0; i < specializationCount; i++)
+        {
+            newSpecializations[i] = specializations[i];
+        }
+        delete[] specializations;
+        specializations = newSpecializations;
+        maxSpecialization *= 2;
+    }
+ 
+}
+void Admin::resizeappoint(){
+      if (appointmentCount == maxAppointment)
+    {
+        // Resize the array if it's full
+        Appointment* newAppointment = new Appointment[maxAppointment * 2];
+        for (int i = 0; i < appointmentCount; i++)
+        {
+            newAppointment[i] = appointments[i];
+        }
+        delete[] appointments;
+        appointments = newAppointment;
+        maxAppointment *= 2;
+    }
+}
+// loader from files
 void Admin::loadDoctor()
 {
     int id,age,expYears,specializationID,salary,fee,archive;
@@ -287,6 +335,8 @@ void Admin::loadDoctor()
     if(inp.is_open())
         while (inp>>id)
         {
+            resizeDoctor();
+
             inp.ignore();
             getline(inp,name);
             inp>>age;
@@ -308,7 +358,10 @@ void Admin::loadDoctor()
             setIndexesToTrue(doctors[doctorCount].getAvailableDays(),8,avalDay);
             setIndexesToTrue(doctors[doctorCount].getAvailablePeroids(),49,avalHour);
             if(specializationID!=-1)
-                doctors[doctorCount].setSpecialization(&specializations[specializationID-1]);
+            {
+              doctors[doctorCount].setSpecialization(specializations[specializationID-1]);
+              ++specializations[specializationID-1];
+            } 
             doctorCount++;
         }
     else
@@ -325,6 +378,8 @@ void Admin::loadPatient()
     if(inp.is_open())
         while (inp>>id)
         {
+            resizePatient();
+
             inp.ignore();
             getline(inp,name);
             inp>>age;
@@ -351,10 +406,9 @@ void Admin::loadSpecial()
     if(inp.is_open())
         while (getline(inp,name))
         {
-            specializations[specializationCount]=Medical_Specialization(specializationCount+1,name);
+            resizespecial();
 
-            cout<<"FUCK";
-            cout<<"FUCK";
+            specializations[specializationCount]=Medical_Specialization(specializationCount+1,name);
             specializationCount++;
         }
     else
@@ -362,12 +416,59 @@ void Admin::loadSpecial()
     inp.close();
 
 }
+void Admin::loadAppointment(){
+  long long date;
+  int period,patientId,doctorId,statue;
+      ifstream inp("inputAppoint.txt");
+
+    if(inp.is_open())
+        while (inp>>date)
+        {
+            resizeappoint();
+
+            inp>>period>>patientId>>doctorId>>statue;
+            appointments[appointmentCount]=Appointment(appointmentCount+1,period,date,statue);
+            appointments[appointmentCount].setPatient(patients[patientId-1]);
+            appointments[appointmentCount].setDoctor(doctors[doctorId-1]);
+            appointmentCount++;
+        }
+    else
+        cout<<"FUCK";
+    inp.close();
+
+}
+void Admin::loadPrescription(){
+  string dose,medic;
+  int appointmentId,quantity,prescCount;
+      ifstream inp("inputPresc.txt");
+
+    if(inp.is_open())
+        while (inp>>appointmentId)
+        {
+            inp>>prescCount; 
+            while (prescCount--) {
+            inp.ignore();
+            getline(inp,medic);
+            getline(inp,dose);
+            inp>>quantity;
+            appointments[appointmentId-1].addPrescription(medic, dose , quantity); 
+            }
+
+        }
+    else
+        cout<<"FUCK";
+    inp.close();
+
+
+}
 
 void Admin::load()
 {
+    this->loadSpecial();
     this->loadDoctor();
     this->loadPatient();
-    this->loadSpecial();
+    this->loadAppointment(); 
+    this->loadPrescription();
 }
 
 void Admin::save()
@@ -385,6 +486,27 @@ void Admin::save()
     {
         doctors[i].saveInfo();
     }
+    ofs.open("inputSpec.txt", std::ios::out | std::ios::trunc);
+    ofs.close();
+    for (int i = 0; i < specializationCount; i++)
+    {
+      specializations[i].saveInfo(); 
+    }
+
+    ofs.open("inputAppoint.txt", std::ios::out | std::ios::trunc);
+    ofs.close();
+    
+    ofs.open("inputPresc.txt", std::ios::out | std::ios::trunc);
+    ofs.close();
+
+    for (int i = 0; i < appointmentCount; i++)
+    {
+      ofstream  oupt2;
+      oupt2.open("inputPresc.txt",ios::app);
+      oupt2<<i+1<<endl;
+      oupt2.close();
+      appointments[i].saveInfo(); 
+    } 
 
 }
 
@@ -447,8 +569,11 @@ ostream& operator<<(ostream& os, const Admin& admin)
     {
         os << admin.specializations[i] << endl;
     }
-
-
+    os << "Appointments :"<< endl;
+    for (int i = 0; i < admin.appointmentCount; i++)
+    {
+        os << admin.appointments[i] << endl;
+    }
     return os;
 }
 

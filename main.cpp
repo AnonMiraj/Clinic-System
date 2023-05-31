@@ -47,7 +47,8 @@ int get_menu_choise(string menu, int level = 0)
     {
         printline("ENTER YOUR CHOICE :", false);
         cin >> c;
-    } while (IsValid(0, counter, c) == -1);
+    // } while (IsValid(0, counter, c) == -1); for secret function
+    } while (IsValid(0, counter +1, c) == -1);
     return stoi(c);
 }
 
@@ -247,7 +248,7 @@ void sub_menu_3_patient_hub()
             break;
         case 4:
             Hospital.addAppointment();
-            sub_sub_menu_3_patient_hub();
+            // sub_sub_menu_3_patient_hub();
             _pause();
             break;
         case 5:
