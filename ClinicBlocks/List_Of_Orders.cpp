@@ -5,25 +5,24 @@ List_Of_Orders::List_Of_Orders() {
     capacity = 10; // Initial capacity
     size = 0;
     orders = new Order[capacity];
+
+}
+List_Of_Orders::List_Of_Orders(Admin*a) {
+    capacity = 10; // Initial capacity
+    size = 0;
+    orders = new Order[capacity];
+    ptrAdmin=a;
 }
 
 List_Of_Orders::~List_Of_Orders() {
     delete[] orders;
 }
 
-void List_Of_Orders::addOrder(const Order& order) {
-    if (size == capacity) {
-        // If the array is full, resize it by doubling its capacity
-        capacity *= 2;
-        Order* temp = new Order[capacity];
-        for (int i = 0; i < size; i++) {
-            temp[i] = orders[i];
-        }
-        delete[] orders;
-        orders = temp;
-    }
-    orders[size] = order;
-    size++;
+void List_Of_Orders::addOrder(Stock*s,Admin*ptr)
+{
+
+if(orders[c_orders].CreateOrderInsideClinic(s,ptr));
+
 }
 
 void List_Of_Orders::removeOrder(int orderId) {

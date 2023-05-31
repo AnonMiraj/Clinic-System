@@ -136,13 +136,13 @@ int Order::searchIdItems(int id)
     return -1;
 }
 
-bool Order::CreateOrderOutsideClinic(Stock& s,Admin&a)
+bool Order::CreateOrderOutsideClinic(Stock* s,Admin*a)
 {
 
 p:
     system("Color 03");
-    stk = &s;
-    ptrAdmin=&a;
+    stk = s;
+    ptrAdmin=a;
     char ch;
     cout << "Enter Id Of Patent You Want To Add Oreder To Him: ";
     int p_id;
@@ -196,12 +196,12 @@ p:
 
 }
 
-bool Order::CreateOrderInsideClinic(Stock&s,Admin&a)
+bool Order::CreateOrderInsideClinic(Stock*s,Admin*a)/// Add Discount to the patient inside the clinic
 {
 p:
     system("Color 03");
-    stk = &s;
-    ptrAdmin=&a;
+    stk = s;
+    ptrAdmin=a;
     char ch;
 
          /// To Return Enter The Value (Return Again)
@@ -363,7 +363,7 @@ void Order::EditOrder(int id)
         return;
     }
 
-    cout << "Order item not found." << endl;
+        cout << "Order item not found." << endl;
 }
 
 void Order::RemoveOrderItem(int itemId)
@@ -427,7 +427,6 @@ istream& operator>>(istream& in, Order& r)
 ostream& operator<<(ostream& out, Order& r)
 {
 
-
     out << "Order ID: " << r.OrderID << endl;
     out << "Date: " << r.date << endl;
     out << "Status: " << r.status << endl;
@@ -438,7 +437,7 @@ ostream& operator<<(ostream& out, Order& r)
     ch = _getch();
     if(ch=='Y'||ch=='y')
     {
-        out << "Order Items:" << endl;
+        out << "\"Order Items\"" << endl;
         for (int i = 0; i < r.c_orderItem; i++)
         {
             out << "Order Item " << i + 1 << ":" << endl;

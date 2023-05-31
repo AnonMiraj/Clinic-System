@@ -62,8 +62,8 @@ public:
 
     ///int calcTotalPiceOfOrder();
     int searchIdItems(int id);
-    bool CreateOrderInsideClinic(Stock& stock,Admin&a);
-    bool CreateOrderOutsideClinic(Stock& stock,Admin&a);
+    bool CreateOrderInsideClinic(Stock* stock,Admin*a);
+    bool CreateOrderOutsideClinic(Stock* stock,Admin*a);
     void AddOrderItem(orderItem* item);
     void UpdateOrderStatus(ORDERSTATUS status);
     void EditOrder(int itemId);

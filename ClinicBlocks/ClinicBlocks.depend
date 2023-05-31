@@ -437,10 +437,14 @@
 	"doctor.h"
 	<string>
 
-1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\list_of_orders.cpp
+1685505112 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\list_of_orders.cpp
 	"List_Of_Orders.h"
+	<iostream>
 
-1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\list_of_orders.h
+1685504866 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\list_of_orders.h
+	"Admin.h"
+	"Stock.h"
+	"Order.h"
 
 1685496780 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\main.cpp
 	<bits/stdc++.h>
@@ -479,12 +483,10 @@
 1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_specialization.cpp
 	"Medical_Specialization.h"
 
-1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.cpp
-	"Order.h"
-	"Order.h"
+1685503869 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.cpp
 	"Order.h"
 
-1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.h
+1685505084 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.h
 	<iostream>
 	"Stock.h"
 	"OrderItem.h"
@@ -498,12 +500,12 @@
 	<fstream>
 	<iomanip>
 
-1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\orderitem.h
+1685505084 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\orderitem.h
 	"Medcin.h"
 	"Stock.h"
 	<conio.h>
 
-1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\orderitem.cpp
+1685505084 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\orderitem.cpp
 	<iostream>
 
 1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\other.cpp

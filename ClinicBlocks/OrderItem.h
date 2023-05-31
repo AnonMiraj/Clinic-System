@@ -18,7 +18,7 @@ public:
 
 	// Setter
 	void setTotalPrice(double total);
-	bool setOrderItem(int id, Stock& s);
+	bool setOrderItem(int id, Stock* s);
 	void setSalePrice(double);
 	void setQuantityOfOrderItem(int);
 

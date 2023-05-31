@@ -23,9 +23,9 @@ void orderItem::setTotalPrice(double t)
     totalPriceOrderItem = t;
 }
 
-bool orderItem::setOrderItem(int id,Stock&s)
+bool orderItem::setOrderItem(int id,Stock*s)
 {
-    stk = &s;
+    stk = s;
     int index= stk->SearchId(id);
    // cout << "Index: " << index;
     //system("pause");
@@ -55,7 +55,7 @@ bool orderItem::setOrderItem(int id,Stock&s)
             {
                 setOrderItem(id, s);
             }
-            
+
             return false;
         }
     }
@@ -157,10 +157,10 @@ orderItem orderItem::operator--()
 
     int index;
     index = stk->SearchId(idOrderItem);
-    
+
     stk->setQuantity((stk->getQuntitiy(idOrderItem) + 1), index);
     qunatityOrderItem--;
-    
+
     return *this;
 }
 
@@ -188,10 +188,10 @@ orderItem orderItem::operator-=(int quantity)
     int index;
     index = stk->SearchId(idOrderItem);
    // cout << "The Old Quntitiy Is: " << quantity << endl;
-    
+
         this->qunatityOrderItem -= quantity;
         stk->setQuantity((stk->getQuntitiy(idOrderItem) + quantity), index);
-        
+
         return *this;
 }
 
@@ -243,13 +243,13 @@ void orderItem::UpdateQuantity(int newQuantity) {
     int d;
 
     if (>=newQuantity) {
-        // زودت الكميه القديمه علشان ارجعه زي ما كام وبعد كدا طرحت الكميه القديمه 
+        // زودت الكميه القديمه علشان ارجعه زي ما كام وبعد كدا طرحت الكميه القديمه
         // وده علشان اتجنب اني اطرح الكميتين واطرح الي اتحدثت فقط
         ptrProduct->setQuntity(ptrProduct->getQuntityFromProduct()+(this->quantity)-newQuantity);
         //Update Order item quantity
         this->quantity = newQuantity;
     }
-    else 
+    else
         cout << "Quantity You Enter Large Than What We have :( "<<endl;
 }
 
@@ -275,7 +275,7 @@ orderItem orderItem::operator--() {
     return *this;
 }
 
-// Constractor to 
+// Constractor to
 
 orderItem::orderItem(Stock&s)
 {
@@ -318,7 +318,7 @@ orderItem orderItem::operator+=(int quantity) {
     if (stk->getQuantity(idOrderItem) >= quantity + this->quantity)
     {
         this->quantity += quantity;
-        stk->setQuantity(getQuantitiy() - quantity);             //--> 
+        stk->setQuantity(getQuantitiy() - quantity);             //-->
     }
     else
         cout << "Quantity You Enter Large Than What We have :( " << endl;
