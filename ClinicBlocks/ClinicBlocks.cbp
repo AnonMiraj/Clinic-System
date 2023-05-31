@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ClinicBlocks" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ClinicBlocks" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/ClinicBlocks" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Cash.cpp" />
+		<Unit filename="Cash.h" />
+		<Unit filename="Check.cpp" />
+		<Unit filename="Check.h" />
+		<Unit filename="Credit.cpp" />
+		<Unit filename="Credit.h" />
+		<Unit filename="List_Of_Orders.cpp" />
+		<Unit filename="List_Of_Orders.h" />
+		<Unit filename="Medcin.cpp" />
+		<Unit filename="Medcin.h" />
+		<Unit filename="Medical_Insurance.cpp" />
+		<Unit filename="Medical_Insurance.h" />
+		<Unit filename="Medical_Specialization.cpp" />
+		<Unit filename="Medical_Specialization.h" />
+		<Unit filename="Order.cpp" />
+		<Unit filename="Order.h" />
+		<Unit filename="OrderItem.cpp" />
+		<Unit filename="OrderItem.h" />
+		<Unit filename="Payment.cpp" />
+		<Unit filename="Payment.h" />
+		<Unit filename="Stock.cpp" />
+		<Unit filename="Stock.h" />
+		<Unit filename="Transaction.cpp" />
+		<Unit filename="Transaction.h" />
+		<Unit filename="admin.cpp" />
+		<Unit filename="admin.h" />
+		<Unit filename="appointment.cpp" />
+		<Unit filename="appointment.h" />
+		<Unit filename="doctor.cpp" />
+		<Unit filename="doctor.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="other.cpp" />
+		<Unit filename="other.h" />
+		<Unit filename="patient.cpp" />
+		<Unit filename="patient.h" />
+		<Unit filename="person.cpp" />
+		<Unit filename="person.h" />
+		<Unit filename="prescription.cpp" />
+		<Unit filename="prescription.h" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
