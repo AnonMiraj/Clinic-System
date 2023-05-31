@@ -60,6 +60,7 @@ void Admin::addSpecialization()
 void Admin::addAppointment()
 {
     resizeappoint();
+    cout<<endl<<appointmentCount<<endl;
     appointments[appointmentCount] = Appointment(appointmentCount+1);
 
     //choose doctor
@@ -72,8 +73,8 @@ void Admin::addAppointment()
 
     //choose appointment
     int per;
-    printDayNames(doctors[ID-1].getAvailableDays(), 49);
-    printPeriodTimes(doctors[ID-1].getAvailablePeroids(), 8);
+    //printDayNames(doctors[ID-1].getAvailableDays(), 49);
+    //printPeriodTimes(doctors[ID-1].getAvailablePeroids(), 8);
     cout<<"Enter a number of period : "; cin >> per;
     appointments[appointmentCount].setPeriod(per);
     cout<<"Enter a day number : "; cin>>per;
