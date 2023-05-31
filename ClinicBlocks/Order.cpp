@@ -1,6 +1,5 @@
 #include "Order.h"
-#include "Order.h"
-#include "Order.h"
+
 
 Order::Order()
 {
@@ -12,6 +11,9 @@ Order::Order()
     items = new orderItem*[100];
     c_orderItem = 0;
     PatientID = 0;
+    DoctorId=0;
+    NameOfdoctor="Unkwon";
+
 }
 
 Order::Order(int orderId, int num, string orderStatus, int total, string customerName)
@@ -134,7 +136,7 @@ int Order::searchIdItems(int id)
     return -1;
 }
 
-void Order::CreateOrderOutsideClinic(Stock& s,Admin&a)
+bool Order::CreateOrderOutsideClinic(Stock& s,Admin&a)
 {
 
 p:
@@ -158,10 +160,12 @@ p:
             goto p;
         }
         else
-            return;
+            return false;
     }
 
     setPatientIdInOrder(p_id);
+    NameOfPatient=ptrAdmin->getPatient_name(indexofPatient);
+    setDate();
     int id;
     cout << "Enter Id OF Order: ";
     cin >> id;
@@ -175,7 +179,7 @@ p:
         {
             c_orderItem++;
             totalPrice += items[c_orderItem]->calcTotalPrice();
-
+            return true;
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
         ch = _getch();
@@ -192,7 +196,7 @@ p:
 
 }
 
-void Order::CreateOrderInsideClinic(Stock&s,Admin&a)
+bool Order::CreateOrderInsideClinic(Stock&s,Admin&a)
 {
 p:
     system("Color 03");
@@ -220,7 +224,7 @@ p:
             goto p;
         }
         else
-            return;
+            return false;
     }
 v:
     int d_id;
@@ -239,13 +243,14 @@ v:
             goto v;
         }
         else
-            return;
+            return false;
     }
 
     setPatientIdInOrder(p_id);    /// To Add ID Patient In Order
     setDoctorIdInOrder(d_id);    /// To Add ID Doctor In Order
     NameOfPatient=ptrAdmin->getPatient_name(indexofPatient);
     NameOfdoctor=ptrAdmin->getDoctor_name(indexofDoctor);
+    setDate();
     int id;
     cout << "Enter Id OF Order: ";
     cin >> id;
@@ -259,7 +264,7 @@ v:
         {
             c_orderItem++;
             totalPrice += items[c_orderItem]->calcTotalPrice();
-
+            return true;
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
         ch = _getch();
@@ -475,3 +480,20 @@ int Order::getDoctorId() const
 {
     return DoctorId;
 }
+void Order::printOrderofPatientInsideClinic(Order&r)
+{
+    cout<<"+-------------------------------------------+"<<endl;
+    cout<<"| Name Of Patient: "<<NameOfPatient<<"\tPatient Id: "<<PatientID<<" |"<<endl;
+    cout<<"| Name Of Doctor: "<<NameOfPatient<<"\tDoctor Id: "<<DoctorId<<" |"<<endl;
+    cout<<"+-------------------------------------------+"<<endl;
+    cout<<r;
+}
+void Order::printOrderofPatientOutsideClinic(Order&r)
+{
+    cout<<"+-------------------------------------------+"<<endl;
+    cout<<"| Name Of Patient: "<<NameOfPatient<<"\tPatient Id: "<<PatientID<<" |"<<endl;
+    cout<<"+-------------------------------------------+"<<endl;
+    cout<<r;
+
+}
+

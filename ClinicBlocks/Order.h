@@ -62,15 +62,17 @@ public:
 
     ///int calcTotalPiceOfOrder();
     int searchIdItems(int id);
-    void CreateOrderInsideClinic(Stock& stock,Admin&a);
-    void CreateOrderOutsideClinic(Stock& stock,Admin&a);
+    bool CreateOrderInsideClinic(Stock& stock,Admin&a);
+    bool CreateOrderOutsideClinic(Stock& stock,Admin&a);
     void AddOrderItem(orderItem* item);
     void UpdateOrderStatus(ORDERSTATUS status);
     void EditOrder(int itemId);
     void RemoveOrderItem(int itemId);
 
-    ///Print
+    ///Print Funcions
 
+    void printOrderofPatientInsideClinic(Order&r);/// Take Obeject From Order And Print
+    void printOrderofPatientOutsideClinic(Order&r);
     /// Overloading Opetator for cin and cout ^_^ (:
 
     friend istream& operator>>(istream& in, Order& r);
