@@ -10,6 +10,9 @@
 
 
 using namespace std;
+
+string getPeriod(int);
+
 int IsValid(int n);
 string IsValid(string word);
 bool IsValid(string num, char n);

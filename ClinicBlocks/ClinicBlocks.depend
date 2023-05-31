@@ -361,11 +361,10 @@
 	"Stock.h"
 	<conio.h>
 
-1685527046 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\appointment.cpp
+1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\appointment.cpp
 	"appointment.h"
-	"prescription.h"
 
-1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\appointment.h
+1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\appointment.h
 	<cstring>
 	<ctime>
 	<chrono>
@@ -382,7 +381,7 @@
 	<string>
 	<iostream>
 
-1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\other.h
+1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\other.h
 	<iostream>
 	<string>
 	<sstream>
@@ -390,7 +389,7 @@
 	<iomanip>
 	<ctime>
 
-1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\doctor.h
+1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\doctor.h
 	<sstream>
 	<string>
 	<iomanip>
@@ -398,19 +397,17 @@
 	"person.h"
 	"Medical_Specialization.h"
 
-1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_specialization.h
+1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_specialization.h
 	<iostream>
 	<string>
-	<fstream>
 
 1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\patient.h
 	"person.h"
 	<string>
 	<fstream>
 
-1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\prescription.h
+1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\prescription.h
 	<string>
-	<fstream>
 
 1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\cash.cpp
 	"Cash.h"
@@ -436,11 +433,12 @@
 	"Payment.h"
 	<string>
 
-1685527046 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\doctor.cpp
+1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\doctor.cpp
 	"doctor.h"
 	<string>
 
-1685527577 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\list_of_orders.cpp
+1685505112 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\list_of_orders.cpp
+	"List_Of_Orders.h"
 	<iostream>
 
 1685504866 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\list_of_orders.h
@@ -457,7 +455,7 @@
 	"other.h"
 	<windows.h>
 
-1685527046 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.h
+1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.h
 	"person.h"
 	"patient.h"
 	"doctor.h"
@@ -465,7 +463,6 @@
 	"Medical_Insurance.h"
 	"Medical_Specialization.h"
 	"appointment.h"
-	"prescription.h"
 	<fstream>
 
 1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_insurance.h
@@ -483,17 +480,17 @@
 1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_insurance.cpp
 	"Medical_Insurance.h"
 
-1685527046 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_specialization.cpp
+1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_specialization.cpp
 	"Medical_Specialization.h"
 
-1685505139 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.cpp
+1685503869 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.cpp
 	"Order.h"
 
-1685527806 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.h
+1685505084 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.h
 	<iostream>
 	"Stock.h"
 	"OrderItem.h"
-	"admin.h"
+	"Admin.h"
 	<string>
 	<conio.h>
 	<ctime>
@@ -503,7 +500,7 @@
 	<fstream>
 	<iomanip>
 
-1685525879 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\orderitem.h
+1685505084 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\orderitem.h
 	"Medcin.h"
 	"Stock.h"
 	<conio.h>
@@ -511,7 +508,7 @@
 1685505084 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\orderitem.cpp
 	<iostream>
 
-1685527046 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\other.cpp
+1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\other.cpp
 	"other.h"
 
 1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\patient.cpp
@@ -524,7 +521,7 @@
 	"person.h"
 	<fstream>
 
-1685527046 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\prescription.cpp
+1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\prescription.cpp
 	"prescription.h"
 	<iostream>
 
@@ -540,7 +537,18 @@
 	"Check.h"
 	"Payment.h"
 
-1685527616 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.cpp
+1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.cpp
+	"admin.h"
+	"Medical_Specialization.h"
+	"doctor.h"
+	"other.h"
+	"patient.h"
+	"person.h"
+	<fstream>
+	<string>
+	<unistd.h>
+
+1685556995 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\admin.cpp
 	"admin.h"
 	"Medical_Specialization.h"
 	"appointment.h"
@@ -552,4 +560,188 @@
 	<fstream>
 	<string>
 	<unistd.h>
+
+1685556295 c:\users\abdo1\documents\github\clinic-system\clinicblocks\admin.h
+	"person.h"
+	"patient.h"
+	"doctor.h"
+	"other.h"
+	"Medical_Insurance.h"
+	"Medical_Specialization.h"
+	"appointment.h"
+	"prescription.h"
+	<fstream>
+	<ctime>
+	<string>
+	<chrono>
+
+1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\person.h
+	"other.h"
+	<string>
+	<iostream>
+
+1685552820 c:\users\abdo1\documents\github\clinic-system\clinicblocks\other.h
+	<iostream>
+	<string>
+	<sstream>
+	<cctype>
+	<iomanip>
+	<ctime>
+
+1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\patient.h
+	"person.h"
+	<string>
+	<fstream>
+
+1685553257 c:\users\abdo1\documents\github\clinic-system\clinicblocks\doctor.h
+	<sstream>
+	<string>
+	<iomanip>
+	<fstream>
+	"person.h"
+	"Medical_Specialization.h"
+
+1685528080 c:\users\abdo1\documents\github\clinic-system\clinicblocks\medical_specialization.h
+	<iostream>
+	<string>
+	<fstream>
+
+1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\medical_insurance.h
+	<iostream>
+	<string>
+
+1685550601 c:\users\abdo1\documents\github\clinic-system\clinicblocks\appointment.h
+	<cstring>
+	<string>
+	<string.h>
+	<ctime>
+	<chrono>
+	<iostream>
+	<iomanip>
+	"person.h"
+	"doctor.h"
+	"patient.h"
+	"prescription.h"
+	"other.h"
+
+1685528080 c:\users\abdo1\documents\github\clinic-system\clinicblocks\prescription.h
+	<string>
+	<fstream>
+
+1685550601 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\appointment.cpp
+	"appointment.h"
+	"prescription.h"
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\cash.cpp
+	"Cash.h"
+
+1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\cash.h
+	"Payment.h"
+
+1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\payment.h
+	<iostream>
+	<string.h>
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\check.cpp
+	"Check.h"
+
+1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\check.h
+	"Payment.h"
+	<string>
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\credit.cpp
+	"Credit.h"
+
+1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\credit.h
+	"Payment.h"
+	<string>
+
+1685556584 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\doctor.cpp
+	"doctor.h"
+	<string>
+
+1685528080 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\list_of_orders.cpp
+	<iostream>
+
+1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\list_of_orders.h
+	"Admin.h"
+	"Stock.h"
+	"Order.h"
+
+1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\stock.h
+	"Medcin.h"
+	<fstream>
+	<iomanip>
+
+1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\medcin.h
+	<iostream>
+	<string>
+	<iomanip>
+
+1685528080 c:\users\abdo1\documents\github\clinic-system\clinicblocks\order.h
+	<iostream>
+	"Stock.h"
+	"OrderItem.h"
+	"admin.h"
+	<string>
+	<conio.h>
+	<ctime>
+
+1685528080 c:\users\abdo1\documents\github\clinic-system\clinicblocks\orderitem.h
+	"Medcin.h"
+	"Stock.h"
+	<conio.h>
+
+1685556295 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\main.cpp
+	<bits/stdc++.h>
+	<cstring>
+	<iostream>
+	<string>
+	"admin.h"
+	"other.h"
+	<windows.h>
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\medcin.cpp
+	"Medcin.h"
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\medical_insurance.cpp
+	"Medical_Insurance.h"
+
+1685556529 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\medical_specialization.cpp
+	"Medical_Specialization.h"
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\order.cpp
+	"Order.h"
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\orderitem.cpp
+	<iostream>
+
+1685552831 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\other.cpp
+	"other.h"
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\patient.cpp
+	"patient.h"
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\payment.cpp
+	"Payment.h"
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\person.cpp
+	"person.h"
+	<fstream>
+
+1685528080 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\prescription.cpp
+	"prescription.h"
+	<iostream>
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\stock.cpp
+	"Stock.h"
+
+1685523475 source:c:\users\abdo1\documents\github\clinic-system\clinicblocks\transaction.cpp
+	"Transaction.h"
+
+1685523475 c:\users\abdo1\documents\github\clinic-system\clinicblocks\transaction.h
+	"Cash.h"
+	"Credit.h"
+	"Check.h"
+	"Payment.h"
 

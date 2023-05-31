@@ -70,9 +70,9 @@ void Doctor::setSalary(int salary) {
     this->salary = salary;
 }
 
-void Doctor::setSpecialization(Medical_Specialization &specialization) {
-    Medical_Specialization *p= &specialization;
-    this->specialization = p;
+void Doctor::setSpecialization(Medical_Specialization &specialization)
+{
+    this->specialization = &specialization;
 }
 
 void Doctor::setExperience(int experience) {
@@ -94,6 +94,16 @@ void Doctor::setDateJoined(const string& dateJoined) {
 
 void Doctor::setAppointmentFee(int appointmentFee) {
     this->appointmentFee = appointmentFee;
+}
+
+void Doctor::setAvailableDays(int index, bool b)
+{
+    availableDays[index] = b;
+}
+
+void Doctor::setAvailablePeroids(int index, bool b)
+{
+    availablePeroids[index] = b;
 }
 
 void Doctor::readDays(){
@@ -183,6 +193,12 @@ void Doctor::editInfo() {
     if (!newAppointmentFee.empty()) {
         appointmentFee = stod(newAppointmentFee);
     }
+}
+
+
+Medical_Specialization* Doctor::getSpecialization()
+{
+    return specialization;
 }
 
 istream& operator>>(istream& is, Doctor& doctor) {

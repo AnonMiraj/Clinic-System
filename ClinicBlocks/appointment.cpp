@@ -15,7 +15,7 @@ Appointment::Appointment()
     prescription=new Prescription[prescriptionSize]; // Initial capacity for 10 patients
     id = 0;
 }
-Appointment::Appointment(int i,int period,time_t date ,int statue )
+Appointment::Appointment(int i,int period,string date ,int statue )
 : id(i),period(period),date(date),statue(statue){
     prescriptionCount=0;
     prescriptionSize=10;
@@ -41,6 +41,11 @@ string Appointment::getPeriod() const
 
 }
 
+int Appointment::getPeriod_int() const
+{
+    return period;
+}
+
 void Appointment::setDate(int wday)
 {
     using namespace std;
@@ -48,8 +53,8 @@ void Appointment::setDate(int wday)
 
     wday = (wday > 1? wday-2 : 6);
 
-    time_t date = system_clock::to_time_t(system_clock::now());
-    tm* t = localtime(&date);
+    time_t da = system_clock::to_time_t(system_clock::now());
+    tm* t = localtime(&da);
     char ch;
     string y, m, d;
     bool IsNotValid;
@@ -71,8 +76,7 @@ void Appointment::setDate(int wday)
             t->tm_mon = stoi(m) - 1;
             t->tm_mday = stoi(d);
 
-            date = system_clock::to_time_t(system_clock::from_time_t(mktime(t)));
-            cout<<endl <<t->tm_wday <<endl;
+            da = system_clock::to_time_t(system_clock::from_time_t(mktime(t)));
 
             if (t->tm_wday != wday)
                 throw "This day is not a valid day for the doctor. :(\n";
@@ -90,14 +94,43 @@ void Appointment::setDate(int wday)
     t->tm_hour = stoi(period.substr(0, 1));
     t->tm_min = stoi(period.substr(3, 1));
 
-    date = system_clock::to_time_t(system_clock::from_time_t(mktime(t)));
+    da = system_clock::to_time_t(system_clock::from_time_t(mktime(t)));
+
+    // modify date to " 2023/06/04 " form
+    m = (m.size() == 1 ? "0"+m : m);
+    d = (d.size() == 1 ? "0"+d : d);
+
+    date = y + "/" + m + "/" + d;
+}
+
+void Appointment::setDate(string d)
+{
+    date = d;
 }
 
 
-
-time_t Appointment::getDate() const
+string Appointment::getDate() const
 {
     return date;
+}
+
+int Appointment::getDate_wday() const
+{
+    using namespace std;
+    using namespace chrono;
+    time_t da = system_clock::to_time_t(system_clock::now());
+    tm* t = localtime(&da);
+
+    string year, month, day; //2023/06/04
+    year = date.substr(0,4);
+    month = date.substr(5,2);
+    day = date.substr(8,2);
+
+    t->tm_year = stoi(year) - 1900;
+    t->tm_mon = stoi(month) - 1;
+    t->tm_mday = stoi(day);
+
+    return (t->tm_wday == 6)? 1 : t->tm_wday+2;
 }
 
 void Appointment::setDoctor(Doctor& d)
@@ -138,11 +171,31 @@ void  Appointment::setStatue(int s)
 
 string  Appointment::getStatue() const
 {
+    if (statue == 0)
+        return "CANCELLED";
+
     if (statue == 1)
         return "BOOKED";
-        
+
     return "ATTEND";
 }
+
+/*void Appointment::editinfo()
+{
+    cout << "Salary: " << salary << endl;
+    string newSalary;
+    getline(cin, newSalary);
+    if (!newSalary.empty()) {
+        salary = stod(newSalary);
+    }
+
+    cout << "Experience: " << experience << " years" << endl;
+    string newExperience;
+    getline(cin, newExperience);
+    if (!newExperience.empty()) {
+        experience = stoi(newExperience);
+    }
+}*/
 
 void Appointment::addPrescription(string medic,string dose,int quantity){
     if (prescriptionCount == prescriptionSize)
@@ -160,6 +213,7 @@ void Appointment::addPrescription(string medic,string dose,int quantity){
     prescription[prescriptionCount] =  Prescription(medic,dose,quantity);
     prescriptionCount++;
 }
+
 void Appointment::saveInfo(){
   ofstream  oupt;
   oupt.open("inputAppoint.txt",ios::app);
@@ -189,7 +243,7 @@ istream& operator>> (istream& in, Appointment& a) // for files
 
 ostream& operator<< (ostream& out, const Appointment& a)
 {
-    out <<"Appointment ID : " <<a.getID() <<"\nDate : " <<printDate(a.getDate()) <<"\nPeriod : " <<a.getPeriod() <<"\nPatient :" << a.patient->getName() <<"\nDoctor : " << a.doctor->getName()<<endl;
+    out <<"Appointment ID : " <<a.getID() <<"\nDate : " <<a.getDate() <<"\nPeriod : " <<a.getPeriod() <<"\nPatient :" << a.patient->getName() <<"\nDoctor : " << a.doctor->getName()<<endl;
   for (int i=0 ; i<a.prescriptionCount; i++) {
   out << i+1<<"- "<<a.prescription[i]<<endl;
   }
@@ -200,7 +254,7 @@ ostream& operator<< (ostream& out, const Appointment& a)
 
 bool Appointment::operator== (const Appointment& a)
 {
-    return this->id == a.id;
+    return (date == a.date && period == a.period && doctor == a.doctor);
 }
 
 bool Appointment::operator>(const Appointment& a)

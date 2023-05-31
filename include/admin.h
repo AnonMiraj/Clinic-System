@@ -38,9 +38,13 @@ public:
     void editPatient();
 
     void addDoctor();
+    void viewDoctor();
+    void viewAvailableDoctors();
     void editDoctor();
+
     void addDoctorToSpec();
     void DetDoctorFromSpec();
+
     //new
     void printAllDoctors();
     void patientHistory();
@@ -55,7 +59,9 @@ public:
     void addSpecialization();
     void editSpecialization();
     void addAppointment();
+    void viewAPP();
     void BeAttend();
+    void cancelAPP();
     int searchAppointment(int id);
   // resize dynamic arrays
     void resizeDoctor();

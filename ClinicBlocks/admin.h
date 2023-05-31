@@ -9,7 +9,9 @@
 #include "appointment.h"
 #include "prescription.h"
 #include <fstream>
-
+#include <ctime>
+#include <string>
+#include <chrono>
 using namespace std;
 
 class Admin {
@@ -38,14 +40,19 @@ public:
     void editPatient();
 
     void addDoctor();
+    void viewDoctor();
+    void viewAvailableDoctors();
     void editDoctor();
+
     void addDoctorToSpec();
     void DetDoctorFromSpec();
+
     //new
     void printAllDoctors();
     void patientHistory();
     void doctorsHistory();
     void printAllSpecs();
+    void printSpecDoctors();
 
 
 
@@ -55,7 +62,9 @@ public:
     void addSpecialization();
     void editSpecialization();
     void addAppointment();
+    void viewAPP();
     void BeAttend();
+    void cancelAPP();
     int searchAppointment(int id);
   // resize dynamic arrays
     void resizeDoctor();
@@ -81,6 +90,9 @@ public:
     int searchDoctor(int);
     string getPatient_name(int in);
     string getDoctor_name(int in);
+
+    //print
+    string printAvailableDay(const Doctor&);
 };
 
 

@@ -18,12 +18,14 @@ private:
     int ratingSum;
     int appointmentCount;
     bool archived;
-    bool availableDays[8];
-    bool availablePeroids[49];
+
+
     string dateJoined;
     int appointmentFee;
 
 public:
+    bool availableDays[8];
+    bool availablePeroids[49];
     // Constructor
     Doctor();
     Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
@@ -48,6 +50,8 @@ public:
     void setExperience(int experience);
     void setRatingSum(int rating);
     void setAppointmentCount(int appointmentCount);
+    void setAvailableDays(int,bool);
+    void setAvailablePeroids(int,bool);
     void setAracived(bool state);
     void setDateJoined(const string& dateJoined);
     void setAppointmentFee(int appointmentFee);
@@ -57,6 +61,7 @@ public:
     void readPeroids();
     void saveInfo();
     virtual void editInfo();
+    Medical_Specialization* getSpecialization();
 
     friend istream& operator>>(istream& is, Doctor& doctor);
     friend ostream& operator<<(ostream& os, const Doctor& doctor);
