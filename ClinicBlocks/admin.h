@@ -57,6 +57,7 @@ public:
     void doctorsHistory();
     void printAllSpecs();
     void printSpecDoctors();
+    void Doctors_SearchByName();
     /// Orders
     void addOrders();
 
@@ -69,7 +70,7 @@ public:
     void viewAPP();
     void BeAttend();
     void cancelAPP();
-    int searchAppointment(int id);
+
   // resize dynamic arrays
     void resizeDoctor();
     void resizePatient();
@@ -90,10 +91,12 @@ public:
     void setInsurances();
     void getInsurances();
 
+    int searchAppointment(int id);
     int searchPatient(int);
     int searchDoctor(int);
     string getPatient_name(int in);
     string getDoctor_name(int in);
+    int searchAppoint_patient(int);
 
     //print
     string printAvailableDay(const Doctor&);
