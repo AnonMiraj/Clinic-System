@@ -540,4 +540,3 @@ void Order::printOrder()
     else
         printOrderofPatientOutsideClinic();
 }
-
