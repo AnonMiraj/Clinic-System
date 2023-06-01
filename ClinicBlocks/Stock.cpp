@@ -46,7 +46,7 @@ void Stock::addMedcinInStock()
         if (MedcinList[i].getId() == medcinid)
         {
             cout << "Medicine already exists in stock. " << endl;
-            cout << "do You Want To Update Quntitiy of This Id or Try Again: ";
+            cout << "do You Want To Update Quntitiy of This Id or Try Again: "<<endl;
             v:
             system("Color 03");
             cout<<" 1- Update His Quntitiy \n 2- Try Again";
@@ -63,8 +63,8 @@ void Stock::addMedcinInStock()
             else {
                 system("Color 04");
                 system("cls");
-                cout<<"Enter A Valid Choise!!!!";
-                Sleep(3);
+                cout<<"Enter A Valid Choise!!!!"<<endl;
+                Sleep(3000);
                 goto v;
             }
 
