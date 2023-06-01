@@ -2,6 +2,7 @@
 #define PATIENT_H
 
 #include "person.h"
+#include "other.h"
 #include <string>
 #include <fstream>
 
