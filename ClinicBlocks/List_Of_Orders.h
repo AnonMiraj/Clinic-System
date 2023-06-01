@@ -3,6 +3,8 @@
 #include "admin.h"
 #include "Stock.h"
 #include "Order.h"
+#include "other.h"
+#include <string>
 #include "appointment.h"
 class List_Of_Orders {
 private:
@@ -20,7 +22,8 @@ public:
     void addOrder(Admin*ptr,Stock*s);
     void removeOrder(int orderId);
     void printAllOrders();
-    void editOrder();
+    int searchOrder(int id);
+    void editOrder(int);
 
 };
 

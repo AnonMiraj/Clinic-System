@@ -140,7 +140,67 @@ void sub_sub_menu_2_spec_management()
     }
 }
 
-void sub_sub_menu_3_stk_management()
+void sub_sub_sub_menu_ViewPatient()
+{
+    int c = -1;
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> ADMIN HUB -> PATINET MANAGMENT -> VIEW ....");
+        c = get_menu_choise("SHOW ALL PATINETS,SHOW SPECIFIC PATIENT", 2);
+        switch (c)
+        {
+        case 1:
+            Hospital->printAllPatient();
+            _pause();
+            break;
+
+        case 2:
+            Hospital->viewPatient();
+            _pause();
+            break;
+
+        case 0:
+            return;
+        default:
+            print_try_again();
+        }
+    }
+}
+
+void sub_sub_menu_3_Patient_management()
+{
+    int c = -1;
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> ADMIN HUB -> PATIENT MANAGEMENT ....");
+
+        c = get_menu_choise("ADD PATIENT,EDIT PATIENT,VIEW", 2);
+        switch (c)
+        {
+        case 1:
+            Hospital->addPatient();
+            _pause();
+            break;
+        case 2:
+            Hospital->editPatient();
+            _pause();
+            break;
+        case 3:
+            sub_sub_sub_menu_ViewPatient();
+            _pause();
+            break;
+        case 0:
+            return;
+        default:
+            print_try_again();
+        }
+    }
+}
+
+
+void sub_sub_menu_4_stk_management()
 {
     int c = -1;
     while (c != 0)
@@ -179,7 +239,7 @@ void sub_menu_1_admin_hub()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> ADMIN hub ....");
-        c = get_menu_choise("DOCTOR MANAGEMENT,SPECIALTY MANAGEMENT,HISTORY PATIENT,HISTORY DOCTOR,STOCK MANAGEMENT,SHOW ALL OF ORDERS DETAEILES", 1);
+        c = get_menu_choise("DOCTOR MANAGEMENT,SPECIALTY MANAGEMENT,PATIENT MANAGEMENT,HISTORY PATIENT,HISTORY DOCTOR,STOCK MANAGEMENT,SHOW ALL OF ORDERS DETAEILES", 1);
         switch (c)
         {
         case 1:
@@ -189,16 +249,20 @@ void sub_menu_1_admin_hub()
             sub_sub_menu_2_spec_management();
             break;
         case 3:
+            sub_sub_menu_3_Patient_management();
+            break;
+
+        case 4:
             Hospital->patientHistory();
             _pause();
             break;
-        case 4:
+        case 5:
             Hospital->doctorsHistory();
             _pause();
-        case 5:
-            sub_sub_menu_3_stk_management();
-            break;
         case 6:
+            sub_sub_menu_4_stk_management();
+            break;
+        case 7:
             OrderList->printAllOrders();
             _pause();
             break;
@@ -353,27 +417,22 @@ void sub_menu_3_patient_hub()
     }
 }
 
-void sub_menu_4_pharmacy_hub()
+void sub_sub_menu_5_View()
 {
     int c = -1;
     while (c != 0)
     {
         wait_or_clear(0, 1);
-        printline("\n\nMAIN MENU -> PHARMACY HUB ....");
-        c = get_menu_choise("ORDER MEDECINE,EDIT ORDER,CANCEL ORDER,PAY THE ORDER", 1);
+        printline("\n\nMAIN MENU -> PHARMACY HUB -> VIEW ....");
+        c = get_menu_choise("SHOW ALL ORDERS,PENDING ORDERS", 2);
         switch (c)
         {
         case 1:
-            // OrderList->addOrder(Hospital,stk);
+            OrderList->printAllOrders();
             _pause();
             break;
+
         case 2:
-            _pause();
-            break;
-        case 3:
-            _pause();
-            break;
-        case 4:
             _pause();
             break;
 
@@ -384,6 +443,69 @@ void sub_menu_4_pharmacy_hub()
         }
     }
 }
+
+void sub_menu_4_pharmacy_hub()
+{
+    int c = -1;
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> PHARMACY HUB ....");
+        c = get_menu_choise("ORDER MEDECINE,EDIT ORDER,CANCEL ORDER,PAY THE ORDER,VIEW", 1);
+        switch (c)
+        {
+        case 1:
+            OrderList->addOrder(Hospital, stk);
+            _pause();
+            break;
+
+        case 2:
+            {
+                string id;
+                do
+                {
+                    cout<<"Enter Order ID To edit : ";
+                    cin>>id;
+                }while (!IsValid(id,'1'));
+                int index = OrderList->searchOrder(stoi(id));
+                if (index != -1)
+                    OrderList->editOrder(index);
+                else
+                    cout<<"There is no order ID :(\n";
+            }
+            _pause();
+            break;
+
+        case 3:
+            {
+                string id;
+                do
+                {
+                    cout<<"Enter Order ID To remove : ";
+                    cin>>id;
+                }while (!IsValid(id,'1'));
+                OrderList->removeOrder(stoi(id));
+                _pause();
+                }
+            break;
+
+        case 4:
+            _pause();
+            break;
+
+        case 5:
+            sub_sub_menu_5_View();
+            _pause();
+            break;
+
+        case 0:
+            return;
+        default:
+            print_try_again();
+        }
+    }
+}
+
 
 /** MAIN FUNCTION **/
 int main()

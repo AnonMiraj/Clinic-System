@@ -52,6 +52,8 @@ public:
     void DetDoctorFromSpec();
 
     //new
+    void viewPatient();
+    void printAllPatient();
     void printAllDoctors();
     void patientHistory();
     void doctorsHistory();

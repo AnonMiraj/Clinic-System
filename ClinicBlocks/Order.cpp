@@ -255,6 +255,7 @@ bool Order::CreateOrder(Stock*s,Admin*Hospital)
 
 
 }
+
 bool Order::CreateOrderInsideClinic(Stock*s,Admin*Hospital,int p_id,int index)/// Add Discount to the patient inside the clinic
 {
 

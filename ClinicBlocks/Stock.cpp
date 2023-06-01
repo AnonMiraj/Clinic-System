@@ -72,7 +72,7 @@ int Stock::getMedcinListCount(){
 }
 
 void Stock::addMedcinInStockByFiles()
-{ 
+{
     ifstream input("./data/inputMedcin.txt");
     if (!input)
     {
@@ -100,7 +100,7 @@ void Stock::addMedcinInStockByFiles()
 
 }
 void Stock::saveInfo(){
-    ofstream oput("./data/inputMedcin.txt");
+    ofstream oput("../data/inputMedcin.txt");
     if (!oput)
     {
         cout << "File Can Not Be Open ):" << endl;
