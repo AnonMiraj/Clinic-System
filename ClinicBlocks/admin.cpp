@@ -836,7 +836,7 @@ string Admin::getDoctor_name(int in)
 int Admin::searchDoctor(int id)
 {
     for (int i=0; i<patientCount; i++)
-        if (doctors[i] == doctors[id])
+        if (doctors[i].getId() == id)
             return i;
 
     return -1;

@@ -18,9 +18,10 @@ public:
 	void addMedcinInStockByFiles();
 	void editMedcin();
 	void deleteMecinFromStock();
-	int getQuntitiy(int id);  // This Funcion return -1 if This Qntitiy Not Exist
-	int SearchId(int id);   // This Function return index if found and return -1 if Not Exist
-	ifstream input;// file
+	int getQuntitiy(int id);  /// This Funcion return -1 if This Quantity Not Exist
+	int SearchId(int id);   /// This Function return index if found and return -1 if Not Exist
+	double getSalePriceOfMedcin(int index);
+	ifstream input;/// file
 	//ofstream output; // read
 
 	friend ostream& operator<<(ostream& out, const Stock& stock);

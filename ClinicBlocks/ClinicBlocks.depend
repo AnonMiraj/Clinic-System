@@ -405,9 +405,8 @@
 	<string>
 	<fstream>
 
-1685584935 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\patient.h
+1685582527 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\patient.h
 	"person.h"
-	"other.h"
 	<string>
 	<fstream>
 
@@ -497,7 +496,7 @@
 1685560319 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\medical_specialization.cpp
 	"Medical_Specialization.h"
 
-1685583592 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.cpp
+1685587241 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.cpp
 	"Order.h"
 
 1685580617 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\order.h
@@ -510,7 +509,7 @@
 	<ctime>
 	"appointment.h"
 
-1685584278 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\stock.h
+1685586671 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\stock.h
 	"Medcin.h"
 	<fstream>
 	<iomanip>
@@ -520,7 +519,7 @@
 	"Stock.h"
 	<conio.h>
 
-1685584264 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\orderitem.cpp
+1685586794 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\orderitem.cpp
 	<iostream>
 
 1685560319 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\other.cpp
@@ -540,7 +539,7 @@
 	"prescription.h"
 	<iostream>
 
-1685584314 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\stock.cpp
+1685586671 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\stock.cpp
 	"Stock.h"
 
 1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\transaction.cpp
@@ -552,7 +551,7 @@
 	"Check.h"
 	"Payment.h"
 
-1685584839 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.cpp
+1685587011 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.cpp
 	"admin.h"
 	"Medical_Specialization.h"
 	"appointment.h"

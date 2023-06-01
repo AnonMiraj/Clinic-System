@@ -38,11 +38,12 @@ bool orderItem::setOrderItem(int id,Stock*s)
         cin >> q;
         if (q <= stk->getQuntitiy(id))
         {
-            cout << "Enter a Sale Price: ";
-            cin >> sale_price;
+            //cout << "Enter a Sale Price: ";
+            //cin >> sale_price;
+            sale_price = stk->getSalePriceOfMedcin(index);
             cout << "This Item Added Successfully \n";
-            stk->setQuantity((stk->getQuntitiy(id) - q), index); //10-->4//6
-            cout<<"Ahmed Mosen";
+            stk->setQuantity((stk->getQuntitiy(id) - q), index); /// Error Exception
+            cout<<"Ahmed Mohsen";
             this->qunatityOrderItem = q;
             return true;
         }

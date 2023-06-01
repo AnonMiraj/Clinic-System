@@ -24,11 +24,14 @@ Stock::~Stock()
 }
 
 
-void Stock::setQuantity(int Q,int index)
+void Stock::setQuantity(int q,int index)
 {
-    Quntitiy[index] = Q;
+    Quntitiy[index] = q;
 }
-
+double Stock::getSalePriceOfMedcin(int index)
+{
+    return MedcinList[index].getPrice();
+}
 // Function to add a medicine to stock
 void Stock::addMedcinInStock()
 {
@@ -142,6 +145,7 @@ int Stock::getQuntitiy(int id)
     index=SearchId(id);
     if (index != -1)
     {
+        //cout<<"Ahmed Mohsen";
         return Quntitiy[index];
     }
     cout << "This Quntitiy isn't Exist" << endl;

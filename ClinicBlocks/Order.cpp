@@ -200,7 +200,8 @@ p:
 }
 bool Order::CreateOrder(Stock*s,Admin*Hospital)
 {
-
+    stk = s;
+    ptrAdmin=Hospital;
     p:
     char ch;
     cout << "Enter Patient Id: ";
@@ -248,13 +249,12 @@ bool Order::CreateOrder(Stock*s,Admin*Hospital)
 
 
 }
-bool Order::CreateOrderInsideClinic(Stock*s,Admin*a,int p_id,int index)/// Add Discount to the patient inside the clinic
+bool Order::CreateOrderInsideClinic(Stock*s,Admin*Hospital,int p_id,int index)/// Add Discount to the patient inside the clinic
 {
 
 
     system("Color 03");
-    stk = s;
-    ptrAdmin=a;
+
     char ch;
 
     /// To Return Enter The Value (Return Again)
@@ -265,7 +265,7 @@ v:
     int d_id;
     cout << "Enter Id Of Doctor: ";
     cin>>d_id;
-    int indexofDoctor =ptrAdmin->searchDoctor(d_id) ;
+    int indexofDoctor =Hospital->searchDoctor(d_id) ;
     if(index==-1)
     {
         system("Color 04");
@@ -296,8 +296,8 @@ v:
         cin >> id;
         if (items[c_orderItem]->setOrderItem(id, s))
         {
-            NameOfPatient=ptrAdmin->getPatient_name(index);/// index here To Patient and i recive it parametar
-            NameOfdoctor=ptrAdmin->getDoctor_name(indexofDoctor);
+            NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
+            NameOfdoctor=Hospital->getDoctor_name(indexofDoctor);
             c_orderItem++;
             totalPrice += items[c_orderItem]->calcTotalPrice();
             return true;
