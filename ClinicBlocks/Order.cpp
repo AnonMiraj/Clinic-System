@@ -133,7 +133,7 @@ int Order::searchIdItems(int id)
     return -1;
 }
 
-bool Order::CreateOrderOutsideClinic(Stock* s,Admin*a,int idPatient,int index)
+bool Order::CreateOrderOutsideClinic(Stock* s,Admin*Hospital,int idPatient,int index)
 {
     /**
 
@@ -162,31 +162,42 @@ p:
     }**/
     char ch;
     setDate();
+    setDate();
+    int c=0;
     int id;
     cout << "Enter Id OF Order: ";
     cin >> id;
 
     do
     {
-
-        if (items[c_orderItem].setOrderItem( s))
+        //cout<<"\n";
+        //cout << "Enter item Id: ";
+        //int id;
+        //cin >> id;
+        if (items[c_orderItem].setOrderItem(s))
         {
-            setPatientIdInOrder(idPatient);
-
-            NameOfPatient=ptrAdmin->getPatient_name(index);
+            totalPrice += items[c_orderItem].calcTotalPrice(); /// Error Exception
             c_orderItem++;
-            totalPrice += items[c_orderItem].calcTotalPrice();
-            return true;
+
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
-        ch = _getch();
+        cin>>ch;
     }
     while (ch == 'y' || ch == 'Y');
 
-    if (c_orderItem > 0)
+
+
+    if (c_orderItem > 0) /// check if i add item or no
     {
-        setOrderId(id);
+    NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
+    setOrderId(id);
+     return true;
     }
+    else{
+
+        return false;
+    }
+
     // }
     // else
     //  cout << "This Custmer Id Does't Exist):" << endl;

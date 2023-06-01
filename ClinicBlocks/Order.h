@@ -20,7 +20,7 @@ private:
     string NameOfdoctor;
     string date;
 
-    bool inside;
+    bool inside;/// check if patient inside or outside clinic
     int OrderID;
     int number;
     int totalPrice;
