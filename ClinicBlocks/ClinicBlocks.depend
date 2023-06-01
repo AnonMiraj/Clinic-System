@@ -405,8 +405,9 @@
 	<string>
 	<fstream>
 
-1685582527 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\patient.h
+1685584935 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\patient.h
 	"person.h"
+	"other.h"
 	<string>
 	<fstream>
 
@@ -420,8 +421,9 @@
 1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\cash.h
 	"Payment.h"
 
-1685499161 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\payment.h
+1685584935 e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\payment.h
 	<iostream>
+	"other.h"
 	<string.h>
 
 1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\check.cpp
@@ -527,7 +529,7 @@
 1685582527 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\patient.cpp
 	"patient.h"
 
-1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\payment.cpp
+1685584935 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\payment.cpp
 	"Payment.h"
 
 1685499161 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\person.cpp
@@ -550,7 +552,7 @@
 	"Check.h"
 	"Payment.h"
 
-1685582926 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.cpp
+1685584839 source:e:\oop\colonclinicbloxv2\clinic-system\clinicblocks\admin.cpp
 	"admin.h"
 	"Medical_Specialization.h"
 	"appointment.h"
