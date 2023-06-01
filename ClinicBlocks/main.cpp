@@ -520,7 +520,7 @@ int main()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU ....", 1);
-        c = get_menu_choise("ADMIN HUB,DOCTOR MANAGEMENT,PATIENT MANAGEMENT,PHARMACY MANAGEMNET(removed),debug",
+        c = get_menu_choise("ADMIN HUB,DOCTOR MANAGEMENT,PATIENT MANAGEMENT,PHARMACY MANAGEMNET,debug",
                             0);
 
         switch (c)
