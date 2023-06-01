@@ -25,11 +25,11 @@ void orderItem::setTotalPrice(double t)
 
 bool orderItem::setOrderItem(Stock*s)
 {
+    stk = s;
     b:
         int id;
         cout<<"Enter Item Id: ";
         cin>>id;
-    stk = s;
     int index= stk->SearchId(id);
 
    // cout << "Index: " << index;
@@ -64,7 +64,8 @@ bool orderItem::setOrderItem(Stock*s)
                goto p;
             }
 
-            return false;
+            else
+               return false;
         }
     }
     else
@@ -76,7 +77,7 @@ bool orderItem::setOrderItem(Stock*s)
         if (chh=='y'||chh=='Y')
             goto b;
         else
-        return false;
+           return false;
     }
 }
 

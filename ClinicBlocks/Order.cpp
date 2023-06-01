@@ -288,6 +288,7 @@ v:
 
     do
     {
+
         //cout<<"\n";
         //cout << "Enter item Id: ";
         //int id;
@@ -295,8 +296,7 @@ v:
 
         if (items[c_orderItem]->setOrderItem(s))
         {
-            totalPrice += items[c_orderItem++]->calcTotalPrice();
-            cout<<"Ezz"<<endl;
+           /// totalPrice += items[c_orderItem++]->calcTotalPrice(); /// Error Exception
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
         cin>>ch;
