@@ -84,14 +84,20 @@ istream& operator>>(istream& is, Patient& patient) {
     cout << "Enter patient's emergency contact: ";
     getline(is, patient.emergencyContact);
 
-        // Display options
-    cout << "Medical Insurance Options:\n";
-    cout << "1. No Medical Insurance \n";
-    cout << "2. Basic \n";
-    cout << "3. Premium \n";
-    cout << "4. Standard \n";
-    cout << "Enter your choice (1-4): ";
-    is>>patient.insurance;
+    // Display options
+    string in;
+    do
+    {
+        cout << "Medical Insurance Options:\n";
+        cout << "1. No Medical Insurance \n";
+        cout << "2. Basic \n";
+        cout << "3. Premium \n";
+        cout << "4. Standard \n";
+        cout << "Enter your choice (1-4): ";
+        is>>in;
+    } while(IsValid(1,4,in) == -1);
+
+    patient.insurance = stoi(in);
     patient.insurance--;
     return is;
 }
@@ -123,7 +129,8 @@ bool Patient::operator==(const Patient &p)
 {
     return this->getId() == p.getId();
 }
-//bool Patient::operator==(const int id)
-//{
-//    return this->getId() == id;
-//}
+
+bool Patient::operator==(const int id)
+{
+    return this->getId() == id;
+}
