@@ -1,7 +1,5 @@
-
 #ifndef DOCTOR_H
 #define DOCTOR_H
-
 #include <sstream>
 #include <string>
 #include <iomanip>
@@ -18,12 +16,14 @@ private:
     int ratingSum;
     int appointmentCount;
     bool archived;
-    bool availableDays[8];
-    bool availablePeroids[49];
+
+
     string dateJoined;
     int appointmentFee;
 
 public:
+    bool availableDays[8];
+    bool availablePeroids[49];
     // Constructor
     Doctor();
     Doctor(int id, const string& name, int age, const string& gender, const string& bloodType,
@@ -41,7 +41,7 @@ public:
     bool getAracived() const;
     string getDateJoined() const;
     int getAppointmentFee() const;
-
+    //int getDoctorId();
     // Setters
     void setSalary(int salary);
     void setSpecialization( Medical_Specialization& specialization);
@@ -59,6 +59,7 @@ public:
     void readPeroids();
     void saveInfo();
     virtual void editInfo();
+    Medical_Specialization* getSpecialization();
 
     friend istream& operator>>(istream& is, Doctor& doctor);
     friend ostream& operator<<(ostream& os, const Doctor& doctor);

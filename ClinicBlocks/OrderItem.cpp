@@ -1,4 +1,4 @@
-﻿#include "orderItem.h"
+﻿#include "OrderItem.h"
 #include <iostream>
 using namespace std;
 
@@ -23,24 +23,32 @@ void orderItem::setTotalPrice(double t)
     totalPriceOrderItem = t;
 }
 
-bool orderItem::setOrderItem(int id,Stock*s)
+bool orderItem::setOrderItem(Stock*s)
 {
-    stk =  s;
+    stk = s;
+    b:
+        int id;
+        cout<<"Enter Item Id: ";
+        cin>>id;
     int index= stk->SearchId(id);
+
    // cout << "Index: " << index;
     //system("pause");
+
     if (index != -1)
     {
+        p:
         this->idOrderItem = id;
         int q;
         cout << "Enter Quntitiy: ";
         cin >> q;
         if (q <= stk->getQuntitiy(id))
         {
-            cout << "Enter a Sale Price: ";
-            cin >> sale_price;
+            //cout << "Enter a Sale Price: ";
+            //cin >> sale_price;
+            sale_price = stk->getSalePriceOfMedcin(index);
             cout << "This Item Added Successfully \n";
-            stk->setQuantity((stk->getQuntitiy(id) - q), index); //10-->4//6
+            stk->setQuantity((stk->getQuntitiy(id) - q), index); /// Error Exception
             this->qunatityOrderItem = q;
             return true;
         }
@@ -53,18 +61,27 @@ bool orderItem::setOrderItem(int id,Stock*s)
             cin >> ch;
             if (ch == 'y' || ch == 'Y')
             {
-                setOrderItem(id, s);
+               goto p;
             }
 
-            return false;
+            else
+               return false;
         }
     }
     else
     {
         cout << "This Id Doesn't Exist ): \n";
-        return false;
+        cout<<"do You Want To add id item Again: [Y/N]";
+        char chh;
+        cin>>chh;
+        if (chh=='y'||chh=='Y')
+            goto b;
+        else
+           return false;
     }
+  return false;
 }
+
 
 double orderItem::calcTotalPrice()
 {
@@ -94,7 +111,8 @@ void orderItem::UpdateQuantity(int newQuantity)
             {
                 cout << "Are You Want To Update Again [Y/N]";
                 char ch;
-                ch = _getch();
+                // ch = _getch();
+                cin >>ch;
                 if (ch == 'y' || ch == 'Y')
                 {
                     cout << "Enter New Quntitiy Again: ";
@@ -113,7 +131,8 @@ void orderItem::UpdateQuantity(int newQuantity)
 
         cout << "Are You Want To Enter Again [Y/N]";
         char ch;
-        ch = _getch();
+        // ch = _getch();
+        cin >>ch;
         if (ch == 'y' || ch == 'Y')
         {
             cout << "Enter New Quntitiy Again: ";
@@ -356,9 +375,12 @@ double orderItem::getQuantitiy()
 
 ostream& operator<<(ostream&out, orderItem&r)
 {
-    out << "| Id Of Item Is: " << setw(24) << setfill(' ') << r.idOrderItem << " |" << endl;
-    out << "| Sale Price Is: " << setw(24) << setfill(' ') << r.getQuantityOfOrderItem() << " |" << endl;
-    out << "| Quntitiy Is: " << setw(26) << setfill(' ') << r.getQuantityOfOrderItem() << " |" << endl;
+    out<<"+-------------------------------------------+"<<endl;
+    out << "| Id Of Item Is: " << setw(26) << setfill(' ') << r.idOrderItem << " |" << endl;
+    out << "| Sale Price Is: " << setw(26) << setfill(' ') << r.calcTotalPrice() << " |" << endl;
+    out << "| Quntitiy Is: " << setw(28) << setfill(' ') << r.getQuantityOfOrderItem() << " |" << endl;
+    out << "| Price Per Unit Is: " << setw(22) << setfill(' ') << r.sale_price << " |" << endl;
+    cout<<"+-------------------------------------------+"<<endl;
 
     return out;
 }

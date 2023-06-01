@@ -8,7 +8,7 @@ Order::Order()
     status = "PENDING";
     totalPrice = 0;
     NameOfPatient = "Unkwon";
-    items = new orderItem*[100];
+    items = new orderItem[100];
     c_orderItem = 0;
     PatientID = 0;
     DoctorId=0;
@@ -34,11 +34,7 @@ Order::~Order()
     // Clean up dynamically allocated memory for order items
     if (items != nullptr)
     {
-        for (int i = 0; i < c_orderItem; i++)
-        {
-            delete items[i];
-        }
-        delete[] items;
+       delete []items;
     }
 }
 
@@ -71,7 +67,7 @@ void Order::setDate()
 {
     time_t rawtime;
     time(&rawtime);
-    //date = ctime(&rawtime);                   //Error Here --> ):
+    date = ctime(&rawtime);                   //Error Here --> ):
 }
 
 void Order::setOrderId(int id)
@@ -129,7 +125,7 @@ int Order::searchIdItems(int id)
 {
     for (int i = 0; i < c_orderItem; i++)
     {
-        if (items[i]->getIdOrderItem() == id)
+        if (items[i].getIdOrderItem() == id)
         {
             return i;
         }
@@ -137,7 +133,7 @@ int Order::searchIdItems(int id)
     return -1;
 }
 
-bool Order::CreateOrderOutsideClinic(Stock* s,Admin*a,int idPatient,int index)
+bool Order::CreateOrderOutsideClinic(Stock* s,Admin*Hospital,int idPatient,int index)
 {
     /**
 
@@ -166,49 +162,60 @@ p:
     }**/
     char ch;
     setDate();
+    setDate();
+    int c=0;
     int id;
     cout << "Enter Id OF Order: ";
     cin >> id;
 
     do
     {
-        cout << "Enter item Id: ";
-        int id;
-        cin >> id;
-        if (items[c_orderItem]->setOrderItem(id, s))
+        //cout<<"\n";
+        //cout << "Enter item Id: ";
+        //int id;
+        //cin >> id;
+        if (items[c_orderItem].setOrderItem(s))
         {
-            setPatientIdInOrder(idPatient);
-
-            NameOfPatient=ptrAdmin->getPatient_name(index);
+            totalPrice += items[c_orderItem].calcTotalPrice(); /// Error Exception
             c_orderItem++;
-            totalPrice += items[c_orderItem]->calcTotalPrice();
-            return true;
+
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
-        ch = _getch();
+        cin>>ch;
     }
     while (ch == 'y' || ch == 'Y');
 
-    if (c_orderItem > 0)
+
+
+    if (c_orderItem > 0) /// check if i add item or no
     {
-        setOrderId(id);
+    NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
+    setOrderId(id);
+     return true;
     }
+    else{
+
+        return false;
+    }
+
     // }
     // else
     //  cout << "This Custmer Id Does't Exist):" << endl;
 
 }
-bool Order::CreateOrder(Stock*s,Admin*a,Appointment*appoint)
+bool Order::CreateOrder(Stock*s,Admin*Hospital)
 {
+    stk = s;
+    ptrAdmin=Hospital;
     p:
     char ch;
     cout << "Enter Patient Id: ";
     int idPatient;
     cin >> idPatient;
 
-    int indexofPatient =ptrAdmin->searchPatient(idPatient);/// To Search In Array Patient And Make Sure Is This Ptient Is Exist
+    int indexofPatient =Hospital->searchPatient(idPatient);/// To Search In Array Patient And Make Sure Is This Ptient Is Exist
 
-    if(indexofPatient=-1)
+    if(indexofPatient==-1)
     {
         system("Color 04");
         cout<<"Srry, This Id Patient Not Exist ):"<<endl;
@@ -222,50 +229,48 @@ bool Order::CreateOrder(Stock*s,Admin*a,Appointment*appoint)
         else
             return false;
     }
+           setDate();
 
-    ///if(appoint->)
-    ///{
-        if(CreateOrderInsideClinic(s,a,idPatient,indexofPatient))
+    if(Hospital->searchAppoint_patient(idPatient))
+    {
+        if(CreateOrderInsideClinic(s,Hospital,idPatient,indexofPatient))
         {
             return true;
-            inside=true;
+            this->inside=1;
         }
         else
             return false;
-    ///}
-    ///else
-    ///{
+    }
+    else
+    {
 
-        if(CreateOrderOutsideClinic(s,a,idPatient,indexofPatient))
+        if(CreateOrderOutsideClinic(s,Hospital,idPatient,indexofPatient))
         {
             return true;
-            inside=false;
+            this->inside=0;
         }
         else
             return false;
-    ///}
+    }
 
 
 }
-bool Order::CreateOrderInsideClinic(Stock*s,Admin*a,int p_id,int index)/// Add Discount to the patient inside the clinic
+bool Order::CreateOrderInsideClinic(Stock*s,Admin*Hospital,int p_id,int index)/// Add Discount to the patient inside the clinic
 {
 
 
     system("Color 03");
-    stk = s;
-    ptrAdmin=a;
+
     char ch;
 
     /// To Return Enter The Value (Return Again)
-
-
 
 v:
     int d_id;
     cout << "Enter Id Of Doctor: ";
     cin>>d_id;
-    int indexofDoctor =ptrAdmin->searchDoctor(d_id) ;
-    if(index=-1)
+    int indexofDoctor =Hospital->searchDoctor(d_id);
+    if(indexofDoctor==-1)
     {
         system("Color 04");
         cout<<"Srry, This Id Doctor Not Exist ):"<<endl;
@@ -284,32 +289,42 @@ v:
     setDoctorIdInOrder(d_id);    /// To Add ID Doctor In Order
 
     setDate();
+    int c=0;
     int id;
     cout << "Enter Id OF Order: ";
     cin >> id;
 
     do
     {
-        cout << "Enter item Id: ";
-        int id;
-        cin >> id;
-        if (items[c_orderItem]->setOrderItem(id, s))
+        //cout<<"\n";
+        //cout << "Enter item Id: ";
+        //int id;
+        //cin >> id;
+        if (items[c_orderItem].setOrderItem(s))
         {
-            NameOfPatient=ptrAdmin->getPatient_name(index);/// index here To Patient and i recive it parametar
-            NameOfdoctor=ptrAdmin->getDoctor_name(indexofDoctor);
+            totalPrice += items[c_orderItem].calcTotalPrice(); /// Error Exception
             c_orderItem++;
-            totalPrice += items[c_orderItem]->calcTotalPrice();
-            return true;
+
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
-        ch = _getch();
+        cin>>ch;
     }
     while (ch == 'y' || ch == 'Y');
 
-    if (c_orderItem > 0)
+
+
+    if (c_orderItem > 0) /// check if i add item or no
     {
-        setOrderId(id);
+    NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
+    NameOfdoctor=Hospital->getDoctor_name(indexofDoctor);///
+    setOrderId(id);
+     return true;
     }
+    else{
+
+        return false;
+    }
+
 }
 
 void Order::AddOrderItem(orderItem* item)
@@ -321,8 +336,8 @@ void Order::AddOrderItem(orderItem* item)
     if (items == nullptr)
     {
         // Create a new array to store order items
-        items = new orderItem * [1];
-        items[0] = item;
+        //items = new orderItem * [1];
+       // items[0] = item;
         c_orderItem = 1;
     }
     else
@@ -333,7 +348,7 @@ void Order::AddOrderItem(orderItem* item)
         // Copy existing items to the new array
         for (int i = 0; i < c_orderItem; i++)
         {
-            newItems[i] = items[i];
+           // newItems[i] = items[i];
         }
 
         // Add the new item to the end of the new array
@@ -343,8 +358,8 @@ void Order::AddOrderItem(orderItem* item)
         delete[] items;
 
         // Update the items pointer to point to the new array
-        items = newItems;
-        totalPrice += items[c_orderItem]->calcTotalPrice();
+       // items = newItems;
+        //totalPrice += items[c_orderItem]->calcTotalPrice();
         // Increment the count of order items
         c_orderItem++;
 
@@ -384,13 +399,13 @@ void Order::EditOrder(int id)
         cin >> newQuantity;
 
         // Supstract the old valu
-        totalPrice -= items[index]->calcTotalPrice();
+        totalPrice -= items[index].calcTotalPrice();
 
         // Update the quantity of the order item
-        items[index]->UpdateQuantity(newQuantity);
+        items[index].UpdateQuantity(newQuantity);
 
         // Calculate the new total price
-        totalPrice+= items[index]->calcTotalPrice();
+        totalPrice+= items[index].calcTotalPrice();
 
         //totalPrice += items[index]->getTotalPrice();
 
@@ -407,13 +422,13 @@ void Order::RemoveOrderItem(int itemId)
 
     for (int i = 0; i < c_orderItem; i++)
     {
-        if (items[i]->getIdOrderItem() == itemId)
+        if (items[i].getIdOrderItem() == itemId)
         {
             /// Calculate the total price before removing the item
-            int itemTotalPrice = items[i]->getTotalPrice();
+            int itemTotalPrice = items[i].getTotalPrice();
 
             /// Delete the order item from the array
-            delete items[i];
+            //delete items[i];
 
             // Shift the remaining items to fill the gap
             //for (int j = i; j < c_orderItem - 1; j++) {
@@ -453,7 +468,8 @@ istream& operator>>(istream& in, Order& r)
         }
 
         cout << "Do You Want To Add Another Item [y/n] ";
-        ch = _getch();
+        // ch = getch();
+        cin >>ch;
     }
     while (ch == 'y' || ch == 'Y');
 
@@ -462,15 +478,18 @@ istream& operator>>(istream& in, Order& r)
 
 ostream& operator<<(ostream& out, Order& r)
 {
+    out <<"+----------------------------------+"<<endl;
+    out << "| Order ID: " << setw(23) << setfill(' ') << r.OrderID << " |" << endl;
+    out << "| Date: "   << r.date  ;
+    out << "| Status: " << setw(25) << setfill(' ') << r.status << " |" << endl;
+    out << "| Total Price: " << setw(20) << setfill(' ') << r.totalPrice << " |" << endl;
+    out <<"+----------------------------------+"<<endl;
 
-    out << "Order ID: " << r.OrderID << endl;
-    out << "Date: " << r.date << endl;
-    out << "Status: " << r.status << endl;
-    out << "Total Price: " << r.totalPrice << endl;
     //out << "Name of Customer: " << r.NameOfCustomer << endl;
     cout << "Do You Need To Display Items? [Y/N]";
     char ch;
-    ch = _getch();
+    // ch = getch();
+    cin >>ch;
     if(ch=='Y'||ch=='y')
     {
         out << "\"Order Items\"" << endl;
@@ -540,4 +559,3 @@ void Order::printOrder()
     else
         printOrderofPatientOutsideClinic();
 }
-

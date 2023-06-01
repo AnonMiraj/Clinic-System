@@ -36,7 +36,7 @@ public:
     friend istream& operator>>(istream& is, Patient& patient);
     friend ostream& operator<<(ostream& os, const Patient& patient);
     bool operator==(const Patient &p);
-    bool operator==(const int id);
+    ///bool operator==(const int id);
 };
 
 

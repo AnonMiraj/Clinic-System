@@ -119,7 +119,7 @@ void Doctor::readPeroids(){
 }
 void Doctor::saveInfo(){
   ofstream  oupt;
-  oupt.open("inputDoctors.txt",ios::app);
+  oupt.open("./data/inputDoctors.txt",ios::app);
   if (oupt.is_open()) {
     oupt<<this->getId()<<endl;
     oupt<<this->getName()<<endl;
@@ -200,7 +200,10 @@ Medical_Specialization* Doctor::getSpecialization()
 {
     return specialization;
 }
-
+//int Doctor::getDoctorId()
+//{
+//    return id;
+//}
 istream& operator>>(istream& is, Doctor& doctor) {
     is >> static_cast<Person&>(doctor);  // Call the base class operator>>
 

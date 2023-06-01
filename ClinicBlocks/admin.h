@@ -8,7 +8,7 @@
 #include "Medical_Specialization.h"
 #include "appointment.h"
 #include "prescription.h"
-//#include "Order.h"
+///#include "List_Of_Orders.h"
 #include <fstream>
 #include <ctime>
 #include <string>
@@ -18,7 +18,7 @@ using namespace std;
 
 class Admin {
 private:
-    //Order*ListOrders;
+    ///List_Of_Orders OrderList;
     Patient* patients;
     Doctor* doctors;
     Medical_Specialization* specializations;
@@ -57,8 +57,8 @@ public:
     void doctorsHistory();
     void printAllSpecs();
     void printSpecDoctors();
-    /// Orders
-    void addOrders();
+    void Doctors_SearchByName();
+
 
     void archiveDoctor();
     void unarchiveDoctor();
@@ -69,7 +69,7 @@ public:
     void viewAPP();
     void BeAttend();
     void cancelAPP();
-    int searchAppointment(int id);
+
   // resize dynamic arrays
     void resizeDoctor();
     void resizePatient();
@@ -90,10 +90,13 @@ public:
     void setInsurances();
     void getInsurances();
 
+    int searchAppointment(int id);
     int searchPatient(int);
     int searchDoctor(int);
     string getPatient_name(int in);
     string getDoctor_name(int in);
+    int searchAppoint_patient(int);
+    int returnValidInt(string);
 
     //print
     string printAvailableDay(const Doctor&);

@@ -41,7 +41,7 @@
 }
     void Medical_Specialization::saveInfo(){
   ofstream  oupt;
-  oupt.open("inputSpec.txt",ios::app);
+  oupt.open("./data/inputSpec.txt",ios::app);
   if (oupt.is_open()) {
     oupt<<this->getName()<<endl;
   }

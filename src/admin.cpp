@@ -10,9 +10,9 @@
 #include <string>
 #include <unistd.h>
 
-
 Admin::Admin()
 {
+    c_OrderList=0;
     patientCount = 0;
     doctorCount = 0;
     specializationCount = 0;
@@ -57,63 +57,185 @@ void Admin::addSpecialization()
     specializationCount++;
 }
 
+string Admin::printAvailableDay(const Doctor& d)
+{
+    using namespace std::chrono;
+    string ye = "", mo = "", da = "", DATE = ""; char ch;
+
+    bool IsNotValid;
+    do
+    {
+        IsNotValid = false;
+        try
+        {
+            cout << "\nEnter date (yyyy/mm/dd): ";
+            cin >> ye >> ch >> mo >> ch >> da;
+
+            if (!IsValid(ye, '1') || !IsValid(mo, '2') || !IsValid(da, '3'))
+                throw "\n";
+
+            if ((ye.size() != 4) || (stoi(mo) > 12) || (stoi(da) > 31))
+                throw "This date is invalid. :(\n";
+
+
+
+            break;
+        }
+        catch (const char* str)
+        {
+            IsNotValid = true;
+            cout << str;
+        }
+
+    } while (IsNotValid);
+
+    mo = (mo.size() == 1 ? "0"+mo : mo);
+    da = (da.size() == 1 ? "0"+da : da);
+    DATE = ye + "/" + mo + "/" + da;
+
+    // Get current local time
+    system_clock::time_point now = system_clock::now();
+    time_t ti = system_clock::to_time_t(now);
+    tm* t = localtime(&ti);
+    t->tm_year = std::stoi(ye) - 1900; // Adjusting the year
+    t->tm_mon = std::stoi(mo) - 1;    // Adjusting the month
+    t->tm_mday = std::stoi(da);       // Setting the day
+
+    mktime(t); // Normalize the time structure
+
+    int wday = t->tm_wday;
+    if (wday == 0) {
+        wday = 6;
+    } else {
+        wday -= 2;
+    }
+
+    int counter = 0;
+    if (d.availableDays[wday] == true)
+    {
+        cout<<endl <<DATE <<endl;
+        for (int j = 1; j < 48; j++)
+        {
+            if (!d.availablePeroids[j])
+                continue;
+
+            bool check = true;
+            for (int k=0; k <appointmentCount; k++)
+            {
+                if (appointments[k].getStatue() == "BOOKED" && appointments[k].getDate() == DATE && appointments[k].getPeriod_int() == j && *appointments[k].getDoctor() == d)
+                {
+                    check = false;
+                    break;
+                }
+            }
+
+            if (check)
+            {
+                if (counter % 5 == 0)
+                    cout << endl;
+                counter++;
+                cout << "| " << j << "- " << getPeriod(j) << "  ";
+            }
+        }
+
+        if (counter == 0)
+            {
+                cout << "There is no available period on this day :(\n";
+                DATE = "00";
+            }
+    }
+    else
+        {
+            cout << "This day is not available for the doctor :(\n";
+            DATE = "00";
+        }
+
+    return DATE;
+}
+
 void Admin::addAppointment()
 {
     resizeappoint();
-    cout<<endl<<appointmentCount<<endl;
     appointments[appointmentCount] = Appointment(appointmentCount+1);
 
     //choose doctor
     int dID;
-    cout<<"Enter doctor id : "; cin>>dID;
-    cout<<doctors[dID-1];
-    appointments[appointmentCount].setDoctor(doctors[dID-1]);
-
-
-
-    //choose appointment
-    int day, period;
-    //printDayNames(doctors[dID-1].getAvailableDays(), 49);
-    //printPeriodTimes(doctors[dID-1].getAvailablePeroids(), 8);
-    
-    // check if at this day , this appointment is exist ? 
-    // check for all book appointments
-    bool check = false;
     do
     {
-        cout<<"Enter a number of period : "; cin >> period;
-        appointments[appointmentCount].setPeriod(period);
-        cout<<"Enter a day number : "; cin>>day;
-        appointments[appointmentCount].setDate(day);
-    
-        for (int i=0; i<appointmentCount-1; i++)
-            if (appointments[i] == appointments[appointmentCount])
+        dID = returnValidInt("Enter Doctor id : ");
+        if (searchDoctor(dID)== -1)
+            cout<<"This Id is not exist :(\n\n";
+        else
+            break;
+    } while (true);
+
+    appointments[appointmentCount].setDoctor(doctors[dID-1]);
+
+    cout<<"Doctor's name : " <<doctors[dID-1].getName()
+        <<"\nSpecialization : " <<doctors[dID-1].getSpecialization()->getName()
+        <<"\nAppointment fee : " <<doctors[dID-1].getAppointmentFee();
+
+    //choose appointment
+    int period;
+    //printDayNames(doctors[dID-1].getAvailableDays(), 8);
+    //printPeriodTimes(doctors[dID-1].availablePeroids, 49);
+    string ava;
+    do
+    {
+        ava = printAvailableDay(doctors[dID-1]);
+    } while (ava == "00");
+    appointments[appointmentCount].setDate(ava);
+
+    // is valid function to check if the period number if availbale this day
+    // you need to return an array from function to what you must choose from
+    string w;
+    do
+    {
+        cout<<"\nEnter period number : "; cin>>w;
+    } while (IsValid(1,48,w) == -1);
+    period = stoi(w);
+    appointments[appointmentCount].setPeriod(period);
+
+        /*
+            for (int i=0; i<appointmentCount-1; i++)
+            if (appointments[i] == appointments[appointmentCount] && appointments[i].getStatue() != "CANCELLED")
             {
                 check = true;
-                cout<<"\nThis date is already booked :(\nPlease, enter a new date";
+                cout<<"\nThis date is already booked :(\nPlease, enter a new date\n";
                 break;
             }
-
-        }while (check);
+        */
 
     //choose patient
-    int pID
-    cout<<"Enter patient id : ";
-    cin>>pID;
+    int pID;
+    do
+    {
+        pID = returnValidInt("Enter Patient ID : ");
+        if (searchPatient(pID) == -1)
+            cout<<"This Id is not exist :(\n\n";
+        else
+            break;
+    } while (true);
+
     appointments[appointmentCount].setPatient(patients[pID-1]);
 
     //pay to book the appointment
 
     appointments[appointmentCount].setStatue(1);
     appointmentCount++;
-    doctors[dID].setAvailableDays(day,false);
-    doctors[dID].setAvailablePeroids(period,false);
 }
 
 void Admin::viewAPP()
 {
     int ID;
-    cout<<"Enter your Appointment id : "; cin>>ID;
+    do
+    {
+        ID = returnValidInt("Enter your Appointment id : ");
+
+        if (searchAppointment(ID) == -1) cout<<"This Id is not exist :(\n";
+        else break;
+    } while (true);
+
     cout<<appointments[ID-1];
     }
 
@@ -148,19 +270,22 @@ p:
 
 void Admin::cancelAPP()
 {
-    int id;
-    cout<<"Enter Appointment Id: ";
-    cin>>id;
+    int id; string w;
+    do
+    {
+        id = returnValidInt("Enter your Appointment id : ");
+
+        if (searchAppointment(id)== -1) cout<<"This Id is not exist :(\n";
+        else break;
+    } while (true);
 
     if(appointments[id-1].getStatue() == "BOOKED")
     {
         appointments[id-1].setStatue(0);
-        appointments[id-1].getDoctor()->setAvailablePeroids(appointments[id-1].getPeriod_int(),true);
-        appointments[id-1].getDoctor()->setAvailablePeroids(appointments[id-1].getDate_wday(),true);    
     }
-    
-    else 
-        cout<<"You cancel the appointment. it's " <<appointments[id-1].getStatue() <<"\n";
+
+    else
+        cout<<"You can't cancel the appointment. it's " <<appointments[id-1].getStatue() <<"\n";
 }
 
 int Admin::searchAppointment(int id)
@@ -171,19 +296,43 @@ int Admin::searchAppointment(int id)
     return -1;
 }
 
+int Admin::returnValidInt(string msg)
+{
+    string w;
+    do
+    {
+        cout<<msg;
+        cin>>w;
+    } while (!IsValid(w,'1'));
+
+    return stoi(w);
+}
+
 void Admin::editPatient()
 {
     int id;
-    cout<<"Enter patient Id: ";
-    cin>>id;
+    do
+    {
+        id = returnValidInt("Enter your Patient id : ");
+
+        if (searchPatient(id)== -1) cout<<"This Id is not exist :(\n";
+        else break;
+    } while (true);
+
     patients[id-1].editInfo();
 }
 
 void Admin::editSpecialization()
 {
-    int id;
-    cout<<"Enter patient Id: ";
-    cin>>id;
+    int id; string w;
+    do
+    {
+        id = returnValidInt("Enter your Appointment id : ");
+
+        if (searchPatient(id)== -1) cout<<"This Id is not exist :(\n";
+        else break;
+    } while (true);
+
     specializations[id-1].editInfo();
 }
 
@@ -242,33 +391,28 @@ void Admin::addDoctor()
 
 void Admin::viewDoctor()
 {
-    int ID;
-    cout<<"Enter your id : "; cin>>ID;
+    int ID = returnValidInt("Enter Doctor ID : ");
     cout<<doctors[ID-1];
 
 }
 
 void Admin::editDoctor()
 {
-    int id;
-    cout<<"Enter doctors Id: ";
-    cin>>id;
+    int id = returnValidInt("Enter Doctor ID : ");
     doctors[id-1].editInfo();
 }
 
 void Admin::archiveDoctor()
 {
-    int doctorIndex;
-    cout<<"Enter the doctor id: ";
-    cin>>doctorIndex;
+    int doctorIndex = returnValidInt("Enter Doctor ID : ");
     doctors[doctorIndex-1].setAracived(true);
 
 }
 
 void Admin::unarchiveDoctor()
 {
-    int archiveIndex;
-    cout<<"Enter the archived Doctor id: ";
+    int archiveIndex = returnValidInt("Enter the archived Doctor id : ");;
+    cout<<"Enter the archived Doctor id : ";
     cin>>archiveIndex;
     doctors[archiveIndex-1].setAracived(false);
 }
@@ -310,11 +454,31 @@ void Admin::printAllSpecs()
 
 }
 
+void Admin::printSpecDoctors()
+{
+    int id = returnValidInt("Enter specialization Id: ");
+    cout<<"\n +++ " <<specializations[id-1].getName() <<" +++\n";
+
+    for(int i=0;i<doctorCount;i++)
+    {
+        if(*doctors[i].getSpecialization() == specializations[id-1])
+        {
+            cout<<"\n****************************************\n";
+            cout<<"ID : " <<doctors[i].getId() <<endl;
+            cout<<"NAME: "<<doctors[i].getName()<<endl;
+            cout<<"Fee: "<<doctors[i].getAppointmentFee()<<endl;
+            cout<<"Available Days: "; printDayNames(doctors[i].availableDays,8);
+            cout<<"\nAvailable Periods: "; printPeriodTimes(doctors[i].availablePeroids,49);
+            cout<<"\nRate: "<<doctors[i].getRatingSum();
+            cout<<"\n****************************************\n";
+
+        }
+    }
+}
+
 void Admin::patientHistory()
 {
-    int id;
-    cout<<"Enter patient Id: ";
-    cin>>id;
+    int id = returnValidInt("Enter Patient ID : ");
 
 
     for(int i=0; i<appointmentCount; i++)
@@ -332,9 +496,7 @@ void Admin::patientHistory()
 
 void Admin::doctorsHistory()
 {
-    int id;
-    cout<<"Enter Doctor Id: ";
-    cin>>id;
+    int id = returnValidInt("Enter Doctor ID : ");
 
 
     for(int i=0; i<appointmentCount; i++)
@@ -350,7 +512,8 @@ void Admin::doctorsHistory()
     }
 }
 
-void Admin::resizeDoctor(){
+void Admin::resizeDoctor()
+{
       if (doctorCount == maxDoctors)
     {
         // Resize the array if it's full
@@ -365,7 +528,8 @@ void Admin::resizeDoctor(){
     }
 }
 
-void Admin::resizePatient(){
+void Admin::resizePatient()
+{
     if (patientCount == maxPatients)
     {
         // Resize the array if it's full
@@ -382,7 +546,8 @@ void Admin::resizePatient(){
 
 }
 
-void Admin::resizespecial(){
+void Admin::resizespecial()
+{
     if (specializationCount == maxSpecialization)
     {
         // Resize the array if it's full
@@ -398,7 +563,8 @@ void Admin::resizespecial(){
 
 }
 
-void Admin::resizeappoint(){
+void Admin::resizeappoint()
+{
       if (appointmentCount == maxAppointment)
     {
         // Resize the array if it's full
@@ -412,13 +578,15 @@ void Admin::resizeappoint(){
         maxAppointment *= 2;
     }
 }
+
+
 // loader from files
 void Admin::loadDoctor()
 {
     int id,age,expYears,specializationID,salary,fee,archive;
     string name,gender,blood,phone,address,avalDay,avalHour,date;
     ifstream inp;
-    inp.open("inputDoctors.txt");
+    inp.open("./data/inputDoctors.txt");
     if(inp.is_open())
         while (inp>>id)
         {
@@ -461,7 +629,7 @@ void Admin::loadPatient()
     string name,gender,blood,phone,address,emergency;
     ifstream inp;
 
-    inp.open("inputPatient.txt");
+    inp.open("./data/inputPatient.txt");
     if(inp.is_open())
         while (inp>>id)
         {
@@ -488,7 +656,7 @@ void Admin::loadPatient()
 void Admin::loadSpecial()
 {
     string name;
-    ifstream inp("inputSpec.txt");
+    ifstream inp("./data/inputSpec.txt");
 
     if(inp.is_open())
         while (getline(inp,name))
@@ -504,10 +672,11 @@ void Admin::loadSpecial()
 
 }
 
-void Admin::loadAppointment(){
+void Admin::loadAppointment()
+{
   string date;
   int period,patientId,doctorId,statue;
-      ifstream inp("inputAppoint.txt");
+      ifstream inp("./data/inputAppoint.txt");
 
     if(inp.is_open())
         while (inp>>date)
@@ -526,10 +695,11 @@ void Admin::loadAppointment(){
 
 }
 
-void Admin::loadPrescription(){
+void Admin::loadPrescription()
+{
   string dose,medic;
   int appointmentId,quantity,prescCount;
-      ifstream inp("inputPresc.txt");
+      ifstream inp("./data/inputPresc.txt");
 
     if(inp.is_open())
         while (inp>>appointmentId)
@@ -562,36 +732,36 @@ void Admin::load()
 
 void Admin::save()
 {
-    ofstream ofs ("inputPatient.txt", std::ios::out | std::ios::trunc); // clear contents
+    ofstream ofs ("./data/inputPatient.txt", std::ios::out | std::ios::trunc); // clear contents
     ofs.close();
 
     for (int i = 0; i < patientCount; i++)
     {
         patients[i].saveInfo();
     }
-    ofs.open("inputDoctors.txt", std::ios::out | std::ios::trunc);
+    ofs.open("./data/inputDoctors.txt", std::ios::out | std::ios::trunc);
     ofs.close();
     for (int i = 0; i < doctorCount; i++)
     {
         doctors[i].saveInfo();
     }
-    ofs.open("inputSpec.txt", std::ios::out | std::ios::trunc);
+    ofs.open("./data/inputSpec.txt", std::ios::out | std::ios::trunc);
     ofs.close();
     for (int i = 0; i < specializationCount; i++)
     {
       specializations[i].saveInfo();
     }
 
-    ofs.open("inputAppoint.txt", std::ios::out | std::ios::trunc);
+    ofs.open("./data/inputAppoint.txt", std::ios::out | std::ios::trunc);
     ofs.close();
 
-    ofs.open("inputPresc.txt", std::ios::out | std::ios::trunc);
+    ofs.open("./data/inputPresc.txt", std::ios::out | std::ios::trunc);
     ofs.close();
 
     for (int i = 0; i < appointmentCount; i++)
     {
       ofstream  oupt2;
-      oupt2.open("inputPresc.txt",ios::app);
+      oupt2.open("./data/inputPresc.txt",ios::app);
       oupt2<<i+1<<endl;
       oupt2.close();
       appointments[i].saveInfo();
@@ -610,11 +780,44 @@ void Admin::getInsurances()
 }
 
 
-//seerch
+void Admin::Doctors_SearchByName()
+{
+    int c = 0;
+    string s; cout<<"\nEnter a name or part to search : "; cin>>s;
+
+    int len = s.size();
+
+    for (int i=0; i<doctorCount; i++)
+    {
+        string name = doctors[i].getName();
+
+        for (int j=0; j<=name.size()-len; j++)
+        {
+
+            string sub= name.substr(j,len);
+            /*for (int k=j; k<j+len; k++) //substr
+                sub += name[k];*/
+
+            if (s == sub)
+                {
+                    cout<<"\n##########################\n";
+                    cout<<doctors[i];
+                    cout<<"\n##########################\n";
+                    c++;
+                    break;
+                }
+        }
+    }
+
+    if (c == 0)
+        cout<<"\nThere is no Doctors at this name :(\n";
+}
+
+//search
 int Admin::searchPatient(int id)
 {
     for (int i=0; i<patientCount; i++)
-        if (patients[i] == patients[id])
+        if (patients[i].getId() == id)
             return i;
 
     return -1;
@@ -632,8 +835,19 @@ string Admin::getDoctor_name(int in)
 
 int Admin::searchDoctor(int id)
 {
-    for (int i=0; i<patientCount; i++)
-        if (doctors[i] == doctors[id])
+    for (int i=0; i<doctorCount; i++)
+        if (doctors[i].getId() == id)
+        {
+            return i;
+        }
+
+    return -1;
+}
+
+int Admin::searchAppoint_patient(int id)
+{
+    for (int i=0; i<appointmentCount; i++)
+        if (*appointments[i].getPatient() == patients[i] && appointments[i].getStatue() != "CANCELLED")
             return i;
 
     return -1;

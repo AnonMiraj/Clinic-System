@@ -41,7 +41,7 @@ void Patient::setEmergencyContact(const string& emergencyContact) {
 }
 void Patient::saveInfo(){
   ofstream  oupt;
-  oupt.open("inputPatient.txt",ios::app);
+  oupt.open("./data/inputPatient.txt",ios::app);
   if (oupt.is_open()) {
     oupt<<this->getId()<<endl;
     oupt<<this->getName()<<endl;
@@ -123,7 +123,7 @@ bool Patient::operator==(const Patient &p)
 {
     return this->getId() == p.getId();
 }
-bool Patient::operator==(const int id)
-{
-    return this->getId() == id;
-}
+//bool Patient::operator==(const int id)
+//{
+//    return this->getId() == id;
+//}

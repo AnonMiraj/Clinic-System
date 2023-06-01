@@ -1,4 +1,5 @@
 #include "Medcin.h"
+#include <string>
 
 // Default constructor
 Medcin::Medcin():id(0),price(0),name("Unkown"),brand("Unkown")
@@ -56,49 +57,46 @@ void Medcin::setBrand(const string& brand) {
 void Medcin::Edit()
 {
     cout << "Edit Medcin:" << endl;
-    cout << "1. Name" << endl;
-    cout << "2. Brand" << endl;
-    cout << "3. id" << endl;
-    cout << "4. price" << endl;
-    cout << "Enter your choice (1-4): ";
 
-    int choice;
-    cin >> choice;
 
     string newValue;
+    // Print the ID
+    cout << "| ID: " << setw(30) << setfill(' ') << id << " |" << endl;
+    cout << "ID: (you can press enter to skip)";
+    getline(cin,newValue);
+    if (newValue!=""){
+    this->setId(stoi(newValue));
+  }
+
+    // Print the name
+    cout << "| Name: " << setw(28) << setfill(' ') << name << " |" << endl;
+    cout << "Name: ";
+    getline(cin,newValue);
+    if (newValue!=""){
+    this->setName(newValue);
+  }
 
 
-    switch (choice) {
-    case 1:
-        cout << "Enter new value: ";
-        cin.ignore(); // Ignore the newline character from previous input
-        getline(cin, newValue);
-        setName(newValue);
-        break;
-    case 2:
-        cout << "Enter new value: ";
-        cin.ignore(); // Ignore the newline character from previous input
-        getline(cin, newValue);
-        setBrand(newValue);
-        break;
-    case 3:
-        int i;
-        cout << "Enter Id:";
-        cin >> i;
-        setId(i);
-        break;
-    case 4:
-        int p;
-        cout << "Enter Price: ";
-        cin >> p;
-        setPrice(p);
-        break;
+    // Print the brand
+    cout << "| Brand: " << setw(27) << setfill(' ') << brand << " |" << endl;
+    cout << "Brand: "; 
+    getline(cin,newValue);
+    if (newValue!=""){
+    this->setBrand(newValue);
+  }
 
-    default:
-        cout << "Invalid choice. No changes made." << endl;
-        return;
-    }
-    cout << "Medcin updated successfully." << endl;
+
+    // Print the price
+    cout << "| Price: " << setw(27) << setfill(' ') << price << " |" << endl;
+    cout << "Price: ";
+    getline(cin,newValue);
+    if (newValue!=""){
+    this->setId(stoi(newValue));
+  }
+
+
+
+
 }
 
 

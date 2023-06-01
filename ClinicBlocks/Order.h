@@ -20,7 +20,7 @@ private:
     string NameOfdoctor;
     string date;
 
-    bool inside;
+    bool inside;/// check if patient inside or outside clinic
     int OrderID;
     int number;
     int totalPrice;
@@ -29,8 +29,9 @@ private:
     int DoctorId;
 
     Stock* stk;
-    orderItem** items;
+    orderItem* items;
     Admin* ptrAdmin;
+
 public:
 
     Order();
@@ -65,7 +66,7 @@ public:
     int searchIdItems(int id);
     bool CreateOrderInsideClinic(Stock* s,Admin*a,int id,int index);
     bool CreateOrderOutsideClinic(Stock* s,Admin*a,int id,int index);
-    bool CreateOrder(Stock* s,Admin*a,Appointment*appoint);
+    bool CreateOrder(Stock* s,Admin*a);
 
 
 

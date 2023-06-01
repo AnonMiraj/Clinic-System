@@ -1,5 +1,14 @@
 #include "other.h"
 
+string getPeriod(int period)
+{
+    if (period % 2 == 1)
+        return (period/2<10 ? "0" :"" )+  to_string(period / 2) + ":00 - " + to_string(period/2) + ":30";
+
+    return (period/2<10 ? "0" :"" )+ to_string(period / 2 - 1) + ":30 - " + (period == 48 ? "0" : to_string(period / 2)) + ":00";
+
+}
+
 string IsValid(string word)
 {
   bool IsNotValid = false;
@@ -132,7 +141,7 @@ int IsValid(int small, int big, string num)
         {
 
             for (int i = 0; i < num.size(); i++)
-                if (!isdigit(num[i]) && num[i]!='-')
+                if (!isdigit(num[i]) && (num[i]!='-' || num.size()==1) )
                 {
                     IsNotValid = true; break;
                 }
@@ -240,9 +249,10 @@ void setIndexesToTrue(bool arr[], int size,string input) {
 
 void printDayNames(const bool arr[], int size ) {
     const string daysOfWeek[] = {
-         "","Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+         "","1-Saturday, ", "2-Sunday, ", "3-Monday, ", "4-Tuesday, ", "5-Wednesday, ", "6-Thursday, ", "7-Friday"
     };
 
+    cout<<"Days : ";
     for (int i = 1; i < size; ++i) {
         if (arr[i]) {
             cout << daysOfWeek[i] << " ";
@@ -279,7 +289,9 @@ void printPeriodTimes( const bool arr[], int size) {
                 cout << setfill('0') << setw(2) << startHour << ":"
                           << setw(2) << startMinutes << " - "
                           << setw(2) << endHour << ":"
-                          << setw(2) << endMinutes << " ";
+                          << setw(2) << endMinutes;
+                if (i != size-1)
+                    cout<<" , ";
 
                 isInPeriod = false;
             }
@@ -299,7 +311,7 @@ void printPeriodTimes( const bool arr[], int size) {
         cout << setfill('0') << setw(2) << startHour << ":"
                   << setw(2) << startMinutes << " - "
                   << setw(2) << endHour << ":"
-                  << setw(2) << endMinutes << " ";
+                  << setw(2) << endMinutes;
     }
 
     cout << endl;

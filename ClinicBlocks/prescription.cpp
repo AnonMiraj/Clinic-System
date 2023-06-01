@@ -36,7 +36,7 @@ void Prescription::setQuantity(int quantity) {
 }
 void Prescription::saveInfo(){
   ofstream  oupt;
-  oupt.open("inputPresc.txt",ios::app);
+  oupt.open("./data/inputPresc.txt",ios::app);
   if (oupt.is_open()) {
     oupt<<this->getMedication()<<endl;
     oupt<<this->getDosage()<<endl;

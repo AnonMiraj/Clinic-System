@@ -41,7 +41,7 @@
 }
     void Medical_Specialization::saveInfo(){
   ofstream  oupt;
-  oupt.open("inputSpec.txt",ios::app);
+  oupt.open("./data/inputSpec.txt",ios::app);
   if (oupt.is_open()) {
     oupt<<this->getName()<<endl;
   }
@@ -62,7 +62,7 @@
 
     // Overloading == operator
     bool Medical_Specialization::operator==(const Medical_Specialization& other) {
-        return (id == other.id && name == other.name);
+        return id == other.id;
     }
 
     Medical_Specialization& Medical_Specialization::operator++() {

@@ -77,7 +77,6 @@ void Appointment::setDate(int wday)
             t->tm_mday = stoi(d);
 
             da = system_clock::to_time_t(system_clock::from_time_t(mktime(t)));
-            cout<<endl <<t->tm_wday <<endl;
 
             if (t->tm_wday != wday)
                 throw "This day is not a valid day for the doctor. :(\n";
@@ -96,14 +95,18 @@ void Appointment::setDate(int wday)
     t->tm_min = stoi(period.substr(3, 1));
 
     da = system_clock::to_time_t(system_clock::from_time_t(mktime(t)));
-    
+
     // modify date to " 2023/06/04 " form
     m = (m.size() == 1 ? "0"+m : m);
     d = (d.size() == 1 ? "0"+d : d);
-    
+
     date = y + "/" + m + "/" + d;
 }
 
+void Appointment::setDate(string d)
+{
+    date = d;
+}
 
 
 string Appointment::getDate() const
@@ -155,7 +158,9 @@ void Appointment::setPrescription(const Prescription& p)
 {
     *prescription = p;
 }
-
+int Appointment::getPrescriptionCount()const{
+  return prescriptionCount;
+}
 Prescription* Appointment::getPrescription() const
 {
     return prescription;
@@ -213,9 +218,9 @@ void Appointment::addPrescription(string medic,string dose,int quantity){
 
 void Appointment::saveInfo(){
   ofstream  oupt;
-  oupt.open("inputAppoint.txt",ios::app);
+  oupt.open("./data/inputAppoint.txt",ios::app);
   ofstream  oupt2;
-  oupt2.open("inputPresc.txt",ios::app);
+  oupt2.open("./data/inputPresc.txt",ios::app);
   if (oupt.is_open()) {
 
     oupt<<this->getDate()<<endl;
@@ -251,10 +256,11 @@ ostream& operator<< (ostream& out, const Appointment& a)
 
 bool Appointment::operator== (const Appointment& a)
 {
-    return (date == a.date && period == a.period);
+    return (date == a.date && period == a.period && doctor == a.doctor);
 }
 
 bool Appointment::operator>(const Appointment& a)
 {
     return this->date > a.date;
 }
+

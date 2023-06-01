@@ -1,7 +1,5 @@
-
 #ifndef DOCTOR_H
 #define DOCTOR_H
-
 #include <sstream>
 #include <string>
 #include <iomanip>
@@ -43,7 +41,7 @@ public:
     bool getAracived() const;
     string getDateJoined() const;
     int getAppointmentFee() const;
-
+    //int getDoctorId();
     // Setters
     void setSalary(int salary);
     void setSpecialization( Medical_Specialization& specialization);
