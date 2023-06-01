@@ -534,7 +534,7 @@ int main()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU ....", 1);
-        c = get_menu_choise("ADMIN HUB,DOCTOR MANAGEMENT,PATIENT MANAGEMENT,PHARMACY MANAGEMNET,debug",
+        c = get_menu_choise("ADMIN HUB,DOCTOR MANAGEMENT,PATIENT MANAGEMENT,PHARMACY MANAGEMNET",
                             0);
 
         switch (c)
@@ -552,10 +552,10 @@ int main()
             sub_menu_4_pharmacy_hub();
             break;
 
-        case 5:
+        /*case 5:
             cout<<*Hospital;
             _pause();
-            break;
+            break;*/
         case 0:
             printline("\n\n\a\t\t\tGoodbye :)......\n\n\n\n\n\n", 1);
             break;
