@@ -153,6 +153,19 @@ string Admin::printAvailableDay(const Doctor& d)
     return DATE;
 }
 
+void Admin::Invoice(int id)
+{
+    int fee = appointments[id].getDoctor()->getAppointmentFee() ;
+    int index_ins = appointments[id].getPatient()->getInsurance();
+    cout<<"\n+---------------------------+\n"
+        <<"        Your invoice      \n"
+        <<"Fee : " <<fee
+        <<"\nInsurance : " <<insurances.getType(index_ins) <<" " <<insurances.getCoverage(index_ins)*100 <<"%"
+        <<"\nTotal invoice : " <<fee - insurances.getCoverage(index_ins)*fee
+        <<"\n+---------------------------+\n";
+}
+
+
 void Admin::addAppointment()
 {
     resizeappoint();
@@ -196,15 +209,6 @@ void Admin::addAppointment()
     period = stoi(w);
     appointments[appointmentCount].setPeriod(period);
 
-        /*
-            for (int i=0; i<appointmentCount-1; i++)
-            if (appointments[i] == appointments[appointmentCount] && appointments[i].getStatue() != "CANCELLED")
-            {
-                check = true;
-                cout<<"\nThis date is already booked :(\nPlease, enter a new date\n";
-                break;
-            }
-        */
 
     //choose patient
     int pID;
@@ -220,6 +224,9 @@ void Admin::addAppointment()
     appointments[appointmentCount].setPatient(patients[pID-1]);
 
     //pay to book the appointment
+    Invoice(appointmentCount);
+
+    //
     appointments[appointmentCount].setStatue(1);
     appointmentCount++;
 }
@@ -236,7 +243,8 @@ void Admin::viewAPP()
     } while (true);
 
     cout<<appointments[ID-1];
-    }
+    Invoice(ID-1);
+}
 
 void Admin::BeAttend()
 {

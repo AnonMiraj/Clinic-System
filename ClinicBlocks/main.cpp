@@ -424,7 +424,7 @@ void sub_sub_menu_5_View()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> PHARMACY HUB -> VIEW ....");
-        c = get_menu_choise("SHOW ALL ORDERS,PENDING ORDERS", 2);
+        c = get_menu_choise("SHOW ALL ORDERS,SHOW SPECIFIC ORDERS", 2);
         switch (c)
         {
         case 1:
@@ -433,7 +433,21 @@ void sub_sub_menu_5_View()
             break;
 
         case 2:
+            {
+                string id;
+                do
+                {
+                    cout<<"Enter Order ID To Show : ";
+                    cin>>id;
+                }while (!IsValid(id,'1'));
+                int index = OrderList->searchOrder(stoi(id));
+
+                if (index != -1)
+                    OrderList->printSpecificOrder(index);
+                else
+                    cout<<"There is ID isn't exist :(\n";
             _pause();
+            }
             break;
 
         case 0:

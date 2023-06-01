@@ -105,13 +105,13 @@ ostream& operator<<(ostream& os, const Patient& patient) {
             os << "No Medical Insurance" << endl;
             break;
         case 1:
-            os << "Basic" << endl;
+            os << "Basic 10%" << endl;
             break;
         case 2:
-            os << "Premium" << endl;
+            os << "Premium 25%" << endl;
             break;
         case 3:
-            os << "Standard" << endl;
+            os << "Standard 50%" << endl;
             break;
     }
     os << "Emergency Contact: " << patient.emergencyContact << endl;
@@ -123,6 +123,7 @@ bool Patient::operator==(const Patient &p)
 {
     return this->getId() == p.getId();
 }
+
 //bool Patient::operator==(const int id)
 //{
 //    return this->getId() == id;

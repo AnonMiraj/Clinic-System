@@ -21,6 +21,7 @@ public:
 
     void addOrder(Admin*ptr,Stock*s);
     void removeOrder(int orderId);
+    void printSpecificOrder(int);
     void printAllOrders();
     int searchOrder(int id);
     void editOrder(int);

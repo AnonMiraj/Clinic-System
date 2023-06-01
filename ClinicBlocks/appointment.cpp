@@ -182,24 +182,8 @@ string  Appointment::getStatue() const
     return "ATTEND";
 }
 
-/*void Appointment::editinfo()
+void Appointment::addPrescription(string medic,string dose,int quantity)
 {
-    cout << "Salary: " << salary << endl;
-    string newSalary;
-    getline(cin, newSalary);
-    if (!newSalary.empty()) {
-        salary = stod(newSalary);
-    }
-
-    cout << "Experience: " << experience << " years" << endl;
-    string newExperience;
-    getline(cin, newExperience);
-    if (!newExperience.empty()) {
-        experience = stoi(newExperience);
-    }
-}*/
-
-void Appointment::addPrescription(string medic,string dose,int quantity){
     if (prescriptionCount == prescriptionSize)
     {
         // Resize the array if it's full

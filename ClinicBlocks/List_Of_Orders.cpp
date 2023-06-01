@@ -65,6 +65,11 @@ void List_Of_Orders::removeOrder(int orderId)
     }
 }
 
+void List_Of_Orders::printSpecificOrder(int i)
+{
+    orders[i].printOrder();
+}
+
 void List_Of_Orders::printAllOrders()
 {
     for(int i=0; i<c_orders; i++)
