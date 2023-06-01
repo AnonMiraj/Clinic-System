@@ -200,7 +200,10 @@ Medical_Specialization* Doctor::getSpecialization()
 {
     return specialization;
 }
-
+//int Doctor::getDoctorId()
+//{
+//    return id;
+//}
 istream& operator>>(istream& is, Doctor& doctor) {
     is >> static_cast<Person&>(doctor);  // Call the base class operator>>
 

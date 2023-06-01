@@ -835,9 +835,11 @@ string Admin::getDoctor_name(int in)
 
 int Admin::searchDoctor(int id)
 {
-    for (int i=0; i<patientCount; i++)
+    for (int i=0; i<doctorCount; i++)
         if (doctors[i].getId() == id)
+        {
             return i;
+        }
 
     return -1;
 }

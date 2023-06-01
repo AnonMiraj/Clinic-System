@@ -172,10 +172,8 @@ p:
 
     do
     {
-        cout << "Enter item Id: ";
-        int id;
-        cin >> id;
-        if (items[c_orderItem]->setOrderItem(id, s))
+
+        if (items[c_orderItem]->setOrderItem( s))
         {
             setPatientIdInOrder(idPatient);
 
@@ -259,14 +257,12 @@ bool Order::CreateOrderInsideClinic(Stock*s,Admin*Hospital,int p_id,int index)//
 
     /// To Return Enter The Value (Return Again)
 
-
-
 v:
     int d_id;
     cout << "Enter Id Of Doctor: ";
     cin>>d_id;
-    int indexofDoctor =Hospital->searchDoctor(d_id) ;
-    if(index==-1)
+    int indexofDoctor =Hospital->searchDoctor(d_id);
+    if(indexofDoctor==-1)
     {
         system("Color 04");
         cout<<"Srry, This Id Doctor Not Exist ):"<<endl;
@@ -285,32 +281,42 @@ v:
     setDoctorIdInOrder(d_id);    /// To Add ID Doctor In Order
 
     setDate();
+    int c=0;
     int id;
     cout << "Enter Id OF Order: ";
     cin >> id;
 
     do
     {
-        cout << "Enter item Id: ";
-        int id;
-        cin >> id;
-        if (items[c_orderItem]->setOrderItem(id, s))
+        //cout<<"\n";
+        //cout << "Enter item Id: ";
+        //int id;
+        //cin >> id;
+
+        if (items[c_orderItem]->setOrderItem(s))
         {
-            NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
-            NameOfdoctor=Hospital->getDoctor_name(indexofDoctor);
-            c_orderItem++;
-            totalPrice += items[c_orderItem]->calcTotalPrice();
-            return true;
+            totalPrice += items[c_orderItem++]->calcTotalPrice();
+            cout<<"Ezz"<<endl;
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
-        ch = _getch();
+        cin>>ch;
     }
     while (ch == 'y' || ch == 'Y');
 
-    if (c_orderItem > 0)
+
+
+    if (c_orderItem > 0) /// check if i add item or no
     {
-        setOrderId(id);
+    NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
+    NameOfdoctor=Hospital->getDoctor_name(indexofDoctor);///
+    setOrderId(id);
+     return true;
     }
+    else{
+
+        return false;
+    }
+
 }
 
 void Order::AddOrderItem(orderItem* item)

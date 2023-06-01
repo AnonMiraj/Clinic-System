@@ -23,12 +23,18 @@ void orderItem::setTotalPrice(double t)
     totalPriceOrderItem = t;
 }
 
-bool orderItem::setOrderItem(int id,Stock*s)
+bool orderItem::setOrderItem(Stock*s)
 {
+    b:
+        int id;
+        cout<<"Enter Item Id: ";
+        cin>>id;
     stk = s;
     int index= stk->SearchId(id);
+
    // cout << "Index: " << index;
     //system("pause");
+
     if (index != -1)
     {
         p:
@@ -43,7 +49,6 @@ bool orderItem::setOrderItem(int id,Stock*s)
             sale_price = stk->getSalePriceOfMedcin(index);
             cout << "This Item Added Successfully \n";
             stk->setQuantity((stk->getQuntitiy(id) - q), index); /// Error Exception
-            cout<<"Ahmed Mohsen";
             this->qunatityOrderItem = q;
             return true;
         }
@@ -65,6 +70,12 @@ bool orderItem::setOrderItem(int id,Stock*s)
     else
     {
         cout << "This Id Doesn't Exist ): \n";
+        cout<<"do You Want To add id item Again: [Y/N]";
+        char chh;
+        cin>>chh;
+        if (chh=='y'||chh=='Y')
+            goto b;
+        else
         return false;
     }
 }
