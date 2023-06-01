@@ -158,7 +158,9 @@ void Appointment::setPrescription(const Prescription& p)
 {
     *prescription = p;
 }
-
+int Appointment::getPrescriptionCount()const{
+  return prescriptionCount;
+}
 Prescription* Appointment::getPrescription() const
 {
     return prescription;
@@ -216,9 +218,9 @@ void Appointment::addPrescription(string medic,string dose,int quantity){
 
 void Appointment::saveInfo(){
   ofstream  oupt;
-  oupt.open("inputAppoint.txt",ios::app);
+  oupt.open("./data/inputAppoint.txt",ios::app);
   ofstream  oupt2;
-  oupt2.open("inputPresc.txt",ios::app);
+  oupt2.open("./data/inputPresc.txt",ios::app);
   if (oupt.is_open()) {
 
     oupt<<this->getDate()<<endl;

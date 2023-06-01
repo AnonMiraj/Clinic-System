@@ -1,0 +1,534 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class Admin {
+	+Admin()
+	+~Admin()
+	-appointments : Appointment*
+	-doctors : Doctor*
+	-insurances : Medical_Insurance
+	-specializations : Medical_Specialization*
+	-patients : Patient*
+	-appointmentCount : int
+	-c_OrderList : int
+	-doctorCount : int
+	-maxAppointment : int
+	-maxDoctors : int
+	-maxPatients : int
+	-maxSpecialization : int
+	-patientCount : int
+	+returnValidInt(string) : int
+	+searchAppoint_patient(int) : int
+	+searchAppointment(int id) : int
+	+searchDoctor(int) : int
+	+searchPatient(int) : int
+	-specializationCount : int
+	+operator<<(ostream& os, const Admin& admin) : ostream&
+	+getDoctor_name(int in) : string
+	+getPatient_name(int in) : string
+	+printAvailableDay(const Doctor &) : string
+	+BeAttend() : void
+	+DetDoctorFromSpec() : void
+	+Doctors_SearchByName() : void
+	+addAppointment() : void
+	+addDoctor() : void
+	+addDoctorToSpec() : void
+	+addPatient() : void
+	+addSpecialization() : void
+	+archiveDoctor() : void
+	+cancelAPP() : void
+	+doctorsHistory() : void
+	+editDoctor() : void
+	+editPatient() : void
+	+editSpecialization() : void
+	+getInsurances() : void
+	+load() : void
+	+loadAppointment() : void
+	+loadDoctor() : void
+	+loadPatient() : void
+	+loadPrescription() : void
+	+loadSpecial() : void
+	+patientHistory() : void
+	+printAllDoctors() : void
+	+printAllSpecs() : void
+	+printSpecDoctors() : void
+	+resizeDoctor() : void
+	+resizePatient() : void
+	+resizeappoint() : void
+	+resizespecial() : void
+	+save() : void
+	+setInsurances() : void
+	+unarchiveDoctor() : void
+	+viewAPP() : void
+	+viewAvailableDoctors() : void
+	+viewDoctor() : void
+}
+
+
+class Appointment {
+	+Appointment(int i)
+	+Appointment(int i, int period, string date, int statue)
+	+Appointment()
+	-doctor : Doctor*
+	+getDoctor() : Doctor* {query}
+	+getPatient() : Patient* {query}
+	-patient : Patient*
+	+getPrescription() : Prescription* {query}
+	-prescription : Prescription*
+	+operator==(const Appointment& a) : bool
+	+operator>(const Appointment& a) : bool
+	+getDate_wday() : int {query}
+	+getID() : int {query}
+	+getPeriod_int() : int {query}
+	-id : int
+	-period : int
+	-prescriptionCount : int
+	-prescriptionSize : int
+	-statue : int
+	+operator>>(istream& in, Appointment& a) : istream&
+	+operator<<(ostream& out, const Appointment& a) : ostream&
+	-date : string
+	+getDate() : string {query}
+	+getPeriod() : string {query}
+	+getStatue() : string {query}
+	+addPrescription(string medic, string dose, int quantity) : void
+	+saveInfo() : void
+	+setDate(int) : void
+	+setDate(string) : void
+	+setDoctor(Doctor& d) : void
+	+setPatient(Patient& p) : void
+	+setPeriod(const int& p) : void
+	+setPrescription(const Prescription& p) : void
+	+setStatue(int s) : void
+}
+
+
+class Cash {
+	+Cash()
+	+Cash(double)
+	+~Cash()
+	+Get_Cash() : Cash&
+	-CashValue : double
+	+operator>>(istream &, Cash &) : istream&
+	+Pay() : void
+	+Set_Cash(double) : void
+	+Update() : void
+}
+
+
+class Check {
+	+Check()
+	+Check(const char*, const char*)
+	+~Check()
+	+get_BankIdForCheck() : Check&
+	+get_NameCheck() : Check&
+	+operator>>(istream &, Check &) : istream&
+	-BankId : string
+	-nameCheck : string
+	+Pay() : void
+	+Update() : void
+	+set_BankIdForCheck(const char*) : void
+	+set_NameCheck(const char*) : void
+}
+
+
+class Doctor {
+	+Doctor()
+	+Doctor(int id, const string& name, int age, const string& gender, const string& bloodType, const string& phoneNumber, const string& address, int salary, int experience, int ratingSum, int appointmentCount, bool archived, const string& dateJoined, int appointmentFee)
+	+getSpecialization() : Medical_Specialization*
+	-specialization : Medical_Specialization*
+	-archived : bool
+	+availableDays : bool
+	+availablePeroids : bool
+	+getAracived() : bool {query}
+	+operator==(const Doctor& d) : bool
+	+operator==(const int id) : bool
+	+getAvailableDays() : bool*
+	+getAvailablePeroids() : bool*
+	-appointmentCount : int
+	-appointmentFee : int
+	-experience : int
+	+getAppointmentCount() : int {query}
+	+getAppointmentFee() : int {query}
+	+getExperience() : int {query}
+	+getRatingSum() : int {query}
+	+getSalary() : int {query}
+	+getSpecializationId() : int {query}
+	-ratingSum : int
+	-salary : int
+	+operator>>(istream& is, Doctor& doctor) : istream&
+	+operator<<(ostream& os, const Doctor& doctor) : ostream&
+	-dateJoined : string
+	+getDateJoined() : string {query}
+	+editInfo() : void
+	+readDays() : void
+	+readPeroids() : void
+	+saveInfo() : void
+	+setAppointmentCount(int appointmentCount) : void
+	+setAppointmentFee(int appointmentFee) : void
+	+setAracived(bool state) : void
+	+setAvailableDays(int, bool) : void
+	+setAvailablePeroids(int, bool) : void
+	+setDateJoined(const string& dateJoined) : void
+	+setExperience(int experience) : void
+	+setRatingSum(int rating) : void
+	+setSalary(int salary) : void
+	+setSpecialization(Medical_Specialization& specialization) : void
+}
+
+
+class List_Of_Orders {
+	+List_Of_Orders()
+	+~List_Of_Orders()
+	-ptrAdmin : Admin*
+	-ptrAppointment : Appointment*
+	-orders : Order*
+	-ptrStock : Stock*
+	-c_orders : int
+	-capacity : int
+	-size : int
+	+addOrder(Admin* ptr, Stock* s) : void
+	+editOrder() : void
+	+printAllOrders() : void
+	+removeOrder(int orderId) : void
+}
+
+
+class Medcin {
+	+Medcin()
+	+Medcin(int id, string name, string brand, int price)
+	+getId() : int {query}
+	+getPrice() : int {query}
+	-id : int
+	-price : int
+	+operator>>(istream &, Medcin& m) : istream&
+	+operator<<(ostream &, Medcin& m) : ostream&
+	-brand : string
+	+getBrand() : string {query}
+	+getName() : string {query}
+	-name : string
+	+Edit() : void
+	+setBrand(const string& brand) : void
+	+setId(int id) : void
+	+setName(const string& name) : void
+	+setPrice(const int& price) : void
+}
+
+
+class Medical_Specialization {
+	+Medical_Specialization()
+	+Medical_Specialization(int _id, string _name)
+	+operator++() : Medical_Specialization&
+	+operator==(const Medical_Specialization& other) : bool
+	+getId() : int {query}
+	+getQuantity() : int {query}
+	-id : int
+	-quantity : int
+	+operator>>(istream& in, Medical_Specialization& specialization) : istream&
+	+operator<<(ostream& out, const Medical_Specialization& specialization) : ostream&
+	+getName() : string {query}
+	-name : string
+	+editInfo() : void
+	+saveInfo() : void
+	+setId(int _id) : void
+	+setName(string _name) : void
+	+setQuantity(int _quantity) : void
+}
+
+
+class Order {
+	+Order()
+	+Order(int orderId, int num, string orderStatus, int total, string PatientName)
+	+~Order()
+	-ptrAdmin : Admin*
+	-stk : Stock*
+	+CreateOrder(Stock* s, Admin* a) : bool
+	+CreateOrderInsideClinic(Stock* s, Admin* a, int id, int index) : bool
+	+CreateOrderOutsideClinic(Stock* s, Admin* a, int id, int index) : bool
+	-inside : bool
+	-DoctorId : int
+	-OrderID : int
+	-PatientID : int
+	-c_orderItem : int
+	+getDoctorId() : int {query}
+	+getNumber() : int {query}
+	+getOrderId() : int {query}
+	+getPatientId() : int {query}
+	+getTotalPrice() : int {query}
+	-number : int
+	+searchIdItems(int id) : int
+	-totalPrice : int
+	+operator>>(istream& in, Order& r) : istream&
+	-items : orderItem*
+	+operator<<(ostream& out, Order& r) : ostream&
+	-NameOfPatient : string
+	-NameOfdoctor : string
+	-date : string
+	+getDate() : string {query}
+	+getDoctorName() : string {query}
+	+getPatentName() : string {query}
+	+getStatus() : string {query}
+	-status : string
+	+AddOrderItem(orderItem* item) : void
+	+EditOrder(int itemId) : void
+	+RemoveOrderItem(int itemId) : void
+	+UpdateOrderStatus(ORDERSTATUS status) : void
+	+printOrder() : void
+	+printOrderofPatientInsideClinic() : void
+	+printOrderofPatientOutsideClinic() : void
+	+setDate() : void
+	+setDoctorIdInOrder(int id) : void
+	+setNameOfDoctor(string name) : void
+	+setNameOfPatient(string Patentname) : void
+	+setNumber(int num) : void
+	+setOrderId(int id) : void
+	+setPatientIdInOrder(int id) : void
+	+setStatus(ORDERSTATUS orderStatus) : void
+	+setTotalPrice(int total) : void
+}
+
+
+class Patient {
+	+Patient()
+	+Patient(int id, const string& name, int age, const string& gender, const string& bloodType, const string& phoneNumber, const string& address, const string& password, const int& insurance, const string& emergencyContact)
+	+operator==(const Patient& p) : bool
+	+getInsurance() : int {query}
+	-insurance : int
+	+operator>>(istream& is, Patient& patient) : istream&
+	+operator<<(ostream& os, const Patient& patient) : ostream&
+	-emergencyContact : string
+	+getEmergencyContact() : string {query}
+	+getPassword() : string {query}
+	-notes : string
+	-password : string
+	+editInfo() : void
+	+saveInfo() : void
+	+setEmergencyContact(const string& emergencyContact) : void
+	+setInsurance(const int& insurance) : void
+	+setPassword(const string& password) : void
+}
+
+
+class Payment {
+	+Payment()
+	+~Payment()
+	#date : Date
+	#amount : double
+	+operator>>(istream &, Payment &) : istream&
+	+Pay() : void
+	+Update() : void
+}
+
+
+abstract class Person {
+	+Person()
+	+Person(int id, const string& name, int age, const string& gender, const string& bloodType, const string& phoneNumber, const string& address)
+	-age : int
+	+getAge() : int {query}
+	+getId() : int {query}
+	-id : int
+	+operator>>(istream& is, Person& person) : istream&
+	+operator<<(ostream& os, const Person& person) : ostream&
+	-address : string
+	-bloodType : string
+	-gender : string
+	+getAddress() : string {query}
+	+getBloodType() : string {query}
+	+getGender() : string {query}
+	+getName() : string {query}
+	+getPhoneNumber() : string {query}
+	-name : string
+	-phoneNumber : string
+	+{abstract} editInfo() : void
+	+setAddress(const string& address) : void
+	+setAge(int age) : void
+	+setBloodType(const string& bloodType) : void
+	+setGender(const string& gender) : void
+	+setId(int id) : void
+	+setName(const string& name) : void
+	+setPhoneNumber(const string& phoneNumber) : void
+}
+
+
+class Prescription {
+	+Prescription()
+	+Prescription(const string& medication, const string& dosage, int quantity)
+	+getQuantity() : int {query}
+	-quantity : int
+	+operator>>(istream& is, Prescription& prescription) : istream&
+	+operator<<(ostream& os, const Prescription& prescription) : ostream&
+	-dosage : string
+	+getDosage() : string {query}
+	+getMedication() : string {query}
+	-medication : string
+	+saveInfo() : void
+	+setDosage(const string& dosage) : void
+	+setMedication(const string& medication) : void
+	+setQuantity(int quantity) : void
+}
+
+
+class Stock {
+	+Stock()
+	+~Stock()
+	-MedcinList : Medcin*
+	+getSalePriceOfMedcin(int index) : double
+	+input : ifstream
+	+SearchId(int id) : int
+	-c_MedcinList : int
+	+getQuntitiy(int id) : int
+	-Quntitiy : int*
+	+operator<<(ostream& out, const Stock& stock) : ostream&
+	+addMedcinInStock() : void
+	+addMedcinInStockByFiles() : void
+	+deleteMecinFromStock() : void
+	+editMedcin() : void
+	+setQuantity(int Quntitiy, int index) : void
+}
+
+
+class Transaction {
+	+Transaction()
+	+~Transaction()
+	-p : Payment**
+	-counter : int
+	+Handle_Pyment() : void
+	+Set_Payment() : void
+}
+
+
+class orderItem {
+	+orderItem()
+	+orderItem(Stock &)
+	-stk : Stock*
+	+setOrderItem(Stock* s) : bool
+	+calcTotalPrice() : double
+	+getQuantityOfOrderItem() : double
+	+getSalePrice() : double
+	+getTotalPrice() : double
+	-sale_price : double
+	-totalPriceOrderItem : double
+	+getIdOrderItem() : int
+	-idOrderItem : int
+	-qunatityOrderItem : int
+	+operator++() : orderItem
+	+operator+=(int quantity) : orderItem
+	+operator--() : orderItem
+	+operator-=(int quantity) : orderItem
+	+operator<<(ostream &, orderItem &) : ostream&
+	+EditOrderItem() : void
+	+UpdateQuantity(int newQuantity) : void
+	+setQuantityOfOrderItem(int) : void
+	+setSalePrice(double) : void
+	+setTotalPrice(double total) : void
+}
+
+
+enum ORDERSTATUS {
+	CANCELED
+	COMPLETED
+	PAID
+	PENDING
+}
+
+
+class Date {
+	+day : int
+	+month : int
+	+year : int
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+.Payment <|-- .Cash
+
+
+.Payment <|-- .Check
+
+
+.Person <|-- .Doctor
+
+
+.Person <|-- .Patient
+
+
+
+
+
+/' Aggregation relationships '/
+
+.Admin o-- .Appointment
+
+
+.Admin o-- .Doctor
+
+
+.Admin o-- .Medical_Specialization
+
+
+.Admin o-- .Patient
+
+
+.Appointment o-- .Doctor
+
+
+.Appointment o-- .Patient
+
+
+.Appointment o-- .Prescription
+
+
+.Doctor o-- .Medical_Specialization
+
+
+.List_Of_Orders o-- .Admin
+
+
+.List_Of_Orders o-- .Appointment
+
+
+.List_Of_Orders o-- .Order
+
+
+.List_Of_Orders o-- .Stock
+
+
+.Order o-- .Admin
+
+
+.Order o-- .Stock
+
+
+.Order o-- .orderItem
+
+
+.Payment *-- .Date
+
+
+.Stock o-- .Medcin
+
+
+.Transaction o-- .Payment
+
+
+.orderItem o-- .Stock
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml

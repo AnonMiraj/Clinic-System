@@ -34,33 +34,34 @@ public:
     Appointment(int i,int period,string date,int statue);
     Appointment();
 
-    // setter and getter for each variable
-    int getID() const;
-
+    /// setter
     void setPeriod(const int &p);
-    string getPeriod() const;
-    int getPeriod_int() const;
-
     void setDate(int);
-    string getDate() const;
-    int getDate_wday() const;
-
+    void setDate(string);
     void setDoctor(Doctor &d);
-    Doctor* getDoctor() const;
-
     void setPatient(Patient &p);
-    Patient* getPatient() const;
-
-    void setPrescription(const Prescription& p);
-    Prescription* getPrescription() const;
-
     void setStatue(int s);
+    void setPrescription(const Prescription& p);
+
+    /// getter
+    string getDate() const;
+    string getPeriod() const;
     string getStatue() const;
+    int getPeriod_int() const;
+    int getDate_wday() const;
+    int getID() const;
+    int getPrescriptionCount()const;
+
+    ///another
 
     void addPrescription(string medic,string dose,int quantity);
     void saveInfo();
+    Doctor* getDoctor() const;
+    Patient* getPatient() const;
+    Prescription* getPrescription() const;
 
-    // opertaor overloading
+    /// opertaor overloading ^_^
+
     friend istream &operator>>(istream &in, Appointment &a);
     friend ostream &operator<<(ostream &out, const Appointment &a);
     bool operator==(const Appointment &a);

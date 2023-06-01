@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include "other.h"
 #include<string.h>
 using namespace std;
 struct Date {

@@ -7,8 +7,12 @@ Payment::Payment() {
 }
 void Payment::Pay() {
 	char ch;
-	cout << "Enter the amount : ";
-	cin >> amount;
+	do
+	{
+	    cout << "Enter the amount : ";
+        cin >> amount;
+	} while(IsValid(amount) == -1);
+	
 	cout << "Enter the date : ";
 	cin >> date.day >> ch >> date.month >> ch >> date.year;
 }

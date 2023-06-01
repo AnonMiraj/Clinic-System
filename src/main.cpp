@@ -140,38 +140,6 @@ void sub_sub_menu_2_spec_management()
     }
 }
 
-void sub_sub_menu_3_stk_management()
-{
-    int c = -1;
-    while (c != 0)
-    {
-        wait_or_clear(0, 1);
-        printline("\n\nMAIN MENU -> ADMIN HUB -> STOCK MANAGEMENT ....");
-
-        c = get_menu_choise("ADD MEDECINE,EDIT MEDECINE,PRINT ALL", 3);
-        switch (c)
-        {
-        case 1:
-            stk->addMedcinInStock();
-            _pause();
-            break;
-        case 2:
-            stk->editMedcin();
-            _pause();
-            break;
-        case 3:
-            cout<<*stk;
-            _pause();
-            break;
-        case 0:
-            return;
-        default:
-            print_try_again();
-        }
-    }
-}
-
-
 void sub_menu_1_admin_hub()
 {
     int c = -1;
@@ -179,7 +147,7 @@ void sub_menu_1_admin_hub()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> ADMIN hub ....");
-        c = get_menu_choise("DOCTOR MANAGEMENT,SPECIALTY MANAGEMENT,HISTORY PATIENT,HISTORY DOCTOR,STOCK MANAGEMENT,SHOW ALL OF ORDERS DETAEILES", 1);
+        c = get_menu_choise("DOCTOR MANAGEMENT,SPECIALTY MANAGEMENT,HISTORY PATIENT,HISTORY DOCTOR,SHOW ALL OF ORDERS DETAEILES", 1);
         switch (c)
         {
         case 1:
@@ -196,9 +164,6 @@ void sub_menu_1_admin_hub()
             Hospital->doctorsHistory();
             _pause();
         case 5:
-            sub_sub_menu_3_stk_management();
-            break;
-        case 6:
             OrderList->printAllOrders();
             _pause();
             break;
@@ -334,15 +299,16 @@ void sub_menu_3_patient_hub()
             _pause();
             break;
         case 3:
-            // OrderList->addOrder(Hospital, stk);
             _pause();
             break;
         case 4:
             sub_sub_menu_3_Appointement();
+            _pause();
             break;
 
         case 5:
             sub_sub_menu_4_View();
+            _pause();
             break;
 
         case 0:
@@ -364,7 +330,7 @@ void sub_menu_4_pharmacy_hub()
         switch (c)
         {
         case 1:
-            // OrderList->addOrder(Hospital,stk);
+            OrderList->addOrder(Hospital,stk);
             _pause();
             break;
         case 2:
@@ -398,7 +364,7 @@ int main()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU ....", 1);
-        c = get_menu_choise("ADMIN HUB,DOCTOR MANAGEMENT,PATIENT MANAGEMENT,PHARMACY MANAGEMNET(removed),debug",
+        c = get_menu_choise("ADMIN HUB,DOCTOR MANAGEMENT,PATIENT MANAGEMENT,PHARMACY MANAGEMNET",
                             0);
 
         switch (c)
@@ -417,7 +383,7 @@ int main()
             break;
 
         case 5:
-            cout<<*Hospital;
+            cout<<Hospital;
             _pause();
             break;
         case 0:
@@ -430,6 +396,5 @@ int main()
         }
     }
     Hospital->save();
-    stk->saveInfo();
     return 0;
 }

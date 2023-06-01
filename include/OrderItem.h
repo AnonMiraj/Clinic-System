@@ -16,24 +16,24 @@ public:
 	orderItem();
 	orderItem(Stock&);
 
-	// Setter
+	/// Setter
 	void setTotalPrice(double total);
-	bool setOrderItem(int id, Stock& s);
+	bool setOrderItem( Stock* s);
 	void setSalePrice(double);
 	void setQuantityOfOrderItem(int);
 
-	// Getter
+	/// Getter
 	double getTotalPrice();
 	int getIdOrderItem();
 	double getSalePrice();
 	double getQuantityOfOrderItem();
 
-	// Another
+	/// Another
 	double calcTotalPrice();
 	void UpdateQuantity(int newQuantity);
 	void EditOrderItem();
 
-	// Overloding Operators
+	/// Overloding Operators
 	orderItem operator++();
 	orderItem operator--();
 	orderItem operator+=(int quantity);

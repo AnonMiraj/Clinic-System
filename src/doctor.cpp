@@ -70,9 +70,9 @@ void Doctor::setSalary(int salary) {
     this->salary = salary;
 }
 
-void Doctor::setSpecialization(Medical_Specialization &specialization) {
-    Medical_Specialization *p= &specialization;
-    this->specialization = p;
+void Doctor::setSpecialization(Medical_Specialization &specialization)
+{
+    this->specialization = &specialization;
 }
 
 void Doctor::setExperience(int experience) {
@@ -119,7 +119,7 @@ void Doctor::readPeroids(){
 }
 void Doctor::saveInfo(){
   ofstream  oupt;
-  oupt.open("inputDoctors.txt",ios::app);
+  oupt.open("./data/inputDoctors.txt",ios::app);
   if (oupt.is_open()) {
     oupt<<this->getId()<<endl;
     oupt<<this->getName()<<endl;
@@ -195,6 +195,15 @@ void Doctor::editInfo() {
     }
 }
 
+
+Medical_Specialization* Doctor::getSpecialization()
+{
+    return specialization;
+}
+//int Doctor::getDoctorId()
+//{
+//    return id;
+//}
 istream& operator>>(istream& is, Doctor& doctor) {
     is >> static_cast<Person&>(doctor);  // Call the base class operator>>
 

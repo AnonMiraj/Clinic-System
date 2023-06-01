@@ -1,4 +1,4 @@
-﻿#include "orderItem.h"
+﻿#include "OrderItem.h"
 #include <iostream>
 using namespace std;
 
@@ -79,7 +79,9 @@ bool orderItem::setOrderItem(Stock*s)
         else
            return false;
     }
+  return false;
 }
+
 
 double orderItem::calcTotalPrice()
 {
@@ -109,7 +111,8 @@ void orderItem::UpdateQuantity(int newQuantity)
             {
                 cout << "Are You Want To Update Again [Y/N]";
                 char ch;
-                ch = _getch();
+                // ch = _getch();
+                cin >>ch;
                 if (ch == 'y' || ch == 'Y')
                 {
                     cout << "Enter New Quntitiy Again: ";
@@ -128,7 +131,8 @@ void orderItem::UpdateQuantity(int newQuantity)
 
         cout << "Are You Want To Enter Again [Y/N]";
         char ch;
-        ch = _getch();
+        // ch = _getch();
+        cin >>ch;
         if (ch == 'y' || ch == 'Y')
         {
             cout << "Enter New Quntitiy Again: ";

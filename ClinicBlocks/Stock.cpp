@@ -1,26 +1,21 @@
 #include "Stock.h"
+#include "other.h"
 
 using namespace std;
 
 Stock::Stock(): c_MedcinList(0)
 {
-    MedcinList = new Medcin[100];
-    input.open("inputMedcin.txt");
-    if (!input)
-    {
-        cout << "File Can Not Be Open ):" << endl;
-        system("pause");
-    }
+    MedcinListSize=100;
+    MedcinList = new Medcin[MedcinListSize];
     //output.open("outputMedcin.txt");
 
-    Quntitiy = new int[100];
+    Quntitiy = new int[MedcinListSize];
 
 }
 
 Stock::~Stock()
 {
     delete[] MedcinList;
-    input.close();
 }
 
 
@@ -49,13 +44,13 @@ void Stock::addMedcinInStock()
         if (MedcinList[i].getId() == medcinid)
         {
             cout << "Medicine already exists in stock. " << endl;
-            cout << "do You Want To Update: ";
+            cout << "do You Want To Update(y/N): ";
             char ch;
             cin >> ch;
             if (ch == 'y' || ch == 'Y')
             {
-                cout << "Enter the additional quantity: ";
-                cin>>Quntitiy[c_MedcinList];
+                cout << "Enter quantity: ";
+                cin>>Quntitiy[i];
             }
 
             return;
@@ -65,15 +60,26 @@ void Stock::addMedcinInStock()
     // Medicine does not exist in stock, add it
 
     MedcinList[c_MedcinList].setId(medcinid);
-    cin >> MedcinList[c_MedcinList++];
-
+    cin >> MedcinList[c_MedcinList];
+    cout << "Enter quantity: ";
+    cin>>Quntitiy[c_MedcinList++];
     // add and increase counter
 
     cout << "^_^ Medicine Successfully Added To Stock. ^_^" << endl;
 }
+int Stock::getMedcinListCount(){
+  return c_MedcinList;
+}
 
 void Stock::addMedcinInStockByFiles()
-{
+{ 
+    ifstream input("./data/inputMedcin.txt");
+    if (!input)
+    {
+        cout << "File Can Not Be Open ):" << endl;
+        _pause();
+    }
+
 
     int id, price;
     string name, brand;
@@ -90,6 +96,28 @@ void Stock::addMedcinInStockByFiles()
 
         c_MedcinList++;
     }
+      input.close();
+
+}
+void Stock::saveInfo(){
+    ofstream oput("./data/inputMedcin.txt");
+    if (!oput)
+    {
+        cout << "File Can Not Be Open ):" << endl;
+        _pause();
+    }
+
+
+    for (int i=0; i<c_MedcinList ; i++) {
+    oput<<MedcinList[i].getId()<<endl;
+    oput<<MedcinList[i].getName()<<endl;
+    oput<<MedcinList[i].getBrand()<<endl;
+    oput<<MedcinList[i].getPrice()<<endl;
+    oput<<Quntitiy[i]<<endl;
+    }
+      oput.close();
+
+
 }
 
 // Function to edit a medicine in stock
@@ -164,6 +192,14 @@ int Stock::SearchId(int id)
         }
     }
     return -1;
+}
+int Stock::SearchIdByName(string med){
+  for (int i=0 ; i<c_MedcinList ; i++) {
+    if (MedcinList[i].getName()==med) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 ostream& operator<<(ostream& out, const Stock& stock)

@@ -586,7 +586,7 @@ void Admin::loadDoctor()
     int id,age,expYears,specializationID,salary,fee,archive;
     string name,gender,blood,phone,address,avalDay,avalHour,date;
     ifstream inp;
-    inp.open("inputDoctors.txt");
+    inp.open("./data/inputDoctors.txt");
     if(inp.is_open())
         while (inp>>id)
         {
@@ -629,7 +629,7 @@ void Admin::loadPatient()
     string name,gender,blood,phone,address,emergency;
     ifstream inp;
 
-    inp.open("inputPatient.txt");
+    inp.open("./data/inputPatient.txt");
     if(inp.is_open())
         while (inp>>id)
         {
@@ -656,7 +656,7 @@ void Admin::loadPatient()
 void Admin::loadSpecial()
 {
     string name;
-    ifstream inp("inputSpec.txt");
+    ifstream inp("./data/inputSpec.txt");
 
     if(inp.is_open())
         while (getline(inp,name))
@@ -676,7 +676,7 @@ void Admin::loadAppointment()
 {
   string date;
   int period,patientId,doctorId,statue;
-      ifstream inp("inputAppoint.txt");
+      ifstream inp("./data/inputAppoint.txt");
 
     if(inp.is_open())
         while (inp>>date)
@@ -699,7 +699,7 @@ void Admin::loadPrescription()
 {
   string dose,medic;
   int appointmentId,quantity,prescCount;
-      ifstream inp("inputPresc.txt");
+      ifstream inp("./data/inputPresc.txt");
 
     if(inp.is_open())
         while (inp>>appointmentId)
@@ -732,36 +732,36 @@ void Admin::load()
 
 void Admin::save()
 {
-    ofstream ofs ("inputPatient.txt", std::ios::out | std::ios::trunc); // clear contents
+    ofstream ofs ("./data/inputPatient.txt", std::ios::out | std::ios::trunc); // clear contents
     ofs.close();
 
     for (int i = 0; i < patientCount; i++)
     {
         patients[i].saveInfo();
     }
-    ofs.open("inputDoctors.txt", std::ios::out | std::ios::trunc);
+    ofs.open("./data/inputDoctors.txt", std::ios::out | std::ios::trunc);
     ofs.close();
     for (int i = 0; i < doctorCount; i++)
     {
         doctors[i].saveInfo();
     }
-    ofs.open("inputSpec.txt", std::ios::out | std::ios::trunc);
+    ofs.open("./data/inputSpec.txt", std::ios::out | std::ios::trunc);
     ofs.close();
     for (int i = 0; i < specializationCount; i++)
     {
       specializations[i].saveInfo();
     }
 
-    ofs.open("inputAppoint.txt", std::ios::out | std::ios::trunc);
+    ofs.open("./data/inputAppoint.txt", std::ios::out | std::ios::trunc);
     ofs.close();
 
-    ofs.open("inputPresc.txt", std::ios::out | std::ios::trunc);
+    ofs.open("./data/inputPresc.txt", std::ios::out | std::ios::trunc);
     ofs.close();
 
     for (int i = 0; i < appointmentCount; i++)
     {
       ofstream  oupt2;
-      oupt2.open("inputPresc.txt",ios::app);
+      oupt2.open("./data/inputPresc.txt",ios::app);
       oupt2<<i+1<<endl;
       oupt2.close();
       appointments[i].saveInfo();

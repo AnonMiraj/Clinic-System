@@ -119,7 +119,7 @@ void Doctor::readPeroids(){
 }
 void Doctor::saveInfo(){
   ofstream  oupt;
-  oupt.open("inputDoctors.txt",ios::app);
+  oupt.open("./data/inputDoctors.txt",ios::app);
   if (oupt.is_open()) {
     oupt<<this->getId()<<endl;
     oupt<<this->getName()<<endl;

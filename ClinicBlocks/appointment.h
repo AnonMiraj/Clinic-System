@@ -50,6 +50,7 @@ public:
     int getPeriod_int() const;
     int getDate_wday() const;
     int getID() const;
+    int getPrescriptionCount()const;
 
     ///another
 

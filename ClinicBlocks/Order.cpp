@@ -468,7 +468,8 @@ istream& operator>>(istream& in, Order& r)
         }
 
         cout << "Do You Want To Add Another Item [y/n] ";
-        ch = _getch();
+        // ch = getch();
+        cin >>ch;
     }
     while (ch == 'y' || ch == 'Y');
 
@@ -487,7 +488,8 @@ ostream& operator<<(ostream& out, Order& r)
     //out << "Name of Customer: " << r.NameOfCustomer << endl;
     cout << "Do You Need To Display Items? [Y/N]";
     char ch;
-    ch = _getch();
+    // ch = getch();
+    cin >>ch;
     if(ch=='Y'||ch=='y')
     {
         out << "\"Order Items\"" << endl;

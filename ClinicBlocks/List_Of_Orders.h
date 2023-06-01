@@ -1,6 +1,6 @@
 #ifndef LIST_OF_ORDERS_H
 #define LIST_OF_ORDERS_H
-#include "Admin.h"
+#include "admin.h"
 #include "Stock.h"
 #include "Order.h"
 #include "appointment.h"
