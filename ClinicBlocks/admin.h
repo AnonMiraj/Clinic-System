@@ -8,20 +8,24 @@
 #include "Medical_Specialization.h"
 #include "appointment.h"
 #include "prescription.h"
+//#include "Order.h"
 #include <fstream>
 #include <ctime>
 #include <string>
 #include <chrono>
+
 using namespace std;
 
 class Admin {
 private:
+    //Order*ListOrders;
     Patient* patients;
     Doctor* doctors;
     Medical_Specialization* specializations;
     Appointment* appointments;
     Medical_Insurance insurances;
 
+    int c_OrderList;
     int patientCount;
     int doctorCount;
     int specializationCount;
@@ -53,8 +57,8 @@ public:
     void doctorsHistory();
     void printAllSpecs();
     void printSpecDoctors();
-
-
+    /// Orders
+    void addOrders();
 
     void archiveDoctor();
     void unarchiveDoctor();

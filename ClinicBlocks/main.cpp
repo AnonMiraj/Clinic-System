@@ -344,6 +344,7 @@ void sub_menu_4_pharmacy_hub()
 /** MAIN FUNCTION **/
 int main()
 {
+    system("Color 03");
     Hospital.load();
     printline("START APPLICATION ....", 1);
     wait_or_clear(1, 1);

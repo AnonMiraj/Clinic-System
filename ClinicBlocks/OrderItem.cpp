@@ -25,7 +25,7 @@ void orderItem::setTotalPrice(double t)
 
 bool orderItem::setOrderItem(int id,Stock*s)
 {
-    stk = s;
+    stk =  s;
     int index= stk->SearchId(id);
    // cout << "Index: " << index;
     //system("pause");
