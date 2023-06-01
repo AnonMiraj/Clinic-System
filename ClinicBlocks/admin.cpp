@@ -141,7 +141,15 @@ void Admin::addAppointment()
 
     //choose doctor
     int dID;
-    cout<<"Enter doctor id : "; cin>>dID;
+    do
+    {
+        dID = returnValidInt("Enter Doctor id : ");
+        if (searchDoctor(dID)== -1)
+            cout<<"This Id is not exist :(\n\n";
+        else
+            break;
+    } while (true);
+    
     appointments[appointmentCount].setDoctor(doctors[dID-1]);
 
     cout<<"Doctor's name : " <<doctors[dID-1].getName()
@@ -161,8 +169,13 @@ void Admin::addAppointment()
 
     // is valid function to check if the period number if availbale this day
     // you need to return an array from function to what you must choose from
-        cout<<"\nEnter period number : "; cin>>period;
-        appointments[appointmentCount].setPeriod(period);
+    string w;
+    do
+    {
+        cout<<"\nEnter period number : "; cin>>w;
+    } while (IsValid(1,48,w) == -1);
+    period = stoi(w);
+    appointments[appointmentCount].setPeriod(period);
 
         /*
             for (int i=0; i<appointmentCount-1; i++)
@@ -176,8 +189,15 @@ void Admin::addAppointment()
 
     //choose patient
     int pID;
-    cout<<"Enter patient id : ";
-    cin>>pID;
+    do
+    {
+        pID = returnValidInt("Enter Patient ID : ");
+        if (searchPatient(pID) == -1)
+            cout<<"This Id is not exist :(\n\n";
+        else
+            break;
+    } while (true);
+
     appointments[appointmentCount].setPatient(patients[pID-1]);
 
     //pay to book the appointment
@@ -189,7 +209,14 @@ void Admin::addAppointment()
 void Admin::viewAPP()
 {
     int ID;
-    cout<<"Enter your Appointment id : "; cin>>ID;
+    do
+    {
+        ID = returnValidInt("Enter your Appointment id : ");
+        
+        if (searchAppointment(ID) == -1) cout<<"This Id is not exist :(\n";
+        else break;
+    } while (true);
+
     cout<<appointments[ID-1];
     }
 
@@ -224,9 +251,14 @@ p:
 
 void Admin::cancelAPP()
 {
-    int id;
-    cout<<"Enter Appointment Id: ";
-    cin>>id;
+    int id; string w;
+    do
+    {
+        id = returnValidInt("Enter your Appointment id : ");
+        
+        if (searchAppointment(id)== -1) cout<<"This Id is not exist :(\n";
+        else break;
+    } while (true);
 
     if(appointments[id-1].getStatue() == "BOOKED")
     {
@@ -234,7 +266,7 @@ void Admin::cancelAPP()
     }
 
     else
-        cout<<"You cancel the appointment. it's " <<appointments[id-1].getStatue() <<"\n";
+        cout<<"You can't cancel the appointment. it's " <<appointments[id-1].getStatue() <<"\n";
 }
 
 int Admin::searchAppointment(int id)
@@ -245,19 +277,43 @@ int Admin::searchAppointment(int id)
     return -1;
 }
 
+int Admin::returnValidInt(string msg)
+{
+    string w;
+    do
+    {
+        cout<<msg;
+        cin>>w;
+    } while (!IsValid(w,'1'));
+
+    return stoi(w);
+}
+
 void Admin::editPatient()
 {
     int id;
-    cout<<"Enter patient Id: ";
-    cin>>id;
+    do
+    {
+        id = returnValidInt("Enter your Patient id : ");
+        
+        if (searchPatient(id)== -1) cout<<"This Id is not exist :(\n";
+        else break;
+    } while (true);
+
     patients[id-1].editInfo();
 }
 
 void Admin::editSpecialization()
 {
-    int id;
-    cout<<"Enter patient Id: ";
-    cin>>id;
+    int id; string w;
+    do
+    {
+        id = returnValidInt("Enter your Appointment id : ");
+        
+        if (searchPatient(id)== -1) cout<<"This Id is not exist :(\n";
+        else break;
+    } while (true);
+
     specializations[id-1].editInfo();
 }
 
@@ -316,33 +372,28 @@ void Admin::addDoctor()
 
 void Admin::viewDoctor()
 {
-    int ID;
-    cout<<"Enter your id : "; cin>>ID;
+    int ID = returnValidInt("Enter Doctor ID : ");
     cout<<doctors[ID-1];
 
 }
 
 void Admin::editDoctor()
 {
-    int id;
-    cout<<"Enter doctors Id: ";
-    cin>>id;
+    int id = returnValidInt("Enter Doctor ID : ");
     doctors[id-1].editInfo();
 }
 
 void Admin::archiveDoctor()
 {
-    int doctorIndex;
-    cout<<"Enter the doctor id: ";
-    cin>>doctorIndex;
+    int doctorIndex = returnValidInt("Enter Doctor ID : ");
     doctors[doctorIndex-1].setAracived(true);
 
 }
 
 void Admin::unarchiveDoctor()
 {
-    int archiveIndex;
-    cout<<"Enter the archived Doctor id: ";
+    int archiveIndex = returnValidInt("Enter the archived Doctor id : ");;
+    cout<<"Enter the archived Doctor id : ";
     cin>>archiveIndex;
     doctors[archiveIndex-1].setAracived(false);
 }
@@ -386,10 +437,7 @@ void Admin::printAllSpecs()
 
 void Admin::printSpecDoctors()
 {
-    int id;
-    cout<<"Enter specialization Id: ";
-    cin>>id;
-
+    int id = returnValidInt("Enter specialization Id: ");
     cout<<"\n +++ " <<specializations[id-1].getName() <<" +++\n";
 
     for(int i=0;i<doctorCount;i++)
@@ -411,9 +459,7 @@ void Admin::printSpecDoctors()
 
 void Admin::patientHistory()
 {
-    int id;
-    cout<<"Enter patient Id: ";
-    cin>>id;
+    int id = returnValidInt("Enter Patient ID : ");
 
 
     for(int i=0; i<appointmentCount; i++)
@@ -431,9 +477,7 @@ void Admin::patientHistory()
 
 void Admin::doctorsHistory()
 {
-    int id;
-    cout<<"Enter Doctor Id: ";
-    cin>>id;
+    int id = returnValidInt("Enter Doctor ID : ");
 
 
     for(int i=0; i<appointmentCount; i++)
@@ -717,7 +761,40 @@ void Admin::getInsurances()
 }
 
 
-//seerch
+void Admin::Doctors_SearchByName()
+{
+    int c = 0;
+    string s; cout<<"\nEnter a name or part to search : "; cin>>s;
+
+    int len = s.size();
+
+    for (int i=0; i<doctorCount; i++)
+    {
+        string name = doctors[i].getName();
+
+        for (int j=0; j<=name.size()-len; j++)
+        {
+
+            string sub= name.substr(j,len);
+            /*for (int k=j; k<j+len; k++) //substr
+                sub += name[k];*/
+
+            if (s == sub)
+                {
+                    cout<<"\n##########################\n";
+                    cout<<doctors[i];
+                    cout<<"\n##########################\n";
+                    c++;
+                    break;
+                }
+        }
+    }
+
+    if (c == 0)
+        cout<<"\nThere is no Doctors at this name :(\n";
+}
+
+//search
 int Admin::searchPatient(int id)
 {
     for (int i=0; i<patientCount; i++)
@@ -746,6 +823,14 @@ int Admin::searchDoctor(int id)
     return -1;
 }
 
+int Admin::searchAppoint_patient(int id)
+{
+    for (int i=0; i<appointmentCount; i++)
+        if (*appointments[i].getPatient() == patients[i] && appointments[i].getStatue() != "CANCELLED")
+            return i;
+
+    return -1;
+}
 
 //temprory
 ostream& operator<<(ostream& os, const Admin& admin)
