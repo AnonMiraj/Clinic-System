@@ -2,24 +2,44 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="Payment.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="appointment.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="12" />
+			<Cursor1 position="2725" topLine="88" />
+		</Cursor>
+		<Folding>
+			<Collapse line="117" />
+		</Folding>
+	</File>
+	<File name="appointment.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="6" />
 		</Cursor>
 	</File>
-	<File name="admin.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="main.cpp" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2245" topLine="78" />
+			<Cursor1 position="12149" topLine="81" />
 		</Cursor>
+		<Folding>
+			<Collapse line="67" />
+			<Collapse line="76" />
+			<Collapse line="106" />
+			<Collapse line="114" />
+			<Collapse line="143" />
+			<Collapse line="171" />
+			<Collapse line="203" />
+			<Collapse line="235" />
+			<Collapse line="279" />
+			<Collapse line="312" />
+			<Collapse line="320" />
+			<Collapse line="350" />
+			<Collapse line="382" />
+			<Collapse line="420" />
+			<Collapse line="447" />
+		</Folding>
 	</File>
-	<File name="patient.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="admin.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="79" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="admin.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="143" />
+			<Cursor1 position="11162" topLine="44" />
 		</Cursor>
 		<Folding>
 			<Collapse line="13" />
@@ -28,55 +48,66 @@
 			<Collapse line="49" />
 			<Collapse line="60" />
 			<Collapse line="156" />
-			<Collapse line="228" />
-			<Collapse line="242" />
-			<Collapse line="271" />
-			<Collapse line="291" />
-			<Collapse line="299" />
-			<Collapse line="311" />
-			<Collapse line="325" />
-			<Collapse line="339" />
-			<Collapse line="363" />
-			<Collapse line="383" />
-			<Collapse line="392" />
-			<Collapse line="399" />
-			<Collapse line="405" />
-			<Collapse line="412" />
-			<Collapse line="420" />
-			<Collapse line="422" />
-			<Collapse line="433" />
-			<Collapse line="445" />
-			<Collapse line="457" />
-			<Collapse line="479" />
-			<Collapse line="497" />
-			<Collapse line="515" />
-			<Collapse line="531" />
-			<Collapse line="549" />
-			<Collapse line="566" />
-			<Collapse line="584" />
-			<Collapse line="626" />
+			<Collapse line="227" />
+			<Collapse line="241" />
+			<Collapse line="270" />
+			<Collapse line="290" />
+			<Collapse line="298" />
+			<Collapse line="310" />
+			<Collapse line="324" />
+			<Collapse line="338" />
+			<Collapse line="362" />
+			<Collapse line="382" />
+			<Collapse line="391" />
+			<Collapse line="398" />
+			<Collapse line="404" />
+			<Collapse line="411" />
+			<Collapse line="419" />
+			<Collapse line="421" />
+			<Collapse line="451" />
+			<Collapse line="463" />
+			<Collapse line="475" />
+			<Collapse line="487" />
+			<Collapse line="509" />
+			<Collapse line="527" />
+			<Collapse line="545" />
+			<Collapse line="561" />
+			<Collapse line="579" />
+			<Collapse line="596" />
+			<Collapse line="614" />
 			<Collapse line="656" />
-			<Collapse line="675" />
-			<Collapse line="698" />
-			<Collapse line="724" />
-			<Collapse line="733" />
-			<Collapse line="772" />
-			<Collapse line="777" />
-			<Collapse line="783" />
-			<Collapse line="826" />
-			<Collapse line="831" />
-			<Collapse line="836" />
-			<Collapse line="855" />
+			<Collapse line="686" />
+			<Collapse line="705" />
+			<Collapse line="728" />
+			<Collapse line="754" />
+			<Collapse line="763" />
+			<Collapse line="802" />
+			<Collapse line="807" />
+			<Collapse line="813" />
+			<Collapse line="847" />
+			<Collapse line="856" />
+			<Collapse line="861" />
+			<Collapse line="866" />
 		</Folding>
 	</File>
-	<File name="appointment.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="List_Of_Orders.cpp" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="6" />
+			<Cursor1 position="1834" topLine="31" />
+		</Cursor>
+		<Folding>
+			<Collapse line="17" />
+			<Collapse line="22" />
+			<Collapse line="50" />
+		</Folding>
+	</File>
+	<File name="Payment.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="7" />
 		</Cursor>
 	</File>
-	<File name="Medcin.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Order.h" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="107" />
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="Medical_Specialization.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -84,51 +115,20 @@
 			<Cursor1 position="0" topLine="44" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3462" topLine="78" />
-		</Cursor>
-		<Folding>
-			<Collapse line="62" />
-			<Collapse line="101" />
-			<Collapse line="138" />
-			<Collapse line="172" />
-			<Collapse line="205" />
-			<Collapse line="243" />
-			<Collapse line="275" />
-			<Collapse line="314" />
-		</Folding>
-	</File>
-	<File name="Order.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="427" />
-		</Cursor>
-	</File>
 	<File name="patient.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="113" />
+			<Cursor1 position="0" topLine="102" />
 		</Cursor>
 	</File>
-	<File name="other.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="admin.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2632" topLine="6" />
+			<Cursor1 position="1172" topLine="35" />
 		</Cursor>
-		<Folding>
-			<Collapse line="12" />
-			<Collapse line="39" />
-			<Collapse line="67" />
-			<Collapse line="98" />
-			<Collapse line="139" />
-		</Folding>
 	</File>
-	<File name="appointment.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="patient.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2725" topLine="88" />
+			<Cursor1 position="79" topLine="0" />
 		</Cursor>
-		<Folding>
-			<Collapse line="117" />
-			<Collapse line="172" />
-		</Folding>
 	</File>
 	<File name="Payment.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
@@ -139,5 +139,61 @@
 		<Cursor>
 			<Cursor1 position="0" topLine="210" />
 		</Cursor>
+	</File>
+	<File name="Stock.cpp" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2230" topLine="94" />
+		</Cursor>
+	</File>
+	<File name="other.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2632" topLine="3" />
+		</Cursor>
+		<Folding>
+			<Collapse line="12" />
+			<Collapse line="39" />
+			<Collapse line="65" />
+			<Collapse line="96" />
+			<Collapse line="137" />
+		</Folding>
+	</File>
+	<File name="Medcin.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="List_Of_Orders.h" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="415" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Order.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8447" topLine="66" />
+		</Cursor>
+		<Folding>
+			<Collapse line="4" />
+			<Collapse line="20" />
+			<Collapse line="32" />
+			<Collapse line="35" />
+			<Collapse line="41" />
+			<Collapse line="46" />
+			<Collapse line="51" />
+			<Collapse line="56" />
+			<Collapse line="61" />
+			<Collapse line="66" />
+			<Collapse line="73" />
+			<Collapse line="78" />
+			<Collapse line="83" />
+			<Collapse line="104" />
+			<Collapse line="109" />
+			<Collapse line="124" />
+			<Collapse line="136" />
+			<Collapse line="206" />
+			<Collapse line="259" />
+			<Collapse line="331" />
+			<Collapse line="372" />
+			<Collapse line="420" />
+		</Folding>
 	</File>
 </CodeBlocks_layout_file>
