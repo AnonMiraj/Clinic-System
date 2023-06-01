@@ -97,6 +97,7 @@ public:
     string getPatient_name(int in);
     string getDoctor_name(int in);
     int searchAppoint_patient(int);
+    int returnValidInt(string);
 
     //print
     string printAvailableDay(const Doctor&);
