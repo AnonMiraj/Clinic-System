@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iomanip>
 #include "other.h"
+#include<windows.h>
 class Stock
 {
 private:

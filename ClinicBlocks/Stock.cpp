@@ -33,8 +33,10 @@ void Stock::addMedcinInStock()
 
     cout << "Enter the details of the medicine to add to stock:" << endl;
 
+    p:
+        system("Color 03");
     int medcinid;
-
+    cout<<"Enter  Medcin Id You Want To Add: ";
     cin >> medcinid;
     cin.ignore();
 
@@ -44,13 +46,26 @@ void Stock::addMedcinInStock()
         if (MedcinList[i].getId() == medcinid)
         {
             cout << "Medicine already exists in stock. " << endl;
-            cout << "do You Want To Update(y/N): ";
-            char ch;
+            cout << "do You Want To Update Quntitiy of This Id or Try Again: ";
+            v:
+            system("Color 03");
+            cout<<" 1- Update His Quntitiy \n 2- Try Again";
+
+            string ch;
             cin >> ch;
-            if (ch == 'y' || ch == 'Y')
+            if (ch=="1")
             {
                 cout << "Enter quantity: ";
                 cin>>Quntitiy[i];
+            }
+            else if(ch=="2")
+                goto p;
+            else {
+                system("Color 04");
+                system("cls");
+                cout<<"Enter A Valid Choise!!!!";
+                Sleep(3);
+                goto v;
             }
 
             return;
@@ -155,7 +170,7 @@ void Stock::deleteMecinFromStock()
         cin >> ch;
         if (ch == 'y' || ch == 'Y')
         {
-            // if user sure then i will delete medcin and -- of counter
+            /// if user sure then i will delete medcin and -- of counter
             cout << "^_^ Was Deleted Successfully ^_^" << endl;
 
             swap(MedcinList[index], MedcinList[c_MedcinList]);
