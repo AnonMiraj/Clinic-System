@@ -198,17 +198,18 @@ p:
     //  cout << "This Custmer Id Does't Exist):" << endl;
 
 }
-bool Order::CreateOrder(Stock*s,Admin*a,Appointment*appoint)
+bool Order::CreateOrder(Stock*s,Admin*Hospital)
 {
+
     p:
     char ch;
     cout << "Enter Patient Id: ";
     int idPatient;
     cin >> idPatient;
 
-    int indexofPatient =ptrAdmin->searchPatient(idPatient);/// To Search In Array Patient And Make Sure Is This Ptient Is Exist
+    int indexofPatient =Hospital->searchPatient(idPatient);/// To Search In Array Patient And Make Sure Is This Ptient Is Exist
 
-    if(indexofPatient=-1)
+    if(indexofPatient==-1)
     {
         system("Color 04");
         cout<<"Srry, This Id Patient Not Exist ):"<<endl;
@@ -223,27 +224,27 @@ bool Order::CreateOrder(Stock*s,Admin*a,Appointment*appoint)
             return false;
     }
 
-    ///if(appoint->)
-    ///{
-        if(CreateOrderInsideClinic(s,a,idPatient,indexofPatient))
+    if(Hospital->searchAppoint_patient(idPatient))
+    {
+        if(CreateOrderInsideClinic(s,Hospital,idPatient,indexofPatient))
         {
             return true;
             inside=true;
         }
         else
             return false;
-    ///}
-    ///else
-    ///{
+    }
+    else
+    {
 
-        if(CreateOrderOutsideClinic(s,a,idPatient,indexofPatient))
+        if(CreateOrderOutsideClinic(s,Hospital,idPatient,indexofPatient))
         {
             return true;
             inside=false;
         }
         else
             return false;
-    ///}
+    }
 
 
 }
@@ -265,7 +266,7 @@ v:
     cout << "Enter Id Of Doctor: ";
     cin>>d_id;
     int indexofDoctor =ptrAdmin->searchDoctor(d_id) ;
-    if(index=-1)
+    if(index==-1)
     {
         system("Color 04");
         cout<<"Srry, This Id Doctor Not Exist ):"<<endl;

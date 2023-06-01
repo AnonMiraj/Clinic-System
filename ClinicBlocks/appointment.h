@@ -43,7 +43,6 @@ public:
     void setStatue(int s);
     void setPrescription(const Prescription& p);
 
-
     /// getter
     string getDate() const;
     string getPeriod() const;
@@ -56,7 +55,6 @@ public:
 
     void addPrescription(string medic,string dose,int quantity);
     void saveInfo();
-    int Admin::searchAppoint_patient(int id)
     Doctor* getDoctor() const;
     Patient* getPatient() const;
     Prescription* getPrescription() const;

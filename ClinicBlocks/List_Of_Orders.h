@@ -15,10 +15,9 @@ private:
     Appointment*ptrAppointment;
 public:
     List_Of_Orders();
-    List_Of_Orders(Admin*ptr,Stock&s);
     ~List_Of_Orders();
 
-    void addOrder(Admin*ptr,Stock*s,Appointment *p);
+    void addOrder(Admin*ptr,Stock*s);
     void removeOrder(int orderId);
     void printAllOrders();
     void editOrder();

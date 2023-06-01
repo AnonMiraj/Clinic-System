@@ -8,7 +8,7 @@
 #include "Medical_Specialization.h"
 #include "appointment.h"
 #include "prescription.h"
-//#include "Order.h"
+///#include "List_Of_Orders.h"
 #include <fstream>
 #include <ctime>
 #include <string>
@@ -18,7 +18,7 @@ using namespace std;
 
 class Admin {
 private:
-    //Order*ListOrders;
+    ///List_Of_Orders OrderList;
     Patient* patients;
     Doctor* doctors;
     Medical_Specialization* specializations;
@@ -58,8 +58,7 @@ public:
     void printAllSpecs();
     void printSpecDoctors();
     void Doctors_SearchByName();
-    /// Orders
-    void addOrders();
+
 
     void archiveDoctor();
     void unarchiveDoctor();

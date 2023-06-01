@@ -60,16 +60,35 @@ void Admin::addSpecialization()
 string Admin::printAvailableDay(const Doctor& d)
 {
     using namespace std::chrono;
-    using std::string;
-    using std::cout;
-    using std::cin;
-    using std::endl;
-    using std::to_string;
+    string ye = "", mo = "", da = "", DATE = ""; char ch;
 
-    string ye = "", mo = "", da = "", DATE = "";
-    char ch;
-    cout << "\nEnter date (yyyy/mm/dd): ";
-    cin >> ye >> ch >> mo >> ch >> da;
+    bool IsNotValid;
+    do
+    {
+        IsNotValid = false;
+        try
+        {
+            cout << "\nEnter date (yyyy/mm/dd): ";
+            cin >> ye >> ch >> mo >> ch >> da;
+
+            if (!IsValid(ye, '1') || !IsValid(mo, '2') || !IsValid(da, '3'))
+                throw "\n";
+
+            if ((ye.size() != 4) || (stoi(mo) > 12) || (stoi(da) > 31))
+                throw "This date is invalid. :(\n";
+
+
+
+            break;
+        }
+        catch (const char* str)
+        {
+            IsNotValid = true;
+            cout << str;
+        }
+
+    } while (IsNotValid);
+
     mo = (mo.size() == 1 ? "0"+mo : mo);
     da = (da.size() == 1 ? "0"+da : da);
     DATE = ye + "/" + mo + "/" + da;
@@ -149,7 +168,7 @@ void Admin::addAppointment()
         else
             break;
     } while (true);
-    
+
     appointments[appointmentCount].setDoctor(doctors[dID-1]);
 
     cout<<"Doctor's name : " <<doctors[dID-1].getName()
@@ -212,7 +231,7 @@ void Admin::viewAPP()
     do
     {
         ID = returnValidInt("Enter your Appointment id : ");
-        
+
         if (searchAppointment(ID) == -1) cout<<"This Id is not exist :(\n";
         else break;
     } while (true);
@@ -255,7 +274,7 @@ void Admin::cancelAPP()
     do
     {
         id = returnValidInt("Enter your Appointment id : ");
-        
+
         if (searchAppointment(id)== -1) cout<<"This Id is not exist :(\n";
         else break;
     } while (true);
@@ -295,7 +314,7 @@ void Admin::editPatient()
     do
     {
         id = returnValidInt("Enter your Patient id : ");
-        
+
         if (searchPatient(id)== -1) cout<<"This Id is not exist :(\n";
         else break;
     } while (true);
@@ -309,7 +328,7 @@ void Admin::editSpecialization()
     do
     {
         id = returnValidInt("Enter your Appointment id : ");
-        
+
         if (searchPatient(id)== -1) cout<<"This Id is not exist :(\n";
         else break;
     } while (true);
@@ -798,7 +817,7 @@ void Admin::Doctors_SearchByName()
 int Admin::searchPatient(int id)
 {
     for (int i=0; i<patientCount; i++)
-        if (patients[i] == patients[id])
+        if (patients[i].getId() == id)
             return i;
 
     return -1;

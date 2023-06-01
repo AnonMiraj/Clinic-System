@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Stock::Stock(): c_MedcinList(0) 
+Stock::Stock(): c_MedcinList(0)
 {
     MedcinList = new Medcin[100];
     input.open("inputMedcin.txt");
@@ -12,6 +12,7 @@ Stock::Stock(): c_MedcinList(0)
         system("pause");
     }
     //output.open("outputMedcin.txt");
+
     Quntitiy = new int[100];
 
 }
@@ -52,7 +53,7 @@ void Stock::addMedcinInStock()
             {
                 cout << "Enter the additional quantity: ";
                 cin>>Quntitiy[c_MedcinList];
-            } 
+            }
 
             return;
         }
@@ -146,7 +147,7 @@ int Stock::getQuntitiy(int id)
     cout << "This Quntitiy isn't Exist" << endl;
 
     return -1;
- 
+
 }
 
 int Stock::SearchId(int id)
@@ -160,7 +161,7 @@ int Stock::SearchId(int id)
     }
     return -1;
 }
-  
+
 ostream& operator<<(ostream& out, const Stock& stock)
 {
     // TODO: insert return statement here

@@ -25,12 +25,13 @@ void orderItem::setTotalPrice(double t)
 
 bool orderItem::setOrderItem(int id,Stock*s)
 {
-    stk =  s;
+    stk = s;
     int index= stk->SearchId(id);
    // cout << "Index: " << index;
     //system("pause");
     if (index != -1)
     {
+        p:
         this->idOrderItem = id;
         int q;
         cout << "Enter Quntitiy: ";
@@ -41,6 +42,7 @@ bool orderItem::setOrderItem(int id,Stock*s)
             cin >> sale_price;
             cout << "This Item Added Successfully \n";
             stk->setQuantity((stk->getQuntitiy(id) - q), index); //10-->4//6
+            cout<<"Ahmed Mosen";
             this->qunatityOrderItem = q;
             return true;
         }
@@ -53,7 +55,7 @@ bool orderItem::setOrderItem(int id,Stock*s)
             cin >> ch;
             if (ch == 'y' || ch == 'Y')
             {
-                setOrderItem(id, s);
+               goto p;
             }
 
             return false;

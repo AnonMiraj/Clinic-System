@@ -31,6 +31,7 @@ private:
     Stock* stk;
     orderItem** items;
     Admin* ptrAdmin;
+
 public:
 
     Order();
@@ -65,7 +66,7 @@ public:
     int searchIdItems(int id);
     bool CreateOrderInsideClinic(Stock* s,Admin*a,int id,int index);
     bool CreateOrderOutsideClinic(Stock* s,Admin*a,int id,int index);
-    bool CreateOrder(Stock* s,Admin*a,Appointment*appoint);
+    bool CreateOrder(Stock* s,Admin*a);
 
 
 

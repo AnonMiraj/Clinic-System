@@ -261,11 +261,4 @@ bool Appointment::operator>(const Appointment& a)
 {
     return this->date > a.date;
 }
-int Admin::searchAppoint_patient(int id)
-{
-    for (int i=0; i<appointmentCount; i++)
-        if (*appointments[i].getPatient() == patients[i] && appointments[i].getStatue() != "CANCELLED")
-            return i;
 
-    return -1;
-}
