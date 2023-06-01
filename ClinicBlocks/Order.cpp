@@ -218,13 +218,14 @@ bool Order::CreateOrder(Stock*s,Admin*Hospital)
         else
             return false;
     }
+           setDate();
 
     if(Hospital->searchAppoint_patient(idPatient))
     {
         if(CreateOrderInsideClinic(s,Hospital,idPatient,indexofPatient))
         {
             return true;
-            inside=1;
+            this->inside=1;
         }
         else
             return false;
@@ -235,7 +236,7 @@ bool Order::CreateOrder(Stock*s,Admin*Hospital)
         if(CreateOrderOutsideClinic(s,Hospital,idPatient,indexofPatient))
         {
             return true;
-            inside=0;
+            this->inside=0;
         }
         else
             return false;
@@ -284,16 +285,13 @@ v:
 
     do
     {
-
         //cout<<"\n";
         //cout << "Enter item Id: ";
         //int id;
         //cin >> id;
-        cout<<c_orderItem<<endl;
         if (items[c_orderItem].setOrderItem(s))
         {
             totalPrice += items[c_orderItem].calcTotalPrice(); /// Error Exception
-            cout<<totalPrice<<"Wtf"<<endl;
             c_orderItem++;
 
         }
@@ -468,11 +466,13 @@ istream& operator>>(istream& in, Order& r)
 
 ostream& operator<<(ostream& out, Order& r)
 {
+    out <<"+----------------------------------+"<<endl;
+    out << "| Order ID: " << setw(23) << setfill(' ') << r.OrderID << " |" << endl;
+    out << "| Date: "   << r.date  ;
+    out << "| Status: " << setw(25) << setfill(' ') << r.status << " |" << endl;
+    out << "| Total Price: " << setw(20) << setfill(' ') << r.totalPrice << " |" << endl;
+    out <<"+----------------------------------+"<<endl;
 
-    out << "Order ID: " << r.OrderID << endl;
-    out << "Date: " << r.date << endl;
-    out << "Status: " << r.status << endl;
-    out << "Total Price: " << r.totalPrice << endl;
     //out << "Name of Customer: " << r.NameOfCustomer << endl;
     cout << "Do You Need To Display Items? [Y/N]";
     char ch;
