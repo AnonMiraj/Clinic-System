@@ -29,7 +29,7 @@ private:
     int DoctorId;
 
     Stock* stk;
-    orderItem** items;
+    orderItem* items;
     Admin* ptrAdmin;
 
 public:
