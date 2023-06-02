@@ -61,7 +61,7 @@ void Medcin::Edit()
 
     string newValue;
     // Print the ID
-    cout << "| ID: " << setw(30) << setfill(' ') << id << " |" << endl;
+    cout << " ID: " << id  << endl;
     cout << "ID: (you can press enter to skip)";
     getline(cin,newValue);
     if (newValue!=""){
@@ -69,7 +69,7 @@ void Medcin::Edit()
   }
 
     // Print the name
-    cout << "| Name: " << setw(28) << setfill(' ') << name << " |" << endl;
+    cout << "| Name: " << name << " |" << endl;
     cout << "Name: ";
     getline(cin,newValue);
     if (newValue!=""){
@@ -79,7 +79,7 @@ void Medcin::Edit()
 
     // Print the brand
     cout << "| Brand: " << setw(27) << setfill(' ') << brand << " |" << endl;
-    cout << "Brand: "; 
+    cout << "Brand: ";
     getline(cin,newValue);
     if (newValue!=""){
     this->setBrand(newValue);

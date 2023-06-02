@@ -557,7 +557,7 @@ int main()
             _pause();
             break;*/
         case 0:
-            printline("\n\n\a\t\t\tGoodbye :)......\n\n\n\n\n\n", 1);
+            printline("\n\n\a\t\t\tGoodbye \x03\x02......\n\n\n\n\n\n", 1);
             break;
         //
         default:

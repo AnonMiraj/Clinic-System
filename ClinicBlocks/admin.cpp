@@ -917,4 +917,3 @@ ostream& operator<<(ostream& os, const Admin& admin)
     }
     return os;
 }
-

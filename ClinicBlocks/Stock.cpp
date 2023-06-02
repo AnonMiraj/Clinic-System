@@ -57,6 +57,10 @@ void Stock::addMedcinInStock()
             {
                 cout << "Enter quantity: ";
                 cin>>Quntitiy[i];
+                cout<<"Has Updated In Stock Successfully"<<endl;
+
+
+
             }
             else if(ch=="2")
                 goto p;
@@ -64,7 +68,7 @@ void Stock::addMedcinInStock()
                 system("Color 04");
                 system("cls");
                 cout<<"Enter A Valid Choise!!!!"<<endl;
-                Sleep(3000);
+                Sleep(2500);
                 goto v;
             }
 
@@ -124,11 +128,13 @@ void Stock::saveInfo(){
 
 
     for (int i=0; i<c_MedcinList ; i++) {
+
     oput<<MedcinList[i].getId()<<endl;
     oput<<MedcinList[i].getName()<<endl;
     oput<<MedcinList[i].getBrand()<<endl;
     oput<<MedcinList[i].getPrice()<<endl;
     oput<<Quntitiy[i]<<endl;
+
     }
       oput.close();
 
@@ -148,7 +154,9 @@ void Stock::editMedcin()
         {
             cout << MedcinList[index];
             MedcinList[index].Edit();
-            cout << "Medicine details updated." << endl;
+            system("Color 02");
+
+            cout << "Medicine details Updated." << endl;
             return;
         }
 
