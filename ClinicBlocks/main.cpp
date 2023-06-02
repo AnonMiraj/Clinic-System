@@ -460,6 +460,25 @@ void sub_sub_menu_5_View()
 
 void sub_menu_4_pharmacy_hub()
 {
+    system("cls");
+         cout << "\t\t   I--------------I\n"
+              << "\t\t   I--------------I\n"
+              << "\t\t  .-'            '-.\n"
+              << "\t\t / --.-.--,---,.--.,\\\n"
+              << "\t\t/--.-.--,---,.--.,-- \\\n"
+              << "\t\t|--------------------|\n"
+              << "\t\t|       ANTI         |\n"
+              << "\t\t|                    |\n"
+              << "\t\t|  VERBAL-DIARRHOEA  |\n"
+              << "\t\t|                    |\n"
+              << "\t\t|     MEDICINE       |\n"
+              << "\t\t|                    |\n"
+              << "\t\t| [ Pharmacy Only ]  |\n"
+              << "\t\t|____________________|\n"
+              << "\t\t|.,--.-.--,---,.--.-.|   \n"
+              << "\t\t|--.-.--,---,.--.,--.|\n"
+              << "\t\t'--------------------'\n";
+              Sleep(3000);
     int c = -1;
     while (c != 0)
     {
@@ -520,10 +539,46 @@ void sub_menu_4_pharmacy_hub()
     }
 }
 
+/***
+ *
+ *
+ *    FFFFFFFFFFFFFFFFFFFFFF                      iiii               CCCCCCCCCCCCClllllll   iiii                      iiii                              SSSSSSSSSSSSSSS                                                    tttt
+ *    F::::::::::::::::::::F                     i::::i           CCC::::::::::::Cl:::::l  i::::i                    i::::i                           SS:::::::::::::::S                                                ttt:::t
+ *    F::::::::::::::::::::F                      iiii          CC:::::::::::::::Cl:::::l   iiii                      iiii                           S:::::SSSSSS::::::S                                                t:::::t
+ *    FF::::::FFFFFFFFF::::F                                   C:::::CCCCCCCC::::Cl:::::l                                                            S:::::S     SSSSSSS                                                t:::::t
+ *      F:::::F       FFFFFF    cccccccccccccccciiiiiii       C:::::C       CCCCCC l::::l iiiiiii nnnn  nnnnnnnn    iiiiiii     cccccccccccccccc     S:::::S            yyyyyyy           yyyyyyy    ssssssssss   ttttttt:::::ttttttt        eeeeeeeeeeee       mmmmmmm    mmmmmmm
+ *      F:::::F               cc:::::::::::::::ci:::::i      C:::::C               l::::l i:::::i n:::nn::::::::nn  i:::::i   cc:::::::::::::::c     S:::::S             y:::::y         y:::::y   ss::::::::::s  t:::::::::::::::::t      ee::::::::::::ee   mm:::::::m  m:::::::mm
+ *      F::::::FFFFFFFFFF    c:::::::::::::::::c i::::i      C:::::C               l::::l  i::::i n::::::::::::::nn  i::::i  c:::::::::::::::::c      S::::SSSS           y:::::y       y:::::y  ss:::::::::::::s t:::::::::::::::::t     e::::::eeeee:::::eem::::::::::mm::::::::::m
+ *      F:::::::::::::::F   c:::::::cccccc:::::c i::::i      C:::::C               l::::l  i::::i nn:::::::::::::::n i::::i c:::::::cccccc:::::c       SS::::::SSSSS       y:::::y     y:::::y   s::::::ssss:::::stttttt:::::::tttttt    e::::::e     e:::::em::::::::::::::::::::::m
+ *      F:::::::::::::::F   c::::::c     ccccccc i::::i      C:::::C               l::::l  i::::i   n:::::nnnn:::::n i::::i c::::::c     ccccccc         SSS::::::::SS      y:::::y   y:::::y     s:::::s  ssssss       t:::::t          e:::::::eeeee::::::em:::::mmm::::::mmm:::::m
+ *      F::::::FFFFFFFFFF   c:::::c              i::::i      C:::::C               l::::l  i::::i   n::::n    n::::n i::::i c:::::c                         SSSSSS::::S      y:::::y y:::::y        s::::::s            t:::::t          e:::::::::::::::::e m::::m   m::::m   m::::m
+ *      F:::::F             c:::::c              i::::i      C:::::C               l::::l  i::::i   n::::n    n::::n i::::i c:::::c                              S:::::S      y:::::y:::::y            s::::::s         t:::::t          e::::::eeeeeeeeeee  m::::m   m::::m   m::::m
+ *      F:::::F             c::::::c     ccccccc i::::i       C:::::C       CCCCCC l::::l  i::::i   n::::n    n::::n i::::i c::::::c     ccccccc                 S:::::S       y:::::::::y       ssssss   s:::::s       t:::::t    tttttte:::::::e           m::::m   m::::m   m::::m
+ *    FF:::::::FF           c:::::::cccccc:::::ci::::::i       C:::::CCCCCCCC::::Cl::::::li::::::i  n::::n    n::::ni::::::ic:::::::cccccc:::::c     SSSSSSS     S:::::S        y:::::::y        s:::::ssss::::::s      t::::::tttt:::::te::::::::e          m::::m   m::::m   m::::m
+ *    F::::::::FF            c:::::::::::::::::ci::::::i        CC:::::::::::::::Cl::::::li::::::i  n::::n    n::::ni::::::i c:::::::::::::::::c     S::::::SSSSSS:::::S         y:::::y         s::::::::::::::s       tt::::::::::::::t e::::::::eeeeeeee  m::::m   m::::m   m::::m
+ *    F::::::::FF             cc:::::::::::::::ci::::::i          CCC::::::::::::Cl::::::li::::::i  n::::n    n::::ni::::::i  cc:::::::::::::::c     S:::::::::::::::SS         y:::::y           s:::::::::::ss          tt:::::::::::tt  ee:::::::::::::e  m::::m   m::::m   m::::m
+ *    FFFFFFFFFFF               cccccccccccccccciiiiiiii             CCCCCCCCCCCCClllllllliiiiiiii  nnnnnn    nnnnnniiiiiiii    cccccccccccccccc      SSSSSSSSSSSSSSS          y:::::y             sssssssssss              ttttttttttt      eeeeeeeeeeeeee  mmmmmm   mmmmmm   mmmmmm
+ *                                                                                                                                                                            y:::::y
 
+ */
 /** MAIN FUNCTION **/
 int main()
 {
+    system("Color 06");
+      cout    << "\t\t              Fci Clinic System\n\n"
+              << "\t\t                 _ _.-'`-._ _\n"
+              << "\t\t                ;.'________'.;\n"
+              << "\t\t     _________n.[____________].n_________\n"
+              << "\t\t    |\"\"_\"\"_\"\"_\"\"||==||==||==||\"\"_\"\"_\"\"_\"\"|\n"
+              << "\t\t    |\"\"\"\"\"\"\"\"\"\"\"\"||..||..||..||\"\"\"\"\"\"\"\"\"\"|\n"
+              << "\t\t    |LI LI LI LI||LI||LI||LI||LI LI LI LI|\n"
+              << "\t\t    |.. .. .. ..||..||..||..||.. .. .. ..|\n"
+              << "\t\t    |LI LI LI LI||LI||LI||LI||LI LI LI LI|\n"
+              << "\t\t ,,;;,;;;,;;;,;;;,;;;,;;;,;;;,;;,;;;,;;;,;;,\n"
+              << "\t\t;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;\n";
+
+
+        Sleep(3000);
     system("Color 03");
     Hospital->load();
     stk->addMedcinInStockByFiles();
