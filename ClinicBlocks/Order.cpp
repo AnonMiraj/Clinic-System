@@ -69,10 +69,12 @@ void Order::setDate()
     time(&rawtime);
     date = ctime(&rawtime);                   //Error Here --> ):
 }
-
+int Order::ord_id=0;
 void Order::setOrderId(int id)
 {
-    OrderID = id;
+     ++ord_id;
+
+     id =ord_id;
 }
 
 void Order::setNumber(int num)
@@ -399,7 +401,7 @@ void Order::EditOrder(int id)
         int newQuantity;
         cin >> newQuantity;
 
-        // Supstract the old valu
+        // Supstract the old value
         totalPrice -= items[index].calcTotalPrice();
 
         // Update the quantity of the order item

@@ -27,6 +27,7 @@ private:
     int c_orderItem;
     int PatientID;
     int DoctorId;
+    static int ord_id;
 
     Stock* stk;
     orderItem* items;
