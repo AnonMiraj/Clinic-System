@@ -544,10 +544,12 @@ void sub_menu_4_pharmacy_hub()
 
  */
 /** MAIN FUNCTION **/
+
 int main()
 {
     system("Color 06");
-      cout    << "\n\n\n\n\t\t\t             Fci Clinic System\n\n"
+      cout    << "\n\n\n\n\t\t\t           \x02\x03 [Fci Clinic System] \x02\x03 \n";
+      cout    << "\t\t\t           -------------------------\n\n"
               << "\t\t\t                 _ _.-'`-._ _\n"
               << "\t\t\t                ;.'________'.;\n"
               << "\t\t\t     _________n.[____________].n_________\n"
@@ -558,8 +560,9 @@ int main()
               << "\t\t\t    |LI LI LI LI||LI||LI||LI||LI LI LI LI|\n"
               << "\t\t\t ,,;;,;;;,;;;,;;;,;;;,;;;,;;;,;;,;;;,;;;,;;,\n"
               << "\t\t\t;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;\n";
-      cout<<"\n\n\t   1- Mohamed        2- Adelrhman        3- Ezz        4- Mohy        5- Amaar"<<endl;
+      cout<<"\n\n\t     1- Mohamed        2- Abdelrahman        3- Ezz        4- Mohy        5- Chat Gpt"<<endl;
 
+      _pause();
         Sleep(3000);
     system("Color 03");
     Hospital->load();
