@@ -34,10 +34,41 @@ Order::~Order()
     // Clean up dynamically allocated memory for order items
     if (items != nullptr)
     {
-       delete []items;
+        delete []items;
     }
 }
+void Order::setPatientIdInOrder(int id)
+{
+    PatientID = id;
+}
 
+void Order::setNameOfDoctor(string name)
+{
+    this->NameOfdoctor = name;
+}
+void Order::setDoctorIdInOrder(int id)
+{
+    this->DoctorId = id;
+}
+string Order::getPatentName() const
+{
+    return NameOfPatient;
+}
+
+string Order::getDoctorName() const
+{
+    return NameOfdoctor;
+}
+
+int Order::getPatientId() const
+{
+    return PatientID;
+}
+
+int Order::getDoctorId() const
+{
+    return DoctorId;
+}
 string Order::getDate() const
 {
     return date;
@@ -70,10 +101,11 @@ void Order::setDate()
     date = ctime(&rawtime);                   //Error Here --> ):
 }
 int Order::ord_id=0;
+
 void Order::setOrderId()
 {
-     ++ord_id;
-     OrderID = ord_id;
+    ++ord_id;
+    OrderID = ord_id;
 }
 
 void Order::setNumber(int num)
@@ -138,7 +170,7 @@ bool Order::CreateOrderOutsideClinic(Stock* s,Admin*Hospital,int idPatient,int i
 {
     /**
 
-p:
+    p:
     system("Color 03");
     stk = s;
     ptrAdmin=a;
@@ -191,11 +223,12 @@ p:
 
     if (c_orderItem > 0) /// check if i add item or no
     {
-    NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
-    //setOrderId(id);
-     return true;
+        NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
+        //setOrderId(id);
+        return true;
     }
-    else{
+    else
+    {
 
         return false;
     }
@@ -209,7 +242,7 @@ bool Order::CreateOrder(Stock*s,Admin*Hospital)
 {
     stk = s;
     ptrAdmin=Hospital;
-    p:
+p:
     char ch;
     cout << "Enter Patient Id: ";
     int idPatient;
@@ -231,7 +264,7 @@ bool Order::CreateOrder(Stock*s,Admin*Hospital)
         else
             return false;
     }
-           setDate();
+    setDate();
 
     if(Hospital->searchAppoint_patient(idPatient))
     {
@@ -318,12 +351,13 @@ v:
 
     if (c_orderItem > 0) /// check if i add item or no
     {
-    NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
-    NameOfdoctor=Hospital->getDoctor_name(indexofDoctor);///
-    //setOrderId(id);
-     return true;
+        NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
+        NameOfdoctor=Hospital->getDoctor_name(indexofDoctor);///
+        //setOrderId(id);
+        return true;
     }
-    else{
+    else
+    {
 
         return false;
     }
@@ -340,7 +374,7 @@ void Order::AddOrderItem(orderItem* item)
     {
         // Create a new array to store order items
         //items = new orderItem * [1];
-       // items[0] = item;
+        // items[0] = item;
         c_orderItem = 1;
     }
     else
@@ -351,7 +385,7 @@ void Order::AddOrderItem(orderItem* item)
         // Copy existing items to the new array
         for (int i = 0; i < c_orderItem; i++)
         {
-           // newItems[i] = items[i];
+            // newItems[i] = items[i];
         }
 
         // Add the new item to the end of the new array
@@ -361,7 +395,7 @@ void Order::AddOrderItem(orderItem* item)
         delete[] items;
 
         // Update the items pointer to point to the new array
-       // items = newItems;
+        // items = newItems;
         //totalPrice += items[c_orderItem]->calcTotalPrice();
         // Increment the count of order items
         c_orderItem++;
@@ -393,7 +427,7 @@ void Order::UpdateOrderStatus(ORDERSTATUS orderStatus)
 void Order::EditOrder(int id)
 {
     // Find the order item with the given item ID
-    int index = stk->SearchId(id);
+    int index =searchIdItems(id);
     if (index != -1)
     {
         // Prompt the user to edit the order item details
@@ -401,18 +435,16 @@ void Order::EditOrder(int id)
         int newQuantity;
         cin >> newQuantity;
 
-        // Supstract the old value
+        /// Supstract the old value
         totalPrice -= items[index].calcTotalPrice();
 
-        // Update the quantity of the order item
+        /// Update the quantity of the order item
         items[index].UpdateQuantity(newQuantity);//
 
-        // Calculate the new total price
+        /// Calculate the new total price
         totalPrice+= items[index].calcTotalPrice();
 
-        //totalPrice += items[index]->getTotalPrice();
-
-        cout << "Order item updated successfully." << endl;
+        cout << "^_^ Order Item Updated Successfully. ^_^" << endl;
         return;
     }
 
@@ -423,37 +455,72 @@ void Order::RemoveOrderItem(int itemId)
 {
     /// Find the order item with the given item ID
 
-    for (int i = 0; i < c_orderItem; i++)
+    int index=searchIdItems(itemId); /// This Function Search in orders
+    if(index!=-1)
     {
-        if (items[i].getIdOrderItem() == itemId)
-        {
-            /// Calculate the total price before removing the item
-            int itemTotalPrice = items[i].getTotalPrice();
 
+        /// Calculate the total price before removing the item
+        int itemTotalPrice = items[index].getTotalPrice();
+
+        /// Return Quntitiy of item that remove to stock
+        stk->setQuantity(stk->getQuntitiy(itemId)+items[index].getQuantityOfOrderItem(),stk->SearchId(itemId));/// This Function Take Two Parameters First get Quntitiy By id Second get index of This Id From Stock Then This Function Put This Quntitiy in This Index
+
+        /// After That Make Quntity OF this Item = 0 as i remove it
+        items[index].setQuantityOfOrderItem(0);
+        /// Delete the order item from the array
+
+        //delete items[i];
+
+        // Shift the remaining items to fill the gap
+        //for (int j = i; j < c_orderItem - 1; j++) {
+        //    items[j] = items[j + 1];
+        //}
+
+        swap(items[index], items[c_orderItem-1]);
+        // Decrement the count of order items
+        c_orderItem--;
+
+        /// Calculate the new total price
+        totalPrice -= itemTotalPrice;
+        cout << "Order item removed successfully." << endl;
+
+    }
+    else
+    {
+        cout << "Order item not found." << endl;
+
+        return;
+    }
+
+}
+
+void Order::CancelOrder()
+{
+    for(int i=0; i<c_orderItem; i++)
+    {
+
+
+            /// Return Quntitiy of item that remove to stock
+
+            //stk->setQuantity(stk->getQuntitiy(itemId),stk->SearchId(itemId));/// This Function Take Two Parameters First get Quntitiy By id Second get index of This Id From Stock Then This Function Put This Quntitiy in This Index
+            /// After That Make Quntity OF this Item = 0 as i remove it
+            items[i].setQuantityOfOrderItem(0);
             /// Delete the order item from the array
-            //delete items[i];
 
-            // Shift the remaining items to fill the gap
-            //for (int j = i; j < c_orderItem - 1; j++) {
-            //    items[j] = items[j + 1];
-            //}
-
-            swap(items[i], items[c_orderItem-1]);
+            //swap(items[index], items[c_orderItem-1]);
             // Decrement the count of order items
             c_orderItem--;
 
-            // Calculate the new total price
-            totalPrice -= itemTotalPrice;
+            /// Calculate the new total price
 
-            cout << "Order item removed successfully." << endl;
-            return;
-        }
+        //else
+        //{
+         //   return;
+        //}
     }
+    totalPrice=0;
 
-    cout << "Order item not found." << endl;
 }
-
-
 istream& operator>>(istream& in, Order& r)
 {
     // i won't use this overloding i will use function create order
@@ -483,7 +550,7 @@ ostream& operator<<(ostream& out, Order& r)
 {
     out <<"+----------------------------------+"<<endl;
     out << "| Order ID: " << setw(23) << setfill(' ') << r.OrderID << " |" << endl;
-    out << "| Date: "   << r.date  ;
+    out << "| Date: "   << r.date ;
     out << "| Status: " << setw(25) << setfill(' ') << r.status << " |" << endl;
     out << "| Total Price: " << setw(20) << setfill(' ') << r.totalPrice << " |" << endl;
     out <<"+----------------------------------+"<<endl;
@@ -505,38 +572,7 @@ ostream& operator<<(ostream& out, Order& r)
     return out;
 }
 
-void Order::setPatientIdInOrder(int id)
-{
-    PatientID = id;
-}
 
-void Order::setNameOfDoctor(string name)
-{
-    this->NameOfdoctor = name;
-}
-void Order::setDoctorIdInOrder(int id)
-{
-    this->DoctorId = id;
-}
-string Order::getPatentName() const
-{
-    return NameOfPatient;
-}
-
-string Order::getDoctorName() const
-{
-    return NameOfdoctor;
-}
-
-int Order::getPatientId() const
-{
-    return PatientID;
-}
-
-int Order::getDoctorId() const
-{
-    return DoctorId;
-}
 void Order::printOrderofPatientInsideClinic()
 {
     cout<<"+-------------------------------------------+"<<endl;

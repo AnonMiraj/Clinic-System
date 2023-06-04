@@ -49,20 +49,25 @@ void List_Of_Orders::addOrder(Admin*Hospital,Stock*s)
 
 void List_Of_Orders::removeOrder(int orderId)
 {
-    for (int i = 0; i < c_orders; i++)
-    {
-        if (orders[i].getOrderId() == orderId)
-        {
-            // Shift the remaining orders to fill the gap
-            for (int j = i; j < c_orders - 1; j++)
-            {
-                orders[j] = orders[j + 1];
-            }
-            size--;
-            c_orders--;
-            break;
-        }
-    }
+//    for (int i = 0; i < c_orders; i++)
+//    {
+//        if (orders[i].getOrderId() == orderId)
+//        {
+//            // Shift the remaining orders to fill the gap
+//            for (int j = i; j < c_orders - 1; j++)
+//            {
+//                orders[j] = orders[j + 1];
+//            }
+//            size--;
+//            c_orders--;
+//            break;
+//        }
+//    }
+int index=orders->searchIdItems(orderId);
+int itemid;
+cout<<"Enter id of item: ";
+cin>>itemid;
+orders[index].RemoveOrderItem(itemid);
 }
 
 void List_Of_Orders::printSpecificOrder(int i)

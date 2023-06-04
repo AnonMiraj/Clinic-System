@@ -63,6 +63,7 @@ public:
 
     /// Another
 
+    void CancelOrder();
     ///int calcTotalPiceOfOrder();
     int searchIdItems(int id);
     bool CreateOrderInsideClinic(Stock* s,Admin*a,int id,int index);
