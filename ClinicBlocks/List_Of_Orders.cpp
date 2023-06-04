@@ -39,15 +39,14 @@ void List_Of_Orders::addOrder(Admin*Hospital,Stock*s)
         orders = new_orders;
     }
 
-
-    if(orders[c_orders].CreateOrder(s,Hospital))/// If Create Order Successfully We increase counter of list
+     if(orders[c_orders].CreateOrder(s,Hospital))/// If Create Order Successfully We increase counter of list
     {
         c_orders++;
     }
 
 }
 
-void List_Of_Orders::removeItem(int id)
+void List_Of_Orders::removeItem(int index)
 {
 //    for (int i = 0; i < c_orders; i++)
 //    {
@@ -64,15 +63,13 @@ void List_Of_Orders::removeItem(int id)
 //        }
 //    }
 
-    int index=orders->searchIdItems(id);
     int itemid;
     cout<<"Enter id of item: ";
     cin>>itemid;
     orders[index].RemoveOrderItem(itemid);
 }
-void List_Of_Orders::cancleOrder(int id)
+void List_Of_Orders::cancleOrder(int index)
 {
-     int index=orders->searchIdItems(id);
      orders[index].CancelOrder();
      swap(orders[index],orders[c_orders-1]);
      c_orders--;

@@ -452,16 +452,16 @@ void sub_sub_menu_4_View()
 void sub_sub_menu_patientHub_pharmacy()
 {
         int c = -1;
-  
+
     while (c != 0)
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> PHARMACY HUB -> PATIENT HUB  ....");
         c = get_menu_choise("ORDER MEDECINE,EDIT ORDER,REMOVE ITEM,CANCEL ORDER,SHOW SPECIFIC ORDER", 1);
-              
+
         string id;
         int index;
-        if (c>2) 
+        if (c>2)
         { do
         {
       p:
@@ -491,11 +491,11 @@ void sub_sub_menu_patientHub_pharmacy()
             _pause();
             break;
         case 3:
-          OrderList->removeOrder(index);
+          OrderList->removeItem(index);
           _pause();
           break;
         case 4:
-            
+
         OrderList->cancleOrder(index);             ///-->>>>>>>> Under Develop
           _pause();
           break;

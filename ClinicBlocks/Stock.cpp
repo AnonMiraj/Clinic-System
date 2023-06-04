@@ -196,7 +196,7 @@ int Stock::getQuntitiy(int id)
     index=SearchId(id);
     if (index != -1)
     {
-        //cout<<"Ahmed Mohsen";
+        //cout<<"Ezz"<<endl;
         return Quntitiy[index];
     }
     cout << "This Quntitiy isn't Exist" << endl;

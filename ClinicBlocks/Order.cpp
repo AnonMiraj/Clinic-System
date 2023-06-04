@@ -211,7 +211,7 @@ bool Order::CreateOrderOutsideClinic(Stock* s,Admin*Hospital,int idPatient,int i
         {
             totalPrice += items[c_orderItem].calcTotalPrice(); /// Error Exception
             c_orderItem++;
-            setOrderId();
+            //setOrderId();
 
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
@@ -225,6 +225,7 @@ bool Order::CreateOrderOutsideClinic(Stock* s,Admin*Hospital,int idPatient,int i
     {
         NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
         //setOrderId(id);
+        setOrderId();
         return true;
     }
     else
@@ -340,7 +341,6 @@ v:
         {
             totalPrice += items[c_orderItem].calcTotalPrice(); /// Error Exception
             c_orderItem++;
-            setOrderId();
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
         cin>>ch;
@@ -349,11 +349,13 @@ v:
 
 
 
+
     if (c_orderItem > 0) /// check if i add item or no
     {
         NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
         NameOfdoctor=Hospital->getDoctor_name(indexofDoctor);///
         //setOrderId(id);
+        setOrderId();
         return true;
     }
     else
@@ -500,14 +502,21 @@ void Order::CancelOrder()
     {
 
 
-            /// Return Quntitiy of item that remove to stock
-
-            //stk->setQuantity(stk->getQuntitiy(itemId),stk->SearchId(itemId));/// This Function Take Two Parameters First get Quntitiy By id Second get index of This Id From Stock Then This Function Put This Quntitiy in This Index
-            /// After That Make Quntity OF this Item = 0 as i remove it
-            items[i].setQuantityOfOrderItem(0);
-            /// Return Quntitiy To Stock
+            /// Return Quntitiy Of All Items To Stock
             int id=items[i].getIdOrderItem();/// get id of item to use it in another functions
-            stk->setQuantity(stk->getQuntitiy(id)+items[i].getQuantityOfOrderItem(),stk->SearchId(id));/// This Function Take Two Parameters First get Quntitiy By id Second get index of This Id From Stock Then This Function Put This Quntitiy in This Index
+            int index=stk->SearchId(id);
+            //int NewQuntitiy=stk->getQuntitiy(id)+items[i].getQuantityOfOrderItem();///Quntitiy in Stock+Quntitiy of Item
+            int NewQuntitiy=items[i].getQuantityOfOrderItem();
+            cout<<"ID: "<<id<<endl;
+            cout<<items[i].getQuantityOfOrderItem();
+
+            stk->setQuantity(stk->getQuntitiy(id)+items[i].getQuantityOfOrderItem(),index);/// This Function Take Two Parameters First All Quntitiy Second get index of This Id From Stock Then This Function Put This Quntitiy in This Index
+
+
+
+            /// After That Make Quntity OF this Item = 0 as i remove it
+
+            items[i].setQuantityOfOrderItem(0);
 
             /// Delete the order item from the array
 
@@ -521,6 +530,7 @@ void Order::CancelOrder()
          //   return;
         //}
     }
+    cout<<"^_^ Has Deletd Successfully ^_^"<<endl;
     c_orderItem=0;
     totalPrice=0;
 

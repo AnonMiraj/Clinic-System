@@ -9,6 +9,7 @@
 class List_Of_Orders {
 private:
     Order* orders;
+    int orderid;
     int size;
     int capacity;
     int c_orders;
