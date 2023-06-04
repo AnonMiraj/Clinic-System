@@ -1,4 +1,5 @@
 #include <bits/stdc++.h> // stringstream
+#include <cstdio>
 #include <cstring>       // string, to_string
 #include <iostream>      // cin, cout
 #include <string>
@@ -284,12 +285,10 @@ void sub_sub_menu_5_pharmacy_management()
         {
         case 1:
             sub_sub_menu_4_stk_management();
-            _pause();
             break;
 
         case 2:
             sub_sub_menu_5_View();
-            _pause();
             break;
 
         case 0:
@@ -660,6 +659,14 @@ int main()
             _pause();
             break;*/
         case 0:
+            cout<<"SAVE DATA?(y/N)";
+            char Y;
+            cin>>Y;
+            if (Y=='y'||Y=='Y')
+            {
+            Hospital->save();
+            stk->saveInfo();
+            }
             printline("\n\n\a\t\t\tGoodbye \x03\x02......\n\n\n\n\n\n", 1);
             break;
         //
@@ -668,7 +675,5 @@ int main()
             wait_or_clear(3, true);
         }
     }
-    Hospital->save();
-    stk->saveInfo();
-    return 0;
+        return 0;
 }

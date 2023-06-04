@@ -339,7 +339,7 @@ void Admin::editSpecialization()
     int id; string w;
     do
     {
-        id = returnValidInt("Enter your Appointment id : ");
+        id = returnValidInt("Enter your Specialization id : ");
 
         if (searchPatient(id)== -1) cout<<"This Id is not exist :(\n";
         else break;
@@ -652,7 +652,7 @@ void Admin::loadDoctor()
             getline(inp,avalHour);
             getline(inp,date);
             inp>>fee;
-            doctors[doctorCount]=Doctor(id,name,age,gender,blood,phone,address,salary,expYears,0,0,false,date,fee);
+            doctors[doctorCount]=Doctor(id,name,age,gender,blood,phone,address,salary,expYears,0,0,archive,date,fee);
             setIndexesToTrue(doctors[doctorCount].getAvailableDays(),8,avalDay);
             setIndexesToTrue(doctors[doctorCount].getAvailablePeroids(),49,avalHour);
             if(specializationID!=-1)

@@ -2,7 +2,7 @@
 Ibuprofen
 Advil
 50
-2
+10
 2
 Acetaminophen
 Tylenol
