@@ -1,7 +1,6 @@
 #pragma once
 #include "Medcin.h"
 #include "Stock.h"
-#include<conio.h>
 
 class orderItem
 {
