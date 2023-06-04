@@ -441,7 +441,7 @@ void Order::EditOrder(int id)
         totalPrice -= items[index].calcTotalPrice();
 
         /// Update the quantity of the order item
-        items[index].UpdateQuantity(newQuantity);//
+        items[index].UpdateQuantity(newQuantity);
 
         /// Calculate the new total price
         totalPrice+= items[index].calcTotalPrice();
@@ -507,8 +507,6 @@ void Order::CancelOrder()
             int index=stk->SearchId(id);
             //int NewQuntitiy=stk->getQuntitiy(id)+items[i].getQuantityOfOrderItem();///Quntitiy in Stock+Quntitiy of Item
             int NewQuntitiy=items[i].getQuantityOfOrderItem();
-            cout<<"ID: "<<id<<endl;
-            cout<<items[i].getQuantityOfOrderItem();
 
             stk->setQuantity(stk->getQuntitiy(id)+items[i].getQuantityOfOrderItem(),index);/// This Function Take Two Parameters First All Quntitiy Second get index of This Id From Stock Then This Function Put This Quntitiy in This Index
 
