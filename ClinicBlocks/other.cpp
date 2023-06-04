@@ -217,7 +217,7 @@ void setIndexesToTrue(bool arr[], int size) {
     }
 }
 
-void setIndexesToTrue(bool *arr, int size,string input) {
+void setIndexesToTrue(bool arr[], int size,string input) {
 
     istringstream iss(input);
     string token;

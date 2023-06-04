@@ -56,7 +56,6 @@ void Admin::addSpecialization()
     specializations[specializationCount] =  Medical_Specialization(specializationCount+1,name);
     specializationCount++;
 }
-
 string Admin::printAvailableDay(const Doctor& d)
 {
     using namespace std::chrono;
@@ -148,6 +147,24 @@ string Admin::printAvailableDay(const Doctor& d)
                 cout << "There is no available period on this day :(\n";
                 DATE = "00";
             }
+        else
+        {
+            string w;
+            do
+            {
+
+                do
+                {
+                    cout<<"\nEnter period number : "; cin>>w;
+                } while (IsValid(1,48,w) == -1);
+
+                if (ava_app[stoi(w)])
+                    appointments[appointmentCount].setPeriod(stoi(w));
+                else
+                    cout<<"This period is not available :(\n";
+
+            } while(!ava_app[stoi(w)]);
+        }
     }
     else
         {
@@ -204,16 +221,6 @@ void Admin::addAppointment()
     } while (ava == "00");
     appointments[appointmentCount].setDate(ava);
 
-    // is valid function to check if the period number if availbale this day
-    // you need to return an array from function to what you must choose from
-    string w;
-    do
-    {
-        cout<<"\nEnter period number : "; cin>>w;
-    } while (IsValid(1,48,w) == -1);
-    period = stoi(w);
-    appointments[appointmentCount].setPeriod(period);
-
 
     //choose patient
     int pID;
@@ -233,8 +240,10 @@ void Admin::addAppointment()
 
     //
     appointments[appointmentCount].setStatue(1);
+    appointments[appointmentCount].setID(appointmentCount);
     appointmentCount++;
 }
+
 
 void Admin::viewAPP()
 {
