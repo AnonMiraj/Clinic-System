@@ -69,10 +69,12 @@ void Order::setDate()
     time(&rawtime);
     date = ctime(&rawtime);                   //Error Here --> ):
 }
-
-void Order::setOrderId(int id)
+int Order::ord_id=0;
+void Order::setOrderId()
 {
-    OrderID = id;
+     ++ord_id;
+
+     OrderID =ord_id;
 }
 
 void Order::setNumber(int num)
@@ -164,9 +166,9 @@ p:
     setDate();
     setDate();
     int c=0;
-    int id;
-    cout << "Enter Id OF Order: ";
-    cin >> id;
+//    int id;
+//    cout << "Enter Id OF Order: ";
+//    cin >> id;
 
     do
     {
@@ -178,6 +180,7 @@ p:
         {
             totalPrice += items[c_orderItem].calcTotalPrice(); /// Error Exception
             c_orderItem++;
+            setOrderId();
 
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
@@ -190,7 +193,7 @@ p:
     if (c_orderItem > 0) /// check if i add item or no
     {
     NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
-    setOrderId(id);
+    //setOrderId(id);
      return true;
     }
     else{
@@ -291,9 +294,9 @@ v:
 
     setDate();
     int c=0;
-    int id;
-    cout << "Enter Id OF Order: ";
-    cin >> id;
+//    int id;
+//    cout << "Enter Id OF Order: ";
+//    cin >> id;
 
     do
     {
@@ -305,7 +308,7 @@ v:
         {
             totalPrice += items[c_orderItem].calcTotalPrice(); /// Error Exception
             c_orderItem++;
-
+            setOrderId();
         }
         cout << "Do You Want To Add Another Medcine [y/n] ";
         cin>>ch;
@@ -318,7 +321,7 @@ v:
     {
     NameOfPatient=Hospital->getPatient_name(index);/// index here To Patient and i recive it parametar
     NameOfdoctor=Hospital->getDoctor_name(indexofDoctor);///
-    setOrderId(id);
+    //setOrderId(id);
      return true;
     }
     else{
@@ -399,7 +402,7 @@ void Order::EditOrder(int id)
         int newQuantity;
         cin >> newQuantity;
 
-        // Supstract the old valu
+        // Supstract the old value
         totalPrice -= items[index].calcTotalPrice();
 
         // Update the quantity of the order item

@@ -27,6 +27,7 @@ private:
     int c_orderItem;
     int PatientID;
     int DoctorId;
+    static int ord_id;
 
     Stock* stk;
     orderItem* items;
@@ -51,7 +52,7 @@ public:
 
     /// Setter
     void setDate();
-    void setOrderId(int id);
+    void setOrderId();
     void setNumber(int num);
     void setStatus(ORDERSTATUS orderStatus);
     void setTotalPrice(int total);

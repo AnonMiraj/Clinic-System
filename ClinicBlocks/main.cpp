@@ -502,7 +502,7 @@ void sub_sub_menu_patientHub_pharmacy()
                 }while (!IsValid(id,'1'));
                 int index = OrderList->searchOrder(stoi(id));
                 if (index != -1)
-                    OrderList->editOrder(index);
+                    OrderList->editOrder(index);                  ///-->>>> Under Develop
                 else
                     cout<<"There is no order ID :(\n";
             }
@@ -517,7 +517,7 @@ void sub_sub_menu_patientHub_pharmacy()
                     cout<<"Enter Order ID To remove : ";
                     cin>>id;
                 }while (!IsValid(id,'1'));
-                OrderList->removeOrder(stoi(id));
+                OrderList->removeOrder(stoi(id));             ///-->>>>>>>> Under Develop
                 _pause();
                 }
             break;
@@ -662,7 +662,6 @@ int main()
       cout<<"\n\n\t     1- Mohamed        2- Abdelrahman        3- Ezz        4- Mohy        5- Chat Gpt"<<endl;
 
       _pause();
-        Sleep(3000);
     system("Color 03");
     Hospital->load();
     stk->addMedcinInStockByFiles();
