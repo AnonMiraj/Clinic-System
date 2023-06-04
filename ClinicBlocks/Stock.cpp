@@ -68,7 +68,7 @@ void Stock::addMedcinInStock()
                 system("Color 04");
                 system("cls");
                 cout<<"Enter A Valid Choise!!!!"<<endl;
-                Sleep(2500);
+                // Sleep(2500);
                 goto v;
             }
 
