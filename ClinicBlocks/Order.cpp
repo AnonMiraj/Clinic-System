@@ -327,16 +327,10 @@ v:
 
     setDate();
     int c=0;
-//    int id;
-//    cout << "Enter Id OF Order: ";
-//    cin >> id;
 
     do
     {
-        //cout<<"\n";
-        //cout << "Enter item Id: ";
-        //int id;
-        //cin >> id;
+
         if (items[c_orderItem].setOrderItem(s))
         {
             totalPrice += items[c_orderItem].calcTotalPrice(); /// Error Exception

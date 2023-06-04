@@ -621,7 +621,7 @@ int main()
               << "\t\t\t\t    |LI LI LI LI||LI||LI||LI||LI LI LI LI|\n"
               << "\t\t\t\t ,,;;,;;;,;;;,;;;,;;;,;;;,;;;,;;,;;;,;;;,;;,\n"
               << "\t\t\t\t;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;\n";
-      cout<<"\n\n\t           1- Mohamed        2- Abdelrahman        3- Ezz        4- Mohy        5- Chat Gpt"<<endl;
+      cout<<"\n\n\t           1- Mohamed        2- Abdelrahman        3- Ezz        4- Mohy        5- Amaar"<<endl;
 
       _pause();
     system("Color 03");
