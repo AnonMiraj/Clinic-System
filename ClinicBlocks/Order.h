@@ -52,7 +52,7 @@ public:
 
     /// Setter
     void setDate();
-    void setOrderId(int id);
+    void setOrderId();
     void setNumber(int num);
     void setStatus(ORDERSTATUS orderStatus);
     void setTotalPrice(int total);
