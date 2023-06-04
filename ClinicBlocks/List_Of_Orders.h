@@ -20,7 +20,7 @@ public:
     ~List_Of_Orders();
     void cancleOrder(int idofOrder);
     void addOrder(Admin*ptr,Stock*s);
-    void removeOrder(int id);
+    void removeItem(int id);
     void printSpecificOrder(int);
     void printAllOrders();
     int searchOrder(int id);

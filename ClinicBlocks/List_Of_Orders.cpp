@@ -47,7 +47,7 @@ void List_Of_Orders::addOrder(Admin*Hospital,Stock*s)
 
 }
 
-void List_Of_Orders::removeOrder(int id)
+void List_Of_Orders::removeItem(int id)
 {
 //    for (int i = 0; i < c_orders; i++)
 //    {

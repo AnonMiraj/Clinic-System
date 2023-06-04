@@ -488,7 +488,7 @@ void sub_sub_menu_patientHub_pharmacy()
                     cout<<"Enter Order ID To remove : ";
                     cin>>id;
                 }while (!IsValid(id,'1'));
-                OrderList->removeOrder(stoi(id));             ///-->>>>>>>> Under Develop
+                OrderList->removeItem(stoi(id));             ///-->>>>>>>> Under Develop
                 _pause();
                 }
             break;
