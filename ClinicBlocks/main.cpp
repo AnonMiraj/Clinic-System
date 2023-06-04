@@ -278,45 +278,15 @@ void sub_sub_menu_5_pharmacy_management()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> ADMIN HUB -> PHARMACY MANAGEMENT ....");
-        c = get_menu_choise("ORDER MEDECINE,EDIT ORDER,CANCEL ORDER,VIEW", 1);
+        c = get_menu_choise("STOCK MANAGEMENT,VIEW", 1);
         switch (c)
         {
         case 1:
-            OrderList->addOrder(Hospital, stk);
+            sub_sub_menu_4_stk_management();
             _pause();
             break;
 
         case 2:
-            {
-                string id;
-                do
-                {
-                    cout<<"Enter Order ID To edit : ";
-                    cin>>id;
-                }while (!IsValid(id,'1'));
-                int index = OrderList->searchOrder(stoi(id));
-                if (index != -1)
-                    OrderList->editOrder(index);
-                else
-                    cout<<"There is no order ID :(\n";
-            }
-            _pause();
-            break;
-
-        case 3:
-            {
-                string id;
-                do
-                {
-                    cout<<"Enter Order ID To remove : ";
-                    cin>>id;
-                }while (!IsValid(id,'1'));
-                OrderList->removeOrder(stoi(id));
-                _pause();
-                }
-            break;
-
-        case 4:
             sub_sub_menu_5_View();
             _pause();
             break;
@@ -661,7 +631,7 @@ int main()
               << "\t\t\t;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;\n";
       cout<<"\n\n\t     1- Mohamed        2- Abdelrahman        3- Ezz        4- Mohy        5- Chat Gpt"<<endl;
 
-      _pause();
+    _pause();
     system("Color 03");
     Hospital->load();
     stk->addMedcinInStockByFiles();
