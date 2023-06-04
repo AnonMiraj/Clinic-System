@@ -73,8 +73,7 @@ int Order::ord_id=0;
 void Order::setOrderId()
 {
      ++ord_id;
-
-     OrderID =ord_id;
+     OrderID = ord_id;
 }
 
 void Order::setNumber(int num)
@@ -406,7 +405,7 @@ void Order::EditOrder(int id)
         totalPrice -= items[index].calcTotalPrice();
 
         // Update the quantity of the order item
-        items[index].UpdateQuantity(newQuantity);
+        items[index].UpdateQuantity(newQuantity);//
 
         // Calculate the new total price
         totalPrice+= items[index].calcTotalPrice();
