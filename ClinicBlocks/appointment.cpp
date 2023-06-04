@@ -26,7 +26,9 @@ int Appointment::getID() const
 {
     return id;
 }
-
+void Appointment::setID(int id){
+  this->id=id;
+}
 void Appointment::setPeriod(const int& p)
 {
     period = p;

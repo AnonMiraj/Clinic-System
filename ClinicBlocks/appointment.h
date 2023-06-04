@@ -42,7 +42,7 @@ public:
     void setPatient(Patient &p);
     void setStatue(int s);
     void setPrescription(const Prescription& p);
-
+    void setID(int id);
     /// getter
     string getDate() const;
     string getPeriod() const;

@@ -5,8 +5,10 @@
 #include "other.h"
 #include "patient.h"
 #include "person.h"
+#include <bits/types/cookie_io_functions_t.h>
 #include <cstdio>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <unistd.h>
 
@@ -60,47 +62,12 @@ void Admin::addSpecialization()
 string Admin::printAvailableDay(const Doctor& d)
 {
     using namespace std::chrono;
-    string ye = "", mo = "", da = "", DATE = ""; char ch;
-
-    bool IsNotValid;
-    do
-    {
-        IsNotValid = false;
-        try
-        {
-            cout << "\nEnter date (yyyy/mm/dd): ";
-            cin >> ye >> ch >> mo >> ch >> da;
-
-            if (!IsValid(ye, '1') || !IsValid(mo, '2') || !IsValid(da, '3'))
-                throw "\n";
-
-            if ((ye.size() != 4) || (stoi(mo) > 12) || (stoi(da) > 31))
-                throw "This date is invalid. :(\n";
-
-
-
-            break;
-        }
-        catch (const char* str)
-        {
-            IsNotValid = true;
-            cout << str;
-        }
-
-    } while (IsNotValid);
-
-    mo = (mo.size() == 1 ? "0"+mo : mo);
-    da = (da.size() == 1 ? "0"+da : da);
-    DATE = ye + "/" + mo + "/" + da;
-
+    string  DATE = "";
     // Get current local time
     system_clock::time_point now = system_clock::now();
     time_t ti = system_clock::to_time_t(now);
     tm* t = localtime(&ti);
-    t->tm_year = std::stoi(ye) - 1900; // Adjusting the year
-    t->tm_mon = std::stoi(mo) - 1;    // Adjusting the month
-    t->tm_mday = std::stoi(da);       // Setting the day
-
+    DATE = to_string(t->tm_year+1900) + "/" + to_string(t->tm_mon) + "/" + to_string(t->tm_mday) ;
     mktime(t); // Normalize the time structure
 
     int wday = t->tm_wday;
@@ -118,17 +85,6 @@ string Admin::printAvailableDay(const Doctor& d)
         for (int r=1; r<49; r++)
             ava_app[r] = d.availablePeroids[r];
 
-        for (int k = 0; k < appointmentCount; k++)
-        {
-
-            if (appointments[k].getStatue()=="BOOKED" && appointments[k].getDate()==DATE && *appointments[k].getDoctor()==d)
-            {
-                ava_app[appointments[k].getPeriod_int()] = false;
-            }
-            else
-                counter++;
-        }
-
 
         int c = 0;
         for (int j = 1; j < 49; j++)
@@ -143,18 +99,7 @@ string Admin::printAvailableDay(const Doctor& d)
             }
         }
 
-        if (counter == 0)
-            {
-                cout << "There is no available period on this day :(\n";
-                DATE = "00";
-            }
     }
-    else
-        {
-            cout << "This day is not available for the doctor :(\n";
-            DATE = "00";
-        }
-
     return DATE;
 }
 
@@ -209,8 +154,11 @@ void Admin::addAppointment()
     string w;
     do
     {
+  p:
         cout<<"\nEnter period number : "; cin>>w;
     } while (IsValid(1,48,w) == -1);
+    if(!*(doctors[dID].getAvailablePeroids()+stoi(w)))
+      goto p;
     period = stoi(w);
     appointments[appointmentCount].setPeriod(period);
 
@@ -233,6 +181,7 @@ void Admin::addAppointment()
 
     //
     appointments[appointmentCount].setStatue(1);
+    appointments[appointmentCount].setID(appointmentCount+1); 
     appointmentCount++;
 }
 
@@ -253,12 +202,25 @@ void Admin::viewAPP()
 
 void Admin::BeAttend()
 {
+    cout<<"ENTER YOUR DOCTOR ID : ";
+    int docID;
+    cin>>docID;
+    int counter=0;
     for (int i = 0; i<appointmentCount; i++)
     {
-        if (appointments[i].getStatue() == "BOOKED")
+        if (appointments[i].getStatue() == "BOOKED"&&appointments[i].getDoctor()->getId()==docID)
+        {
             cout<<"\n************************\n"
                 <<appointments[i]
                 <<"\n************************\n";
+            counter++;
+        }
+    }
+    if (!counter)
+    {
+      cout<<"NO APPOINTMENTS TO ATTENED";
+      return;
+    
     }
 string medic, dose;
 int quantity,yes;
