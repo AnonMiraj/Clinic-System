@@ -104,9 +104,8 @@ int Order::ord_id=0;
 
 void Order::setOrderId()
 {
-    OrderID = ord_id;
     ++ord_id;
-
+    OrderID = ord_id;
 }
 
 void Order::setNumber(int num)
