@@ -72,7 +72,10 @@ void List_Of_Orders::removeOrder(int id)
 }
 void List_Of_Orders::cancleOrder(int id)
 {
-
+     int index=orders->searchIdItems(id);
+     orders[index].CancelOrder();
+     swap(orders[index],orders[c_orders-1]);
+     c_orders--;
 }
 void List_Of_Orders::printSpecificOrder(int i)
 {
