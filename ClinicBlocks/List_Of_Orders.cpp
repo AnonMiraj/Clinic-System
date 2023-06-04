@@ -68,12 +68,14 @@ void List_Of_Orders::removeItem(int index)
     cin>>itemid;
     orders[index].RemoveOrderItem(itemid);
 }
+
 void List_Of_Orders::cancleOrder(int index)
 {
      orders[index].CancelOrder();
      swap(orders[index],orders[c_orders-1]);
      c_orders--;
 }
+
 void List_Of_Orders::printSpecificOrder(int i)
 {
     orders[i].printOrder();
@@ -97,6 +99,7 @@ int List_Of_Orders::searchOrder(int id)
 
 void List_Of_Orders::editOrder(int i)
 {
+
     string id;
     do
     {
@@ -104,5 +107,12 @@ void List_Of_Orders::editOrder(int i)
         cin>>id;
     }
     while (!IsValid(id,'1'));
+
+    cout<<"Ahmed Mohsen"<<endl;
     orders[i].EditOrder(stoi(id));
 }
+
+
+
+
+

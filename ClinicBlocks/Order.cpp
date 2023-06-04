@@ -104,8 +104,9 @@ int Order::ord_id=0;
 
 void Order::setOrderId()
 {
-    ++ord_id;
     OrderID = ord_id;
+    ++ord_id;
+
 }
 
 void Order::setNumber(int num)
@@ -428,6 +429,7 @@ void Order::UpdateOrderStatus(ORDERSTATUS orderStatus)
 
 void Order::EditOrder(int id)
 {
+    cout<<"Shadow"<<endl;
     // Find the order item with the given item ID
     int index =searchIdItems(id);
     if (index != -1)
@@ -450,7 +452,7 @@ void Order::EditOrder(int id)
         return;
     }
 
-    cout << "Order item not found." << endl;
+    cout << "Order item not found. :(" << endl;
 }
 
 void Order::RemoveOrderItem(int itemId)
