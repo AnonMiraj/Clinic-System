@@ -89,7 +89,7 @@ double orderItem::calcTotalPrice()
     return totalPriceOrderItem;
 }
 
-void orderItem::UpdateQuantity(int newQuantity)
+void orderItem::UpdateQuantity(int newQuantity)// --> 10 --> 5--> 5--> 7
 {
     int index;
     if (newQuantity != 0)
