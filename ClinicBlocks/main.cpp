@@ -2,6 +2,7 @@
 #include <cstring>       // string, to_string
 #include <iostream>      // cin, cout
 #include <string>
+#include <strings.h>
 #include "admin.h"
 #include "List_Of_Orders.h"
 #include "Stock.h"
@@ -451,11 +452,29 @@ void sub_sub_menu_4_View()
 void sub_sub_menu_patientHub_pharmacy()
 {
         int c = -1;
+  
     while (c != 0)
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> PHARMACY HUB -> PATIENT HUB  ....");
-        c = get_menu_choise("ORDER MEDECINE,EDIT ORDER,CANCEL ORDER,SHOW SPECIFIC ORDER", 1);
+        c = get_menu_choise("ORDER MEDECINE,EDIT ORDER,REMOVE ITEM,CANCEL ORDER,SHOW SPECIFIC ORDER", 1);
+              
+        string id;
+        int index;
+        if (c>2) 
+        { do
+        {
+      p:
+          cout<<"Enter Order ID ";
+          cin>>id;
+        }while (!IsValid(id,'1'));
+        index = OrderList->searchOrder(stoi(id));
+        if (index == -1)
+        {
+          cout<<"ID DOESNT EXIST :(\n";
+          goto p;
+        }
+        }
         switch (c)
         {
         case 1:
@@ -464,44 +483,26 @@ void sub_sub_menu_patientHub_pharmacy()
             break;
 
         case 2:
-            {
-                string id;
-                do
-                {
-                    cout<<"Enter Order ID To edit : ";
-                    cin>>id;
-                }while (!IsValid(id,'1'));
-                int index = OrderList->searchOrder(stoi(id));
+
                 if (index != -1)
                     OrderList->editOrder(index);                  ///-->>>> Under Develop
                 else
                     cout<<"There is no order ID :(\n";
-            }
             _pause();
             break;
-
         case 3:
-            {
-                string id;
-                do
-                {
-                    cout<<"Enter Order ID To remove : ";
-                    cin>>id;
-                }while (!IsValid(id,'1'));
-                OrderList->removeOrder(stoi(id));             ///-->>>>>>>> Under Develop
-                _pause();
-                }
-            break;
-
+          OrderList->removeOrder(index);
+          _pause();
+          break;
         case 4:
+            
+        OrderList->cancleOrder(index);             ///-->>>>>>>> Under Develop
+          _pause();
+          break;
+
+        case 5:
             {
-                string id;
-                do
-                {
-                    cout<<"Enter Order ID To Show : ";
-                    cin>>id;
-                }while (!IsValid(id,'1'));
-                int index = OrderList->searchOrder(stoi(id));
+            int index = OrderList->searchOrder(stoi(id));
 
                 if (index != -1)
                     OrderList->printSpecificOrder(index);
@@ -569,13 +570,11 @@ void sub_menu_4_pharmacy_hub()
         {
         case 1:
             sub_sub_menu_5_pharmacy_management();
-            _pause();
             break;
 
 
         case 2:
             sub_sub_menu_patientHub_pharmacy();
-            _pause();
             break;
 
         case 0:
@@ -638,7 +637,7 @@ int main()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU ....", 1);
-        c = get_menu_choise("ADMIN HUB,DOCTOR MANAGEMENT,PATIENT MANAGEMENT,PHARMACY MANAGEMNET",
+        c = get_menu_choise("ADMIN HUB,DOCTOR HUB,PATIENT HUB,PHARMACY HUB",
                             0);
 
         switch (c)
