@@ -457,8 +457,8 @@ void sub_sub_menu_patientHub_pharmacy()
         c = get_menu_choise("ORDER MEDECINE,EDIT ORDER,REMOVE ITEM,CANCEL ORDER,SHOW SPECIFIC ORDER", 1);
 
         string id;
-        int index;
-        if (c>2)
+        int index=-1;
+        if (c>1)
         { do
         {
       p:
