@@ -35,6 +35,7 @@ class Admin {
 	+BeAttend() : void
 	+DetDoctorFromSpec() : void
 	+Doctors_SearchByName() : void
+	+Invoice(int) : void
 	+addAppointment() : void
 	+addDoctor() : void
 	+addDoctorToSpec() : void
@@ -55,6 +56,7 @@ class Admin {
 	+loadSpecial() : void
 	+patientHistory() : void
 	+printAllDoctors() : void
+	+printAllPatient() : void
 	+printAllSpecs() : void
 	+printSpecDoctors() : void
 	+resizeDoctor() : void
@@ -67,6 +69,7 @@ class Admin {
 	+viewAPP() : void
 	+viewAvailableDoctors() : void
 	+viewDoctor() : void
+	+viewPatient() : void
 }
 
 
@@ -85,6 +88,7 @@ class Appointment {
 	+getDate_wday() : int {query}
 	+getID() : int {query}
 	+getPeriod_int() : int {query}
+	+getPrescriptionCount() : int {query}
 	-id : int
 	-period : int
 	-prescriptionCount : int
@@ -101,39 +105,11 @@ class Appointment {
 	+setDate(int) : void
 	+setDate(string) : void
 	+setDoctor(Doctor& d) : void
+	+setID(int id) : void
 	+setPatient(Patient& p) : void
 	+setPeriod(const int& p) : void
 	+setPrescription(const Prescription& p) : void
 	+setStatue(int s) : void
-}
-
-
-class Cash {
-	+Cash()
-	+Cash(double)
-	+~Cash()
-	+Get_Cash() : Cash&
-	-CashValue : double
-	+operator>>(istream &, Cash &) : istream&
-	+Pay() : void
-	+Set_Cash(double) : void
-	+Update() : void
-}
-
-
-class Check {
-	+Check()
-	+Check(const char*, const char*)
-	+~Check()
-	+get_BankIdForCheck() : Check&
-	+get_NameCheck() : Check&
-	+operator>>(istream &, Check &) : istream&
-	-BankId : string
-	-nameCheck : string
-	+Pay() : void
-	+Update() : void
-	+set_BankIdForCheck(const char*) : void
-	+set_NameCheck(const char*) : void
 }
 
 
@@ -176,6 +152,8 @@ class Doctor {
 	+setAvailablePeroids(int, bool) : void
 	+setDateJoined(const string& dateJoined) : void
 	+setExperience(int experience) : void
+	+setIndexesToTrued(string input) : void
+	+setIndexesToTruep(string input) : void
 	+setRatingSum(int rating) : void
 	+setSalary(int salary) : void
 	+setSpecialization(Medical_Specialization& specialization) : void
@@ -191,11 +169,16 @@ class List_Of_Orders {
 	-ptrStock : Stock*
 	-c_orders : int
 	-capacity : int
+	-orderid : int
+	+searchOrder(int id) : int
 	-size : int
+	+Pay() : void
 	+addOrder(Admin* ptr, Stock* s) : void
-	+editOrder() : void
+	+cancleOrder(int idofOrder) : void
+	+editOrder(int) : void
 	+printAllOrders() : void
-	+removeOrder(int orderId) : void
+	+printSpecificOrder(int) : void
+	+removeItem(int id) : void
 }
 
 
@@ -217,6 +200,19 @@ class Medcin {
 	+setId(int id) : void
 	+setName(const string& name) : void
 	+setPrice(const int& price) : void
+}
+
+
+class Medical_Insurance {
+	+Medical_Insurance()
+	-coverage : double
+	+getCoverage(int index) : double {query}
+	+operator>>(istream& is, Medical_Insurance& mi) : istream&
+	+operator<<(ostream& os, const Medical_Insurance& mi) : ostream&
+	+getType(int index) : string {query}
+	-type : string
+	+setCoverage(int index, double newCoverage) : void
+	+setType(int index, const string& newType) : void
 }
 
 
@@ -266,6 +262,7 @@ class Order {
 	+operator>>(istream& in, Order& r) : istream&
 	-items : orderItem*
 	+operator<<(ostream& out, Order& r) : ostream&
+	-{static} ord_id : static int
 	-NameOfPatient : string
 	-NameOfdoctor : string
 	-date : string
@@ -275,6 +272,7 @@ class Order {
 	+getStatus() : string {query}
 	-status : string
 	+AddOrderItem(orderItem* item) : void
+	+CancelOrder() : void
 	+EditOrder(int itemId) : void
 	+RemoveOrderItem(int itemId) : void
 	+UpdateOrderStatus(ORDERSTATUS status) : void
@@ -286,7 +284,7 @@ class Order {
 	+setNameOfDoctor(string name) : void
 	+setNameOfPatient(string Patentname) : void
 	+setNumber(int num) : void
-	+setOrderId(int id) : void
+	+setOrderId() : void
 	+setPatientIdInOrder(int id) : void
 	+setStatus(ORDERSTATUS orderStatus) : void
 	+setTotalPrice(int total) : void
@@ -311,17 +309,6 @@ class Patient {
 	+setEmergencyContact(const string& emergencyContact) : void
 	+setInsurance(const int& insurance) : void
 	+setPassword(const string& password) : void
-}
-
-
-class Payment {
-	+Payment()
-	+~Payment()
-	#date : Date
-	#amount : double
-	+operator>>(istream &, Payment &) : istream&
-	+Pay() : void
-	+Update() : void
 }
 
 
@@ -378,9 +365,11 @@ class Stock {
 	+~Stock()
 	-MedcinList : Medcin*
 	+getSalePriceOfMedcin(int index) : double
-	+input : ifstream
+	-MedcinListSize : int
 	+SearchId(int id) : int
+	+SearchIdByName(string med) : int
 	-c_MedcinList : int
+	+getMedcinListCount() : int
 	+getQuntitiy(int id) : int
 	-Quntitiy : int*
 	+operator<<(ostream& out, const Stock& stock) : ostream&
@@ -388,17 +377,8 @@ class Stock {
 	+addMedcinInStockByFiles() : void
 	+deleteMecinFromStock() : void
 	+editMedcin() : void
+	+saveInfo() : void
 	+setQuantity(int Quntitiy, int index) : void
-}
-
-
-class Transaction {
-	+Transaction()
-	+~Transaction()
-	-p : Payment**
-	-counter : int
-	+Handle_Pyment() : void
-	+Set_Payment() : void
 }
 
 
@@ -437,23 +417,10 @@ enum ORDERSTATUS {
 }
 
 
-class Date {
-	+day : int
-	+month : int
-	+year : int
-}
-
-
 
 
 
 /' Inheritance relationships '/
-
-.Payment <|-- .Cash
-
-
-.Payment <|-- .Check
-
 
 .Person <|-- .Doctor
 
@@ -470,6 +437,9 @@ class Date {
 
 
 .Admin o-- .Doctor
+
+
+.Admin *-- .Medical_Insurance
 
 
 .Admin o-- .Medical_Specialization
@@ -511,13 +481,7 @@ class Date {
 .Order o-- .orderItem
 
 
-.Payment *-- .Date
-
-
 .Stock o-- .Medcin
-
-
-.Transaction o-- .Payment
 
 
 .orderItem o-- .Stock

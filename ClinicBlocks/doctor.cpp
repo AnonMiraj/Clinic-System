@@ -7,8 +7,8 @@ Doctor::Doctor()
  : Person(),
       salary(0), specialization(), experience(0),
       ratingSum(0),appointmentCount(0), dateJoined(""), appointmentFee(0) {
-  bool availableDays[8]={false};
-  bool setAvailablePeroids[49]={false};
+  bool availableDays[8]={0};
+  bool setAvailablePeroids[49]={0};
   specialization=nullptr;
 }
 
@@ -20,8 +20,8 @@ Doctor::Doctor(int id, const string& name, int age, const string& gender, const 
       salary(salary), experience(experience),
       ratingSum(ratingSum),appointmentCount(appointmentCount),archived(archived)
       ,dateJoined(dateJoined), appointmentFee(appointmentFee) {
-  bool availableDays[8]={false};
-  bool setAvailablePeroids[49]={false};
+  bool availableDays[8]={0};
+  bool setAvailablePeroids[49]={0};
   specialization=nullptr;
 
 }
@@ -106,17 +106,83 @@ void Doctor::setAvailablePeroids(int index, bool b)
     availablePeroids[index] = b;
 }
 
+
+void Doctor::setIndexesToTrued(string input) {
+
+    istringstream iss(input);
+    string token;
+    while (iss >> token) {
+        if (token.find('-') != string::npos) {
+            // Range input detected, e.g., "1-3"
+            istringstream rangeIss(token);
+            string start, end;
+            getline(rangeIss, start, '-');
+            getline(rangeIss, end, '-');
+
+            int startIndex = stoi(start);
+            int endIndex = stoi(end);
+
+            for (int i = startIndex; i <= endIndex; ++i) {
+                if (i >= 1 && i < 8) {
+                    availableDays[i] = true;
+                }
+            }
+        } else {
+            // Single index input detected, e.g., "1"
+            int index = stoi(token);
+            if (index >= 1 && index < 8) {
+                availableDays[index] = true;
+            }
+        }
+    }
+}
+
+
+void Doctor::setIndexesToTruep(string input) {
+
+    istringstream iss(input);
+    string token;
+    while (iss >> token) {
+        if (token.find('-') != string::npos) {
+            // Range input detected, e.g., "1-3"
+            istringstream rangeIss(token);
+            string start, end;
+            getline(rangeIss, start, '-');
+            getline(rangeIss, end, '-');
+
+            int startIndex = stoi(start);
+            int endIndex = stoi(end);
+
+            for (int i = startIndex; i <= endIndex; ++i) {
+                if (i >= 1 && i < 49) {
+                    availablePeroids[i] = true;
+                }
+            }
+        } else {
+            // Single index input detected, e.g., "1"
+            int index = stoi(token);
+            if (index >= 1 && index < 48) {
+                availablePeroids[index] = true;
+            }
+        }
+    }
+}
 void Doctor::readDays(){
     cout << "The weak here start with Saturday so 1 means Saturday\n";
     cout << "Enter the working days (\"1 2 3\", \"1-3\", \"1-2 5 6\" ): "<<endl;
-    setIndexesToTrue(availableDays, 8);
+    cin.ignore();
+    string s;
+    getline(cin,s);
+  Doctor::setIndexesToTrued(s);
 }
 void Doctor::readPeroids(){
 
     cout << "The day consist of 48 peroids ( 30 min ) the first one starts with 1 and equal 00:00 the next is 00:30 ,etc\n";
     cout << "Enter the working Peroids (\"1 2 3\", \"1-3\", \"1-2 5 6\" ): "<<endl;
-    setIndexesToTrue(availablePeroids, 49);
-}
+    string s;
+    cin.ignore();
+    getline(cin,s);
+  Doctor::setIndexesToTruep(s);}
 void Doctor::saveInfo(){
   ofstream  oupt;
   oupt.open("./data/inputDoctors.txt",ios::app);
@@ -244,9 +310,7 @@ ostream& operator<<(ostream& os, const Doctor& doctor) {
     printPeriodTimes(doctor.availablePeroids , 49);
     os << "Date Joined: " << doctor.dateJoined << endl;
     os << "Appointment Fee: " << doctor.appointmentFee << endl;
-
-
-    return os;
+       return os;
 }
 
 bool Doctor::operator==(const Doctor& d)
