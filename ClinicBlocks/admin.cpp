@@ -897,6 +897,7 @@ int Admin::searchAppoint_patient(int id)
 }
 
 //temprory
+
 ostream& operator<<(ostream& os, const Admin& admin)
 {
     os << "Patients:" << endl;

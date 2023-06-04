@@ -55,7 +55,7 @@ public:
     void setNumber(int num);
     void setStatus(ORDERSTATUS orderStatus);
     void setTotalPrice(int total);
-    void setNameOfPatient(string Patentname);
+    void setNameOfPatient(string Patientname);
     void setPatientIdInOrder(int id);
     void setNameOfDoctor(string name);
     void setDoctorIdInOrder(int id);

@@ -43,7 +43,6 @@ void List_Of_Orders::addOrder(Admin*Hospital,Stock*s)
     {
         c_orders++;
     }
-
 }
 
 void List_Of_Orders::removeItem(int index)
@@ -71,9 +70,11 @@ void List_Of_Orders::removeItem(int index)
 
 void List_Of_Orders::cancleOrder(int index)
 {
+
      orders[index].CancelOrder();
      swap(orders[index],orders[c_orders-1]);
      c_orders--;
+
 }
 
 void List_Of_Orders::printSpecificOrder(int i)
@@ -99,7 +100,6 @@ int List_Of_Orders::searchOrder(int id)
 
 void List_Of_Orders::editOrder(int i)
 {
-
     string id;
     do
     {
@@ -108,9 +108,11 @@ void List_Of_Orders::editOrder(int i)
     }
     while (!IsValid(id,'1'));
 
-    cout<<"Ahmed Mohsen"<<endl;
     orders[i].EditOrder(stoi(id));
+
+
 }
+
 
 
 

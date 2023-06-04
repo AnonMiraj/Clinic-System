@@ -462,13 +462,18 @@ void sub_sub_menu_patientHub_pharmacy()
         { do
         {
       p:
+          cout<<"Press 0 To Exit"<<endl;
           cout<<"Enter Order ID ";
           cin>>id;
+          if(id=="0")
+            return;
         }while (!IsValid(id,'1'));
         index = OrderList->searchOrder(stoi(id));
         if (index == -1)
         {
           cout<<"ID DOESNT EXIST :(\n";
+
+
           goto p;
         }
         }
