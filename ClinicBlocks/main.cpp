@@ -191,7 +191,6 @@ void sub_sub_menu_3_Patient_management()
             break;
         case 3:
             sub_sub_sub_menu_ViewPatient();
-            _pause();
             break;
         case 0:
             return;
@@ -332,7 +331,6 @@ void sub_menu_1_admin_hub()
             break;
         case 7:
             sub_sub_menu_5_pharmacy_management();
-            _pause();
             break;
 
         case 0:
