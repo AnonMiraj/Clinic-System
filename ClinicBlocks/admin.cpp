@@ -114,27 +114,32 @@ string Admin::printAvailableDay(const Doctor& d)
     if (d.availableDays[wday] == true)
     {
         cout<<endl <<DATE <<endl;
-        for (int j = 1; j < 48; j++)
+        bool ava_app[49];
+        for (int r=1; r<49; r++)
+            ava_app[r] = d.availablePeroids[r];
+
+        for (int k = 0; k < appointmentCount; k++)
         {
-            if (!d.availablePeroids[j])
-                continue;
 
-            bool check = true;
-            for (int k=0; k <appointmentCount; k++)
+            if (appointments[k].getStatue()=="BOOKED" && appointments[k].getDate()==DATE && *appointments[k].getDoctor()==d)
             {
-                if (appointments[k].getStatue() == "BOOKED" && appointments[k].getDate() == DATE && appointments[k].getPeriod_int() == j && *appointments[k].getDoctor() == d)
-                {
-                    check = false;
-                    break;
-                }
+                ava_app[appointments[k].getPeriod_int()] = false;
             }
-
-            if (check)
-            {
-                if (counter % 5 == 0)
-                    cout << endl;
+            else
                 counter++;
+        }
+
+
+        int c = 0;
+        for (int j = 1; j < 49; j++)
+        {
+            if (ava_app[j])
+            {
+                if (c % 5 == 0)
+                    cout<<endl;
+
                 cout << "| " << j << "- " << getPeriod(j) << "  ";
+                c++;
             }
         }
 
