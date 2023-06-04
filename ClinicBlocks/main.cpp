@@ -146,7 +146,7 @@ void sub_sub_sub_menu_ViewPatient()
     while (c != 0)
     {
         wait_or_clear(0, 1);
-        printline("\n\nMAIN MENU -> ADMIN HUB -> PATINET MANAGMENT -> VIEW ....");
+        printline("\n\nMAIN MENU -> ADMIN HUB -> PATINET MANAGMENT -> VIEW PATIENT ....");
         c = get_menu_choise("SHOW ALL PATINETS,SHOW SPECIFIC PATIENT", 2);
         switch (c)
         {
@@ -236,7 +236,7 @@ void sub_sub_menu_5_View()
     while (c != 0)
     {
         wait_or_clear(0, 1);
-        printline("\n\nMAIN MENU -> ADMIN HUB -> PHARMACY MANAGEMENT -> VIEW ....");
+        printline("\n\nMAIN MENU -> ADMIN HUB -> PHARMACY MANAGEMENT -> VIEW ORDER ....");
         c = get_menu_choise("SHOW ALL ORDERS,SHOW SPECIFIC ORDERS", 2);
         switch (c)
         {
@@ -278,7 +278,7 @@ void sub_sub_menu_5_pharmacy_management()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> ADMIN HUB -> PHARMACY MANAGEMENT ....");
-        c = get_menu_choise("STOCK MANAGEMENT,VIEW", 1);
+        c = get_menu_choise("STOCK MANAGEMENT,VIEW ORDER", 1);
         switch (c)
         {
         case 1:
@@ -334,6 +334,7 @@ void sub_menu_1_admin_hub()
             sub_sub_menu_5_pharmacy_management();
             _pause();
             break;
+
         case 0:
             return;
         default:
@@ -453,7 +454,7 @@ void sub_sub_menu_patientHub_pharmacy()
     while (c != 0)
     {
         wait_or_clear(0, 1);
-        printline("\n\nMAIN MENU -> PATIENT HUB -> PHARMACY HUB  ....");
+        printline("\n\nMAIN MENU -> PHARMACY HUB -> PATIENT HUB  ....");
         c = get_menu_choise("ORDER MEDECINE,EDIT ORDER,CANCEL ORDER,SHOW SPECIFIC ORDER", 1);
         switch (c)
         {
@@ -526,7 +527,7 @@ void sub_menu_3_patient_hub()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> PATIENT HUB ....");
-        c = get_menu_choise("CREATE ACCOUNT,EDIT ACCOUNT INFORMATION,APPOINTMENT,VIEW,PHARMACY MANAGEMENT", 1);
+        c = get_menu_choise("CREATE ACCOUNT,EDIT ACCOUNT INFORMATION,APPOINTMENT,VIEW PATIENT", 1);
         switch (c)
         {
         case 1:
@@ -544,11 +545,6 @@ void sub_menu_3_patient_hub()
 
         case 4:
             sub_sub_menu_4_View();
-            break;
-
-        case 5:
-            sub_sub_menu_patientHub_pharmacy();
-            _pause();
             break;
 
         case 0:
@@ -631,7 +627,7 @@ int main()
               << "\t\t\t;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;\n";
       cout<<"\n\n\t     1- Mohamed        2- Abdelrahman        3- Ezz        4- Mohy        5- Chat Gpt"<<endl;
 
-    _pause();
+      _pause();
     system("Color 03");
     Hospital->load();
     stk->addMedcinInStockByFiles();
