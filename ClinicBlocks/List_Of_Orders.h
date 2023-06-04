@@ -19,6 +19,7 @@ private:
 public:
     List_Of_Orders();
     ~List_Of_Orders();
+    void Pay();
     void cancleOrder(int idofOrder);
     void addOrder(Admin*ptr,Stock*s);
     void removeItem(int id);

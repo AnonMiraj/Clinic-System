@@ -454,7 +454,7 @@ void sub_sub_menu_patientHub_pharmacy()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> PHARMACY HUB -> PATIENT HUB  ....");
-        c = get_menu_choise("ORDER MEDECINE,EDIT ORDER,REMOVE ITEM,CANCEL ORDER,SHOW SPECIFIC ORDER", 1);
+        c = get_menu_choise("ORDER MEDECINE,Upade item Quntitiy,REMOVE ITEM,CANCEL ORDER,SHOW SPECIFIC ORDER", 1);
 
         string id;
         int index=-1;

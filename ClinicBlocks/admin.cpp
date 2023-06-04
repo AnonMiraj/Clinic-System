@@ -5,7 +5,7 @@
 #include "other.h"
 #include "patient.h"
 #include "person.h"
-#include <bits/types/cookie_io_functions_t.h>
+//#include <bits/types/cookie_io_functions_t.h>
 #include <cstdio>
 #include <fstream>
 #include <iostream>
@@ -38,6 +38,10 @@ Admin::~Admin()
     delete[] doctors;
     delete[] specializations;
 }
+
+
+
+
 
 void Admin::addPatient()
 {
@@ -181,7 +185,7 @@ void Admin::addAppointment()
 
     //
     appointments[appointmentCount].setStatue(1);
-    appointments[appointmentCount].setID(appointmentCount+1); 
+    appointments[appointmentCount].setID(appointmentCount+1);
     appointmentCount++;
 }
 
@@ -220,7 +224,7 @@ void Admin::BeAttend()
     {
       cout<<"NO APPOINTMENTS TO ATTENED";
       return;
-    
+
     }
 string medic, dose;
 int quantity,yes;

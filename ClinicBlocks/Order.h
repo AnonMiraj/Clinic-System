@@ -64,12 +64,12 @@ public:
 
     void CancelOrder();
     ///int calcTotalPiceOfOrder();
-    int searchIdItems(int id);
+    int  searchIdItems(int id);
     bool CreateOrderInsideClinic(Stock* s,Admin*a,int id,int index);
     bool CreateOrderOutsideClinic(Stock* s,Admin*a,int id,int index);
     bool CreateOrder(Stock* s,Admin*a);
 
-
+    ///
 
     void AddOrderItem(orderItem* item);
     void UpdateOrderStatus(ORDERSTATUS status);
