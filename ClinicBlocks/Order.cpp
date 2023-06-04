@@ -505,11 +505,14 @@ void Order::CancelOrder()
             //stk->setQuantity(stk->getQuntitiy(itemId),stk->SearchId(itemId));/// This Function Take Two Parameters First get Quntitiy By id Second get index of This Id From Stock Then This Function Put This Quntitiy in This Index
             /// After That Make Quntity OF this Item = 0 as i remove it
             items[i].setQuantityOfOrderItem(0);
+            /// Return Quntitiy To Stock
+            int id=items[i].getIdOrderItem();/// get id of item to use it in another functions
+            stk->setQuantity(stk->getQuntitiy(id)+items[i].getQuantityOfOrderItem(),stk->SearchId(id));/// This Function Take Two Parameters First get Quntitiy By id Second get index of This Id From Stock Then This Function Put This Quntitiy in This Index
+
             /// Delete the order item from the array
 
             //swap(items[index], items[c_orderItem-1]);
             // Decrement the count of order items
-            c_orderItem--;
 
             /// Calculate the new total price
 
@@ -518,6 +521,7 @@ void Order::CancelOrder()
          //   return;
         //}
     }
+    c_orderItem=0;
     totalPrice=0;
 
 }

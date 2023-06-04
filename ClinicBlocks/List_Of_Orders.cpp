@@ -47,7 +47,7 @@ void List_Of_Orders::addOrder(Admin*Hospital,Stock*s)
 
 }
 
-void List_Of_Orders::removeOrder(int orderId)
+void List_Of_Orders::removeOrder(int id)
 {
 //    for (int i = 0; i < c_orders; i++)
 //    {
@@ -63,13 +63,17 @@ void List_Of_Orders::removeOrder(int orderId)
 //            break;
 //        }
 //    }
-int index=orders->searchIdItems(orderId);
-int itemid;
-cout<<"Enter id of item: ";
-cin>>itemid;
-orders[index].RemoveOrderItem(itemid);
-}
 
+    int index=orders->searchIdItems(id);
+    int itemid;
+    cout<<"Enter id of item: ";
+    cin>>itemid;
+    orders[index].RemoveOrderItem(itemid);
+}
+void List_Of_Orders::cancleOrder(int id)
+{
+
+}
 void List_Of_Orders::printSpecificOrder(int i)
 {
     orders[i].printOrder();
@@ -98,6 +102,7 @@ void List_Of_Orders::editOrder(int i)
     {
         cout<<"Enter Order item ID To edit : ";
         cin>>id;
-    }while (!IsValid(id,'1'));
+    }
+    while (!IsValid(id,'1'));
     orders[i].EditOrder(stoi(id));
 }

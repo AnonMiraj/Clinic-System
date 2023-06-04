@@ -18,9 +18,9 @@ private:
 public:
     List_Of_Orders();
     ~List_Of_Orders();
-
+    void cancleOrder(int idofOrder);
     void addOrder(Admin*ptr,Stock*s);
-    void removeOrder(int orderId);
+    void removeOrder(int id);
     void printSpecificOrder(int);
     void printAllOrders();
     int searchOrder(int id);
