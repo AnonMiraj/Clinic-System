@@ -1,0 +1,189 @@
+1
+John Smith
+35
+Male
+AB+
+555-1234
+123 Main Street, Anytown, USA
+Jane Smith (sister), 555-5678
+1
+2
+Emily Johnson
+42
+Female
+O-
+555-9876
+456 Elm Avenue, Cityville, USA
+Michael Johnson (husband), 555-5432
+2
+3
+David Miller
+58
+Male
+A+
+555-2468
+789 Oak Street, Townsville, USA
+Sarah Miller (daughter), 555-7890
+3
+4
+Sophia Wilson
+28
+Female
+B-
+555-1111
+987 Pine Lane, Villagetown, USA
+Andrew Wilson (brother), 555-2222
+4
+5
+Robert Thompson
+45
+Male
+O+
+555-3333
+321 Cedar Road, Countyville, USA
+Jennifer Thompson (wife), 555-4444
+0
+6
+Olivia Davis
+31
+Female
+A-
+555-5555
+555 Willow Street, Meadowville, USA
+Daniel Davis (brother), 555-6666
+2
+7
+Liam Johnson
+39
+Male
+B+
+555-7777
+777 Maple Avenue, Riverside, USA
+Sophie Johnson (wife), 555-8888
+0
+8
+Emma Martinez
+27
+Female
+AB-
+555-9999
+999 Rose Court, Harmonyville, USA
+Carlos Martinez (husband), 555-0000
+0
+9
+William Anderson
+50
+Male
+O-
+555-1235
+123 Oak Lane, Timberland, USA
+Elizabeth Anderson (wife), 555-5679
+3
+10
+Ava Thompson
+33
+Female
+A+
+555-1357
+135 Pine Street, Hillside, USA
+James Thompson (husband), 555-7913
+0
+1
+John Smith
+35
+Male
+AB+
+555-1234
+123 Main Street, Anytown, USA
+Jane Smith (sister), 555-5678
+1
+2
+Emily Johnson
+42
+Female
+O-
+555-9876
+456 Elm Avenue, Cityville, USA
+Michael Johnson (husband), 555-5432
+2
+3
+David Miller
+58
+Male
+A+
+555-2468
+789 Oak Street, Townsville, USA
+Sarah Miller (daughter), 555-7890
+3
+4
+Sophia Wilson
+28
+Female
+B-
+555-1111
+987 Pine Lane, Villagetown, USA
+Andrew Wilson (brother), 555-2222
+4
+5
+Robert Thompson
+45
+Male
+O+
+555-3333
+321 Cedar Road, Countyville, USA
+Jennifer Thompson (wife), 555-4444
+0
+6
+Olivia Davis
+31
+Female
+A-
+555-5555
+555 Willow Street, Meadowville, USA
+Daniel Davis (brother), 555-6666
+2
+7
+Liam Johnson
+39
+Male
+B+
+555-7777
+777 Maple Avenue, Riverside, USA
+Sophie Johnson (wife), 555-8888
+0
+8
+Emma Martinez
+27
+Female
+AB-
+555-9999
+999 Rose Court, Harmonyville, USA
+Carlos Martinez (husband), 555-0000
+0
+9
+William Anderson
+50
+Male
+O-
+555-1235
+123 Oak Lane, Timberland, USA
+Elizabeth Anderson (wife), 555-5679
+3
+10
+Ava Thompson
+33
+Female
+A+
+555-1357
+135 Pine Street, Hillside, USA
+James Thompson (husband), 555-7913
+0
+1
+
+33
+Female
+A+
+555-1357
+135 Pine Street, Hillside, USA
+James Thompson (husband), 555-7913
+0

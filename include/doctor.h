@@ -53,8 +53,8 @@ public:
     void setAracived(bool state);
     void setDateJoined(const string& dateJoined);
     void setAppointmentFee(int appointmentFee);
-
-
+    void setIndexesToTrued(string input);
+    void setIndexesToTruep(string input);
     void readDays();
     void readPeroids();
     void saveInfo();

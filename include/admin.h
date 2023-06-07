@@ -51,7 +51,10 @@ public:
     void addDoctorToSpec();
     void DetDoctorFromSpec();
 
+    void Invoice(int);
     //new
+    void viewPatient();
+    void printAllPatient();
     void printAllDoctors();
     void patientHistory();
     void doctorsHistory();

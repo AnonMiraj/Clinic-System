@@ -39,31 +39,47 @@ void List_Of_Orders::addOrder(Admin*Hospital,Stock*s)
         orders = new_orders;
     }
 
-
-    if(orders[c_orders].CreateOrder(s,Hospital))/// If Create Order Successfully We increse counter of list
+     if(orders[c_orders].CreateOrder(s,Hospital))/// If Create Order Successfully We increase counter of list
     {
         c_orders++;
-
     }
+}
+
+void List_Of_Orders::removeItem(int index)
+{
+//    for (int i = 0; i < c_orders; i++)
+//    {
+//        if (orders[i].getOrderId() == orderId)
+//        {
+//            // Shift the remaining orders to fill the gap
+//            for (int j = i; j < c_orders - 1; j++)
+//            {
+//                orders[j] = orders[j + 1];
+//            }
+//            size--;
+//            c_orders--;
+//            break;
+//        }
+//    }
+
+    int itemid;
+    cout<<"Enter id of item: ";
+    cin>>itemid;
+    orders[index].RemoveOrderItem(itemid);
+}
+
+void List_Of_Orders::cancleOrder(int index)
+{
+
+     orders[index].CancelOrder();
+     swap(orders[index],orders[c_orders-1]);
+     c_orders--;
 
 }
 
-void List_Of_Orders::removeOrder(int orderId)
+void List_Of_Orders::printSpecificOrder(int i)
 {
-    for (int i = 0; i < size; i++)
-    {
-        if (orders[i].getOrderId() == orderId)
-        {
-            // Shift the remaining orders to fill the gap
-            for (int j = i; j < size - 1; j++)
-            {
-                orders[j] = orders[j + 1];
-            }
-            size--;
-            c_orders--;
-            break;
-        }
-    }
+    orders[i].printOrder();
 }
 
 void List_Of_Orders::printAllOrders()
@@ -73,3 +89,32 @@ void List_Of_Orders::printAllOrders()
         orders[i].printOrder();
     }
 }
+
+int List_Of_Orders::searchOrder(int id)
+{
+    for (int i=0; i<c_orders; i++)
+        if (orders[i].getOrderId() == id)
+            return i;
+    return -1;
+}
+
+void List_Of_Orders::editOrder(int i)
+{
+    string id;
+    do
+    {
+        cout<<"Enter Order item ID To edit : ";
+        cin>>id;
+    }
+    while (!IsValid(id,'1'));
+
+    orders[i].EditOrder(stoi(id));
+
+
+}
+
+
+
+
+
+

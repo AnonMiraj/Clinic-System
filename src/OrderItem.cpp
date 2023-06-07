@@ -89,7 +89,7 @@ double orderItem::calcTotalPrice()
     return totalPriceOrderItem;
 }
 
-void orderItem::UpdateQuantity(int newQuantity)
+void orderItem::UpdateQuantity(int newQuantity)// --> 10 --> 5--> 5--> 7
 {
     int index;
     if (newQuantity != 0)
@@ -377,7 +377,7 @@ ostream& operator<<(ostream&out, orderItem&r)
 {
     out<<"+-------------------------------------------+"<<endl;
     out << "| Id Of Item Is: " << setw(26) << setfill(' ') << r.idOrderItem << " |" << endl;
-    out << "| Sale Price Is: " << setw(26) << setfill(' ') << r.calcTotalPrice() << " |" << endl;
+    out << "| Total Sale Price Is: " << setw(20) << setfill(' ') << r.calcTotalPrice() << " |" << endl;
     out << "| Quntitiy Is: " << setw(28) << setfill(' ') << r.getQuantityOfOrderItem() << " |" << endl;
     out << "| Price Per Unit Is: " << setw(22) << setfill(' ') << r.sale_price << " |" << endl;
     cout<<"+-------------------------------------------+"<<endl;

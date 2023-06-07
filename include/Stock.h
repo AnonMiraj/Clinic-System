@@ -3,8 +3,10 @@
 #include <fstream>
 #include <iomanip>
 #include "other.h"
+//#include<windows.h>
 class Stock
 {
+
 private:
 	int c_MedcinList;
   int MedcinListSize;
@@ -21,12 +23,12 @@ public:
 	void deleteMecinFromStock();
 	int getQuntitiy(int id);  /// This Funcion return -1 if This Quantity Not Exist
 	int SearchId(int id);   /// This Function return index if found and return -1 if Not Exist
-  int SearchIdByName(string med);
+    int SearchIdByName(string med);
 	double getSalePriceOfMedcin(int index);
-  int getMedcinListCount();
+    int getMedcinListCount();
 
 	void addMedcinInStockByFiles();
-  void saveInfo();
+    void saveInfo();
 
 	friend ostream& operator<<(ostream& out, const Stock& stock);
 };

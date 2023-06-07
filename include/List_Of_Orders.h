@@ -3,10 +3,13 @@
 #include "admin.h"
 #include "Stock.h"
 #include "Order.h"
+#include "other.h"
+#include <string>
 #include "appointment.h"
 class List_Of_Orders {
 private:
     Order* orders;
+    int orderid;
     int size;
     int capacity;
     int c_orders;
@@ -16,13 +19,15 @@ private:
 public:
     List_Of_Orders();
     ~List_Of_Orders();
-
+    void Pay();
+    void cancleOrder(int idofOrder);
     void addOrder(Admin*ptr,Stock*s);
-    void removeOrder(int orderId);
+    void removeItem(int id);
+    void printSpecificOrder(int);
     void printAllOrders();
-    void editOrder();
+    int searchOrder(int id);
+    void editOrder(int);
 
 };
 
 #endif
-

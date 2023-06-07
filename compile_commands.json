@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/ezz/Clinic-System/.build",
+  "command": "/usr/bin/c++  -I/home/ezz/ddd/Clinic-System/include  -o CMakeFiles/main.dir/main.cpp.o -c /home/ezz/Clinic-System/main.cpp",
+  "file": "/home/ezzClinic-System/main.cpp",
+  "output": "CMakeFiles/main.dir/main.cpp.o"
+}
+]

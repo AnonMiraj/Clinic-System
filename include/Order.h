@@ -5,7 +5,6 @@
 #include "OrderItem.h"
 #include "admin.h"
 #include <string>
-#include<conio.h>
 #include <ctime>
 #include "appointment.h"
 using namespace std;
@@ -27,6 +26,7 @@ private:
     int c_orderItem;
     int PatientID;
     int DoctorId;
+    static int ord_id;
 
     Stock* stk;
     orderItem* items;
@@ -51,24 +51,25 @@ public:
 
     /// Setter
     void setDate();
-    void setOrderId(int id);
+    void setOrderId();
     void setNumber(int num);
     void setStatus(ORDERSTATUS orderStatus);
     void setTotalPrice(int total);
-    void setNameOfPatient(string Patentname);
+    void setNameOfPatient(string Patientname);
     void setPatientIdInOrder(int id);
     void setNameOfDoctor(string name);
     void setDoctorIdInOrder(int id);
 
     /// Another
 
+    void CancelOrder();
     ///int calcTotalPiceOfOrder();
-    int searchIdItems(int id);
+    int  searchIdItems(int id);
     bool CreateOrderInsideClinic(Stock* s,Admin*a,int id,int index);
     bool CreateOrderOutsideClinic(Stock* s,Admin*a,int id,int index);
     bool CreateOrder(Stock* s,Admin*a);
 
-
+    ///
 
     void AddOrderItem(orderItem* item);
     void UpdateOrderStatus(ORDERSTATUS status);

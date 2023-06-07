@@ -33,8 +33,10 @@ void Stock::addMedcinInStock()
 
     cout << "Enter the details of the medicine to add to stock:" << endl;
 
+    p:
+        system("Color 03");
     int medcinid;
-
+    cout<<"Enter  Medcin Id You Want To Add: ";
     cin >> medcinid;
     cin.ignore();
 
@@ -44,13 +46,30 @@ void Stock::addMedcinInStock()
         if (MedcinList[i].getId() == medcinid)
         {
             cout << "Medicine already exists in stock. " << endl;
-            cout << "do You Want To Update(y/N): ";
-            char ch;
+            cout << "do You Want To Update Quntitiy of This Id or Try Again: "<<endl;
+            v:
+            system("Color 03");
+            cout<<" 1- Update His Quntitiy \n 2- Try Again";
+
+            string ch;
             cin >> ch;
-            if (ch == 'y' || ch == 'Y')
+            if (ch=="1")
             {
                 cout << "Enter quantity: ";
                 cin>>Quntitiy[i];
+                cout<<"Has Updated In Stock Successfully"<<endl;
+
+
+
+            }
+            else if(ch=="2")
+                goto p;
+            else {
+                system("Color 04");
+                system("cls");
+                cout<<"Enter A Valid Choise!!!!"<<endl;
+                // Sleep(2500);
+                goto v;
             }
 
             return;
@@ -72,7 +91,7 @@ int Stock::getMedcinListCount(){
 }
 
 void Stock::addMedcinInStockByFiles()
-{ 
+{
     ifstream input("./data/inputMedcin.txt");
     if (!input)
     {
@@ -100,7 +119,7 @@ void Stock::addMedcinInStockByFiles()
 
 }
 void Stock::saveInfo(){
-    ofstream oput("./data/inputMedcin.txt");
+    ofstream oput("../data/inputMedcin.txt");
     if (!oput)
     {
         cout << "File Can Not Be Open ):" << endl;
@@ -109,11 +128,13 @@ void Stock::saveInfo(){
 
 
     for (int i=0; i<c_MedcinList ; i++) {
+
     oput<<MedcinList[i].getId()<<endl;
     oput<<MedcinList[i].getName()<<endl;
     oput<<MedcinList[i].getBrand()<<endl;
     oput<<MedcinList[i].getPrice()<<endl;
     oput<<Quntitiy[i]<<endl;
+
     }
       oput.close();
 
@@ -133,7 +154,9 @@ void Stock::editMedcin()
         {
             cout << MedcinList[index];
             MedcinList[index].Edit();
-            cout << "Medicine details updated." << endl;
+            system("Color 02");
+
+            cout << "Medicine details Updated." << endl;
             return;
         }
 
@@ -155,7 +178,7 @@ void Stock::deleteMecinFromStock()
         cin >> ch;
         if (ch == 'y' || ch == 'Y')
         {
-            // if user sure then i will delete medcin and -- of counter
+            /// if user sure then i will delete medcin and -- of counter
             cout << "^_^ Was Deleted Successfully ^_^" << endl;
 
             swap(MedcinList[index], MedcinList[c_MedcinList]);
@@ -173,7 +196,7 @@ int Stock::getQuntitiy(int id)
     index=SearchId(id);
     if (index != -1)
     {
-        //cout<<"Ahmed Mohsen";
+        //cout<<"Ezz"<<endl;
         return Quntitiy[index];
     }
     cout << "This Quntitiy isn't Exist" << endl;

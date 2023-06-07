@@ -1,7 +1,6 @@
 #pragma once
 #include "Medcin.h"
 #include "Stock.h"
-#include<conio.h>
 
 class orderItem
 {
@@ -29,7 +28,7 @@ public:
 	double getQuantityOfOrderItem();
 
 	/// Another
-	double calcTotalPrice();
+	double calcTotalPrice();        /// --> To Calc Total Price and return the value in total price
 	void UpdateQuantity(int newQuantity);
 	void EditOrderItem();
 

@@ -1,7 +1,9 @@
 #include <bits/stdc++.h> // stringstream
+#include <cstdio>
 #include <cstring>       // string, to_string
 #include <iostream>      // cin, cout
 #include <string>
+#include <strings.h>
 #include "admin.h"
 #include "List_Of_Orders.h"
 #include "Stock.h"
@@ -140,7 +142,65 @@ void sub_sub_menu_2_spec_management()
     }
 }
 
-void sub_sub_menu_3_stk_management()
+void sub_sub_sub_menu_ViewPatient()
+{
+    int c = -1;
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> ADMIN HUB -> PATINET MANAGMENT -> VIEW PATIENT ....");
+        c = get_menu_choise("SHOW ALL PATINETS,SHOW SPECIFIC PATIENT", 2);
+        switch (c)
+        {
+        case 1:
+            Hospital->printAllPatient();
+            _pause();
+            break;
+
+        case 2:
+            Hospital->viewPatient();
+            _pause();
+            break;
+
+        case 0:
+            return;
+        default:
+            print_try_again();
+        }
+    }
+}
+
+void sub_sub_menu_3_Patient_management()
+{
+    int c = -1;
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> ADMIN HUB -> PATIENT MANAGEMENT ....");
+
+        c = get_menu_choise("ADD PATIENT,EDIT PATIENT,VIEW", 2);
+        switch (c)
+        {
+        case 1:
+            Hospital->addPatient();
+            _pause();
+            break;
+        case 2:
+            Hospital->editPatient();
+            _pause();
+            break;
+        case 3:
+            sub_sub_sub_menu_ViewPatient();
+            break;
+        case 0:
+            return;
+        default:
+            print_try_again();
+        }
+    }
+}
+
+void sub_sub_menu_4_stk_management()
 {
     int c = -1;
     while (c != 0)
@@ -171,6 +231,73 @@ void sub_sub_menu_3_stk_management()
     }
 }
 
+void sub_sub_menu_5_View()
+{
+    int c = -1;
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> ADMIN HUB -> PHARMACY MANAGEMENT -> VIEW ORDER ....");
+        c = get_menu_choise("SHOW ALL ORDERS,SHOW SPECIFIC ORDERS", 2);
+        switch (c)
+        {
+        case 1:
+            OrderList->printAllOrders();
+            _pause();
+            break;
+
+        case 2:
+            {
+                string id;
+                do
+                {
+                    cout<<"Enter Order ID To Show : ";
+                    cin>>id;
+                }while (!IsValid(id,'1'));
+                int index = OrderList->searchOrder(stoi(id));
+
+                if (index != -1)
+                    OrderList->printSpecificOrder(index);
+                else
+                    cout<<"There is ID isn't exist :(\n";
+            _pause();
+            }
+            break;
+
+        case 0:
+            return;
+        default:
+            print_try_again();
+        }
+    }
+}
+
+void sub_sub_menu_5_pharmacy_management()
+{
+    int c = -1;
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> ADMIN HUB -> PHARMACY MANAGEMENT ....");
+        c = get_menu_choise("STOCK MANAGEMENT,VIEW ORDER", 1);
+        switch (c)
+        {
+        case 1:
+            sub_sub_menu_4_stk_management();
+            break;
+
+        case 2:
+            sub_sub_menu_5_View();
+            break;
+
+        case 0:
+            return;
+        default:
+            print_try_again();
+        }
+    }
+}
+
 
 void sub_menu_1_admin_hub()
 {
@@ -179,7 +306,7 @@ void sub_menu_1_admin_hub()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> ADMIN hub ....");
-        c = get_menu_choise("DOCTOR MANAGEMENT,SPECIALTY MANAGEMENT,HISTORY PATIENT,HISTORY DOCTOR,STOCK MANAGEMENT,SHOW ALL OF ORDERS DETAEILES", 1);
+        c = get_menu_choise("DOCTOR MANAGEMENT,SPECIALTY MANAGEMENT,PATIENT MANAGEMENT,HISTORY PATIENT,HISTORY DOCTOR,STOCK MANAGEMENT,PHARMACY MANAGEMENT", 1);
         switch (c)
         {
         case 1:
@@ -189,19 +316,23 @@ void sub_menu_1_admin_hub()
             sub_sub_menu_2_spec_management();
             break;
         case 3:
+            sub_sub_menu_3_Patient_management();
+            break;
+
+        case 4:
             Hospital->patientHistory();
             _pause();
             break;
-        case 4:
+        case 5:
             Hospital->doctorsHistory();
             _pause();
-        case 5:
-            sub_sub_menu_3_stk_management();
-            break;
         case 6:
-            OrderList->printAllOrders();
-            _pause();
+            sub_sub_menu_4_stk_management();
             break;
+        case 7:
+            sub_sub_menu_5_pharmacy_management();
+            break;
+
         case 0:
             return;
         default:
@@ -315,6 +446,83 @@ void sub_sub_menu_4_View()
     }
 }
 
+void sub_sub_menu_patientHub_pharmacy()
+{
+        int c = -1;
+
+    while (c != 0)
+    {
+        wait_or_clear(0, 1);
+        printline("\n\nMAIN MENU -> PHARMACY HUB -> PATIENT HUB  ....");
+        c = get_menu_choise("ORDER MEDECINE,Upade item Quntitiy,REMOVE ITEM,CANCEL ORDER,SHOW SPECIFIC ORDER", 1);
+
+        string id;
+        int index=-1;
+        if (c>1)
+        { do
+        {
+      p:
+          cout<<"Press 0 To Exit"<<endl;
+          cout<<"Enter Order ID ";
+          cin>>id;
+          if(id=="0")
+            return;
+        }while (!IsValid(id,'1'));
+        index = OrderList->searchOrder(stoi(id));
+        if (index == -1)
+        {
+          cout<<"ID DOESNT EXIST :(\n";
+
+
+          goto p;
+        }
+        }
+        switch (c)
+        {
+        case 1:
+            OrderList->addOrder(Hospital, stk);
+            _pause();
+            break;
+
+        case 2:
+
+                if (index != -1)
+                    OrderList->editOrder(index);                  ///-->>>> Under Develop
+                else
+                    cout<<"There is no order ID :(\n";
+            _pause();
+            break;
+        case 3:
+          OrderList->removeItem(index);
+          _pause();
+          break;
+        case 4:
+
+        OrderList->cancleOrder(index);             ///-->>>>>>>> Under Develop
+          _pause();
+          break;
+
+        case 5:
+            {
+            int index = OrderList->searchOrder(stoi(id));
+
+                if (index != -1)
+                    OrderList->printSpecificOrder(index);
+                else
+                    cout<<"There is ID isn't exist :(\n";
+            _pause();
+            }
+            break;
+            break;
+
+        case 0:
+            return;
+        default:
+            print_try_again();
+        }
+    }
+}
+
 void sub_menu_3_patient_hub()
 {
     int c = -1;
@@ -322,7 +530,7 @@ void sub_menu_3_patient_hub()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> PATIENT HUB ....");
-        c = get_menu_choise("CREATE ACCOUNT,EDIT ACCOUNT INFORMATION,BUY A PRESCRIPTION,APPOINTMENT,VIEW", 1);
+        c = get_menu_choise("CREATE ACCOUNT,EDIT ACCOUNT INFORMATION,APPOINTMENT,VIEW PATIENT", 1);
         switch (c)
         {
         case 1:
@@ -333,20 +541,18 @@ void sub_menu_3_patient_hub()
             Hospital->editPatient();
             _pause();
             break;
+
         case 3:
-            // OrderList->addOrder(Hospital, stk);
-            _pause();
-            break;
-        case 4:
             sub_sub_menu_3_Appointement();
             break;
 
-        case 5:
+        case 4:
             sub_sub_menu_4_View();
             break;
 
         case 0:
             return;
+
         default:
             print_try_again();
         }
@@ -355,26 +561,22 @@ void sub_menu_3_patient_hub()
 
 void sub_menu_4_pharmacy_hub()
 {
+
     int c = -1;
     while (c != 0)
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU -> PHARMACY HUB ....");
-        c = get_menu_choise("ORDER MEDECINE,EDIT ORDER,CANCEL ORDER,PAY THE ORDER", 1);
+        c = get_menu_choise("ADMIN HUB,PATIENT HUB", 1);
         switch (c)
         {
         case 1:
-            // OrderList->addOrder(Hospital,stk);
-            _pause();
+            sub_sub_menu_5_pharmacy_management();
             break;
+
+
         case 2:
-            _pause();
-            break;
-        case 3:
-            _pause();
-            break;
-        case 4:
-            _pause();
+            sub_sub_menu_patientHub_pharmacy();
             break;
 
         case 0:
@@ -385,9 +587,48 @@ void sub_menu_4_pharmacy_hub()
     }
 }
 
+/***
+ *
+ *
+ *    FFFFFFFFFFFFFFFFFFFFFF                      iiii               CCCCCCCCCCCCClllllll   iiii                      iiii                              SSSSSSSSSSSSSSS                                                    tttt
+ *    F::::::::::::::::::::F                     i::::i           CCC::::::::::::Cl:::::l  i::::i                    i::::i                           SS:::::::::::::::S                                                ttt:::t
+ *    F::::::::::::::::::::F                      iiii          CC:::::::::::::::Cl:::::l   iiii                      iiii                           S:::::SSSSSS::::::S                                                t:::::t
+ *    FF::::::FFFFFFFFF::::F                                   C:::::CCCCCCCC::::Cl:::::l                                                            S:::::S     SSSSSSS                                                t:::::t
+ *      F:::::F       FFFFFF    cccccccccccccccciiiiiii       C:::::C       CCCCCC l::::l iiiiiii nnnn  nnnnnnnn    iiiiiii     cccccccccccccccc     S:::::S            yyyyyyy           yyyyyyy    ssssssssss   ttttttt:::::ttttttt        eeeeeeeeeeee       mmmmmmm    mmmmmmm
+ *      F:::::F               cc:::::::::::::::ci:::::i      C:::::C               l::::l i:::::i n:::nn::::::::nn  i:::::i   cc:::::::::::::::c     S:::::S             y:::::y         y:::::y   ss::::::::::s  t:::::::::::::::::t      ee::::::::::::ee   mm:::::::m  m:::::::mm
+ *      F::::::FFFFFFFFFF    c:::::::::::::::::c i::::i      C:::::C               l::::l  i::::i n::::::::::::::nn  i::::i  c:::::::::::::::::c      S::::SSSS           y:::::y       y:::::y  ss:::::::::::::s t:::::::::::::::::t     e::::::eeeee:::::eem::::::::::mm::::::::::m
+ *      F:::::::::::::::F   c:::::::cccccc:::::c i::::i      C:::::C               l::::l  i::::i nn:::::::::::::::n i::::i c:::::::cccccc:::::c       SS::::::SSSSS       y:::::y     y:::::y   s::::::ssss:::::stttttt:::::::tttttt    e::::::e     e:::::em::::::::::::::::::::::m
+ *      F:::::::::::::::F   c::::::c     ccccccc i::::i      C:::::C               l::::l  i::::i   n:::::nnnn:::::n i::::i c::::::c     ccccccc         SSS::::::::SS      y:::::y   y:::::y     s:::::s  ssssss       t:::::t          e:::::::eeeee::::::em:::::mmm::::::mmm:::::m
+ *      F::::::FFFFFFFFFF   c:::::c              i::::i      C:::::C               l::::l  i::::i   n::::n    n::::n i::::i c:::::c                         SSSSSS::::S      y:::::y y:::::y        s::::::s            t:::::t          e:::::::::::::::::e m::::m   m::::m   m::::m
+ *      F:::::F             c:::::c              i::::i      C:::::C               l::::l  i::::i   n::::n    n::::n i::::i c:::::c                              S:::::S      y:::::y:::::y            s::::::s         t:::::t          e::::::eeeeeeeeeee  m::::m   m::::m   m::::m
+ *      F:::::F             c::::::c     ccccccc i::::i       C:::::C       CCCCCC l::::l  i::::i   n::::n    n::::n i::::i c::::::c     ccccccc                 S:::::S       y:::::::::y       ssssss   s:::::s       t:::::t    tttttte:::::::e           m::::m   m::::m   m::::m
+ *    FF:::::::FF           c:::::::cccccc:::::ci::::::i       C:::::CCCCCCCC::::Cl::::::li::::::i  n::::n    n::::ni::::::ic:::::::cccccc:::::c     SSSSSSS     S:::::S        y:::::::y        s:::::ssss::::::s      t::::::tttt:::::te::::::::e          m::::m   m::::m   m::::m
+ *    F::::::::FF            c:::::::::::::::::ci::::::i        CC:::::::::::::::Cl::::::li::::::i  n::::n    n::::ni::::::i c:::::::::::::::::c     S::::::SSSSSS:::::S         y:::::y         s::::::::::::::s       tt::::::::::::::t e::::::::eeeeeeee  m::::m   m::::m   m::::m
+ *    F::::::::FF             cc:::::::::::::::ci::::::i          CCC::::::::::::Cl::::::li::::::i  n::::n    n::::ni::::::i  cc:::::::::::::::c     S:::::::::::::::SS         y:::::y           s:::::::::::ss          tt:::::::::::tt  ee:::::::::::::e  m::::m   m::::m   m::::m
+ *    FFFFFFFFFFF               cccccccccccccccciiiiiiii             CCCCCCCCCCCCClllllllliiiiiiii  nnnnnn    nnnnnniiiiiiii    cccccccccccccccc      SSSSSSSSSSSSSSS          y:::::y             sssssssssss              ttttttttttt      eeeeeeeeeeeeee  mmmmmm   mmmmmm   mmmmmm
+ *                                                                                                                                                                            y:::::y
+
+ */
 /** MAIN FUNCTION **/
+
 int main()
 {
+    system("Color 06");
+      cout    << "\n\n\n\n\t\t\t\t           \x02\x03 [Fci Clinic System] \x02\x03 \n";
+      cout    << "\t\t\t\t           -------------------------\n\n"
+              << "\t\t\t\t                 _ _.-'`-._ _\n"
+              << "\t\t\t\t                ;.'________'.;\n"
+              << "\t\t\t\t     _________n.[____________].n_________\n"
+              << "\t\t\t\t    |\"\"_\"\"_\"\"_\"\"||==||==||==||\"\"_\"\"_\"\"_\"\"|\n"
+              << "\t\t\t\t    |\"\"\"\"\"\"\"\"\"\"\"\"||..||..||..||\"\"\"\"\"\"\"\"\"\"|\n"
+              << "\t\t\t\t    |LI LI LI LI||LI||LI||LI||LI LI LI LI|\n"
+              << "\t\t\t\t    |.. .. .. ..||..||..||..||.. .. .. ..|\n"
+              << "\t\t\t\t    |LI LI LI LI||LI||LI||LI||LI LI LI LI|\n"
+              << "\t\t\t\t ,,;;,;;;,;;;,;;;,;;;,;;;,;;;,;;,;;;,;;;,;;,\n"
+              << "\t\t\t\t;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;\n";
+      cout<<"\n\n\t           1- Mohamed        2- Abdelrahman        3- Ezz        4- Mohy        5- Amaar"<<endl;
+
+      _pause();
     system("Color 03");
     Hospital->load();
     stk->addMedcinInStockByFiles();
@@ -398,7 +639,7 @@ int main()
     {
         wait_or_clear(0, 1);
         printline("\n\nMAIN MENU ....", 1);
-        c = get_menu_choise("ADMIN HUB,DOCTOR MANAGEMENT,PATIENT MANAGEMENT,PHARMACY MANAGEMNET(removed),debug",
+        c = get_menu_choise("ADMIN HUB,DOCTOR HUB,PATIENT HUB,PHARMACY HUB",
                             0);
 
         switch (c)
@@ -416,12 +657,20 @@ int main()
             sub_menu_4_pharmacy_hub();
             break;
 
-        case 5:
+        /*case 5:
             cout<<*Hospital;
             _pause();
-            break;
+            break;*/
         case 0:
-            printline("\n\n\a\t\t\tGoodbye :)......\n\n\n\n\n\n", 1);
+            cout<<"SAVE DATA?(y/N)";
+            char Y;
+            cin>>Y;
+            if (Y=='y'||Y=='Y')
+            {
+            Hospital->save();
+            stk->saveInfo();
+            }
+            printline("\n\n\a\t\t\tGoodbye \x03\x02......\n\n\n\n\n\n", 1);
             break;
         //
         default:
@@ -429,7 +678,5 @@ int main()
             wait_or_clear(3, true);
         }
     }
-    Hospital->save();
-    stk->saveInfo();
-    return 0;
+        return 0;
 }
