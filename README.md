@@ -7,7 +7,7 @@ The project is a hospital management system implemented in C++. It includes modu
 You can you can compile your own binary from sources using the following commands:
 
 1. enter in terminal: `git clone https://github.com/AnonMiraj/Clinic-System.git`
-2. `sh build.sh`
+2. `sh bulid.sh`
 
 
 ### CodeBlocks

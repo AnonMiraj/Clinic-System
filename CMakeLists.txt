@@ -10,9 +10,6 @@ project(Clinc)
 add_library(main_library  
   src/admin.cpp
   src/appointment.cpp
-  src/Cash.cpp
-  src/Check.cpp 
-  src/Credit.cpp
   src/doctor.cpp
   src/List_Of_Orders.cpp
   src/Medcin.cpp
@@ -22,11 +19,9 @@ add_library(main_library
   src/OrderItem.cpp
   src/other.cpp
   src/patient.cpp
-  src/Payment.cpp
   src/person.cpp
   src/prescription.cpp
   src/Stock.cpp
-  src/Transaction.cpp
 
   
 )
