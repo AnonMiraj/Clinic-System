@@ -14,4 +14,4 @@ You can you can compile your own binary from sources using the following command
 You can find a CodeBlocks Project file in ClinicBlocks folder.
 
 ## Credit
-1- Mohy , 2- mohamed , 3- Ezz , 4-Abdo , 5- Ammar
+1- Mohy , 2- mohamed , 3- Ezz , 4-Abdo 
